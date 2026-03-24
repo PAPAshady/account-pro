@@ -1,3 +1,9 @@
+import Banner from '@/components/templates/index/Banner';
+
 export default function Home() {
-  return <div className="text-5xl font-bold"></div>;
+  return (
+    <div>
+      <Banner />
+    </div>
+  );
 }

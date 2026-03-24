@@ -10,7 +10,7 @@ import Particle from '@/components/modules/Particle/Particle';
 
 export default function Header() {
   return (
-    <div className="relative">
+    <div className="relative pb-10">
       <Particle className="-top-35 -left-20 size-64 opacity-35 blur-[70px]" />
       <Particle className="top-5 -right-40 hidden size-64 opacity-35 blur-[70px] lg:block" />
 
