@@ -24,13 +24,14 @@ export default function Banner() {
         />
         <div className="bg-primary absolute inset-0 size-full mix-blend-hue"></div>
       </div>
-      <div className="flex-row-reverse items-center gap-10 space-y-4 lg:container lg:flex">
+
+      <div className="container flex-row-reverse items-center gap-10 space-y-4 lg:flex">
         <Image
           alt="Account Pro"
           src="/images/index/Banner.png"
           width={637}
           height={368}
-          className="w-full lg:w-1/2"
+          className="w-full lg:w-1/2 mix-blend-exclusion"
         />
         <div className="space-y-5 sm:space-y-8 lg:w-1/2">
           <div className="-mt-12 space-y-5 text-center sm:space-y-8 lg:text-start">
