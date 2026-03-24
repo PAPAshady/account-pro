@@ -31,7 +31,7 @@ export default function Banner() {
           src="/images/index/Banner.png"
           width={637}
           height={368}
-          className="w-full lg:w-1/2 mix-blend-exclusion"
+          className="w-full mix-blend-exclusion lg:w-1/2"
         />
         <div className="space-y-5 sm:space-y-8 lg:w-1/2">
           <div className="-mt-12 space-y-5 text-center sm:space-y-8 lg:text-start">
