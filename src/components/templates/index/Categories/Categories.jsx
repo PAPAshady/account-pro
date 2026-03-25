@@ -67,6 +67,11 @@ export default function Categories() {
                 <CategoryCard key={category.id} {...category} />
               ))}
             </div>
+            <div className="flex justify-center pt-3 sm:pt-1">
+              <PrimaryButton dir="ltr" className="lg:hidden">
+                همه دسته بندی ها
+              </PrimaryButton>
+            </div>
           </div>
         </div>
       </div>

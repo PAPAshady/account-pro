@@ -8,6 +8,7 @@ export default function Home() {
       <Banner />
       <Categories />
       <Services />
+      <div className="h-100"></div>
     </div>
   );
 }
