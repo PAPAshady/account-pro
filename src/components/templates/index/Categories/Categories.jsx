@@ -1,5 +1,6 @@
 import PrimaryButton from '@/components/modules/PrimaryButton/PrimaryButton';
 import CategoryCard from '@/components/modules/Cards/CategoryCard/CategoryCard';
+import Particle from '@/components/modules/Particle/Particle';
 
 const categoryCards = [
   {
@@ -36,12 +37,14 @@ const categoryCards = [
 
 export default function Categories() {
   return (
-    <div className="container">
-      <div className="">
+    <div className="relative">
+      <Particle className="top-45 right-0 hidden size-50 opacity-50 blur-[80px] sm:block lg:top-25" />
+
+      <div className="container">
         <div
           className="relative bg-no-repeat lg:bg-none!"
           style={{
-            backgroundImage: 'url(/images/index/categories-container.png)',
+            backgroundImage: 'url(/images/index/section-container-sm.png)',
             backgroundPositionY: 55,
             backgroundPositionX: 'center',
           }}
@@ -65,7 +68,6 @@ export default function Categories() {
               ))}
             </div>
           </div>
-          <div className="h-900"></div>
         </div>
       </div>
     </div>
