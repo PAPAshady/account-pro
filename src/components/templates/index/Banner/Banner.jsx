@@ -4,7 +4,7 @@ import Image from 'next/image';
 export default function Banner() {
   return (
     <div className="relative">
-      <div className="absolute top-0 -left-20 hidden lg:inline-block">
+      <div className="absolute top-0 left-0 hidden lg:inline-block">
         <Image
           src="/images/index/ring-particle-1.png"
           width={359}
@@ -14,7 +14,7 @@ export default function Banner() {
         />
         <div className="bg-primary absolute inset-0 size-full mix-blend-hue"></div>
       </div>
-      <div className="absolute -top-17 -right-20 hidden lg:inline-block">
+      <div className="absolute -top-17 right-0 hidden lg:inline-block">
         <Image
           src="/images/index/ring-particle-2.png"
           width={296}
