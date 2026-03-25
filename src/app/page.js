@@ -1,6 +1,7 @@
-import Banner from '@/components/templates/index/Banner/Banner';
-import Categories from '@/components/templates/index/Categories/Categories';
-import Services from '@/components/templates/index/Services/Services';
+import Banner from '@templates/index/Banner/Banner';
+import Categories from '@templates/index/Categories/Categories';
+import Services from '@templates/index/Services/Services';
+import AppleId from '@templates/index/AppleId/AppleId';
 
 export default function Home() {
   return (
@@ -8,6 +9,7 @@ export default function Home() {
       <Banner />
       <Categories />
       <Services />
+      <AppleId />
       <div className="h-100"></div>
     </div>
   );

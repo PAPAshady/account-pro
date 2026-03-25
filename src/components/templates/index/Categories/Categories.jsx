@@ -1,6 +1,6 @@
-import PrimaryButton from '@/components/modules/PrimaryButton/PrimaryButton';
-import CategoryCard from '@/components/modules/Cards/CategoryCard/CategoryCard';
-import Particle from '@/components/modules/Particle/Particle';
+import PrimaryButton from '@modules/PrimaryButton/PrimaryButton';
+import CategoryCard from '@modules/Cards/CategoryCard/CategoryCard';
+import Particle from '@modules/Particle/Particle';
 
 const categoryCards = [
   {

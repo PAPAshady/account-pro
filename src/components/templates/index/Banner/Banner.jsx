@@ -1,4 +1,4 @@
-import PrimaryButton from '@/components/modules/PrimaryButton/PrimaryButton';
+import PrimaryButton from '@modules/PrimaryButton/PrimaryButton';
 import Image from 'next/image';
 
 export default function Banner() {

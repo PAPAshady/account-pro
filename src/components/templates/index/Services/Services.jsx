@@ -1,6 +1,6 @@
-import ServiceCard from '@/components/modules/Cards/ServiceCard/ServiceCard';
-import PrimaryButton from '@/components/modules/PrimaryButton/PrimaryButton';
-import Particle from '@/components/modules/Particle/Particle';
+import ServiceCard from '@modules/Cards/ServiceCard/ServiceCard';
+import PrimaryButton from '@modules/PrimaryButton/PrimaryButton';
+import Particle from '@modules/Particle/Particle';
 
 const services = [
   { id: 1, title: 'لایسنس ویندوز ۱۱', price: 90_000, region: 'همه ریجن ها' },
