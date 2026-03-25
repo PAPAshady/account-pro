@@ -16,6 +16,15 @@
   @apply mx-auto w-[80%] max-w-360 lg:w-[90%];
 }
 
+@utility bg-hatching {
+  background-image: repeating-linear-gradient(
+    125deg,
+    transparent,
+    transparent 14px,
+    #00977680 15px
+  );
+}
+
 @theme {
   /* Colors */
   --color-primary: #0efdc2;

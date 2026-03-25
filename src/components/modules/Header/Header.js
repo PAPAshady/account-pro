@@ -65,7 +65,7 @@ export default function Header() {
               </div>
             </RoundedContainer>
           </div>
-          <div className="hidden items-center justify-between gap-3.5 py-2.5 lg:flex">
+          <div className="hidden items-center justify-between gap-3 py-2.5 min-[1080]:gap-4 lg:flex">
             <Navbar />
             <RoundedContainer
               containerClassName="grow"

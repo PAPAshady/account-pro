@@ -1,7 +1,5 @@
-import Image from 'next/image';
-
-import RoundedContainer from '@/ui/RoundedContainer/RoundedContainer';
 import PrimaryButton from '@/components/modules/PrimaryButton/PrimaryButton';
+import CategoryCard from '@/components/modules/Cards/CategoryCard/CategoryCard';
 
 const categoryCards = [
   {
@@ -63,29 +61,7 @@ export default function Categories() {
             </div>
             <div className="grid grow grid-cols-2 gap-4 px-2 sm:grid-cols-3 lg:grid-cols-5 xl:gap-6">
               {categoryCards.map((category) => (
-                <div key={category.id} className="group">
-                  <RoundedContainer containerClassName="h-full" className="h-full" dir="ltr">
-                    <div className="hover:bg-primary flex h-full flex-col gap-4 bg-[#161616] px-2.5 pt-3.75 transition-colors duration-300 xl:p-5! xl:pb-0!">
-                      <div className="flex h-full grow flex-col transition-colors duration-300">
-                        <p className="text-mainColor group-hover:text-blackColor text-sm xl:text-base!">
-                          اکانت های
-                        </p>
-                        <p className="group-hover:text-blackColor line-clamp-2 grow text-sm font-bold xl:text-lg!">
-                          {category.title}
-                        </p>
-                      </div>
-                      <div className="">
-                        <Image
-                          alt={category.alt}
-                          src={category.image}
-                          width={512}
-                          height={512}
-                          className="mx-auto size-13.75 grayscale-100 group-hover:grayscale-0 xl:size-23.75!"
-                        />
-                      </div>
-                    </div>
-                  </RoundedContainer>
-                </div>
+                <CategoryCard key={category.id} {...category} />
               ))}
             </div>
           </div>

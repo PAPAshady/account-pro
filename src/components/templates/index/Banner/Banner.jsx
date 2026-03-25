@@ -25,7 +25,7 @@ export default function Banner() {
         <div className="bg-primary absolute inset-0 size-full mix-blend-hue"></div>
       </div>
 
-      <div className="container flex-row-reverse items-center gap-10 space-y-4 lg:flex">
+      <div className="container flex-row-reverse items-center gap-10 space-y-4 lg:flex lg:px-15 lg:pt-10">
         <Image
           alt="Account Pro"
           src="/images/index/Banner.png"
@@ -49,7 +49,7 @@ export default function Banner() {
                 />
               </div>
             </h1>
-            <p className="text-paragraph text-sm lg:text-base">
+            <p className="text-paragraph text-sm lg:w-[75%] lg:text-base">
               اکانت پرو، فروشگاه تخصصی خرید و فروش انواع اکانت‌های قانونی با قیمت مناسب و پشتیبانی
               حرفه‌ای، همراه شماست.
             </p>
