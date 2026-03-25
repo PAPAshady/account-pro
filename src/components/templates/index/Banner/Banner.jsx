@@ -55,7 +55,7 @@ export default function Banner() {
             </p>
           </div>
           <div className="mx-auto w-1/2 lg:m-0 lg:w-1/3">
-            <PrimaryButton dir="ltr" className="w-full">
+            <PrimaryButton dir="ltr" className="w-full border-[#333] lg:border">
               دسته بندی ها
             </PrimaryButton>
           </div>

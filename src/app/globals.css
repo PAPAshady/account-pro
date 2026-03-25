@@ -25,6 +25,16 @@
   );
 }
 
+@utility rounded-box-rtl {
+  border-radius: 8px 20px 20px 20px;
+  overflow: hidden;
+}
+
+@utility rounded-box-ltr {
+  border-radius: 20px 8px 20px 20px;
+  overflow: hidden;
+}
+
 @theme {
   /* Colors */
   --color-primary: #0efdc2;
