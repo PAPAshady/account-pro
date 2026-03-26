@@ -12,7 +12,7 @@ const services = [
 export default function Services() {
   return (
     <div className="relative">
-      <Particle className="-bottom-26 left-0 size-44 opacity-60 blur-[70px] sm:-bottom-46 sm:size-68 sm:opacity-40 sm:blur-[80px]" />
+      <Particle className="-bottom-26 left-0 z-2 size-44 opacity-60 blur-[70px] sm:-bottom-46 sm:size-68 sm:opacity-40 sm:blur-[80px] lg:opacity-30" />
       <div className="container">
         <div className="relative w-full bg-[url('/images/index/section-container-lg.png')] bg-position-[center_55] bg-no-repeat lg:bg-[url('/images/index/section-container-sm.png')] lg:bg-position-[center_20]">
           <div className="space-y-2">

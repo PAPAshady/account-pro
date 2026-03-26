@@ -5,7 +5,7 @@ import AppleId from '@templates/index/AppleId/AppleId';
 
 export default function Home() {
   return (
-    <div className="space-y-27">
+    <div className="space-y-27 overflow-x-hidden">
       <Banner />
       <Categories />
       <Services />
