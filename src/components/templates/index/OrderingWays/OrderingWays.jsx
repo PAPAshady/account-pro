@@ -70,7 +70,6 @@ export default function OrderingWays() {
               ))}
             </div>
           </div>
-          <div className="h-200"></div>
         </div>
       </div>
     </div>
@@ -81,7 +80,7 @@ function OrderingWaysItem({ title, subtitle, image, icon, id }) {
   return (
     <div className="relative">
       {id < 4 && (
-        <div className="absolute top-10 -left-3">
+        <div className="absolute top-10 -left-3 hidden lg:block">
           <Image
             src="/images/index/ordering-ways-left-arrow.png"
             width={30}
