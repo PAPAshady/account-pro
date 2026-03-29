@@ -4,7 +4,8 @@ import Services from '@templates/index/Services/Services';
 import AppleId from '@templates/index/AppleId/AppleId';
 import OrderingWays from '@templates/index/OrderingWays/OrderingWays';
 import Plans from '@templates/index/Plans/Plans';
-import Reviews from '@/components/templates/index/Reviews/Reviews';
+import Reviews from '@templates/index/Reviews/Reviews';
+import Blog from '@templates/index/Blog/Blog';
 
 export default function Home() {
   return (
@@ -16,6 +17,7 @@ export default function Home() {
       <OrderingWays />
       <Plans />
       <Reviews />
+      <Blog />
       <div className="h-100"></div>
     </div>
   );
