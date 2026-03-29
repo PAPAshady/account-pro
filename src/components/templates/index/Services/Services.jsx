@@ -18,7 +18,7 @@ export default function Services() {
           <div className="space-y-2">
             <h3 className="text-center text-2xl font-bold">سرویس های اکانت پرو</h3>
             <h3 className="text-paragraph mb-2 text-center text-lg font-bold lg:mb-5">Services</h3>
-            <div className="grid grid-cols-1 gap-x-4 gap-y-2 sm:grid-cols-2 lg:grid-cols-4 lg:gap-4">
+            <div className="grid grid-cols-1 gap-x-4 gap-y-2 min-[1140px]:grid-cols-4! sm:grid-cols-2 lg:grid-cols-3 lg:gap-4">
               {services.slice(0, 4).map((service) => (
                 <ServiceCard key={service.id} {...service} />
               ))}
