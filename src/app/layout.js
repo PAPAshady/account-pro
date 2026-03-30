@@ -1,4 +1,5 @@
-import Header from '@/components/modules/Header/Header';
+import Header from '@modules/Header/Header';
+import Footer from '@modules/Footer/Footer';
 import './globals.css';
 
 export const metadata = {
@@ -9,9 +10,10 @@ export default function RootLayout({ children }) {
   return (
     <html lang="fa-IR" dir="rtl" className="antialiased">
       <body className="flex min-h-full flex-col overflow-x-hidden">
-        <div className="mt-10 lg:mt-12.5">
+        <div className="overflow-x-hidden">
           <Header />
           {children}
+          <Footer />
         </div>
       </body>
     </html>

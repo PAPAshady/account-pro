@@ -9,7 +9,7 @@ import Blog from '@templates/index/Blog/Blog';
 
 export default function Home() {
   return (
-    <div className="space-y-27 overflow-x-hidden lg:space-y-32">
+    <div className="space-y-27 lg:space-y-32">
       <Banner />
       <Categories />
       <Services />
@@ -18,7 +18,6 @@ export default function Home() {
       <Plans />
       <Reviews />
       <Blog />
-      <div className="h-100"></div>
     </div>
   );
 }
