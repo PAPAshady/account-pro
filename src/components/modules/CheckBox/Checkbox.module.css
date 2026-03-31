@@ -1,0 +1,32 @@
+.checkboxContainer {
+  position: relative;
+}
+
+.checkboxInput {
+  position: absolute;
+  width: 0;
+}
+
+.customCheckbox {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 24px;
+  height: 24px;
+  background-color: #ffffff1a;
+  border-radius: 8px 4px 8px 8px;
+  transition: all 150ms;
+}
+
+.customRadioInputCheckMark {
+  opacity: 0;
+  transition: all 150ms;
+}
+
+.checkboxInput:checked + .customCheckbox {
+  background-color: #0efdc2;
+}
+
+.checkboxInput:checked + .customCheckbox .customRadioInputCheckMark {
+  opacity: 1;
+}

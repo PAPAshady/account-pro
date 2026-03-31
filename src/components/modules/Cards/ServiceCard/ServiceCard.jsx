@@ -21,12 +21,12 @@ export default function ServiceCard({ title, price, region }) {
           src="/images/services/spotify.png"
           width={300}
           height={300}
-          className="size-18.75 grayscale-100 transition-all duration-300 group-hover:grayscale-0"
+          className="size-18.75 grayscale-100 transition-all duration-300 group-hover:grayscale-0 lg:size-20"
         />
       </div>
       <div className="bg-box -mt-3.5 rounded-t-lg rounded-b-3xl p-3 pt-4 lg:pt-6">
         <div className="mb-3 flex items-center justify-between gap-2 lg:mb-4.5">
-          <h4 className="line-clamp-2" title={title}>
+          <h4 className="line-clamp-2 lg:text-lg lg:font-bold" title={title}>
             {title}
           </h4>
           <div className="text-end">

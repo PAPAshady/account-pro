@@ -1,7 +1,9 @@
 import Image from 'next/image';
 import Link from 'next/link';
 
-import { FaBars, FaShoppingCart, FaSearch, FaUser } from 'react-icons/fa';
+import { FaBars, FaShoppingCart, FaUser } from 'react-icons/fa';
+
+import SearchBox from '@modules/SearchBox/SearchBox';
 
 import Navbar from '@/components/modules/Navbar/Navbar';
 import PrimaryButton from '@/components/modules/PrimaryButton/PrimaryButton';
@@ -60,14 +62,7 @@ export default function Header() {
           </div>
           <div className="hidden items-center justify-between gap-3 py-2.5 min-[1080]:gap-4 lg:flex">
             <Navbar />
-            <div className="bg-foreground rounded-box-rtl flex grow items-center gap-2 px-3.5">
-              <input
-                type="text"
-                placeholder="جستوجو کنید..."
-                className="h-11.25 grow outline-none"
-              />
-              <FaSearch className="text-paragraph min-h-4 min-w-4 shrink-0" />
-            </div>
+            <SearchBox />
             <PrimaryButton>
               ورود/ثبت نام
               <FaUser />

@@ -103,7 +103,7 @@ export default function Footer() {
                   <li className="py-1.5">
                     <Link
                       className="hover:text-primary transition-colors duration-300"
-                      href="/services"
+                      href="/shop"
                     >
                       سرویس های اکانت پرو
                     </Link>

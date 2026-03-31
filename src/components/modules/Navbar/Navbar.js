@@ -7,7 +7,7 @@ import clsx from 'clsx';
 
 const navLinks = [
   { id: 1, title: 'صفحه اصلی', href: '/' },
-  { id: 2, title: 'سرویس ها', href: '/services', hasMenu: true },
+  { id: 2, title: 'سرویس ها', href: '/shop', hasMenu: true },
   { id: 4, title: 'پلن ها', href: '/plans' },
   { id: 5, title: 'وبلاگ', href: '/blog' },
   { id: 3, title: 'درباره ما', href: '/about-us' },

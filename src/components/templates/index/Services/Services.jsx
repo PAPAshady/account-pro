@@ -1,13 +1,7 @@
 import ServiceCard from '@modules/Cards/ServiceCard/ServiceCard';
 import PrimaryButton from '@modules/PrimaryButton/PrimaryButton';
 import Particle from '@modules/Particle/Particle';
-
-const services = [
-  { id: 1, title: 'لایسنس ویندوز ۱۱', price: 90_000, region: 'همه ریجن ها' },
-  { id: 2, title: 'اکانت پرمیوم یوتیوب', price: 100_000, region: 'همه ریجن ها' },
-  { id: 3, title: 'اکانت پرمیوم اسپاتیفای یک ماهه', price: 200_000, region: 'ریجن آمریکا' },
-  { id: 4, title: 'اکانت پرمیوم تلگرام یک ساله', price: 120_000, region: 'همه ریجن ها' },
-];
+import { services } from '@/data';
 
 export default function Services() {
   return (
