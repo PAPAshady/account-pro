@@ -3,12 +3,7 @@ import Image from 'next/image';
 import PlanCard from '@modules/Cards/PlanCard/PlanCard';
 import Particle from '@modules/Particle/Particle';
 import PrimaryButton from '@modules/PrimaryButton/PrimaryButton';
-
-const plans = [
-  { id: 1, title: 'یکماهه', price: 150_000 },
-  { id: 2, title: 'سه ماهه', price: 250_000 },
-  { id: 4, title: 'یکساله', price: 120_000 },
-];
+import { plans } from '@/data';
 
 export default function Plans() {
   return (

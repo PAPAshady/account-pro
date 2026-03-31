@@ -42,3 +42,9 @@ export const filters = [
     options: [{ title: 'استریم فیلم و سریال' }, { title: 'استریم موزیک' }, { title: 'هوش مصنوعی' }],
   },
 ];
+
+export const plans = [
+  { id: 1, title: 'یکماهه', price: 150_000 },
+  { id: 2, title: 'سه ماهه', price: 250_000 },
+  { id: 4, title: 'یکساله', price: 120_000 },
+];

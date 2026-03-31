@@ -42,3 +42,7 @@ export default function Shop() {
     </div>
   );
 }
+
+export const metadata = {
+  title: 'فروشگاه - اکانت پرو',
+};
