@@ -25,7 +25,7 @@ export default function Banner() {
         <div className="bg-primary absolute inset-0 size-full mix-blend-hue"></div>
       </div>
 
-      <div className="container flex-row-reverse items-center gap-10 space-y-4 lg:flex lg:px-15 lg:pt-10">
+      <div className="container flex-row-reverse items-center gap-10 space-y-4 lg:flex lg:px-15 lg:ppt-10">
         <Image
           alt="Account Pro"
           src="/images/index/Banner.png"

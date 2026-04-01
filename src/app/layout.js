@@ -12,7 +12,7 @@ export default function RootLayout({ children }) {
       <body className="flex min-h-full flex-col overflow-x-hidden">
         <div className="overflow-x-hidden">
           <Header />
-          {children}
+          <div className="lg:mb-8">{children}</div>
           <Footer />
         </div>
       </body>
