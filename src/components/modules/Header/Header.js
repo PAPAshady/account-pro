@@ -63,7 +63,7 @@ export default function Header() {
           <div className="hidden items-center justify-between gap-3 py-2.5 min-[1080]:gap-4 lg:flex">
             <Navbar />
             <SearchBox />
-            <PrimaryButton>
+            <PrimaryButton isLink href="/login">
               ورود/ثبت نام
               <FaUser />
             </PrimaryButton>
