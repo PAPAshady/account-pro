@@ -6,7 +6,7 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="fa-IR" dir="rtl" className="antialiased">
+    <html lang="fa-IR" dir="rtl" className="scroll-smooth antialiased">
       <body>{children}</body>
     </html>
   );

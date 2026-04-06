@@ -147,7 +147,7 @@ export default function ProductDetails() {
             <span className="text-primary">%</span>
           </p>
           <p className="text-paragraph text-sm min-[380px]:text-base min-[900px]:text-lg">
-            مشتری رضایتمند!
+            خرید دوباره از اکانت پرو!
           </p>
         </div>
         <div className="bg-foreground flex min-h-50 flex-col justify-end rounded-4xl rounded-br-2xl p-5">
@@ -156,7 +156,7 @@ export default function ProductDetails() {
             <span>10000</span>
           </p>
           <p className="text-paragraph text-sm min-[380px]:text-base min-[900px]:text-lg">
-            مشتری رضایتمند!
+            فعالسازی در ماه گذشته!
           </p>
         </div>
         <div className="bg-foreground flex min-h-50 flex-col justify-end rounded-4xl rounded-bl-2xl p-5 text-end">
@@ -165,7 +165,7 @@ export default function ProductDetails() {
             <span>8</span>
           </p>
           <p className="text-paragraph text-sm min-[380px]:text-base min-[900px]:text-lg">
-            مشتری رضایتمند!
+            لایسنس و اشتراک مختلف!
           </p>
         </div>
       </div>
