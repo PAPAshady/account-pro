@@ -3,6 +3,7 @@ import Navigation from '@templates/product/Navigation/Navigation';
 import Introduction from '@templates/product/Introduction/Introduction';
 import Plans from '@templates/product/Plans/Plans';
 import ActivationMethods from '@templates/product/ActivationMethods/ActivationMethods';
+import ImportantPoints from '@templates/product/ImportantPoints/ImportantPoints';
 
 export default function Product() {
   return (
@@ -12,6 +13,7 @@ export default function Product() {
       <Introduction />
       <Plans />
       <ActivationMethods />
+      <ImportantPoints />
     </div>
   );
 }

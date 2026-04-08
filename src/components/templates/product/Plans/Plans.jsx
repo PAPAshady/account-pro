@@ -17,8 +17,8 @@ export default function Plans() {
         </div>
         <div className="space-y-10 px-4 pt-2 md:px-6 md:pt-3 md:pb-0">
           <p className="text-paragraph lg:text-lg">
-            سپاتیفای چندین نوع اشتراک پرمیوم ارائه می‌دهد که هر کدام برای گروه خاصی از کاربران طراحی
-            شده است. <br /> در ادامه، انواع اشتراک‌ها و ویژگی‌های آن‌ها توضیح داده شده است.
+            سپاتیفای چندین نوع اشتراک پرمیوم ارائه می‌دهد که هر کدام برای گروه خxاصی از کاربران
+            طراحی شده است. <br /> در ادامه، انواع اشتراک‌ها و ویژگی‌های آن‌ها توضیح داده شده است.
           </p>
 
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 lg:gap-6">
