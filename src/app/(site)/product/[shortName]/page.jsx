@@ -2,6 +2,7 @@ import ProductDetails from '@templates/product/ProductDetails/ProductDetails';
 import Navigation from '@templates/product/Navigation/Navigation';
 import Introduction from '@templates/product/Introduction/Introduction';
 import Plans from '@templates/product/Plans/Plans';
+import ActivationMethods from '@templates/product/ActivationMethods/ActivationMethods';
 
 export default function Product() {
   return (
@@ -10,6 +11,7 @@ export default function Product() {
       <Navigation />
       <Introduction />
       <Plans />
+      <ActivationMethods />
     </div>
   );
 }
