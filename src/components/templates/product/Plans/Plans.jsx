@@ -12,8 +12,8 @@ export default function Plans() {
           }}
         ></div>
         <div className="mb-3 space-y-1 px-4 font-bold">
-          <h3 className="text-xl lg:text-[26px]">انواع پلن های اشتراک پرمیوم</h3>
-          <p className="text-sm">Premium Plans</p>
+          <h3 className="font-morabba text-xl lg:text-[26px]">انواع پلن های اشتراک پرمیوم</h3>
+          <p className="font-stretchPro text-paragraph text-sm">Premium Plans</p>
         </div>
         <div className="space-y-10 px-4 pt-2 md:px-6 md:pt-3 md:pb-0">
           <p className="text-paragraph lg:text-lg">
@@ -36,7 +36,7 @@ function PremiumCard({ title, type, options }) {
   return (
     <div className="bg-foreground border-foreground hover:border-primary flex flex-col gap-3 rounded-3xl rounded-tr-lg border p-5 transition-colors duration-300">
       <p className="text-primary">{type}</p>
-      <p className="mb-2 text-[28px] font-bold">{title}</p>
+      <p className="font-morabba mb-2 text-[28px] font-bold">{title}</p>
       <ul className="flex grow flex-col gap-5">
         {options.map((option) => (
           <li className="flex gap-2" key={option.id}>

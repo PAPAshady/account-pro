@@ -19,8 +19,12 @@ export default function Blog() {
         />
         <div>
           <div className="mb-2">
-            <h3 className="text-center text-2xl font-bold">وبلاگ اکانت پرو</h3>
-            <h3 className="text-paragraph mb-2 text-center text-lg font-bold lg:mb-5">‌Blog</h3>
+            <h3 className="font-morabba md:mb-1 text-center text-xl font-semibold md:text-[26px]">
+              وبلاگ اکانت پرو
+            </h3>
+            <h3 className="text-paragraph font-stretchPro mb-2 text-center text-sm font-semibold lg:mb-5">
+              ‌Blog
+            </h3>
           </div>
           <div className="grid grid-cols-1 gap-2 min-[560px]:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
             <BlogCard />

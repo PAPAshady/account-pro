@@ -25,7 +25,7 @@ export default function Banner() {
         <div className="bg-primary absolute inset-0 size-full mix-blend-hue"></div>
       </div>
 
-      <div className="container flex-row-reverse items-center gap-10 space-y-4 lg:flex lg:px-15 lg:ppt-10">
+      <div className="lg:ppt-10 container flex-row-reverse items-center gap-10 space-y-4 lg:flex lg:px-15">
         <Image
           alt="Account Pro"
           src="/images/index/Banner.png"
@@ -35,7 +35,7 @@ export default function Banner() {
         />
         <div className="space-y-5 sm:space-y-8 lg:w-1/2">
           <div className="-mt-12 space-y-5 text-center sm:space-y-8 lg:text-start">
-            <h1 className="text-xl min-[360px]:text-2xl sm:text-3xl">
+            <h1 className="text-xl min-[360px]:text-2xl sm:text-[32px]">
               <span>خرید حساب های کاملا قانونی</span>
               <br />
               <div className="mt-2 flex items-center justify-center gap-1 sm:gap-2 lg:justify-start">
@@ -45,7 +45,7 @@ export default function Banner() {
                   src="/images/logo/logo-md.png"
                   width={192}
                   height={48}
-                  className="mt-1.5 w-24 sm:w-32"
+                  className="mt-1.5 w-24 sm:w-40"
                 />
               </div>
             </h1>

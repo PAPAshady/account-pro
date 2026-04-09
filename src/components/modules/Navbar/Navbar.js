@@ -24,8 +24,8 @@ export default function Navbar() {
           <li className="grow" key={navLink.id}>
             <Link
               className={clsx(
-                'flex items-center justify-center gap-2 px-2.5 pt-2.5 pb-3',
-                pathname.includes(navLink.href) ? 'font-bold text-white' : 'text-paragraph'
+                'flex items-center justify-center gap-2 px-2.5 pt-2.5 pb-3 text-white transition-colors duration-300 hover:text-[#ccc]',
+                pathname.includes(navLink.href) ? 'h font-semibold' : 'font-light'
               )}
               href={navLink.href}
             >

@@ -12,8 +12,8 @@ export default function ImportantPoints() {
           }}
         ></div>
         <div className="mb-3 space-y-1 px-4 font-bold">
-          <h3 className="text-xl lg:text-[26px]">نکات مهم قبل از خرید</h3>
-          <p className="text-sm">Important Points</p>
+          <h3 className="font-morabba text-xl lg:text-[26px]">نکات مهم قبل از خرید</h3>
+          <p className="text-paragraph font-stretchPro text-sm">Important Points</p>
         </div>
         <div className="px-4 pt-2 md:px-6 md:pt-3 md:pb-0">
           <div className="grid grid-cols-1 gap-4 md:grid-cols-2">

@@ -12,8 +12,12 @@ export default function Introduction() {
           }}
         ></div>
         <div className="space-y-1 px-4 font-bold">
-          <h3 className="text-xl lg:text-[26px]">اسپاتیفای، بزرگترین پلتفرم استریم موسیقی</h3>
-          <p className="text-sm">SPOTIFY,The world&apos;s largest music platform</p>
+          <h3 className="font-morabba text-xl lg:text-[26px]">
+            اسپاتیفای، بزرگترین پلتفرم استریم موسیقی
+          </h3>
+          <p className="font-stretchPro text-paragraph text-sm">
+            SPOTIFY,The world&apos;s largest music platform
+          </p>
         </div>
         <div className="relative flex flex-col justify-center gap-4 p-3 md:mt-4 md:flex-row md:items-center md:px-6">
           <div className="space-y-4 md:w-[60%]">

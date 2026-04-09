@@ -10,8 +10,12 @@ export default function Services() {
       <div className="container">
         <div className="relative w-full bg-[url('/images/index/section-container-lg.png')] bg-position-[center_55] bg-no-repeat lg:bg-[url('/images/index/section-container-sm.png')] lg:bg-position-[center_20]">
           <div className="space-y-2">
-            <h3 className="text-center text-2xl font-bold">سرویس های اکانت پرو</h3>
-            <h3 className="text-paragraph mb-2 text-center text-lg font-bold lg:mb-5">Services</h3>
+            <h3 className="font-morabba text-center text-[26px] font-semibold">
+              سرویس های اکانت پرو
+            </h3>
+            <h3 className="text-paragraph font-stretchPro mb-4 text-center text-sm font-semibold lg:mb-5">
+              Services
+            </h3>
             <div className="grid grid-cols-1 gap-x-4 gap-y-2 min-[1140px]:grid-cols-4! sm:grid-cols-2 lg:grid-cols-3 lg:gap-4">
               {services.slice(0, 4).map((service) => (
                 <ServiceCard key={service.id} {...service} />

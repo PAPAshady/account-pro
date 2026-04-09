@@ -2,23 +2,7 @@ import Image from 'next/image';
 
 import PrimaryButton from '@modules/PrimaryButton/PrimaryButton';
 import Particle from '@modules/Particle/Particle';
-
-const reviews = [
-  {
-    id: 1,
-    name: 'یاسین جلیلی',
-    account: 'اکانت پرمیوم یوتیوب',
-    body: 'خیلی راضی‌ام! اکانت پرو سریع و بدون دردسر حساب‌ها رو فعال می‌کنه و پشتیبانی همیشه پاسخگوعه',
-    avatar: 'profile2.png',
-  },
-  {
-    id: 2,
-    name: 'مریم مرادی',
-    account: 'اکانت پرمیوم اسپاتیفای',
-    body: 'خدماتشون عالیه، هم قانونی و هم با قیمت مناسب. استفاده از اکانت پرو رو پیشنهاد می‌کنم!',
-    avatar: 'profile.png',
-  },
-];
+import { reviews } from '@/data';
 
 export default function Reviews() {
   return (
@@ -49,10 +33,10 @@ export default function Reviews() {
           <div className="items-center gap-10 lg:flex xl:gap-4">
             <div className="mb-10 text-center lg:m-0 lg:max-w-57.5 lg:ps-4 lg:pt-20 lg:text-start xl:w-[30%] xl:max-w-none xl:p-0 xl:ps-6">
               <div className="mb-4 xl:mb-1">
-                <h4 className="text-xl font-bold md:text-2xl lg:mb-4 lg:text-3xl xl:mb-2 xl:pt-6">
+                <h4 className="font-morabba text-xl font-semibold md:text-[26px] lg:mb-4 lg:text-3xl xl:mb-2 xl:pt-6">
                   نظرات مشتریان
                 </h4>
-                <h4 className="text-xl font-bold">Customers Review</h4>
+                <h4 className="font-stretchPro text-paragraph text-sm xl:mb-3">Customers Review</h4>
               </div>
               <p className="text-paragraph lg:mb-24 xl:mb-8">
                 اکانت پرو همیشه توجه کاربرانش را جلب می کند!

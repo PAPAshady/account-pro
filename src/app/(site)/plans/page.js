@@ -6,8 +6,8 @@ export default function page() {
     <div className="container">
       <div className="mb-16 text-center">
         <h4 className="mb-2 font-bold md:mb-4">
-          <span className="block text-[26px] lg:mb-2 lg:text-3xl">پلن های قیمتی</span>
-          <span className="text-lg lg:text-xl">Price&apos;s Plans</span>
+          <span className="font-morabba block text-[26px] lg:mb-2 lg:text-3xl">پلن های قیمتی</span>
+          <span className="font-stretchPro text-paragraph text-sm">Price&apos;s Plans</span>
         </h4>
         <p className="text-paragraph">
           با انتخاب پلن مناسب خود، علاوه بر صرفه‌جویی در هزینه، تجربه‌ای بدون دغدغه از استفاده از

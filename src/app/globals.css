@@ -1,16 +1,7 @@
 @import 'tailwindcss';
-
-@font-face {
-  font-family: yekan;
-  src: url(../../public/fonts/BYekan.ttf) format('truetype-variations');
-  font-weight: normal;
-}
-
-@font-face {
-  font-family: yekan;
-  src: url(../../public/fonts/BYekan-Bold.ttf) format('truetype-variations');
-  font-weight: bold;
-}
+@import '../../public/fonts/yekanbakh/yekanbakh-font.css';
+@import '../../public/fonts/morabba-font/morabba-font.css';
+@import '../../public/fonts/stretch-pro-font/stretch-pro-font.css';
 
 @utility container {
   @apply mx-auto w-[80%] max-w-360 lg:w-[90%];
@@ -46,9 +37,11 @@
   --color-box: #161616;
 
   /* Fonts */
-  --font-yekan: yekan, sans-serif;
+  --font-yekanBakh: YekanBakh, sans-serif;
+  --font-morabba: Morabba, sans-serif;
+  --font-stretchPro: StretchPro, sans-serif;
 }
 
 body {
-  @apply bg-blackColor font-yekan text-white;
+  @apply bg-blackColor font-yekanBakh font-medium text-white;
 }

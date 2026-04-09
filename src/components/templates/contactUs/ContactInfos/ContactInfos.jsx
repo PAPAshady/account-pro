@@ -36,8 +36,8 @@ export default function ContactInfos() {
       <div className="lg:container">
         <div className="container bg-[url('/images/contact-us/section-container-1.png')] bg-position-[center_30] bg-no-repeat pb-8 lg:bg-none">
           <div className="mb-4 text-center font-bold lg:hidden">
-            <p className="mb-1 text-2xl">اطلاعات تماس</p>
-            <p className="text-lg">Contact Information</p>
+            <p className="font-morabba mb-1 text-xl">اطلاعات تماس</p>
+            <p className="font-stretchPro text-paragraph text-sm">Contact Us</p>
           </div>
 
           <div className="items-center justify-center gap-6 md:flex">
@@ -88,8 +88,8 @@ export default function ContactInfos() {
               <div className="bg-hatching bg-primary absolute bottom-0 -z-1 h-[45%] w-full rounded-t-lg rounded-b-[40px]"></div>
 
               <div className="-mt-4 mb-4 text-center font-bold">
-                <p className="mb-1 text-2xl">اطلاعات تماس</p>
-                <p>Contact Information</p>
+                <p className="font-morabba text-[26px]">اطلاعات تماس</p>
+                <p className="font-stretchPro text-paragraph text-sm">Contact Us</p>
               </div>
               <Image
                 width={500}

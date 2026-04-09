@@ -13,6 +13,7 @@ import {
 
 import PrimaryButton from '@modules/PrimaryButton/PrimaryButton';
 import Particle from '@modules/Particle/Particle';
+import { footerLinks } from '@/data';
 
 export default function Footer() {
   return (
@@ -37,7 +38,6 @@ export default function Footer() {
           className="w-62 lg:h-62 lg:w-81.5"
         />
       </div>
-
       <div className="container">
         <div className="flex flex-col gap-4 lg:flex-row">
           <div className="bg-box rounded-box-ltr relative flex flex-col items-center p-7.5 lg:w-1/4 lg:justify-center">
@@ -71,8 +71,8 @@ export default function Footer() {
           <div className="bg-box rounded-box-ltr flex flex-col gap-10 py-6.25 md:flex-row md:gap-4 lg:w-3/4">
             <div className="space-y-6.25 px-5 md:w-1/3 lg:w-[40%]">
               <div className="text-center md:text-start">
-                <p className="text-[18px] font-bold">درباره اکانت پرو</p>
-                <p className="text-primary text-[18px] font-bold">About us</p>
+                <p className="font-morabba text-[18px] font-semibold">درباره اکانت پرو</p>
+                <p className="text-primary font-stretchPro text-xs">About us</p>
               </div>
               <p className="text-paragraph text-justify text-sm lg:text-base">
                 در اکانت پرو، ما به دنبال فراهم کردن دسترسی آسان و قانونی به سرویس‌های پرطرفدار دنیا
@@ -83,8 +83,8 @@ export default function Footer() {
             </div>
             <div className="md:w-1/3 lg:w-[20%]">
               <div className="text-center md:text-start">
-                <p className="text-[18px] font-bold">دسترسی سریع</p>
-                <p className="text-primary text-[18px] font-bold">Quick access</p>
+                <p className="font-morabba text-[18px] font-semibold">دسترسی سریع</p>
+                <p className="text-primary font-stretchPro text-xs">Quick Access</p>
               </div>
               <div className="mt-1 flex justify-between">
                 <Image
@@ -95,51 +95,9 @@ export default function Footer() {
                   className="h-20 w-10 shrink-0 object-cover pt-2 md:hidden"
                 />
                 <ul className="box grow p-4 pb-0 font-bold md:px-0">
-                  <li className="py-1.5">
-                    <Link className="hover:text-primary transition-colors duration-300" href="/">
-                      صفحه اصلی
-                    </Link>
-                  </li>
-                  <li className="py-1.5">
-                    <Link
-                      className="hover:text-primary transition-colors duration-300"
-                      href="/shop"
-                    >
-                      سرویس های اکانت پرو
-                    </Link>
-                  </li>
-                  <li className="py-1.5">
-                    <Link
-                      className="hover:text-primary transition-colors duration-300"
-                      href="/plans"
-                    >
-                      پلن ها
-                    </Link>
-                  </li>
-                  <li className="py-1.5">
-                    <Link
-                      className="hover:text-primary transition-colors duration-300"
-                      href="/blog"
-                    >
-                      وبلاگ
-                    </Link>
-                  </li>
-                  <li className="py-1.5">
-                    <Link
-                      className="hover:text-primary transition-colors duration-300"
-                      href="/about-us"
-                    >
-                      درباره ما
-                    </Link>
-                  </li>
-                  <li className="py-1.5">
-                    <Link
-                      className="hover:text-primary transition-colors duration-300"
-                      href="/contact-us"
-                    >
-                      تماس با ما
-                    </Link>
-                  </li>
+                  {footerLinks.map((link) => (
+                    <FooterLink key={link.id} {...link} />
+                  ))}
                 </ul>
                 <Image
                   alt="kkk"
@@ -152,8 +110,8 @@ export default function Footer() {
             </div>
             <div className="px-3.5 md:w-1/3 lg:w-[40%]">
               <div className="text-center md:text-start">
-                <p className="text-[18px] font-bold">راه های ارتباطی</p>
-                <p className="text-primary mb-4 text-[18px] font-bold">Contact ways</p>
+                <p className="font-morabba text-[18px] font-semibold">راه های ارتباطی</p>
+                <p className="text-primary font-stretchPro mb-4 text-xs">Contact Ways</p>
                 <div className="space-y-6">
                   <div className="flex justify-between gap-7">
                     <div className="flex gap-2">
@@ -193,5 +151,15 @@ export default function Footer() {
         </div>
       </div>
     </footer>
+  );
+}
+
+function FooterLink({ title, href }) {
+  return (
+    <li className="py-1.5">
+      <Link className="hover:text-primary transition-colors duration-300" href={href}>
+        {title}
+      </Link>
+    </li>
   );
 }

@@ -32,8 +32,10 @@ export default function AboutUs() {
           <div className="flex flex-col items-center gap-4 px-4 sm:gap-8 md:flex-row lg:items-end lg:justify-center lg:px-10">
             <div className="space-y-4 sm:space-y-6 md:w-1/2">
               <div className="lg:-mt-0.5 lg:ps-4">
-                <p className="text-xl font-bold lg:mb-2 lg:text-2xl">درباره اکانت پرو</p>
-                <p className="text-xl font-bold">About Us</p>
+                <p className="font-morabba text-xl font-semibold lg:mb-1 lg:text-[26px]">
+                  درباره اکانت پرو
+                </p>
+                <p className="font-stretchPro text-paragraph text-sm">About Us</p>
               </div>
               <p className="text-paragraph text-justify text-sm sm:text-base lg:text-start lg:text-lg">
                 در اکانت پرو، ما به دنبال فراهم کردن دسترسی آسان و قانونی به سرویس‌های پرطرفدار دنیا

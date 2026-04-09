@@ -19,7 +19,9 @@ export default function PlanCard({ title, price }) {
             <span className="text-primary group-hover:text-blackColor text-sm transition-colors duration-300 sm:text-lg">
               اشتراک ویژه اکانت پرو
             </span>
-            <p className="text-4xl font-bold sm:text-5xl">{title}</p>
+            <p className="font-morabba text-[30px] font-bold min-[1100px]:text-[40px]! sm:text-[47px] xl:text-[47px]!">
+              {title}
+            </p>
           </div>
         </div>
         <div className="flex items-center pe-2 pb-1">

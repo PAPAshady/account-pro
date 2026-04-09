@@ -48,8 +48,8 @@ export default function Header() {
             </Link>
             <div className="bg-foreground rounded-box-rtl flex items-center gap-3 py-2.5 ps-3.75 pe-2">
               <div className="text-end">
-                <p className="text-sm font-bold">۰۹۳۳۱۸۴۴۵۴۹</p>
-                <p className="text-paragraph">پشتیبانی ۲۴ ساعته</p>
+                <p className="font-semibold">۰۹۳۳۱۸۴۴۵۴۹</p>
+                <p className="font-light">پشتیبانی ۲۴ ساعته</p>
               </div>
               <Image
                 src="/images/support.png"

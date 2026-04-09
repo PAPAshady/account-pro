@@ -12,8 +12,8 @@ export default function ActivationMethods() {
           }}
         ></div>
         <div className="mb-3 space-y-1 px-4 font-bold">
-          <h3 className="text-xl lg:text-[26px]">نحوه ی فعالسازی</h3>
-          <p className="text-sm">Activation</p>
+          <h3 className="font-morabba text-xl lg:text-[26px]">نحوه ی فعالسازی</h3>
+          <p className="text-paragraph font-stretchPro text-sm">Activation</p>
         </div>
         <div className="px-4 pt-2 md:px-6 md:pt-3 md:pb-0">
           <div className="mb-6 flex flex-col gap-6 lg:flex-row">

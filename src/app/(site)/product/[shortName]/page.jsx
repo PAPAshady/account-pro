@@ -7,7 +7,7 @@ import ImportantPoints from '@templates/product/ImportantPoints/ImportantPoints'
 
 export default function Product() {
   return (
-    <div className="container space-y-16">
+    <div className="container space-y-16 lg:space-y-24">
       <ProductDetails />
       <Navigation />
       <Introduction />

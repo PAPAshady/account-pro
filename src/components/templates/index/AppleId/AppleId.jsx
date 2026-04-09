@@ -49,8 +49,8 @@ export default function AppleId() {
               height={201}
             />
             <div className="lg:-mt-10 lg:text-center xl:-mt-16">
-              <h4 className="text-xl font-bold md:text-2xl">سفارش اپل آیدی</h4>
-              <h4 className="text-xl font-bold md:text-2xl">Apple ID</h4>
+              <h4 className="font-morabba text-xl font-semibold md:text-[26px]">سفارش اپل آیدی</h4>
+              <h4 className="font-stretchPro text-paragraph text-sm">Apple ID</h4>
             </div>
           </div>
           <div className="relative z-1 gap-3 space-y-4 md:w-[70%] md:space-y-0 lg:flex lg:w-full">
@@ -75,7 +75,7 @@ export default function AppleId() {
               <div className="flex gap-4">
                 <FaShippingFast className="ms-2 mt-2" />
                 <div>
-                  <p>تایید و ثبت سفارش</p>
+                  <p className="text-xl">تایید و ثبت سفارش</p>
                   <p className="text-primary text-sm">Accept and Ordering</p>
                 </div>
               </div>

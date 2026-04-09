@@ -1,39 +1,7 @@
 import Image from 'next/image';
 
-import { FaUser, FaSearch, FaShoppingBasket, FaWallet } from 'react-icons/fa';
-
 import Particle from '@modules/Particle/Particle';
-
-const orederingWays = [
-  {
-    id: 1,
-    title: 'ثبت نام و ورود',
-    subtitle: 'Sign up',
-    image: 'ordering-ways-signup.png',
-    icon: <FaUser />,
-  },
-  {
-    id: 2,
-    title: 'انتخاب محصول',
-    subtitle: 'Search & Choose',
-    image: 'ordering-ways-search.png',
-    icon: <FaSearch />,
-  },
-  {
-    id: 3,
-    title: 'افزودن به سبد خرید',
-    subtitle: 'Send to Cart',
-    image: 'ordering-ways-cart.png',
-    icon: <FaShoppingBasket />,
-  },
-  {
-    id: 4,
-    title: 'پرداخت و ثبت سفارش',
-    subtitle: 'Pay & Accept Order',
-    image: 'ordering-ways-pay.png',
-    icon: <FaWallet />,
-  },
-];
+import { orederingWays } from '@/data';
 
 export default function OrderingWays() {
   return (
@@ -61,8 +29,12 @@ export default function OrderingWays() {
         <div className="relative w-full bg-[url('/images/index/section-container-lg.png')] bg-position-[center_16] bg-no-repeat min-[1100px]:bg-[url('/images/index/ordering-ways-rectangle.png')]! sm:bg-[url('/images/index/section-container-sm.png')]">
           <div className="space-y-6 min-[1100px]:space-y-4! sm:space-y-8">
             <div>
-              <h3 className="mb-2 text-center text-2xl font-bold">مراحل سفارش محصول</h3>
-              <h3 className="text-paragraph text-center text-lg font-bold">Ordering Ways</h3>
+              <h3 className="font-morabba text-center text-xl font-semibold md:text-[26px]">
+                مراحل سفارش محصول
+              </h3>
+              <h3 className="text-paragraph font-stretchPro mb-4 text-center text-sm font-semibold lg:mb-5">
+                Ordering Ways
+              </h3>
             </div>
             <div className="grid grid-cols-1 gap-4 px-2.5 min-[400px]:gap-5.5 sm:grid-cols-2 md:grid-cols-4 md:gap-4 md:px-0 lg:gap-6">
               {orederingWays.map((item) => (

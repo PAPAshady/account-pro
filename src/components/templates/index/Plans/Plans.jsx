@@ -33,15 +33,15 @@ export default function Plans() {
       <div className="gap-4 min-[1100px]:flex">
         <div className="mb-4 text-center min-[1100px]:w-[25%] min-[1100px]:pt-16 min-[1100px]:text-start md:mb-10 lg:mb-12">
           <div className="relative mb-4">
-            <h4 className="text-xl font-bold sm:mix-blend-color-dodge md:text-2xl lg:mb-2 lg:text-3xl">
+            <h4 className="font-morabba text-xl font-bold sm:mix-blend-color-dodge md:text-2xl lg:mb-2 lg:text-3xl">
               پلن های قیمتی
             </h4>
-            <h4 className="text-xl font-bold sm:mix-blend-color-dodge md:text-2xl lg:text-3xl">
+            <h4 className="font-stretchPro text-paragraph text-sm font-bold sm:mix-blend-color-dodge">
               Price&apos;s plans
             </h4>
             <div className="absolute hidden size-full bg-white mix-blend-hue sm:block"></div>
           </div>
-          <p className="text-paragraph text-sm lg:text-base">
+          <p className="text-paragraph text-sm md:text-base">
             با انتخاب پلن مناسب خود، علاوه بر صرفه‌جویی در هزینه، تجربه‌ای بدون دغدغه از استفاده از
             حساب‌های پریمیوم خواهید داشت.
           </p>

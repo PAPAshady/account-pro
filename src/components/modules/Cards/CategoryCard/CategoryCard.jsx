@@ -3,12 +3,12 @@ import Image from 'next/image';
 export default function CategoryCard({ id, title, image, alt }) {
   return (
     <div key={id} className="group">
-      <div className="group-hover:bg-primary hover:bg-hatching rounded-box-ltr relative flex h-full flex-col gap-4 bg-[#161616] px-2.5 pt-3.75 transition-all duration-300 xl:p-5! xl:pb-0!">
+      <div className="group-hover:bg-primary hover:bg-hatching rounded-box-ltr bg-box relative flex h-full flex-col gap-4 px-2.5 pt-3.75 transition-all duration-300 xl:p-5! xl:pb-0!">
         <div className="flex h-full grow flex-col transition-colors duration-300">
-          <p className="text-mainColor group-hover:text-blackColor text-sm xl:text-base!">
+          <p className="text-mainColor group-hover:text-blackColor text-sm font-light xl:text-[15px]!">
             اکانت های
           </p>
-          <p className="group-hover:text-blackColor line-clamp-2 grow text-sm font-bold xl:text-lg!">
+          <p className="group-hover:text-blackColor line-clamp-2 grow text-sm font-bold xl:text-[17px]!">
             {title}
           </p>
         </div>

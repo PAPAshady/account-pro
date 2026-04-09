@@ -5,7 +5,7 @@ export default function SearchBox({ className, ...props }) {
   return (
     <div
       className={clsx(
-        'bg-foreground rounded-box-rtl flex grow items-center gap-2 px-3.5',
+        'bg-foreground rounded-box-rtl flex grow items-center gap-2 px-3.5 text-[15px]',
         className
       )}
     >

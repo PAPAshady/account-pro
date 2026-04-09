@@ -1,4 +1,13 @@
-import { FaVectorSquare, FaClock, FaWallet, FaCheck, FaLanguage } from 'react-icons/fa';
+import {
+  FaVectorSquare,
+  FaClock,
+  FaWallet,
+  FaCheck,
+  FaLanguage,
+  FaUser,
+  FaSearch,
+  FaShoppingBasket,
+} from 'react-icons/fa';
 
 export const services = [
   { id: 1, title: 'لایسنس ویندوز ۱۱', price: '۹۰,۰۰۰', region: 'همه ریجن ها' },
@@ -237,4 +246,94 @@ export const productActivationImportantPoints = [
     title: 'شرایط لغو اشتراک',
     description: 'شرایط لغو اشتراک را قبل از خرید بررسی کنید تا در آینده با مشکلی مواجه نشوید',
   },
+];
+
+export const categoryCards = [
+  {
+    id: 1,
+    title: 'استریم فیلم و سریال',
+    image: '/images/index/movie-category.png',
+    alt: 'Movie and series',
+  },
+  {
+    id: 2,
+    title: 'استریم موزیک',
+    image: '/images/index/music-category.png',
+    alt: 'Music',
+  },
+  {
+    id: 3,
+    title: 'گرافیک و طراحی',
+    image: '/images/index/graphic-category.png',
+    alt: 'Graphics',
+  },
+  {
+    id: 4,
+    title: 'گیفت کارت و بازی',
+    image: '/images/index/gift-category.png',
+    alt: 'Gift Card',
+  },
+  {
+    id: 5,
+    title: 'هوش مصنوعی',
+    image: '/images/index/ai-category.png',
+    alt: 'AI',
+  },
+];
+
+export const orederingWays = [
+  {
+    id: 1,
+    title: 'ثبت نام و ورود',
+    subtitle: 'Sign up',
+    image: 'ordering-ways-signup.png',
+    icon: <FaUser />,
+  },
+  {
+    id: 2,
+    title: 'انتخاب محصول',
+    subtitle: 'Search & Choose',
+    image: 'ordering-ways-search.png',
+    icon: <FaSearch />,
+  },
+  {
+    id: 3,
+    title: 'افزودن به سبد خرید',
+    subtitle: 'Send to Cart',
+    image: 'ordering-ways-cart.png',
+    icon: <FaShoppingBasket />,
+  },
+  {
+    id: 4,
+    title: 'پرداخت و ثبت سفارش',
+    subtitle: 'Pay & Accept Order',
+    image: 'ordering-ways-pay.png',
+    icon: <FaWallet />,
+  },
+];
+
+export const reviews = [
+  {
+    id: 1,
+    name: 'یاسین جلیلی',
+    account: 'اکانت پرمیوم یوتیوب',
+    body: 'خیلی راضی‌ام! اکانت پرو سریع و بدون دردسر حساب‌ها رو فعال می‌کنه و پشتیبانی همیشه پاسخگوعه',
+    avatar: 'profile2.png',
+  },
+  {
+    id: 2,
+    name: 'مریم مرادی',
+    account: 'اکانت پرمیوم اسپاتیفای',
+    body: 'خدماتشون عالیه، هم قانونی و هم با قیمت مناسب. استفاده از اکانت پرو رو پیشنهاد می‌کنم!',
+    avatar: 'profile.png',
+  },
+];
+
+export const footerLinks = [
+  { id: 1, title: 'صفحه اصلی', href: '/' },
+  { id: 2, title: 'سرویس های اکانت پرو', href: '/shop' },
+  { id: 3, title: 'پلن ها', href: '/plans' },
+  { id: 4, title: 'وبلاگ', href: '/blog' },
+  { id: 5, title: 'درباره ما', href: '/about-us' },
+  { id: 6, title: 'تماس با ما', href: '/contact-us' },
 ];
