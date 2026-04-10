@@ -360,3 +360,34 @@ export const faq = [
     text: 'لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است.',
   },
 ];
+
+export const commentsBoxes = [
+  {
+    id: 1,
+    title: 'مشتری رضایتمند!',
+    number: 90,
+    image: '/images/product/customers.png',
+    mark: '%',
+  },
+  {
+    id: 2,
+    title: 'خرید دوباره از اکانت پرو!',
+    number: 95,
+    image: '/images/product/rebuy.png',
+    mark: '%',
+  },
+  {
+    id: 3,
+    title: 'فعالسازی در ماه گذشته!',
+    number: 6000,
+    image: '/images/product/cart.png',
+    mark: '+',
+  },
+  {
+    id: 4,
+    title: 'لایسنس و اشتراک مختلف!',
+    number: 8,
+    image: '/images/product/gift.png',
+    mark: '+',
+  },
+];

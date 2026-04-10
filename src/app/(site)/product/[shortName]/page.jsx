@@ -5,6 +5,7 @@ import Plans from '@templates/product/Plans/Plans';
 import ActivationMethods from '@templates/product/ActivationMethods/ActivationMethods';
 import ImportantPoints from '@templates/product/ImportantPoints/ImportantPoints';
 import Faq from '@templates/product/Faq/Faq';
+import Comments from '@templates/product/Comments/Comments';
 
 export default function Product() {
   return (
@@ -16,6 +17,7 @@ export default function Product() {
       <ActivationMethods />
       <ImportantPoints />
       <Faq />
+      <Comments />
     </div>
   );
 }

@@ -43,5 +43,5 @@
 }
 
 body {
-  @apply bg-blackColor font-yekanBakh font-medium text-white;
+  @apply bg-blackColor font-yekanBakh font-normal text-white;
 }
