@@ -40,7 +40,7 @@ export default function ActivationMethods() {
             </div>
           </div>
           <div className="bg-foreground flex flex-col gap-5 rounded-3xl rounded-tr-lg p-5">
-            <p className="mb-5 text-lg">کدام روش فعال‌سازی برای شما مناسب‌تر است؟</p>
+            <p className="mb-1 text-lg">کدام روش فعال‌سازی برای شما مناسب‌تر است؟</p>
             <p className="text-paragraph">
               خرید اشتراک پرمیوم از طریق ایمیل کاربر امنیت بیشتری دارد و به کاربر اجازه می‌دهد از
               ویژگی‌های کامل اسپاتیفای بهره‌مند شود، اما نیاز به اطلاعات حساب و فرآیند پرداخت
