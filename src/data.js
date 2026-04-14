@@ -7,6 +7,14 @@ import {
   FaUser,
   FaSearch,
   FaShoppingBasket,
+  FaRegHeart,
+  FaRegComment,
+  FaPhone,
+  FaRegUser,
+  FaGripLines,
+  FaRegNewspaper,
+  FaRegComments,
+  FaRedo,
 } from 'react-icons/fa';
 
 export const services = [
@@ -389,5 +397,65 @@ export const commentsBoxes = [
     number: 8,
     image: '/images/product/gift.png',
     mark: '+',
+  },
+];
+
+export const licences = [
+  {
+    id: 1,
+    title: 'پرمیوم یوتیوب یک ماهه',
+    remainingTime: '۲۷ روز',
+    buyTime: '۱۴۰۵.۰۱.۲۲',
+    endTime: '۱۴۰۵.۰۲.۲۱',
+    price: '۱,۰۰۰,۰۰۰',
+  },
+  {
+    id: 2,
+    title: 'پرمیوم اسپاتیفای سه ماهه',
+    remainingTime: '۸۸ روز',
+    buyTime: '۱۴۰۵.۰۱.۲۲',
+    endTime: '۱۴۰۵.۰۴.۲۱',
+    price: '۵,۵۰۰,۰۰۰',
+  },
+  {
+    id: 3,
+    title: 'لایسنس ویندوز ۱۱ یک ساله',
+    remainingTime: '۳۶۰ روز',
+    buyTime: '۱۴۰۵.۰۱.۲۲',
+    endTime: '۱۴۰۶.۰۱.۲۱',
+    price: '۳,۲۰۰,۰۰۰',
+  },
+];
+
+export const dashboardLinks = [
+  { id: 1, title: 'داشبورد', href: '/dashboard', icon: <FaVectorSquare /> },
+  { id: 2, title: 'سفارش ها', href: '/dashboard/orders', icon: <FaShoppingBasket /> },
+  { id: 3, title: 'علاقه مندی ها', href: '/dashboard/favorites', icon: <FaRegHeart /> },
+  { id: 4, title: 'دیدگاه ها', href: '/dashboard/comments', icon: <FaRegComment /> },
+  { id: 5, title: 'تماس با پشتیبانی', href: '/dashboard/support', icon: <FaPhone /> },
+  { id: 6, title: 'اطلاعات حساب کاربری', href: '/dashboard/profile', icon: <FaRegUser /> },
+  { id: 7, title: 'اشتراک ها و لایسنس ها', href: '/dashboard/licenses', icon: <FaGripLines /> },
+  { id: 8, title: 'اخبار و اطلاعیه ها', href: '/dashboard/news', icon: <FaRegNewspaper /> },
+];
+
+export const ticketsStatus = [
+  { id: 1, value: '۹', title: 'همه :‌', subTitle: 'All', icon: <FaRegComments /> },
+  { id: 2, value: '۳', title: 'در انتظار پاسخ :‌', subTitle: 'Waiting', icon: <FaClock /> },
+  { id: 3, value: '۱', title: 'در حال بررسی : ‌', subTitle: 'Reviewing', icon: <FaRedo /> },
+  { id: 4, value: '۰', title: 'پایان یافته :‌', subTitle: 'Finished', icon: <FaCheck /> },
+];
+
+export const announcements = [
+  {
+    id: 1,
+    title: 'بروزرسانی سیاست‌ها',
+    date: '1404.04.23',
+    body: 'کاربر گرامی، اسپاتیفای اخیراً سیاست‌های خود را در مورد استفاده از VPN تغییر داده است. برای جلوگیری از هرگونه مشکل در دسترسی به اشتراک پرمیوم، توصیه می‌کنیم مقاله جدید ما درباره این تغییرات را مطالعه کنید. اطلاعات کامل در بخش مقالات سایت در دسترس شماست!',
+  },
+  {
+    id: 2,
+    title: 'قدردانی از همراهی شما',
+    date: '۱۳۸۲.۰۳.۱۴',
+    body: 'کاربر عزیز، از صبر و همراهی شما در زمان به‌روزرسانی سایت صمیمانه سپاسگزاریم. به پاس قدردانی از شما، ۳ روز عضویت رایگان به حساب شما اضافه شد تا این یک روز اختلال را جبران کنیم. امیدواریم همچنان از خدمات ما لذت ببرید!',
   },
 ];
