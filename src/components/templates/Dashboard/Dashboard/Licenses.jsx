@@ -20,6 +20,11 @@ export default function Licenses() {
           <License key={license.id} {...license} />
         ))}
       </div>
+
+      {/* Empty state ui */}
+      {/* <div className="px-3 pt-3 text-center md:px-4 lg:pt-6">
+        <p>در حال حاضر اشتراک فعالی ندارید.</p>
+      </div> */}
     </div>
   );
 }

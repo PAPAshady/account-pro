@@ -1,9 +1,11 @@
 import Image from 'next/image';
 
+import { FaHeart, FaRegHeart } from 'react-icons/fa';
+
 import Particle from '@/components/modules/Particle/Particle';
 import PrimaryButton from '@/components/modules/PrimaryButton/PrimaryButton';
 
-export default function ServiceCard({ title, price, region }) {
+export default function ServiceCard({ title, price, region, hasLikeButton, isFavorite }) {
   return (
     <div className="group relative">
       <div className="relative flex h-20 items-center gap-2 overflow-hidden">
@@ -37,9 +39,16 @@ export default function ServiceCard({ title, price, region }) {
             </p>
           </div>
         </div>
-        <PrimaryButton dir="ltr" className="w-full">
-          مشاهده و خرید
-        </PrimaryButton>
+        <div className="flex items-center gap-2.5">
+          <PrimaryButton dir="ltr" className="w-full">
+            مشاهده و خرید
+          </PrimaryButton>
+          {hasLikeButton && (
+            <button className="bg-foreground text-primary grid size-10.5 shrink-0 cursor-pointer place-content-center rounded-lg rounded-tr-sm text-[23px] hover:bg-[#ffffff28]">
+              {isFavorite ? <FaHeart /> : <FaRegHeart />}
+            </button>
+          )}
+        </div>
       </div>
     </div>
   );
