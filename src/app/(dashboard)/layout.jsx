@@ -5,10 +5,11 @@ import { FaBars, FaShoppingCart, FaChevronLeft, FaSignOutAlt } from 'react-icons
 
 import { dashboardLinks } from '@/data';
 import SearchBox from '@modules/SearchBox/SearchBox';
+import Footer from '@modules/Footer/Footer';
 
 export default function layout({ children }) {
   return (
-    <div>
+    <div className="overflow-x-hidden">
       <header className="mb-10 border-b border-[#333]">
         <div className="mx-auto flex w-[95%] max-w-360 items-center justify-between py-5 xl:w-[85%]">
           <button className="bg-foreground rounded-box-ltr grid size-10.5 cursor-pointer place-content-center p-2.5 lg:hidden">
@@ -32,7 +33,7 @@ export default function layout({ children }) {
         </div>
       </header>
       <div className="mx-auto w-[95%] max-w-360 xl:w-[85%]">
-        <div className="flex items-start gap-6 pb-10">
+        <div className="flex itemsstart gap-6 pb-10">
           <aside className="hidden h-full w-1/4 lg:block xl:w-62.5">
             <div className="space-y-5">
               <div className="bg-primary bg-hatching rounded-2xl rounded-tr-3xl p-6.25 pb-2.5 text-[#191919]">
@@ -85,6 +86,9 @@ export default function layout({ children }) {
             {children}
           </main>
         </div>
+      </div>
+      <div className="-mt-10">
+        <Footer />
       </div>
     </div>
   );
