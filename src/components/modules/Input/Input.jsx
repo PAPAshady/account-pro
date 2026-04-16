@@ -1,15 +1,11 @@
-import React from 'react';
+import clsx from 'clsx';
 
-function Input({ label, placeholder, type = 'text' }) {
+function Input({ label, className, ...props }) {
   return (
     <div>
-      <label className="mb-1 block font-light">{label}</label>
+      <label className="mb-1 block font-normal">{label}</label>
       <div className="bg-foreground rounded-box-ltr flex grow items-center gap-2 px-3.5">
-        <input
-          type={type}
-          placeholder={placeholder}
-          className="h-11.25 grow font-normal outline-none"
-        />
+        <input className={clsx('h-11.25 grow font-normal outline-none', className)} {...props} />
       </div>
     </div>
   );
