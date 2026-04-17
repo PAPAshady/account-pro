@@ -429,13 +429,11 @@ export const licences = [
 
 export const dashboardLinks = [
   { id: 1, title: 'داشبورد', href: '/dashboard', icon: <FaVectorSquare /> },
-  { id: 2, title: 'سفارش ها', href: '/dashboard/orders', icon: <FaShoppingBasket /> },
-  { id: 3, title: 'علاقه مندی ها', href: '/dashboard/favorites', icon: <FaRegHeart /> },
-  { id: 4, title: 'دیدگاه ها', href: '/dashboard/comments', icon: <FaRegComment /> },
-  { id: 5, title: 'تماس با پشتیبانی', href: '/dashboard/support', icon: <FaPhone /> },
-  { id: 6, title: 'اطلاعات حساب کاربری', href: '/dashboard/profile', icon: <FaRegUser /> },
-  { id: 7, title: 'اشتراک ها و لایسنس ها', href: '/dashboard/licenses', icon: <FaGripLines /> },
-  { id: 8, title: 'اخبار و اطلاعیه ها', href: '/dashboard/news', icon: <FaRegNewspaper /> },
+  { id: 2, title: 'علاقه مندی ها', href: '/dashboard/favorites', icon: <FaRegHeart /> },
+  { id: 3, title: 'تماس با پشتیبانی', href: '/dashboard/support', icon: <FaPhone /> },
+  { id: 4, title: 'اطلاعات حساب کاربری', href: '/dashboard/profile', icon: <FaRegUser /> },
+  { id: 5, title: 'اشتراک ها و لایسنس ها', href: '/dashboard/licenses', icon: <FaGripLines /> },
+  { id: 6, title: 'اخبار و اطلاعیه ها', href: '/dashboard/news', icon: <FaRegNewspaper /> },
 ];
 
 export const ticketsStatus = [
