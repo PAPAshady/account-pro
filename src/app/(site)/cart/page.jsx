@@ -3,7 +3,7 @@ import CartItem from '@modules/CartItem/CartItem';
 
 export default function page() {
   return (
-    <div className="    container space-y-8">
+    <div className="container space-y-8">
       <div>
         <h2 className="font-morabba text-2xl font-semibold">سبد خرید</h2>
         <p className="font-stretchPro text-paragraph">Shopping Cart</p>
@@ -14,7 +14,7 @@ export default function page() {
           <CartItem />
           <CartItem />
         </main>
-        <aside className="bg-foreground s hidden w-1/3 rounded-3xl rounded-tl-lg p-5 lg:block xl:w-95 xl:shrink-0">
+        <aside className="bg-foreground hidden w-1/3 rounded-3xl rounded-tl-lg p-5 lg:block xl:w-95 xl:shrink-0">
           <div>
             <p className="mb-1.25 border-b border-[#FFFFFF1A] pb-2.5">جمع کل سبد خرید</p>
             <div className="flex flex-wrap items-center justify-between gap-2 px-3 py-2.25">
