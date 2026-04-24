@@ -1,47 +1,45 @@
 'use client';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { z } from 'zod';
 
 import Input from '@modules/Input/Input';
 import PrimaryButton from '@modules/PrimaryButton/PrimaryButton';
-
-const schema = z
-  .object({
-    name: z.string().min(2, { message: 'نام باید حداقل شامل دو کرکتر باشد' }),
-    email: z.email({ message: 'ایمیل نامعتبر' }),
-    phone: z.string().length(11, { message: 'تلفن باید شامل ۱۱ رقم باشد' }),
-    password: z
-      .string()
-      .min(6, { message: 'رمز عبور باید حداقل شامل ۶ کرکتر باشد' })
-      .max(20, { message: 'رمز عبور باید حداکثر ۲۰ کرکتر داشته باشد.' }),
-    repeatedPassword: z.string(),
-  })
-  .superRefine((data, ctx) => {
-    if (data.password !== data.repeatedPassword) {
-      return ctx.addIssue({
-        code: 'custom',
-        path: ['repeatedPassword'],
-        message: 'رمز های عبور همخوانی ندارند.',
-      });
-    }
-
-    return true;
-  });
+import { signUpSchema } from '@/schemas/auth.schema';
 
 export default function SignUp() {
+  const router = useRouter();
   const {
     register,
     handleSubmit,
+    setError,
     formState: { errors },
-  } = useForm({ resolver: zodResolver(schema) });
+  } = useForm({ resolver: zodResolver(signUpSchema) });
 
-  console.log(errors);
+  const submitHandler = async (formData) => {
+    try {
+      const res = await fetch('/api/auth/signup', {
+        method: 'POST',
+        body: JSON.stringify(formData),
+      });
+      const data = await res.json();
 
-  const submitHandler = async () => {
-    console.log('Hello world!');
+      if (res.status === 400) {
+        for (let key in data.errors) {
+          setError('name', { message: data.errors[key] });
+        }
+        return;
+      }
+
+      if (res.status === 409) {
+        setError(data.field, { message: data.message });
+        return;
+      }
+
+      router.push('/');
+    } catch (err) {}
   };
 
   return (
