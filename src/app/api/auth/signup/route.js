@@ -4,7 +4,7 @@ import model from '@/models/User';
 import { signUpSchema } from '@/schemas/auth.schema';
 import { connectToDB } from '@/utils/db';
 import { hashPassword } from '@/utils/auth';
-import { generateAccessToken } from '@/utils/auth';
+import { generateAccessToken, generateRefreshToken } from '@/utils/auth';
 
 export async function POST(req) {
   await connectToDB();
@@ -33,17 +33,26 @@ export async function POST(req) {
     }
 
     const hashed = hashPassword(user.password);
-
-    await model.create({ ...user, password: hashed });
-
     const cookiesStore = await cookies();
-    const token = generateAccessToken({ email: user.email });
+    const accessToken = generateAccessToken({ email: user.email });
+    const refreshToken = generateRefreshToken({ email: user.email });
+    const refreshTokenExpires = new Date(Date.now() + 15 * 24 * 60 * 60 * 1000);
 
-    cookiesStore.set('jwt_access', token, {
+    await model.create({ ...user, refreshToken ,refreshTokenExpires, password: hashed });
+
+    cookiesStore.set('jwt_access', accessToken, {
       httpOnly: true,
       secure: process.env.NODE_ENV === 'production',
       sameSite: 'lax',
-      maxAge: 60 * 15,
+      maxAge: 60 * 15, // 15 mins
+      path: '/',
+    });
+
+    cookiesStore.set('jwt_refresh', refreshToken, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === 'production',
+      sameSite: 'lax',
+      maxAge: 15 * 24 * 60 * 60, // 15 days
       path: '/',
     });
 
