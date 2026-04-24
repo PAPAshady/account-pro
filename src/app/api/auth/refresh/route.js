@@ -10,7 +10,7 @@ export async function POST() {
     const cookiesStore = await cookies();
     const refreshToken = cookiesStore.get('jwt_refresh')?.value;
 
-    const tokenPayload = await verifyToken(refreshToken);
+    const tokenPayload = verifyToken(refreshToken);
 
     if (!tokenPayload) {
       return Response.json({ message: 'Invalid refresh token' }, { status: 401 });
@@ -25,8 +25,8 @@ export async function POST() {
       return Response.json({ message: 'Refresh token revoked.' }, { status: 401 });
     }
 
-    const newAccessToken = await generateAccessToken({ email: user.email });
-    const newRefreshToken = await generateRefreshToken({ email: user.email });
+    const newAccessToken = generateAccessToken({ email: user.email });
+    const newRefreshToken = generateRefreshToken({ email: user.email });
 
     user.refreshToken = newRefreshToken;
     user.refreshTokenExpires = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000);
