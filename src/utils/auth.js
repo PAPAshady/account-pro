@@ -14,5 +14,9 @@ export const generateRefreshToken = (payload) => {
 };
 
 export const verifyToken = (token) => {
-  return verify(token, process.env.JWT_SECRET);
+  try {
+    return verify(token, process.env.JWT_SECRET);
+  } catch (error) {
+    return null;
+  }
 };
