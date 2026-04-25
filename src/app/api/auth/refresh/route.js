@@ -17,17 +17,17 @@ export async function POST() {
       return Response.json({ message: 'Invalid refresh token. User must login.' }, { status: 401 });
     }
 
-    const user = await model.findOne({ email: tokenPayload.email }, '+refreshToken ');
+    const user = await model.findOne({ email: tokenPayload?.email }, 'refreshToken email _id');
 
     if (!user || user.refreshToken !== refreshToken) {
-      return Response.json({ message: 'Refresh token revoked.' }, { status: 401 });
+      return Response.json({ message: 'Refresh token revoked. User must login' }, { status: 401 });
     }
 
     const newAccessToken = generateAccessToken({ email: user.email });
     const newRefreshToken = generateRefreshToken({ email: user.email });
 
     await model.findByIdAndUpdate(user._id, { refreshToken: newRefreshToken });
-    
+
     const response = NextResponse.json({ success: true });
 
     response.cookies.set('jwt_access', newAccessToken, {
