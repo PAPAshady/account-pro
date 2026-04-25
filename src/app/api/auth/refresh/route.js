@@ -1,4 +1,5 @@
 import { cookies } from 'next/headers';
+import { NextResponse } from 'next/server';
 
 import { verifyToken, generateAccessToken, generateRefreshToken } from '@/utils/auth';
 import model from '@/models/User';
@@ -13,44 +14,41 @@ export async function POST() {
     const tokenPayload = verifyToken(refreshToken);
 
     if (!tokenPayload) {
-      return Response.json({ message: 'Invalid refresh token' }, { status: 401 });
+      return Response.json({ message: 'Invalid refresh token. User must login.' }, { status: 401 });
     }
 
-    const user = await model.findOne(
-      { email: tokenPayload.email },
-      '+refreshToken +refreshTokenExpires'
-    );
+    const user = await model.findOne({ email: tokenPayload.email }, '+refreshToken ');
 
-    if (!user || user.refreshToken !== refreshToken || user.refreshTokenExpires < new Date()) {
+    if (!user || user.refreshToken !== refreshToken) {
       return Response.json({ message: 'Refresh token revoked.' }, { status: 401 });
     }
 
     const newAccessToken = generateAccessToken({ email: user.email });
     const newRefreshToken = generateRefreshToken({ email: user.email });
 
-    user.refreshToken = newRefreshToken;
-    user.refreshTokenExpires = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000);
+    await model.findByIdAndUpdate(user._id, { refreshToken: newRefreshToken });
+    
+    const response = NextResponse.json({ success: true });
 
-    await user.save();
-
-    cookiesStore.set('jwt_access', newAccessToken, {
+    response.cookies.set('jwt_access', newAccessToken, {
       httpOnly: true,
       secure: process.env.NODE_ENV === 'production',
+      maxAge: process.env.ACCESS_TOKEN_EXPIRE_TIME,
       sameSite: 'lax',
-      maxAge: 60 * 15, // 15 mins
       path: '/',
     });
 
-    cookiesStore.set('jwt_refresh', newRefreshToken, {
+    response.cookies.set('jwt_refresh', newRefreshToken, {
       httpOnly: true,
       secure: process.env.NODE_ENV === 'production',
+      maxAge: process.env.REFRESH_TOKEN_EXPIRE_TIME,
       sameSite: 'lax',
-      maxAge: 15 * 24 * 60 * 60, // 15 days
       path: '/',
     });
 
-    return Response.json({ success: true });
+    return response;
   } catch (err) {
+    console.log('Refresh error => ', err);
     return Response.json({ message: 'Refresh failed.' }, { status: 500 });
   }
 }

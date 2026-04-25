@@ -35,11 +35,6 @@ const schema = mongoose.Schema(
       default: null,
       select: false,
     },
-    refreshTokenExpires: {
-      type: Date,
-      default: null,
-      select: false,
-    },
   },
   { timestamps: true }
 );

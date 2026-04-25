@@ -1,4 +1,4 @@
-import { cookies } from 'next/headers';
+import { NextResponse } from 'next/server';
 
 import model from '@/models/User';
 import { signUpSchema } from '@/schemas/auth.schema';
@@ -33,30 +33,30 @@ export async function POST(req) {
     }
 
     const hashed = hashPassword(user.password);
-    const cookiesStore = await cookies();
     const accessToken = generateAccessToken({ email: user.email });
     const refreshToken = generateRefreshToken({ email: user.email });
-    const refreshTokenExpires = new Date(Date.now() + 15 * 24 * 60 * 60 * 1000);
 
-    await model.create({ ...user, refreshToken ,refreshTokenExpires, password: hashed });
+    await model.create({ ...user, refreshToken, password: hashed });
 
-    cookiesStore.set('jwt_access', accessToken, {
+    const response = NextResponse.json('خوش آمدید.', { status: 201 });
+
+    response.cookies.set('jwt_access', accessToken, {
       httpOnly: true,
       secure: process.env.NODE_ENV === 'production',
+      maxAge: process.env.ACCESS_TOKEN_EXPIRE_TIME,
       sameSite: 'lax',
-      maxAge: 60 * 15, // 15 mins
       path: '/',
     });
 
-    cookiesStore.set('jwt_refresh', refreshToken, {
+    response.cookies.set('jwt_refresh', refreshToken, {
       httpOnly: true,
       secure: process.env.NODE_ENV === 'production',
+      maxAge: process.env.REFRESH_TOKEN_EXPIRE_TIME,
       sameSite: 'lax',
-      maxAge: 15 * 24 * 60 * 60, // 15 days
       path: '/',
     });
 
-    return Response.json('خوش آمدید.', { status: 201 });
+    return response;
   } catch (err) {
     console.error('Error creating user => ', err);
     return Response.json(
