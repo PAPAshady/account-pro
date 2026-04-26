@@ -6,8 +6,6 @@ import { tokenNames } from '@/constants';
 
 const protectedRoutes = ['/dashboard'];
 
-let refreshPromise = null;
-
 export default async function proxy(req) {
   const { pathname } = req.nextUrl;
   const isProtectedRoute = protectedRoutes.some((path) => pathname.startsWith(path));
@@ -27,18 +25,12 @@ export default async function proxy(req) {
   // invalid access token, call refresh endpoint
   if (!accessPayload && refreshPayload) {
     try {
-      // prevent race conditions in case multiple requests trigger with invalid token.
-      if (!refreshPromise) {
-        refreshPromise = fetch(new URL('/api/auth/refresh', req.url), {
-          method: 'POST',
-          headers: {
-            Cookie: cookiesStore.toString(),
-          },
-        });
-      }
-
-      const refreshResponse = await refreshPromise;
-      refreshPromise = null;
+      const refreshResponse = await fetch(new URL('/api/auth/refresh', req.url), {
+        method: 'POST',
+        headers: {
+          Cookie: cookiesStore.toString(),
+        },
+      });
 
       //  Refresh failed. User must login again.
       if (!refreshResponse.ok) throw new Error('refresh_failed');
@@ -48,7 +40,6 @@ export default async function proxy(req) {
       newCookies.forEach((cookie) => response.headers.append('Set-Cookie', cookie));
       return response;
     } catch (err) {
-      refreshPromise = null;
       const response = NextResponse.redirect(new URL('/sign-in', req.url));
       response.cookies.delete(tokenNames.JWT_REFRESH);
       response.cookies.delete(tokenNames.JWT_ACCESS);
