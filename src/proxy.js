@@ -4,13 +4,7 @@ import { cookies } from 'next/headers';
 import { verifyToken } from '@/utils/auth';
 import { tokenNames } from '@/constants';
 
-const protectedRoutes = ['/dashboard'];
-
 export default async function proxy(req) {
-  const { pathname } = req.nextUrl;
-  const isProtectedRoute = protectedRoutes.some((path) => pathname.startsWith(path));
-  if (!isProtectedRoute) return NextResponse.next();
-
   const cookiesStore = await cookies();
   const refreshToken = cookiesStore.get(tokenNames.JWT_REFRESH)?.value;
   const accessToken = cookiesStore.get(tokenNames.JWT_ACCESS)?.value;
@@ -52,5 +46,5 @@ export default async function proxy(req) {
 }
 
 export const config = {
-  matcher: ['/((?!_next/static|_next/image|favicon.ico|images|fonts).*)'],
+  matcher: ['/dashboard/:path*'],
 };
