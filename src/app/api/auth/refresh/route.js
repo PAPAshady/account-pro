@@ -2,14 +2,15 @@ import { cookies } from 'next/headers';
 import { NextResponse } from 'next/server';
 
 import { verifyToken, generateAccessToken, generateRefreshToken } from '@/utils/auth';
-import model from '@/models/User';
 import { connectToDB } from '@/utils/db';
+import model from '@/models/User';
+import { tokenNames } from '@/constants';
 
 export async function POST() {
   await connectToDB();
   try {
     const cookiesStore = await cookies();
-    const refreshToken = cookiesStore.get('jwt_refresh')?.value;
+    const refreshToken = cookiesStore.get(tokenNames.JWT_REFRESH)?.value;
 
     const tokenPayload = verifyToken(refreshToken);
 
@@ -30,7 +31,7 @@ export async function POST() {
 
     const response = NextResponse.json({ success: true });
 
-    response.cookies.set('jwt_access', newAccessToken, {
+    response.cookies.set(tokenNames.JWT_ACCESS, newAccessToken, {
       httpOnly: true,
       secure: process.env.NODE_ENV === 'production',
       maxAge: process.env.ACCESS_TOKEN_EXPIRE_TIME,
@@ -38,7 +39,7 @@ export async function POST() {
       path: '/',
     });
 
-    response.cookies.set('jwt_refresh', newRefreshToken, {
+    response.cookies.set(tokenNames.JWT_REFRESH, newRefreshToken, {
       httpOnly: true,
       secure: process.env.NODE_ENV === 'production',
       maxAge: process.env.REFRESH_TOKEN_EXPIRE_TIME,

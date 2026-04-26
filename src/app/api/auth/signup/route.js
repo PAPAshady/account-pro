@@ -5,6 +5,7 @@ import { signUpSchema } from '@/schemas/auth.schema';
 import { connectToDB } from '@/utils/db';
 import { hashPassword } from '@/utils/auth';
 import { generateAccessToken, generateRefreshToken } from '@/utils/auth';
+import { tokenNames } from '@/constants';
 
 export async function POST(req) {
   await connectToDB();
@@ -40,7 +41,7 @@ export async function POST(req) {
 
     const response = NextResponse.json('خوش آمدید.', { status: 201 });
 
-    response.cookies.set('jwt_access', accessToken, {
+    response.cookies.set(tokenNames.JWT_ACCESS, accessToken, {
       httpOnly: true,
       secure: process.env.NODE_ENV === 'production',
       maxAge: process.env.ACCESS_TOKEN_EXPIRE_TIME,
@@ -48,7 +49,7 @@ export async function POST(req) {
       path: '/',
     });
 
-    response.cookies.set('jwt_refresh', refreshToken, {
+    response.cookies.set(tokenNames.JWT_REFRESH, refreshToken, {
       httpOnly: true,
       secure: process.env.NODE_ENV === 'production',
       maxAge: process.env.REFRESH_TOKEN_EXPIRE_TIME,
