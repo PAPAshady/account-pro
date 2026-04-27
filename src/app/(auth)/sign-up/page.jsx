@@ -28,7 +28,7 @@ export default function SignUp() {
 
       if (res.status === 400) {
         for (let key in data.errors) {
-          setError('name', { message: data.errors[key] });
+          setError(key, { message: data.errors[key] });
         }
         return;
       }

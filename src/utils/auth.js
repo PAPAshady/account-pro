@@ -1,11 +1,13 @@
-import { NextResponse } from 'next/server';
-
-import { hashSync } from 'bcryptjs';
+import { hashSync, compareSync } from 'bcryptjs';
 import { sign, verify } from 'jsonwebtoken';
 import { tokenNames } from '@/constants';
 
 export const hashPassword = (password) => {
   return hashSync(password, 12);
+};
+
+export const verifyPassword = (password, hashedPassword) => {
+  return compareSync(password, hashedPassword);
 };
 
 export const generateAccessToken = (payload) => {

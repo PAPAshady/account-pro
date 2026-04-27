@@ -21,3 +21,11 @@ export const signUpSchema = z
     }
     return true;
   });
+
+export const signInSchema = z.object({
+  email: z.email({ message: 'ایمیل نامعتبر' }),
+  password: z
+    .string()
+    .min(6, { message: 'رمز عبور باید حداقل شامل ۶ کرکتر باشد' })
+    .max(20, { message: 'رمز عبور باید حداکثر ۲۰ کرکتر داشته باشد.' }),
+});

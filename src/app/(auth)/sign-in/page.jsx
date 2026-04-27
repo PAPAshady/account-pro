@@ -1,9 +1,47 @@
+'use client';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
+
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
 
 import Input from '@modules/Input/Input';
 import PrimaryButton from '@modules/PrimaryButton/PrimaryButton';
+import { signInSchema } from '@/schemas/auth.schema';
 
 export default function SignIn() {
+  const router = useRouter();
+  const {
+    register,
+    handleSubmit,
+    setError,
+    formState: { errors },
+  } = useForm({ resolver: zodResolver(signInSchema) });
+
+  const submitHandler = async (formData) => {
+    try {
+      const res = await fetch('/api/auth/signin', {
+        method: 'POST',
+        body: JSON.stringify(formData),
+      });
+      const data = await res.json();
+
+      if (res.status === 400) {
+        for (let key in data.errors) {
+          setError(key, { message: data.errors[key] });
+        }
+        return;
+      }
+
+      if (res.status === 401) {
+        setError('root', { message: data.message });
+        return;
+      }
+
+      if (res.ok) router.push('/');
+    } catch (err) {}
+  };
+
   return (
     <>
       <div className="space-y-1 font-bold">
@@ -13,10 +51,24 @@ export default function SignIn() {
       <p className="text-paragraph">
         از انتخاب شما مطمئن هستیم، <br /> چون رضایت شما همیشه اولویت ما بوده است.
       </p>
-      <form className="space-y-5">
+      <form className="space-y-5" onSubmit={handleSubmit(submitHandler)}>
         <div className="space-y-2">
-          <Input label="شماره همراه : " />
-          <Input label="رمز عبور :‌" type="password" />
+          <Input
+            label="آدرس ایمیل : "
+            type="email"
+            placeholder="someone@gmail.com"
+            aria-invalid={!!errors.email}
+            message={errors.email?.message}
+            {...register('email')}
+          />
+
+          <Input
+            label="رمز عبور :‌"
+            type="password"
+            aria-invalid={!!errors.password}
+            message={errors.password?.message}
+            {...register('password')}
+          />
         </div>
         <div className="pt-2">
           <PrimaryButton className="bg-primary mx-auto w-[80%] max-w-62.5 font-bold text-[#2f2f2f] hover:bg-[#0ac596]! hover:bg-none">
