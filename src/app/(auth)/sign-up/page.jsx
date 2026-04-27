@@ -73,6 +73,7 @@ export default function SignUp() {
             <Input
               label="آدرس ایمیل :‌"
               type="email"
+              autoComplete="new-password"
               placeholder="someone@gmail.com"
               aria-invalid={!!errors.email}
               message={errors.email?.message}
@@ -83,6 +84,7 @@ export default function SignUp() {
             <Input
               label="رمز عبور :‌"
               type="password"
+              autoComplete="new-password"
               aria-invalid={!!errors.password}
               message={errors.password?.message}
               {...register('password')}

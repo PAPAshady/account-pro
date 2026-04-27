@@ -57,6 +57,7 @@ export default function SignIn() {
             label="آدرس ایمیل : "
             type="email"
             placeholder="someone@gmail.com"
+            autoComplete="new-password"
             aria-invalid={!!errors.email}
             message={errors.email?.message}
             {...register('email')}
@@ -66,6 +67,7 @@ export default function SignIn() {
             label="رمز عبور :‌"
             type="password"
             aria-invalid={!!errors.password}
+            autoComplete="new-password"
             message={errors.password?.message}
             {...register('password')}
           />
