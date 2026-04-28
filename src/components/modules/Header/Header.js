@@ -1,15 +1,22 @@
 import Image from 'next/image';
 import Link from 'next/link';
+import { cookies } from 'next/headers';
 
 import { FaBars, FaShoppingCart, FaUser } from 'react-icons/fa';
 
 import SearchBox from '@modules/SearchBox/SearchBox';
 
-import Navbar from '@/components/modules/Navbar/Navbar';
-import PrimaryButton from '@/components/modules/PrimaryButton/PrimaryButton';
-import Particle from '@/components/modules/Particle/Particle';
+import Navbar from '@modules/Navbar/Navbar';
+import PrimaryButton from '@modules/PrimaryButton/PrimaryButton';
+import Particle from '@modules/Particle/Particle';
 
-export default function Header() {
+export default async function Header() {
+  const cookiesStore = await cookies();
+  const res = await fetch(process.env.NEXT_PUBLIC_BASE_URL + '/api/auth/me', {
+    headers: { Cookie: cookiesStore },
+  });
+  const user = await res.json();
+
   return (
     <div className="relative py-10 lg:pt-12.5">
       <Particle className="-top-35 left-0 size-64 opacity-35 blur-[70px]" />
@@ -63,10 +70,17 @@ export default function Header() {
           <div className="hidden items-center justify-between gap-3 py-2.5 min-[1080]:gap-4 lg:flex">
             <Navbar />
             <SearchBox />
-            <PrimaryButton isLink href="/sign-in">
-              ورود/ثبت نام
-              <FaUser />
-            </PrimaryButton>
+            {user ? (
+              <PrimaryButton>
+                {user.name}
+                <FaUser />
+              </PrimaryButton>
+            ) : (
+              <PrimaryButton isLink href="/sign-in">
+                ورود/ثبت نام
+                <FaUser />
+              </PrimaryButton>
+            )}
             <PrimaryButton className="px-3!">
               <FaShoppingCart />
             </PrimaryButton>

@@ -17,7 +17,7 @@ export async function POST(req) {
       return NextResponse.json({ message: 'ثبت نام ناموفق بود.', errors }, { status: 400 });
     }
 
-    const user = await model.findOne({ email: userData.email }, 'password _id');
+    const user = await model.findOne({ email: userData.email }, 'password _id email');
 
     const incorrectCrendentialsResponse = NextResponse.json(
       { message: 'ایمیل یا رمز عبور اشتباه است.' },

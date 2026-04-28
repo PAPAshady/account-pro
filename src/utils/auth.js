@@ -1,6 +1,7 @@
 import { hashSync, compareSync } from 'bcryptjs';
 import { sign, verify } from 'jsonwebtoken';
 import { tokenNames } from '@/constants';
+import model from '@/models/User';
 
 export const hashPassword = (password) => {
   return hashSync(password, 12);
@@ -26,8 +27,7 @@ export const verifyToken = (token) => {
   }
 };
 
-export const ensureAuthentication = async (req) => {
-  const { cookies } = req;
+export const ensureAuthentication = async (cookies) => {
   const refreshToken = cookies.get(tokenNames.JWT_REFRESH)?.value;
   const accessToken = cookies.get(tokenNames.JWT_ACCESS)?.value;
   const refreshPayload = verifyToken(refreshToken);
@@ -41,7 +41,7 @@ export const ensureAuthentication = async (req) => {
   // invalid access token, call refresh endpoint
   if (!accessPayload && refreshPayload) {
     try {
-      const refreshResponse = await fetch(new URL('/api/auth/refresh', req.url), {
+      const refreshResponse = await fetch(process.env.NEXT_PUBLIC_BASE_URL + '/api/auth/refresh', {
         method: 'POST',
         headers: {
           Cookie: req.cookies.toString(),
