@@ -4,8 +4,8 @@ import model from '@/models/User';
 import { signUpSchema } from '@/schemas/auth.schema';
 import { connectToDB } from '@/utils/db';
 import { hashPassword } from '@/utils/auth';
-import { generateAccessToken, generateRefreshToken } from '@/utils/auth';
-import { tokenNames } from '@/constants';
+import { generateAccessToken } from '@/utils/auth';
+import { ACCESS_TOKEN_NAME } from '@/constants';
 
 export async function POST(req) {
   await connectToDB();
@@ -35,24 +35,15 @@ export async function POST(req) {
 
     const hashed = hashPassword(user.password);
     const accessToken = generateAccessToken({ email: user.email });
-    const refreshToken = generateRefreshToken({ email: user.email });
 
-    await model.create({ ...user, refreshToken, password: hashed });
+    await model.create({ ...user, password: hashed });
 
     const response = NextResponse.json('خوش آمدید.', { status: 201 });
 
-    response.cookies.set(tokenNames.JWT_ACCESS, accessToken, {
+    response.cookies.set(ACCESS_TOKEN_NAME, accessToken, {
       httpOnly: true,
       secure: process.env.NODE_ENV === 'production',
       maxAge: process.env.ACCESS_TOKEN_EXPIRE_TIME,
-      sameSite: 'lax',
-      path: '/',
-    });
-
-    response.cookies.set(tokenNames.JWT_REFRESH, refreshToken, {
-      httpOnly: true,
-      secure: process.env.NODE_ENV === 'production',
-      maxAge: process.env.REFRESH_TOKEN_EXPIRE_TIME,
       sameSite: 'lax',
       path: '/',
     });

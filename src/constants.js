@@ -1,4 +1,1 @@
-export const tokenNames = {
-  JWT_ACCESS: 'jwt_access',
-  JWT_REFRESH: 'jwt_refresh',
-};
+export const ACCESS_TOKEN_NAME = 'jwt_access';

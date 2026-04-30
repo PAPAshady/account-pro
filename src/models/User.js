@@ -30,11 +30,6 @@ const schema = mongoose.Schema(
       unique: true,
       match: [/^[0-9]{11}$/, 'Phone number must be 11 digits'],
     },
-    refreshToken: {
-      type: String,
-      default: null,
-      select: false,
-    },
   },
   { timestamps: true }
 );

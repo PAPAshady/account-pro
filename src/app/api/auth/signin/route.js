@@ -1,9 +1,9 @@
 import { NextResponse } from 'next/server';
 
 import { connectToDB } from '@/utils/db';
-import { verifyPassword, generateAccessToken, generateRefreshToken } from '@/utils/auth';
+import { verifyPassword, generateAccessToken } from '@/utils/auth';
 import { signInSchema } from '@/schemas/auth.schema';
-import { tokenNames } from '@/constants';
+import { ACCESS_TOKEN_NAME } from '@/constants';
 import model from '@/models/User';
 
 export async function POST(req) {
@@ -30,25 +30,13 @@ export async function POST(req) {
 
     if (!isPasswordValid) return incorrectCrendentialsResponse;
 
-    const accessToken = generateAccessToken({ email: user.email });
-    const refreshToken = generateRefreshToken({ email: user.email });
-
-    await model.findByIdAndUpdate(user._id, { refreshToken });
-
     const response = NextResponse.json({ message: 'خوش آمدید' }, { status: 201 });
+    const accessToken = generateAccessToken({ email: user.email });
 
-    response.cookies.set(tokenNames.JWT_ACCESS, accessToken, {
+    response.cookies.set(ACCESS_TOKEN_NAME, accessToken, {
       httpOnly: true,
       secure: process.env.NODE_ENV === 'production',
       maxAge: process.env.ACCESS_TOKEN_EXPIRE_TIME,
-      sameSite: 'lax',
-      path: '/',
-    });
-
-    response.cookies.set(tokenNames.JWT_REFRESH, refreshToken, {
-      httpOnly: true,
-      secure: process.env.NODE_ENV === 'production',
-      maxAge: process.env.REFRESH_TOKEN_EXPIRE_TIME,
       sameSite: 'lax',
       path: '/',
     });

@@ -1,28 +1,22 @@
 import { cookies } from 'next/headers';
 
-import { connectToDB } from '@/utils/db';
-import { ensureAuthentication, verifyToken } from '@/utils/auth';
-import { tokenNames } from '@/constants';
 import model from '@/models/User';
+import { connectToDB } from '@/utils/db';
+import { verifyToken } from '@/utils/auth';
+import { ACCESS_TOKEN_NAME } from '@/constants';
 
 export async function GET() {
   await connectToDB();
   try {
     const cookiesStore = await cookies();
-    const { success, newCookies } = await ensureAuthentication(cookiesStore);
-    if (!success) return Response.json(null);
-    const accessToken = cookiesStore.get(tokenNames.JWT_ACCESS).value;
+    const accessToken = cookiesStore.get(ACCESS_TOKEN_NAME)?.value;
     const tokenPayload = verifyToken(accessToken);
-    const user = await model.findOne(
-      { email: tokenPayload.email },
-      'email name phone _id createdAt updatedAt'
-    );
-    if (!user) return Response.json(null);
-    const response = Response.json(user, { status: 200 });
-    newCookies.map((cookie) => response.headers.append('Set-Cookie', cookie));
-    return response;
+    if (!tokenPayload) return Response.json(null, { status: 401 });
+    const user = await model.findOne({ email: tokenPayload?.email }, '-__v');
+    if (!user) return Response.json(null, { status: 401 });
+    return Response.json(user);
   } catch (err) {
-    console.error('Error getting user data => ', err);
-    return Response.json({ message: 'Error getting user data.' }, { status: 500 });
+    console.error('Failed to get user data => ', err);
+    return Response.json({ message: 'Failed to get user data' }, { status: 500 });
   }
 }
