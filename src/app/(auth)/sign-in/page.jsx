@@ -8,6 +8,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import Input from '@modules/Input/Input';
 import PrimaryButton from '@modules/PrimaryButton/PrimaryButton';
 import { signInSchema } from '@/schemas/auth.schema';
+import api from '@/axiosInstance';
 
 export default function SignIn() {
   const router = useRouter();
@@ -18,27 +19,23 @@ export default function SignIn() {
     formState: { errors },
   } = useForm({ resolver: zodResolver(signInSchema) });
 
-  const submitHandler = async (formData) => {
+  const submitHandler = async (data) => {
     try {
-      const res = await fetch('/api/auth/signin', {
-        method: 'POST',
-        body: JSON.stringify(formData),
-      });
-      const data = await res.json();
+      const res = await api.post('/api/auth/signin', data);
 
       if (res.status === 400) {
-        for (let key in data.errors) {
-          setError(key, { message: data.errors[key] });
+        for (let key in res.data.errors) {
+          setError(key, { message: res.data.errors[key] });
         }
         return;
       }
 
       if (res.status === 401) {
-        setError('root', { message: data.message });
+        setError('root', { message: res.data.message });
         return;
       }
 
-      if (res.ok) router.push('/');
+      if (res.status === 200) router.push('/');
     } catch (err) {}
   };
 

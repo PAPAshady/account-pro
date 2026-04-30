@@ -1,21 +1,30 @@
+'use client';
 import Image from 'next/image';
 import Link from 'next/link';
-import { cookies } from 'next/headers';
+import { useEffect, useState } from 'react';
 
 import { FaBars, FaShoppingCart, FaUser } from 'react-icons/fa';
 
 import SearchBox from '@modules/SearchBox/SearchBox';
-
 import Navbar from '@modules/Navbar/Navbar';
 import PrimaryButton from '@modules/PrimaryButton/PrimaryButton';
 import Particle from '@modules/Particle/Particle';
+import api from '@/axiosInstance';
 
-export default async function Header() {
-  const cookiesStore = await cookies();
-  const res = await fetch(process.env.NEXT_PUBLIC_BASE_URL + '/api/auth/me', {
-    headers: { Cookie: cookiesStore },
-  });
-  const user = await res.json();
+export default function Header() {
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    const handler = async () => {
+      try {
+        const user = await api.get('/api/auth/me');
+        setUser(user.data);
+      } catch (err) {
+        setUser(null);
+      }
+    };
+    handler();
+  }, []);
 
   return (
     <div className="relative py-10 lg:pt-12.5">

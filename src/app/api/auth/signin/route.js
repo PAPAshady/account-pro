@@ -30,7 +30,7 @@ export async function POST(req) {
 
     if (!isPasswordValid) return incorrectCrendentialsResponse;
 
-    const response = NextResponse.json({ message: 'خوش آمدید' }, { status: 201 });
+    const response = NextResponse.json({ message: 'خوش آمدید' });
     const accessToken = generateAccessToken({ email: user.email });
 
     response.cookies.set(ACCESS_TOKEN_NAME, accessToken, {
