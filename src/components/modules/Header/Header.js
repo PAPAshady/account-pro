@@ -10,9 +10,11 @@ import Navbar from '@modules/Navbar/Navbar';
 import PrimaryButton from '@modules/PrimaryButton/PrimaryButton';
 import Particle from '@modules/Particle/Particle';
 import api from '@/axiosInstance';
+import useHamburgerMenu from '@/store/useHamburgerMenu';
 
 export default function Header() {
   const [user, setUser] = useState(null);
+  const setOpen = useHamburgerMenu((state) => state.setOpen);
 
   useEffect(() => {
     const handler = async () => {
@@ -34,7 +36,10 @@ export default function Header() {
       <header className="container">
         {/* Mobile Header */}
         <div className="flex items-center justify-between lg:hidden">
-          <button className="bg-foreground rounded-box-ltr grid size-10.5 cursor-pointer place-content-center p-2.5">
+          <button
+            onClick={() => setOpen(true)}
+            className="bg-foreground rounded-box-ltr grid size-10.5 cursor-pointer place-content-center p-2.5"
+          >
             <FaBars />
           </button>
           <Link href="/">

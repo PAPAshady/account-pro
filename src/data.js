@@ -8,13 +8,17 @@ import {
   FaSearch,
   FaShoppingBasket,
   FaRegHeart,
-  FaRegComment,
   FaPhone,
   FaRegUser,
   FaGripLines,
   FaRegNewspaper,
   FaRegComments,
   FaRedo,
+  FaTv,
+  FaMusic,
+  FaPencilAlt,
+  FaFoursquare,
+  FaPuzzlePiece,
 } from 'react-icons/fa';
 
 export const services = [
@@ -456,4 +460,25 @@ export const announcements = [
     date: '۱۳۸۲.۰۳.۱۴',
     body: 'کاربر عزیز، از صبر و همراهی شما در زمان به‌روزرسانی سایت صمیمانه سپاسگزاریم. به پاس قدردانی از شما، ۳ روز عضویت رایگان به حساب شما اضافه شد تا این یک روز اختلال را جبران کنیم. امیدواریم همچنان از خدمات ما لذت ببرید!',
   },
+];
+
+export const navLinks = [
+  { id: 1, title: 'صفحه اصلی', href: '/' },
+  {
+    id: 2,
+    title: 'سرویس ها',
+    href: '/shop',
+    hasMenu: true,
+    menus: [
+      { id: 1, href: '/', title: 'استریم فیلم و سریال', icon: <FaTv /> },
+      { id: 2, href: '/', title: 'استریم موزیک', icon: <FaMusic /> },
+      { id: 3, href: '/', title: 'گرافیک و طراحی', icon: <FaPencilAlt /> },
+      { id: 4, href: '/', title: 'هوش مصنوعی', icon: <FaFoursquare /> },
+      { id: 5, href: '/', title: 'گیفت کارت و بازی', icon: <FaPuzzlePiece /> },
+    ],
+  },
+  { id: 4, title: 'پلن ها', href: '/plans' },
+  { id: 5, title: 'وبلاگ', href: '/blog' },
+  { id: 3, title: 'درباره ما', href: '/about-us' },
+  { id: 6, title: 'تماس با ما', href: '/contact-us' },
 ];

@@ -5,14 +5,7 @@ import { usePathname } from 'next/navigation';
 import { FaChevronDown } from 'react-icons/fa';
 import clsx from 'clsx';
 
-const navLinks = [
-  { id: 1, title: 'صفحه اصلی', href: '/' },
-  { id: 2, title: 'سرویس ها', href: '/shop', hasMenu: true },
-  { id: 4, title: 'پلن ها', href: '/plans' },
-  { id: 5, title: 'وبلاگ', href: '/blog' },
-  { id: 3, title: 'درباره ما', href: '/about-us' },
-  { id: 6, title: 'تماس با ما', href: '/contact-us' },
-];
+import { navLinks } from '@/data';
 
 export default function Navbar() {
   const pathname = usePathname();
