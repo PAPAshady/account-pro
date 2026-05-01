@@ -22,4 +22,6 @@ export default function InitAuth() {
     };
     getUser();
   }, [setIsLoading, setUser]);
+
+  return null;
 }

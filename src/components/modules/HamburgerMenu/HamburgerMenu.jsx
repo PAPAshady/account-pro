@@ -4,13 +4,15 @@ import Image from 'next/image';
 import { useRef } from 'react';
 
 import clsx from 'clsx';
-import { FaArrowLeft } from 'react-icons/fa';
+import { FaArrowLeft, FaChevronLeft } from 'react-icons/fa';
 
 import useHamburgerMenu from '@/store/useHamburgerMenu';
 import NavItem from '@modules/HamburgerMenuNavItem/HamburgerMenuNavItem';
+import useAuth from '@/store/useAuth';
 import { navLinks } from '@/data';
 
 export default function HamburgerMenu() {
+  const user = useAuth((state) => state.user);
   const open = useHamburgerMenu((state) => state.open);
   const setOpen = useHamburgerMenu((state) => state.setOpen);
   const menuRef = useRef(null);
@@ -36,13 +38,26 @@ export default function HamburgerMenu() {
         )}
       >
         <div className="bg-foreground flex h-20 items-center justify-center px-5">
-          <Link
-            href="/sign-in"
-            className="flex items-center gap-2.5 px-5 py-3 text-lg font-semibold"
-          >
-            <span>ورود یا ثبت نام</span>
-            <FaArrowLeft />
-          </Link>
+          {user ? (
+            <div className="flex w-full items-center justify-between gap-2">
+              <div>
+                <p>{user.name}</p>
+                <p className="text-paragraph text-sm">{user.phone}</p>
+              </div>
+              <Link href="/dashboard" className="p-2" onClick={() => setOpen(false)}>
+                <FaChevronLeft />
+              </Link>
+            </div>
+          ) : (
+            <Link
+              href="/sign-in"
+              className="flex items-center gap-2.5 px-5 py-3 text-lg font-semibold"
+              onClick={() => setOpen(false)}
+            >
+              <span>ورود یا ثبت نام</span>
+              <FaArrowLeft />
+            </Link>
+          )}
         </div>
         <div className="mt-8 flex grow flex-col px-5 pb-5">
           <div className="grow">
