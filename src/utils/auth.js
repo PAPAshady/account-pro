@@ -10,7 +10,7 @@ export const verifyPassword = (password, hashedPassword) => {
 };
 
 export const generateAccessToken = (payload) => {
-  return sign(payload, process.env.JWT_SECRET, { expiresIn: 900 }); // 15mins
+  return sign(payload, process.env.JWT_SECRET, { expiresIn: process.env.ACCESS_TOKEN_EXPIRE_TIME });
 };
 
 export const verifyToken = (token) => {

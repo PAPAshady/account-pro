@@ -1,7 +1,6 @@
 'use client';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useEffect, useState } from 'react';
 
 import { FaBars, FaShoppingCart, FaUser } from 'react-icons/fa';
 
@@ -9,25 +8,12 @@ import SearchBox from '@modules/SearchBox/SearchBox';
 import Navbar from '@modules/Navbar/Navbar';
 import PrimaryButton from '@modules/PrimaryButton/PrimaryButton';
 import Particle from '@modules/Particle/Particle';
-import api from '@/axiosInstance';
 import useHamburgerMenu from '@/store/useHamburgerMenu';
+import useAuth from '@/store/useAuth';
 
 export default function Header() {
-  const [user, setUser] = useState(null);
   const setOpen = useHamburgerMenu((state) => state.setOpen);
-
-  useEffect(() => {
-    const handler = async () => {
-      try {
-        const user = await api.get('/api/auth/me');
-        setUser(user.data);
-      } catch (err) {
-        setUser(null);
-      }
-    };
-    handler();
-  }, []);
-
+  const user = useAuth((state) => state.user);
   return (
     <div className="relative py-10 lg:pt-12.5">
       <Particle className="-top-35 left-0 size-64 opacity-35 blur-[70px]" />

@@ -8,9 +8,11 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import Input from '@modules/Input/Input';
 import PrimaryButton from '@modules/PrimaryButton/PrimaryButton';
 import { signUpSchema } from '@/schemas/auth.schema';
+import useAuth from '@/store/useAuth';
 import api from '@/axiosInstance';
 
 export default function SignUp() {
+  const setUser = useAuth((state) => state.setUser);
   const router = useRouter();
   const {
     register,
@@ -35,7 +37,10 @@ export default function SignUp() {
         return;
       }
 
-      if (res.status === 201) router.push('/');
+      if (res.status === 201) {
+        setUser(res.data.user);
+        router.push('/');
+      }
     } catch (err) {}
   };
 

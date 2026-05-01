@@ -9,8 +9,10 @@ import Input from '@modules/Input/Input';
 import PrimaryButton from '@modules/PrimaryButton/PrimaryButton';
 import { signInSchema } from '@/schemas/auth.schema';
 import api from '@/axiosInstance';
+import useAuth from '@/store/useAuth';
 
 export default function SignIn() {
+  const setUser = useAuth((state) => state.setUser);
   const router = useRouter();
   const {
     register,
@@ -35,7 +37,10 @@ export default function SignIn() {
         return;
       }
 
-      if (res.status === 200) router.push('/');
+      if (res.status === 200) {
+        setUser(res.data.user);
+        router.push('/');
+      }
     } catch (err) {}
   };
 

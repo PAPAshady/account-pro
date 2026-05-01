@@ -10,8 +10,8 @@ import { ACCESS_TOKEN_NAME } from '@/constants';
 export async function POST(req) {
   try {
     await connectToDB();
-    const user = await req.json();
-    const validated = signUpSchema.safeParse(user);
+    const data = await req.json();
+    const validated = signUpSchema.safeParse(data);
 
     if (!validated.success) {
       const errors = validated.error.flatten().fieldErrors;
@@ -19,11 +19,11 @@ export async function POST(req) {
     }
 
     const alreadyExists = await model.findOne({
-      $or: [{ email: user.email }, { phone: user.phone }],
+      $or: [{ email: data.email }, { phone: data.phone }],
     });
 
     if (alreadyExists) {
-      const isEmailDuplicated = alreadyExists.email === user.email;
+      const isEmailDuplicated = alreadyExists.email === data.email;
       return Response.json(
         {
           message: `این ${isEmailDuplicated ? 'ایمیل' : 'شماره تلفن'} قبلا استفاده شده است.`,
@@ -33,12 +33,21 @@ export async function POST(req) {
       );
     }
 
-    const hashed = hashPassword(user.password);
-    const accessToken = generateAccessToken({ email: user.email });
+    const hashed = hashPassword(data.password);
+    const user = await model.create({ ...data, password: hashed });
+    const accessToken = generateAccessToken({ email: data.email });
 
-    await model.create({ ...user, password: hashed });
+    // make sure to NOT send password in the response.
+    const userData = {
+      name: user.name,
+      phone: user.phone,
+      email: user.email,
+      createdAt: user.createdAt,
+      updatedAt: user.updatedAt,
+      _id: user._id,
+    };
 
-    const response = NextResponse.json('خوش آمدید.', { status: 201 });
+    const response = NextResponse.json({ user: userData, message: 'خوش آمدید' }, { status: 201 });
 
     response.cookies.set(ACCESS_TOKEN_NAME, accessToken, {
       httpOnly: true,
