@@ -62,8 +62,14 @@ export default function HamburgerMenu() {
         <div className="mt-8 flex grow flex-col px-5 pb-5">
           <div className="grow">
             <nav className="flex flex-col gap-1">
-              {navLinks.map(({ id, ...link }) => (
-                <NavItem key={id} {...link} />
+              {navLinks.map((link) => (
+                <NavItem
+                  key={link.id}
+                  title={link.title}
+                  href={link.href}
+                  hasMenu={link.hasMenu}
+                  menus={link.menus}
+                />
               ))}
             </nav>
           </div>
