@@ -35,17 +35,17 @@ export default function Banner() {
         />
         <div className="space-y-5 sm:space-y-8 lg:w-1/2">
           <div className="-mt-12 space-y-5 text-center sm:space-y-8 lg:text-start">
-            <h1 className="text-xl min-[360px]:text-2xl sm:text-[32px]">
+            <h1 className="text-xl min-[360px]:text-2xl sm:text-[32px] lg:mt-16 xl:mt-8">
               <span>خرید حساب های کاملا قانونی</span>
               <br />
-              <div className="mt-2 flex items-center justify-center gap-1 sm:gap-2 lg:justify-start">
+              <div className="mt-2 flex items-center justify-center gap-2 sm:gap-2 lg:justify-start xl:gap-3">
                 انواع پلتفرم ها فقط با
                 <Image
                   alt="اکانت پرو"
                   src="/images/logo/logo-md.png"
                   width={192}
                   height={48}
-                  className="mt-1.5 w-24 sm:w-40"
+                  className="w-22 min-[480px]:w-30 sm:w-40 lg:h-auto lg:w-30 xl:w-40"
                 />
               </div>
             </h1>
