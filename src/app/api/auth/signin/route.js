@@ -7,8 +7,8 @@ import { ACCESS_TOKEN_NAME } from '@/constants';
 import model from '@/models/User';
 
 export async function POST(req) {
-  await connectToDB();
   try {
+    await connectToDB();
     const userData = await req.json();
     const validated = signInSchema.safeParse(userData);
 

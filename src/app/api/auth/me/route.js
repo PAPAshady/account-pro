@@ -6,8 +6,8 @@ import { verifyToken } from '@/utils/auth';
 import { ACCESS_TOKEN_NAME } from '@/constants';
 
 export async function GET() {
-  await connectToDB();
   try {
+    await connectToDB();
     const cookiesStore = await cookies();
     const accessToken = cookiesStore.get(ACCESS_TOKEN_NAME)?.value;
     const tokenPayload = verifyToken(accessToken);

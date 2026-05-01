@@ -8,8 +8,8 @@ import { generateAccessToken } from '@/utils/auth';
 import { ACCESS_TOKEN_NAME } from '@/constants';
 
 export async function POST(req) {
-  await connectToDB();
   try {
+    await connectToDB();
     const user = await req.json();
     const validated = signUpSchema.safeParse(user);
 
