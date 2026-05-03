@@ -433,10 +433,10 @@ export const licences = [
 
 export const dashboardLinks = [
   { id: 1, title: 'داشبورد', href: '/dashboard', icon: <FaVectorSquare /> },
-  { id: 2, title: 'علاقه مندی ها', href: '/dashboard/favorites', icon: <FaRegHeart /> },
-  { id: 3, title: 'تماس با پشتیبانی', href: '/dashboard/support', icon: <FaPhone /> },
-  { id: 4, title: 'اطلاعات حساب کاربری', href: '/dashboard/profile', icon: <FaRegUser /> },
-  { id: 5, title: 'اشتراک ها و لایسنس ها', href: '/dashboard/licenses', icon: <FaGripLines /> },
+  { id: 2, title: 'اشتراک ها و لایسنس ها', href: '/dashboard/licenses', icon: <FaGripLines /> },
+  { id: 3, title: 'اطلاعات حساب کاربری', href: '/dashboard/profile', icon: <FaRegUser /> },
+  { id: 4, title: 'علاقه مندی ها', href: '/dashboard/favorites', icon: <FaRegHeart /> },
+  { id: 5, title: 'تماس با پشتیبانی', href: '/dashboard/support', icon: <FaPhone /> },
   { id: 6, title: 'اخبار و اطلاعیه ها', href: '/dashboard/news', icon: <FaRegNewspaper /> },
 ];
 

@@ -72,7 +72,7 @@ export default function UserProfileDropDown({ userName }) {
             </div>
             <div>
               <ul className="mb-2 flex flex-col gap-2 border-b border-[#ffffff1a] pb-2">
-                {dashboardLinks.slice(0, 5).map((link) => (
+                {dashboardLinks.slice(0, 4).map((link) => (
                   <DropDownLink
                     key={link.id}
                     href={link.href}
@@ -83,9 +83,10 @@ export default function UserProfileDropDown({ userName }) {
               </ul>
               <DropDownLink
                 title="خروج از حساب کاربری"
-                href=""
                 icon={<FaSignOutAlt />}
                 onClick={signOutHandler}
+                isSignOutButton
+                href=""
               />
             </div>
           </div>
@@ -95,17 +96,26 @@ export default function UserProfileDropDown({ userName }) {
   );
 }
 
-function DropDownLink({ title, href, icon, ...props }) {
+function DropDownLink({ title, href, icon, isSignOutButton, ...props }) {
   return (
     <li className="list-none" {...props}>
       <Link href={href} className="group flex items-center justify-between py-1">
         <div className="flex items-center gap-3">
-          <i className="group-hover:bg-primary grid size-8 place-content-center rounded-lg rounded-tr-sm bg-[#ffffff1a] transition-colors duration-300 group-hover:text-[#336]">
+          <i
+            className={clsx(
+              'grid size-8 place-content-center rounded-lg rounded-tr-sm bg-[#ffffff1a] transition-colors duration-300',
+              isSignOutButton
+                ? 'group-hover:bg-red-400'
+                : 'group-hover:bg-primary group-hover:text-[#336]'
+            )}
+          >
             {icon}
           </i>
           <span>{title}</span>
         </div>
-        <FaChevronLeft className="text-primary text-sm opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+        {!isSignOut && (
+          <FaChevronLeft className="text-primary text-sm opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+        )}
       </Link>
     </li>
   );
