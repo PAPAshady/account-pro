@@ -15,54 +15,65 @@ export default function UserProfileDropDown({ userName }) {
   const dropDownRef = useRef(null);
 
   const closeOnClickOutside = (e) => {
-    console.log(dropDownRef.current.contains(e.target));
     if (!dropDownRef.current.contains(e.target)) setOpen(false);
   };
 
+  const lockScrollbar = () => (document.body.className = 'overflow-y-hidden ps-[8px]');
+  const unlockScrollbar = () => (document.body.className = '');
+
+  // lock scrollbar when dropdown is open
   useEffect(() => {
-    if (open) document.body.style.overflowY = 'hidden';
-    else document.body.style.overflowY = 'visible';
+    if (open) lockScrollbar();
+    else unlockScrollbar();
+    return () => unlockScrollbar();
   }, [open]);
 
   return (
-    <div className="relative" onClick={closeOnClickOutside}>
-      <div
-        className={clsx(
-          'fixed inset-0 size-full bg-black/50 transition-all duration-200',
-          open ? 'z-10' : 'invisible -z-1 opacity-0'
-        )}
-      ></div>
+    <div>
       <PrimaryButton className="relative z-20" onClick={() => setOpen((prev) => !prev)}>
         {userName}
         <FaUser />
       </PrimaryButton>
-      <div
-        ref={dropDownRef}
-        className={clsx(
-          'absolute left-0 z-20 pt-2 transition-all duration-200',
-          !open && 'translate-y-2 opacity-0'
-        )}
-      >
-        <div className="w-62.5 space-y-5 rounded-3xl rounded-tr-lg bg-[#252525] p-3.75 pt-6">
-          <div className="bg-primary bg-hatching space-y-2 rounded-md rounded-tl-[20px] p-6.25 pb-3.75">
-            <div>
-              <Image
-                alt="نیما زمانی"
-                width={60}
-                height={60}
-                className="border-primary -mt-10 size-14 rounded-3xl rounded-tr-lg border-4 object-cover"
-                src="/images/profile/profile2.png"
-              />
+      <div className="relative" onClick={closeOnClickOutside}>
+        <div
+          className={clsx(
+            'fixed inset-0 size-full bg-black/50 transition-all duration-200',
+            open ? 'z-10' : 'invisible -z-1 opacity-0'
+          )}
+        ></div>
+        <div
+          ref={dropDownRef}
+          className={clsx(
+            'absolute left-0 z-20 pt-2 transition-all duration-200',
+            !open && 'translate-y-2 opacity-0'
+          )}
+        >
+          <div className="w-62.5 space-y-5 rounded-3xl rounded-tr-lg bg-[#252525] p-3.75 pt-6">
+            <div className="bg-primary bg-hatching space-y-2 rounded-md rounded-tl-[20px] p-6.25 pb-3.75">
+              <div>
+                <Image
+                  alt="نیما زمانی"
+                  width={60}
+                  height={60}
+                  className="border-primary -mt-10 size-14 rounded-3xl rounded-tr-lg border-4 object-cover"
+                  src="/images/profile/profile2.png"
+                />
+              </div>
+              <p className="text-xl font-bold text-[#191919]">نیما زمانی</p>
             </div>
-            <p className="text-xl font-bold text-[#191919]">نیما زمانی</p>
-          </div>
-          <div>
-            <ul className="mb-2 flex flex-col gap-2 border-b border-[#ffffff1a] pb-2">
-              {dashboardLinks.slice(0, 5).map((link) => (
-                <DropDownLink key={link.id} href={link.href} icon={link.icon} title={link.title} />
-              ))}
-            </ul>
-            <DropDownLink title="خروج از حساب کاربری" href="" icon={<FaSignOutAlt />} />
+            <div>
+              <ul className="mb-2 flex flex-col gap-2 border-b border-[#ffffff1a] pb-2">
+                {dashboardLinks.slice(0, 5).map((link) => (
+                  <DropDownLink
+                    key={link.id}
+                    href={link.href}
+                    icon={link.icon}
+                    title={link.title}
+                  />
+                ))}
+              </ul>
+              <DropDownLink title="خروج از حساب کاربری" href="" icon={<FaSignOutAlt />} />
+            </div>
           </div>
         </div>
       </div>

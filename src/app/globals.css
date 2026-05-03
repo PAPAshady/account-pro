@@ -45,3 +45,23 @@
 body {
   @apply bg-blackColor font-yekanBakh font-normal text-white;
 }
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #a3a3a3;
+  border-radius: 2px;
+}
+
+::-webkit-scrollbar-track {
+  background: #2c2c2c;
+  border-radius: 2px;
+  border: 1px solid rgba(216, 223, 245, 0.5);
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #a3a3a3 #2c2c2c;
+}
