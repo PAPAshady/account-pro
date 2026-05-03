@@ -4,15 +4,17 @@ import { useState, useRef, useEffect } from 'react';
 import Link from 'next/link';
 
 import { FaUser, FaSignOutAlt, FaChevronLeft } from 'react-icons/fa';
-
 import clsx from 'clsx';
 
 import PrimaryButton from '@modules/PrimaryButton/PrimaryButton';
+import api from '@/axiosInstance';
+import useAuth from '@/store/useAuth';
 import { dashboardLinks } from '@/data';
 
 export default function UserProfileDropDown({ userName }) {
   const [open, setOpen] = useState(false);
   const dropDownRef = useRef(null);
+  const setUser = useAuth((state) => state.setUser);
 
   const closeOnClickOutside = (e) => {
     if (!dropDownRef.current.contains(e.target)) setOpen(false);
@@ -20,6 +22,13 @@ export default function UserProfileDropDown({ userName }) {
 
   const lockScrollbar = () => (document.body.className = 'overflow-y-hidden ps-[8px]');
   const unlockScrollbar = () => (document.body.className = '');
+
+  const signOutHandler = async () => {
+    try {
+      const res = await api.post('/api/auth/signout');
+      if (res.status === 200) setUser(null);
+    } catch (error) {}
+  };
 
   // lock scrollbar when dropdown is open
   useEffect(() => {
@@ -72,7 +81,12 @@ export default function UserProfileDropDown({ userName }) {
                   />
                 ))}
               </ul>
-              <DropDownLink title="خروج از حساب کاربری" href="" icon={<FaSignOutAlt />} />
+              <DropDownLink
+                title="خروج از حساب کاربری"
+                href=""
+                icon={<FaSignOutAlt />}
+                onClick={signOutHandler}
+              />
             </div>
           </div>
         </div>
