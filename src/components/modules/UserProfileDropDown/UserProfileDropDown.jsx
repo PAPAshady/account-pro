@@ -113,7 +113,7 @@ function DropDownLink({ title, href, icon, isSignOutButton, ...props }) {
           </i>
           <span>{title}</span>
         </div>
-        {!isSignOut && (
+        {!isSignOutButton && (
           <FaChevronLeft className="text-primary text-sm opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
         )}
       </Link>
