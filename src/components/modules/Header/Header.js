@@ -10,6 +10,7 @@ import PrimaryButton from '@modules/PrimaryButton/PrimaryButton';
 import Particle from '@modules/Particle/Particle';
 import useHamburgerMenu from '@/store/useHamburgerMenu';
 import useAuth from '@/store/useAuth';
+import UserProfileDropDown from '@modules/UserProfileDropDown/UserProfileDropDown';
 
 export default function Header() {
   const setOpen = useHamburgerMenu((state) => state.setOpen);
@@ -71,10 +72,7 @@ export default function Header() {
             <Navbar />
             <SearchBox />
             {user ? (
-              <PrimaryButton>
-                {user.name}
-                <FaUser />
-              </PrimaryButton>
+              <UserProfileDropDown userName={user.name} />
             ) : (
               <PrimaryButton isLink href="/sign-in">
                 ورود/ثبت نام
