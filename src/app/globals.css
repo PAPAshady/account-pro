@@ -40,6 +40,32 @@
   --font-yekanBakh: YekanBakh, sans-serif;
   --font-morabba: Morabba, sans-serif;
   --font-stretchPro: StretchPro, sans-serif;
+
+  /* Animations */
+  --animate-slide-in: slideIn 200ms ease-out;
+  --animate-slide-out: slideOut 200ms ease-in;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideOut {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
 }
 
 body {
