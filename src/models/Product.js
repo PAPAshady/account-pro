@@ -1,0 +1,65 @@
+const mongoose = require('mongoose');
+
+const schema = mongoose.Schema(
+  {
+    title: {
+      type: String,
+      required: true,
+      unique: true,
+      trim: true,
+      minLength: 3,
+    },
+    latinTitle: {
+      type: String,
+      required: true,
+      unique: true,
+      trim: true,
+      minLength: 3,
+    },
+    heading: {
+      type: String,
+      required: true,
+      unique: true,
+      trim: true,
+    },
+    latinHeading: {
+      type: String,
+      required: true,
+      unique: true,
+      trim: true,
+    },
+    shortDescription: {
+      type: String,
+      required: true,
+      trim: true,
+    },
+    longDescription: {
+      type: String,
+      required: true,
+      trim: true,
+    },
+    price: {
+      type: Number,
+      default: 0,
+      min: 0,
+    },
+    slug: {
+      type: String,
+      required: true,
+      minLength: 1,
+    },
+    images: [
+      {
+        url: { type: String, required: true },
+        alt: String,
+        name: String,
+      },
+    ],
+    region: String,
+  },
+  { timestamps: true }
+);
+
+const model = mongoose.models.Product || mongoose.model('Product', schema);
+
+export default model;
