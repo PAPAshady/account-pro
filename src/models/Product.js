@@ -18,13 +18,11 @@ const schema = mongoose.Schema(
     },
     heading: {
       type: String,
-      required: true,
       unique: true,
       trim: true,
     },
     latinHeading: {
       type: String,
-      required: true,
       unique: true,
       trim: true,
     },
