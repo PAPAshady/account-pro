@@ -5,7 +5,7 @@ import Link from 'next/link';
 
 import { FaUser, FaSignOutAlt, FaChevronLeft } from 'react-icons/fa';
 import clsx from 'clsx';
-import * as DropDown from '@radix-ui/react-dropdown-menu';
+import { Root, Trigger, Portal, Content, Item } from '@radix-ui/react-dropdown-menu';
 
 import PrimaryButton from '@modules/PrimaryButton/PrimaryButton';
 import api from '@/axiosInstance';
@@ -24,21 +24,19 @@ export default function UserProfileDropDown({ userName }) {
   };
 
   return (
-    <DropDown.Root open={open} onOpenChange={setOpen}>
-      <DropDown.Trigger className="outline-none" asChild>
+    <Root open={open} onOpenChange={setOpen}>
+      <Trigger className="outline-none" asChild>
         <PrimaryButton>
           {userName}
           <FaUser />
         </PrimaryButton>
-      </DropDown.Trigger>
-      <DropDown.Portal>
-        <DropDown.Content
+      </Trigger>
+      <Portal>
+        <Content
           align="end"
           dir="rtl"
           sideOffset={10}
-          className={clsx(
-            'data-[state=closed]:animate-slide-out data-[state=open]:animate-slide-in w-62.5 space-y-5 rounded-3xl rounded-tr-lg bg-[#252525] p-3.75 pt-6 transition-all duration-200'
-          )}
+          className="data-[state=closed]:animate-slide-out data-[state=open]:animate-slide-in w-62.5 space-y-5 rounded-3xl rounded-tr-lg bg-[#252525] p-3.75 pt-6"
         >
           <div className="bg-primary bg-hatching space-y-2 rounded-md rounded-tl-[20px] p-6.25 pb-3.75">
             <div>
@@ -66,15 +64,15 @@ export default function UserProfileDropDown({ userName }) {
               href=""
             />
           </div>
-        </DropDown.Content>
-      </DropDown.Portal>
-    </DropDown.Root>
+        </Content>
+      </Portal>
+    </Root>
   );
 }
 
 function DropDownLink({ title, href, icon, isSignOutButton, ...props }) {
   return (
-    <DropDown.Item className="outline-none" {...props}>
+    <Item className="outline-none" {...props}>
       <Link href={href} className="group flex items-center justify-between py-1">
         <div className="flex items-center gap-3">
           <i
@@ -93,6 +91,6 @@ function DropDownLink({ title, href, icon, isSignOutButton, ...props }) {
           <FaChevronLeft className="text-primary text-sm opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
         )}
       </Link>
-    </DropDown.Item>
+    </Item>
   );
 }

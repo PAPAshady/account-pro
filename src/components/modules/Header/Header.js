@@ -11,6 +11,7 @@ import Particle from '@modules/Particle/Particle';
 import useHamburgerMenu from '@/store/useHamburgerMenu';
 import useAuth from '@/store/useAuth';
 import UserProfileDropDown from '@modules/UserProfileDropDown/UserProfileDropDown';
+import CartDropDown from '@modules/CartDropDown/CartDropDown';
 
 export default function Header() {
   const setOpen = useHamburgerMenu((state) => state.setOpen);
@@ -79,9 +80,7 @@ export default function Header() {
                 <FaUser />
               </PrimaryButton>
             )}
-            <PrimaryButton className="px-3!">
-              <FaShoppingCart />
-            </PrimaryButton>
+            <CartDropDown />
           </div>
         </div>
       </header>
