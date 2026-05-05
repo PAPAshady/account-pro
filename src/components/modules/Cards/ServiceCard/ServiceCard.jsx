@@ -5,7 +5,7 @@ import { FaHeart, FaRegHeart } from 'react-icons/fa';
 import Particle from '@/components/modules/Particle/Particle';
 import PrimaryButton from '@/components/modules/PrimaryButton/PrimaryButton';
 
-export default function ServiceCard({ title, price, region, hasLikeButton, isFavorite }) {
+export default function ServiceCard({ title, price, region, images, hasLikeButton, isFavorite }) {
   return (
     <div className="group relative">
       <div className="relative flex h-20 items-center gap-2 overflow-hidden">
@@ -20,7 +20,7 @@ export default function ServiceCard({ title, price, region, hasLikeButton, isFav
       <div className="relative z-1 -mt-13 flex justify-center">
         <Image
           alt="Spotify"
-          src="/images/services/spotify.png"
+          src={images[0].url}
           width={300}
           height={300}
           className="size-18.75 grayscale-100 transition-all duration-300 group-hover:grayscale-0 lg:size-20"
