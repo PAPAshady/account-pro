@@ -1,6 +1,6 @@
 import Image from 'next/image';
 
-export default function Introduction() {
+export default function Introduction({ title, images, heading, latinHeading, longDescription }) {
   return (
     <div id="introduction">
       <div className="relative">
@@ -12,32 +12,21 @@ export default function Introduction() {
           }}
         ></div>
         <div className="space-y-1 px-4 font-bold">
-          <h3 className="font-morabba text-xl lg:text-[26px]">
-            اسپاتیفای، بزرگترین پلتفرم استریم موسیقی
-          </h3>
-          <p className="font-stretchPro text-paragraph text-sm">
-            SPOTIFY,The world&apos;s largest music platform
-          </p>
+          <h3 className="font-morabba text-xl lg:text-[26px]">{heading}</h3>
+          <p className="font-stretchPro text-paragraph text-sm">{latinHeading}</p>
         </div>
         <div className="relative flex flex-col justify-center gap-4 p-3 md:mt-4 md:flex-row md:items-center md:px-6">
           <div className="space-y-4 md:w-[60%]">
             <div className="bg-foreground text-paragraph rounded-3xl rounded-tr-lg p-5 text-justify">
-              <p>
-                اسپاتیفای یک پلتفرم محبوب برای استریم موسیقی، پادکست و محتوای صوتی است که بیش از 640
-                میلیون کاربر فعال ماهانه و 252 میلیون مشترک پرمیوم در 184 کشور دارد. کاربران با نسخه
-                پرمیوم از تجربه‌ای بدون تبلیغات، کیفیت بهتر و دانلود آفلاین بهره‌مند می‌شوند. این
-                سرویس با آرشیو بیش از 100 میلیون آهنگ و امکانات نوآورانه مثل AI DJ تجربه‌ای
-                شخصی‌سازی‌شده ارائه می‌دهد. درآمد اسپاتیفای در سه‌ماهه آخر 2024 به 4 میلیارد یورو
-                رسیده است.
-              </p>
+              <p>{longDescription}</p>
             </div>
           </div>
           <div className="relative md:w-[40%]">
             <Image
-              alt="Spotify"
+              alt={title}
               width={400}
               height={462}
-              src="/images/services/spotify-phone.png"
+              src={images[1].url}
               className="top-1/2 left-1/2 mx-auto w-full max-w-85 md:absolute md:-translate-1/2"
             />
           </div>

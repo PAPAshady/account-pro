@@ -55,18 +55,16 @@ const inputs = [
   },
 ];
 
-export default function ProductDetails() {
+export default function ProductDetails({ title, latinTitle, shortDescription, price, images }) {
   return (
     <div className="flex flex-col items-center gap-3 min-[900px]:flex-row md:gap-6 lg:gap-10">
       <div className="w-full space-y-6 min-[900px]:w-1/2">
         <div className="space-y-2 font-bold">
-          <h1 className="font-morabba text-xl min-[900px]:text-[26px]">لایسنس ویندوز ۱۱</h1>
-          <p className="font-stretchPro text-paragraph mb-6 text-sm">Windows 11 License</p>
-          <p className="text-sm font-thin min-[900px]:text-base">
-            موسیقی بی وقفه، دانلود نامحدود و پلی لیس هایی که همیشه در کنار تو هستن.
-          </p>
+          <h1 className="font-morabba text-xl min-[900px]:text-[26px]">{title}</h1>
+          <p className="font-stretchPro text-paragraph mb-6 text-sm">{latinTitle}</p>
+          <p className="text-sm font-thin min-[900px]:text-base">{shortDescription} </p>
           <p className="pt-3 text-sm font-semibold min-[900px]:text-base">
-            همین حالا اسپاتیفای پرمیوم رو امتحان کن!
+            همین حالا {title} رو امتحان کن!
           </p>
         </div>
         <div className="grid grid-cols-2 gap-x-2 gap-y-6 min-[380px]:gap-x-4">
@@ -80,7 +78,7 @@ export default function ProductDetails() {
               <span>مبلغ قابل پرداخت :</span>
               <p className="text-[32px]">
                 <bdi>
-                  ۲۰۰,۰۰۰
+                  {price.toLocaleString()}
                   <span className="text-primary ms-2 text-lg">تومان</span>
                 </bdi>
               </p>
@@ -125,10 +123,10 @@ export default function ProductDetails() {
         <div className="absolute top-1/2 left-1/2 -translate-1/2 rounded-4xl">
           <Particle className="top-1/2 left-1/2 size-64 -translate-1/2 opacity-35 blur-[70px]" />
           <Image
-            alt="windows 11"
+            alt={title}
             width={170}
             height={170}
-            src="/images/services/spotify.png"
+            src={images[0].url}
             className="size-42.5 min-w-42.5 object-cover"
           />
         </div>

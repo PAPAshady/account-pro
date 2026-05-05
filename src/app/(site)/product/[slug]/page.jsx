@@ -1,3 +1,5 @@
+import { redirect } from 'next/navigation';
+
 import ProductDetails from '@templates/product/ProductDetails/ProductDetails';
 import Navigation from '@templates/product/Navigation/Navigation';
 import Introduction from '@templates/product/Introduction/Introduction';
@@ -7,12 +9,16 @@ import ImportantPoints from '@templates/product/ImportantPoints/ImportantPoints'
 import Faq from '@templates/product/Faq/Faq';
 import Comments from '@templates/product/Comments/Comments';
 
-export default function Product() {
+export default async function Product({ params }) {
+  const { slug } = await params;
+  const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/products/${slug}`);
+  if (res.status === 404) redirect('/404');
+  const product = await res.json();
   return (
     <div className="container space-y-16 lg:space-y-24">
-      <ProductDetails />
+      <ProductDetails {...product} />
       <Navigation />
-      <Introduction />
+      <Introduction {...product} />
       <Plans />
       <ActivationMethods />
       <ImportantPoints />
