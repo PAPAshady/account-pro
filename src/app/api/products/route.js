@@ -38,12 +38,12 @@ export async function POST(req) {
 
     const mainImageUrl = await saveFileToDisk(
       product.mainImage,
-      `${product.title}-main`,
+      `${product.latinTitle}-main`,
       'products'
     );
     const sectionImageUrl = await saveFileToDisk(
       product.sectionImage,
-      `${product.title}-section`,
+      `${product.latinTitle}-section`,
       'products'
     );
 
