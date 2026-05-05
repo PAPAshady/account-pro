@@ -11,5 +11,5 @@ export async function saveFileToDisk(file, name, dirName) {
 
   const filePath = path.join(process.cwd(), 'public', 'images', dirName, fileName);
   await writeFile(filePath, buffer);
-  return `/${dirName}/${fileName}`;
+  return `/images/${dirName}/${fileName}`;
 }
