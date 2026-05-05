@@ -1,4 +1,4 @@
-import ServiceCard from '@modules/Cards/ServiceCard/ServiceCard';
+import ServiceCard from '@/components/modules/Cards/ProductCard/ProductCard';
 import { services } from '@/data';
 
 export default function Licences() {

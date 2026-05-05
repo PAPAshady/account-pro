@@ -5,7 +5,15 @@ import { FaHeart, FaRegHeart } from 'react-icons/fa';
 import Particle from '@/components/modules/Particle/Particle';
 import PrimaryButton from '@/components/modules/PrimaryButton/PrimaryButton';
 
-export default function ServiceCard({ title, price, region, images, hasLikeButton, isFavorite }) {
+export default function ProductCard({
+  title,
+  price,
+  region,
+  images,
+  slug,
+  hasLikeButton,
+  isFavorite,
+}) {
   return (
     <div className="group relative">
       <div className="relative flex h-20 items-center gap-2 overflow-hidden">
@@ -40,7 +48,7 @@ export default function ServiceCard({ title, price, region, images, hasLikeButto
           </div>
         </div>
         <div className="flex items-center gap-2.5">
-          <PrimaryButton dir="ltr" className="w-full">
+          <PrimaryButton isLink href={`/product/${slug}`} dir="ltr" className="w-full">
             مشاهده و خرید
           </PrimaryButton>
           {hasLikeButton && (

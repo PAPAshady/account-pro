@@ -1,5 +1,5 @@
 import SearchBox from '@modules/SearchBox/SearchBox';
-import ServiceCard from '@modules/Cards/ServiceCard/ServiceCard';
+import ServiceCard from '@/components/modules/Cards/ProductCard/ProductCard';
 import FiltersSlider from '@templates/shop/FiltersSlider/FiltersSlider';
 import FilterAccordion from '@modules/FilterAccordion/FilterAccordion';
 import CheckboxFilterItem from '@modules/CheckboxFilterItem/CheckboxFilterItem';

@@ -1,4 +1,4 @@
-import ServiceCard from '@modules/Cards/ServiceCard/ServiceCard';
+import ProductCard from '@/components/modules/Cards/ProductCard/ProductCard';
 import PrimaryButton from '@modules/PrimaryButton/PrimaryButton';
 import Particle from '@modules/Particle/Particle';
 
@@ -21,7 +21,7 @@ export default async function Services() {
             </h3>
             <div className="grid grid-cols-1 gap-x-4 gap-y-2 min-[1140px]:grid-cols-4! sm:grid-cols-2 lg:grid-cols-3 lg:gap-4">
               {products.map((product) => (
-                <ServiceCard key={product._id} {...product} />
+                <ProductCard key={product._id} {...product} />
               ))}
             </div>
           </div>
