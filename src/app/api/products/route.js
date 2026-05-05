@@ -38,3 +38,14 @@ export async function POST(req) {
     return Response.json({ message: 'Failed to add product to database' }, { status: 500 });
   }
 }
+
+export async function GET() {
+  try {
+    await connectToDB();
+    const products = await model.find({}, '-__v');
+    return Response.json(products);
+  } catch (err) {
+    console.error('Error fetching products => ', err);
+    return Response.json({ message: 'Failed to fetch products' }, { status: 500 });
+  }
+}
