@@ -2,14 +2,18 @@ import { connectToDB } from '@/utils/db';
 import { validateUser } from '@/utils/auth';
 import { categorySchema } from '@/schemas/category.schema';
 import categoriesModel from '@/models/Category';
+import { saveFileToDisk } from '@/utils/file';
 
 export async function POST(req) {
   try {
     await connectToDB();
     const isUserValidated = (await validateUser({ checkIsAdmin: true })).status === 200;
-    if (!isUserValidated) return response.json(null, { status: 401 });
+    if (!isUserValidated) return Response.json({ message: 'Prohibited access.' }, { status: 401 });
 
-    const category = await req.json();
+    const data = await req.formData();
+    const category = {};
+    for (let [key, value] of data) category[key] = value;
+
     const validated = categorySchema.safeParse(category);
 
     if (!validated.success) {
@@ -27,7 +31,10 @@ export async function POST(req) {
         { status: 409 }
       );
     }
-    const createdCategory = await categoriesModel.create(category);
+
+    const imageUrl = await saveFileToDisk(category.imageFile, category.title, 'categories');
+
+    const createdCategory = await categoriesModel.create({ ...category, imageUrl });
     return Response.json(createdCategory, { status: 201 });
   } catch (error) {
     console.error('Failed to add Category to database => ', error);

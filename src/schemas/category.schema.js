@@ -17,4 +17,5 @@ export const categorySchema = z.object({
     .string({ message: 'Icon name must be a string.' })
     .trim()
     .min(1, { message: 'Icon name is required.' }),
+  imageFile: z.instanceof(File, { message: 'Category image must be a File.' }),
 });

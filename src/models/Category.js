@@ -23,6 +23,10 @@ const schema = mongoose.Schema({
     type: String,
     required: true,
   },
+  imageUrl: {
+    type: String,
+    required: true,
+  },
 });
 
 const categoriesModel = mongoose.models.Category || mongoose.model('Category', schema);
