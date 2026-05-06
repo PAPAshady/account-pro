@@ -1,9 +1,12 @@
 import PrimaryButton from '@modules/PrimaryButton/PrimaryButton';
 import CategoryCard from '@modules/Cards/CategoryCard/CategoryCard';
 import Particle from '@modules/Particle/Particle';
-import { categoryCards } from '@/data';
 
-export default function Categories() {
+export default async function Categories() {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/categories`, {
+    cache: 'force-cache',
+  });
+  const categories = await res.json();
   return (
     <div className="relative">
       <Particle className="top-45 right-0 hidden size-50 opacity-50 blur-[80px] sm:block lg:top-25" />
@@ -35,8 +38,8 @@ export default function Categories() {
               </div>
             </div>
             <div className="grid grow grid-cols-2 gap-4 px-2 sm:grid-cols-3 lg:grid-cols-5 xl:gap-6">
-              {categoryCards.map((category) => (
-                <CategoryCard key={category.id} {...category} />
+              {categories.map((category) => (
+                <CategoryCard key={category._id} {...category} />
               ))}
             </div>
             <div className="flex justify-center pt-3 sm:pt-1">

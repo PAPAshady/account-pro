@@ -32,7 +32,7 @@ export async function POST(req) {
       );
     }
 
-    const imageUrl = await saveFileToDisk(category.imageFile, category.title, 'categories');
+    const imageUrl = await saveFileToDisk(category.imageFile, category.latinTitle, 'categories');
 
     const createdCategory = await categoriesModel.create({ ...category, imageUrl });
     return Response.json(createdCategory, { status: 201 });

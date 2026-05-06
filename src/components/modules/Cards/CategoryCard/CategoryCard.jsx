@@ -1,8 +1,8 @@
 import Image from 'next/image';
 
-export default function CategoryCard({ id, title, image, alt }) {
+export default function CategoryCard({ title, imageUrl }) {
   return (
-    <div key={id} className="group">
+    <div className="group">
       <div className="group-hover:bg-primary hover:bg-hatching rounded-box-ltr bg-box relative flex h-full flex-col gap-4 px-2.5 pt-3.75 transition-all duration-300 xl:p-5! xl:pb-0!">
         <div className="flex h-full grow flex-col transition-colors duration-300">
           <p className="text-mainColor group-hover:text-blackColor text-sm font-light xl:text-[15px]!">
@@ -14,8 +14,8 @@ export default function CategoryCard({ id, title, image, alt }) {
         </div>
         <div>
           <Image
-            alt={alt}
-            src={image}
+            alt={title}
+            src={imageUrl}
             width={512}
             height={512}
             className="mx-auto size-13.75 grayscale-100 transition-colors duration-300 xl:size-23.75!"
