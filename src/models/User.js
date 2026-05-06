@@ -1,5 +1,7 @@
 const mongoose = require('mongoose');
 
+import { USER_ROLES } from '@/constants';
+
 const schema = mongoose.Schema(
   {
     email: {
@@ -29,6 +31,12 @@ const schema = mongoose.Schema(
       required: true,
       unique: true,
       match: [/^[0-9]{11}$/, 'Phone number must be 11 digits'],
+    },
+    role: {
+      type: String,
+      required: true,
+      default: 'user',
+      enum: Object.values(USER_ROLES),
     },
   },
   { timestamps: true }

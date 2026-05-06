@@ -7,7 +7,7 @@ import { saveFileToDisk } from '@/utils/file';
 export async function POST(req) {
   try {
     await connectToDB();
-    const isUserValidated = (await validateUser()).status === 200;
+    const isUserValidated = (await validateUser({ checkIsAdmin: true })).status === 200;
     if (!isUserValidated) return Response.json(null, { status: 401 });
 
     const data = await req.formData();

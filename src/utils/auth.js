@@ -5,6 +5,7 @@ import { connectToDB } from './db';
 import { sign, verify } from 'jsonwebtoken';
 import { ACCESS_TOKEN_NAME } from '@/constants';
 import usersModel from '@/models/User';
+import { USER_ROLES } from '@/constants';
 
 export const hashPassword = (password) => {
   return hashSync(password, 12);
@@ -28,7 +29,7 @@ export const verifyToken = (token) => {
   }
 };
 
-export const validateUser = async () => {
+export const validateUser = async ({ checkIsAdmin = false } = {}) => {
   try {
     await connectToDB();
     const cookiesStore = await cookies();
@@ -37,6 +38,13 @@ export const validateUser = async () => {
     if (!tokenPayload) return Response.json(false, { status: 401 });
     const user = await usersModel.findOne({ email: tokenPayload?.email }, '-__v');
     if (!user) return Response.json(false, { status: 401 });
+
+    if (checkIsAdmin) {
+      const adminRoles = [USER_ROLES.ADMIN, USER_ROLES.SUPER_ADMIN];
+      if (adminRoles.includes(user.role)) return Response.json(true);
+      return Response.json(false, { status: 403 });
+    }
+
     return Response.json(true);
   } catch (err) {
     console.error('Failed to get user data => ', err);

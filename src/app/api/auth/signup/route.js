@@ -5,7 +5,7 @@ import { signUpSchema } from '@/schemas/auth.schema';
 import { connectToDB } from '@/utils/db';
 import { hashPassword } from '@/utils/auth';
 import { generateAccessToken } from '@/utils/auth';
-import { ACCESS_TOKEN_NAME } from '@/constants';
+import { ACCESS_TOKEN_NAME, USER_ROLES } from '@/constants';
 
 export async function POST(req) {
   try {
@@ -34,7 +34,7 @@ export async function POST(req) {
     }
 
     const hashed = hashPassword(data.password);
-    const user = await model.create({ ...data, password: hashed });
+    const user = await model.create({ ...data, role: USER_ROLES.USER, password: hashed });
     const accessToken = generateAccessToken({ email: data.email });
 
     // make sure to NOT send password in the response.
@@ -44,6 +44,7 @@ export async function POST(req) {
       email: user.email,
       createdAt: user.createdAt,
       updatedAt: user.updatedAt,
+      role: user.role,
       _id: user._id,
     };
 
