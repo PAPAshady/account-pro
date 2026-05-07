@@ -4,6 +4,7 @@ import { FaHeart, FaRegHeart } from 'react-icons/fa';
 
 import Particle from '@/components/modules/Particle/Particle';
 import PrimaryButton from '@/components/modules/PrimaryButton/PrimaryButton';
+import Link from 'next/link';
 
 export default function ProductCard({
   title,
@@ -36,9 +37,11 @@ export default function ProductCard({
       </div>
       <div className="bg-box -mt-3.5 rounded-t-lg rounded-b-3xl p-3 pt-4 lg:pt-6">
         <div className="mb-3 flex items-center justify-between gap-2 lg:mb-4.5">
-          <h4 className="line-clamp-2 lg:text-lg lg:font-bold" title={title}>
-            {title}
-          </h4>
+          <Link href={`/product/${slug}`}>
+            <h4 className="line-clamp-2 lg:text-lg lg:font-bold" title={title}>
+              {title}
+            </h4>
+          </Link>
           <div className="text-end">
             <span className="text-paragraph text-sm lg:text-base">شروع قیمت از</span>
             <p>

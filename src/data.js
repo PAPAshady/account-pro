@@ -31,23 +31,15 @@ export const services = [
 export const filters = [
   {
     id: 1,
-    title: 'دسته بندی ها',
-    subtitle: 'Categories',
-    icon: <FaVectorSquare />,
-    type: 'checkbox',
-    options: [{ title: 'استریم فیلم و سریال' }, { title: 'استریم موزیک' }, { title: 'هوش مصنوعی' }],
-  },
-  {
-    id: 2,
     title: 'مدت زمان اشتراک',
     subtitle: 'Time Duration',
     icon: <FaClock />,
     type: 'checkbox',
     options: [{ title: 'استریم فیلم و سریال' }, { title: 'استریم موزیک' }, { title: 'هوش مصنوعی' }],
   },
-  { id: 3, title: 'محدوده قیمت', subtitle: 'Price', icon: <FaWallet />, type: 'slider' },
+  { id: 2, title: 'محدوده قیمت', subtitle: 'Price', icon: <FaWallet />, type: 'slider' },
   {
-    id: 4,
+    id: 3,
     title: 'نحوه فعال سازی',
     subtitle: 'Activation Method',
     icon: <FaCheck />,
@@ -55,7 +47,7 @@ export const filters = [
     options: [{ title: 'استریم فیلم و سریال' }, { title: 'استریم موزیک' }, { title: 'هوش مصنوعی' }],
   },
   {
-    id: 5,
+    id: 4,
     title: 'زبان ها',
     subtitle: 'Language',
     icon: <FaLanguage />,
