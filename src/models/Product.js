@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+require('./Category');
 
 const schema = mongoose.Schema(
   {
@@ -53,7 +54,15 @@ const schema = mongoose.Schema(
         name: String,
       },
     ],
-    region: String,
+    region: {
+      type: String,
+      default: 'همه ریجن ها',
+    },
+    category: {
+      type: mongoose.Types.ObjectId,
+      required: true,
+      ref: 'Category',
+    },
   },
   { timestamps: true }
 );

@@ -68,7 +68,7 @@ export async function POST(req) {
 export async function GET() {
   try {
     await connectToDB();
-    const products = await model.find({}, '-__v');
+    const products = await model.find({}, '-__v').populate('category', '-__v');
     return Response.json(products);
   } catch (err) {
     console.error('Error fetching products => ', err);

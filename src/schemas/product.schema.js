@@ -1,4 +1,5 @@
 import z from 'zod';
+import { Types } from 'mongoose';
 
 export const productSchema = z.object({
   title: z.string().trim().min(3, { message: 'Product title must include atleast 3 characters.' }),
@@ -33,4 +34,9 @@ export const productSchema = z.object({
   sectionImage: z.instanceof(File, {
     message: 'section-image must be a file.',
   }),
+  category: z
+    .string({ message: 'categoryId Must be a string.' })
+    .transform((val) => Types.ObjectId.isValid(val), {
+      message: 'Invalid MongoDB ObjectId format',
+    }),
 });
