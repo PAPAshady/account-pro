@@ -1,10 +1,9 @@
 import ProductCard from '@/components/modules/Cards/ProductCard/ProductCard';
 import PrimaryButton from '@modules/PrimaryButton/PrimaryButton';
 import Particle from '@modules/Particle/Particle';
-import { BASE_URL } from '@/constants';
 
 export default async function Services() {
-  const res = await fetch(`${BASE_URL}/api/products`, {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/products`, {
     cache: 'force-cache',
   });
   const products = await res.json();
