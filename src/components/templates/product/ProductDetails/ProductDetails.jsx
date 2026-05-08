@@ -18,8 +18,12 @@ export default function ProductDetails({
   images,
 }) {
   const addToCart = async () => {
-    const res = await api.post('/api/cart', { _id });
-    console.log(res);
+    try {
+      const res = await api.post('/api/cart', { _id });
+      if (res.status === 201) console.log('Added to cart => ', res.data);
+    } catch (err) {
+      console.log('Failed to add to cart => ', err);
+    }
   };
 
   return (

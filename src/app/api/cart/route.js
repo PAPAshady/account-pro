@@ -65,6 +65,25 @@ export async function POST(req) {
 
     return Response.json(updatedCart, { status: 201 });
   } catch (error) {
+    console.error('Failed to add to cart => ', error);
+    return Response.json({ message: 'Failed to add to cart.' }, { status: 500 });
+  }
+}
+
+export async function GET() {
+  try {
+    await connectToDB();
+    const cookiesStore = await cookies();
+    const userRes = await fetch(`${BASE_URL}/api/auth/me`, { headers: { cookie: cookiesStore } });
+    if (userRes.status !== 200) return Response.json({ message: 'Login first' }, { status: 401 });
+
+    const { _id: userId } = await userRes.json();
+
+    let cart = await cartModel.findOne({ user: userId }, '-__v').populate('items.product');
+    if (!cart) cart = await cartModel.create({ user: userId, items: [] });
+
+    return Response.json(cart, { status: 200 });
+  } catch (error) {
     console.error('Failed to get cart => ', error);
     return Response.json({ message: 'Failed to get cart.' }, { status: 500 });
   }

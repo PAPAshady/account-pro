@@ -2,7 +2,7 @@ import Image from 'next/image';
 
 import { FaRegTrashAlt } from 'react-icons/fa';
 
-export default function CartDropDownItem() {
+export default function CartDropDownItem({ title, price, image, quantity }) {
   return (
     <div className="relative flex items-center gap-6 rounded-2xl rounded-tl-sm bg-[#191919CC] p-3.75">
       <button className="bg-primary absolute top-1/2 -right-4 grid size-5.5 -translate-y-1/2 cursor-pointer place-content-center rounded-lg text-[#191919] hover:bg-[#07dfa9]">
@@ -14,14 +14,14 @@ export default function CartDropDownItem() {
             alt="spotify"
             width={300}
             height={300}
-            src="/images/services/spotify.png"
+            src={image}
             className="size-full object-cover"
           />
         </div>
         <div className="grow space-y-0.5">
-          <p>اکانت پرمیوم یوتیوب یک ماهه</p>
+          <p>{title}</p>
           <p className="text-primary space-x-1">
-            <span className="text-lg text-white">۱۰۰,۰۰۰</span>
+            <span className="text-lg text-white">{price.toLocaleString()}</span>
             <span className="text-sm">تومان</span>
           </p>
         </div>
@@ -31,7 +31,7 @@ export default function CartDropDownItem() {
           +
         </button>
         <span className="bg-foreground grid place-content-start px-3 py-2 text-center text-xl font-bold">
-          1
+          {quantity}
         </span>
         <button className="bg-primary grid h-8.75 w-5 cursor-pointer place-content-center rounded-lg rounded-tr-sm text-2xl text-[#191919]">
           -
