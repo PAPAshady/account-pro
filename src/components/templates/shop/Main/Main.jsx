@@ -2,10 +2,12 @@ import SearchBox from '@modules/SearchBox/SearchBox';
 import ProductCard from '@modules/Cards/ProductCard/ProductCard';
 import FiltersSlider from '@templates/shop/FiltersSlider/FiltersSlider';
 import { BASE_URL } from '@/constants';
+import { getFilteredProducts } from '@/services/products';
 
 export default async function Main({ params }) {
   const searchParams = new URLSearchParams();
 
+  // normalize search params
   Object.entries(params).forEach(([key, value]) => {
     if (Array.isArray(value)) {
       value.forEach((v) => searchParams.append(key, v));
@@ -14,10 +16,7 @@ export default async function Main({ params }) {
     }
   });
 
-  const res = await fetch(`${BASE_URL}/api/products?${searchParams.toString()}`, {
-    cache: 'force-cache',
-  });
-  const products = await res.json();
+  const products = await getFilteredProducts(searchParams);
   return (
     <main className="space-y-6 min-[880px]:w-[70%] xl:w-[75%]">
       <SearchBox />

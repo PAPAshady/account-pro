@@ -3,6 +3,7 @@ import { validateUser } from '@/utils/auth';
 import { categorySchema } from '@/schemas/category.schema';
 import categoriesModel from '@/models/Category';
 import { saveFileToDisk } from '@/utils/file';
+import { getCategories } from '@/services/categories';
 
 export async function POST(req) {
   try {
@@ -44,8 +45,7 @@ export async function POST(req) {
 
 export async function GET() {
   try {
-    await connectToDB();
-    const categories = await categoriesModel.find({}, '-__v');
+    const categories = await getCategories();
     return Response.json(categories);
   } catch (error) {
     console.error('Failed to get categories => ', error);

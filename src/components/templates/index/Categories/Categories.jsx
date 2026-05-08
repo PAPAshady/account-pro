@@ -1,12 +1,10 @@
 import PrimaryButton from '@modules/PrimaryButton/PrimaryButton';
 import CategoryCard from '@modules/Cards/CategoryCard/CategoryCard';
 import Particle from '@modules/Particle/Particle';
+import { getCategories } from '@/services/categories';
 
 export default async function Categories() {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/categories`, {
-    cache: 'force-cache',
-  });
-  const categories = await res.json();
+  const categories = await getCategories();
   return (
     <div className="relative">
       <Particle className="top-45 right-0 hidden size-50 opacity-50 blur-[80px] sm:block lg:top-25" />

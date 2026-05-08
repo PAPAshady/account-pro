@@ -1,12 +1,10 @@
 import ProductCard from '@/components/modules/Cards/ProductCard/ProductCard';
 import PrimaryButton from '@modules/PrimaryButton/PrimaryButton';
 import Particle from '@modules/Particle/Particle';
+import { getCachedProducts } from '@/services/products';
 
 export default async function Services() {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/products`, {
-    cache: 'force-cache',
-  });
-  const products = await res.json();
+  const products = await getCachedProducts();
   return (
     <div className="relative">
       <Particle className="-bottom-26 left-0 z-2 size-44 opacity-60 blur-[70px] sm:-bottom-46 sm:size-68 sm:opacity-40 sm:blur-[80px] lg:opacity-30" />
