@@ -18,3 +18,5 @@ export default async function Shop({ searchParams }) {
 export const metadata = {
   title: 'فروشگاه - اکانت پرو',
 };
+
+export const dynamic = 'force-dynamic';
