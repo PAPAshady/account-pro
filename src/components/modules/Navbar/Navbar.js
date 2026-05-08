@@ -14,7 +14,7 @@ export default function Navbar() {
     <nav className="bg-foreground rounded-box-rtl grow-2 overflow-visible">
       <ul className="flex items-center">
         {navLinks.map((navLink) => (
-          <li className="group relative z-1 grow" key={navLink.id}>
+          <li className="group relative z-2 grow" key={navLink.id}>
             <Link
               className={clsx(
                 'flex items-center justify-center gap-2 px-2.5 pt-2.5 pb-3 text-white transition-colors duration-300 hover:text-[#ccc]',
