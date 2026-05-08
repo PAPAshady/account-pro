@@ -9,7 +9,7 @@ export default function ProductCard({
   title,
   price,
   region,
-  images,
+  image,
   slug,
   hasLikeButton,
   isFavorite,
@@ -28,7 +28,7 @@ export default function ProductCard({
       <div className="relative z-1 -mt-13 flex justify-center">
         <Image
           alt="Spotify"
-          src={images[0].url}
+          src={image}
           width={300}
           height={300}
           className="size-18.75 grayscale-100 transition-all duration-300 group-hover:grayscale-0 lg:size-20"

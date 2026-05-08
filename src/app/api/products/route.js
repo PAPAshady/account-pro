@@ -2,6 +2,7 @@ import { connectToDB } from '@/utils/db';
 import { productSchema } from '@/schemas/product.schema';
 import { validateUser } from '@/utils/auth';
 import model from '@/models/Product';
+import categoriesModel from '@/models/Category';
 import { saveFileToDisk } from '@/utils/file';
 
 export async function POST(req) {
@@ -65,10 +66,21 @@ export async function POST(req) {
   }
 }
 
-export async function GET() {
+export async function GET(req) {
   try {
     await connectToDB();
-    const products = await model.find({}, '-__v').populate('category', '-__v');
+    const params = req.nextUrl.searchParams;
+    const categoryParams = params.getAll('cat');
+
+    // Build filter dynamically
+    const filters = {};
+
+    if (categoryParams.length) {
+      const categories = await categoriesModel.find({ slug: { $in: categoryParams } }, '_id');
+      const categoryIds = categories.map((cat) => cat.id);
+      if (categoryIds.length) filters.category = { $in: categoryIds };
+    }
+    const products = await model.find(filters, '-__v').populate('category', '-__v');
     return Response.json(products);
   } catch (err) {
     console.error('Error fetching products => ', err);

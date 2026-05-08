@@ -5,3 +5,5 @@ export const USER_ROLES = {
   ADMIN: 'admin',
   SUPER_ADMIN: 'super_admin',
 };
+
+export const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
