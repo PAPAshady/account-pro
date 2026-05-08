@@ -23,6 +23,7 @@ export const getFilteredProducts = async (searchParams) => {
   try {
     await connectToDB();
     const categoryParams = searchParams.getAll('cat');
+    const searchParam = searchParams.get('search')?.trim();
 
     // Build filter dynamically
     const filters = {};
@@ -32,7 +33,18 @@ export const getFilteredProducts = async (searchParams) => {
       const categoryIds = categories.map((cat) => cat.id);
       if (categoryIds.length) filters.category = { $in: categoryIds };
     }
+
+    if (searchParam) {
+      // prevent regex injection
+      const safeSearchParam = searchParam.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+      filters.$or = [
+        { title: { $regex: safeSearchParam, $options: 'i' } },
+        { latinTitle: { $regex: safeSearchParam, $options: 'i' } },
+      ];
+    }
+
     const products = await productsModel.find(filters, '-__v').lean().populate('category', '-__v');
+
     return JSON.parse(JSON.stringify(products));
   } catch (err) {
     console.error('Error fetching products => ', err);

@@ -1,7 +1,6 @@
-import SearchBox from '@modules/SearchBox/SearchBox';
+import ProductsPageSearchBox from '@templates/shop/ProductsPageSearchBox/ProductsPageSearchBox';
 import ProductCard from '@modules/Cards/ProductCard/ProductCard';
 import FiltersSlider from '@templates/shop/FiltersSlider/FiltersSlider';
-import { BASE_URL } from '@/constants';
 import { getFilteredProducts } from '@/services/products';
 
 export default async function Main({ params }) {
@@ -19,7 +18,7 @@ export default async function Main({ params }) {
   const products = await getFilteredProducts(searchParams);
   return (
     <main className="space-y-6 min-[880px]:w-[70%] xl:w-[75%]">
-      <SearchBox />
+      <ProductsPageSearchBox />
       <FiltersSlider />
       <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 sm:gap-x-4 xl:grid-cols-3 xl:gap-6">
         {products?.map((product) => (
