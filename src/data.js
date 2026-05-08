@@ -22,10 +22,34 @@ import {
 } from 'react-icons/fa';
 
 export const services = [
-  { id: 1, title: 'لایسنس ویندوز ۱۱', price: '۹۰,۰۰۰', region: 'همه ریجن ها' },
-  { id: 2, title: 'اکانت پرمیوم یوتیوب', price: '۱۰۰,۰۰۰', region: 'همه ریجن ها' },
-  { id: 3, title: 'اکانت پرمیوم اسپاتیفای یک ماهه', price: '۲۰۰,۰۰۰', region: 'ریجن آمریکا' },
-  { id: 4, title: 'اکانت پرمیوم تلگرام یک ساله', price: '۱۲۰,۰۰۰', region: 'همه ریجن ها' },
+  {
+    id: 1,
+    title: 'لایسنس ویندوز ۱۱',
+    price: '۹۰,۰۰۰',
+    region: 'همه ریجن ها',
+    image: '/images/apple.png',
+  },
+  {
+    id: 2,
+    title: 'اکانت پرمیوم یوتیوب',
+    price: '۱۰۰,۰۰۰',
+    region: 'همه ریجن ها',
+    image: '/images/apple.png',
+  },
+  {
+    id: 3,
+    title: 'اکانت پرمیوم اسپاتیفای یک ماهه',
+    price: '۲۰۰,۰۰۰',
+    region: 'ریجن آمریکا',
+    image: '/images/apple.png',
+  },
+  {
+    id: 4,
+    title: 'اکانت پرمیوم تلگرام یک ساله',
+    price: '۱۲۰,۰۰۰',
+    region: 'همه ریجن ها',
+    image: '/images/apple.png',
+  },
 ];
 
 export const filters = [
