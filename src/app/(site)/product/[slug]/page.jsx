@@ -8,15 +8,21 @@ import ActivationMethods from '@templates/product/ActivationMethods/ActivationMe
 import ImportantPoints from '@templates/product/ImportantPoints/ImportantPoints';
 import Faq from '@templates/product/Faq/Faq';
 import Comments from '@templates/product/Comments/Comments';
+import { getProduct } from '@/services/products';
 
 export default async function Product({ params }) {
   const { slug } = await params;
-  const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/products/${slug}`);
-  if (res.status === 404) redirect('/404');
-  const product = await res.json();
+  const { data: product } = await getProduct(slug);
   return (
     <div className="container space-y-16 lg:space-y-24">
-      <ProductDetails {...product} />
+      <ProductDetails
+        _id={product._id}
+        title={product.title}
+        latinTitle={product.latinTitle}
+        shortDescription={product.shortDescription}
+        price={product.price}
+        images={product.images}
+      />
       <Navigation />
       <Introduction {...product} />
       <Plans />

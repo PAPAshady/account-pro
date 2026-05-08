@@ -51,3 +51,15 @@ export const getFilteredProducts = async (searchParams) => {
     return null;
   }
 };
+
+export const getProduct = async (slug) => {
+  try {
+    await connectToDB();
+    const product = await productsModel.findOne({ slug }, '-__v').lean().populate();
+    if (!product) return { data: null, status: 404 };
+    return JSON.parse(JSON.stringify({ data: product, status: 200 }));
+  } catch (error) {
+    console.error('Failed to fetch product => ', error);
+    return { data: null, status: 500 };
+  }
+};

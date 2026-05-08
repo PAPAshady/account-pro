@@ -19,6 +19,9 @@ import {
   FaPencilAlt,
   FaFoursquare,
   FaPuzzlePiece,
+  FaCalendar,
+  FaPhotoVideo,
+  FaChartLine,
 } from 'react-icons/fa';
 
 export const services = [
@@ -567,4 +570,46 @@ export const navLinks = [
   { id: 5, title: 'وبلاگ', href: '/blog' },
   { id: 3, title: 'درباره ما', href: '/about-us' },
   { id: 6, title: 'تماس با ما', href: '/contact-us' },
+];
+
+export const productInputs = [
+  {
+    id: 1,
+    label: 'مدت زمان',
+    icon: <FaCalendar />,
+    options: [
+      { value: '1-year', title: 'یکساله' },
+      { value: '3-months', title: 'سه ماهه' },
+      { value: '1-month', title: 'یکماهه' },
+    ],
+  },
+  {
+    id: 2,
+    label: 'نوع حساب کاربری',
+    icon: <FaUser />,
+    options: [
+      { value: 'new', title: 'اکانت جدید' },
+      { value: 'current', title: 'اکانت موجود' },
+    ],
+  },
+  {
+    id: 3,
+    label: 'منطقه/کشور',
+    icon: <FaPhotoVideo />,
+    options: [
+      { value: 'turkey', title: 'ترکیه' },
+      { value: 'usa', title: 'آمریکا' },
+      { value: 'ukraine', title: 'اوکراین' },
+    ],
+  },
+  {
+    id: 4,
+    label: 'پلن ها',
+    icon: <FaChartLine />,
+    options: [
+      { value: 'individual', title: 'پلن فردی' },
+      { value: 'double', title: 'پلن دوگانه' },
+      { value: 'family', title: 'پلن خانوادگی' },
+    ],
+  },
 ];

@@ -1,61 +1,27 @@
+'use client';
 import Image from 'next/image';
 
-import {
-  FaCalendar,
-  FaUser,
-  FaPhotoVideo,
-  FaChartLine,
-  FaRegHeart,
-  FaShareAlt,
-} from 'react-icons/fa';
+import { FaRegHeart, FaShareAlt } from 'react-icons/fa';
 
 import SelectInput from '@modules/SelectInput/SelectInput';
 import PrimaryButton from '@modules/PrimaryButton/PrimaryButton';
 import Particle from '@modules/Particle/Particle';
+import { productInputs } from '@/data';
+import api from '@/axiosInstance';
 
-const inputs = [
-  {
-    id: 1,
-    label: 'مدت زمان',
-    icon: <FaCalendar />,
-    options: [
-      { value: '1-year', title: 'یکساله' },
-      { value: '3-months', title: 'سه ماهه' },
-      { value: '1-month', title: 'یکماهه' },
-    ],
-  },
-  {
-    id: 2,
-    label: 'نوع حساب کاربری',
-    icon: <FaUser />,
-    options: [
-      { value: 'new', title: 'اکانت جدید' },
-      { value: 'current', title: 'اکانت موجود' },
-    ],
-  },
-  {
-    id: 3,
-    label: 'منطقه/کشور',
-    icon: <FaPhotoVideo />,
-    options: [
-      { value: 'turkey', title: 'ترکیه' },
-      { value: 'usa', title: 'آمریکا' },
-      { value: 'ukraine', title: 'اوکراین' },
-    ],
-  },
-  {
-    id: 4,
-    label: 'پلن ها',
-    icon: <FaChartLine />,
-    options: [
-      { value: 'individual', title: 'پلن فردی' },
-      { value: 'double', title: 'پلن دوگانه' },
-      { value: 'family', title: 'پلن خانوادگی' },
-    ],
-  },
-];
+export default function ProductDetails({
+  _id,
+  title,
+  latinTitle,
+  shortDescription,
+  price,
+  images,
+}) {
+  const addToCart = async () => {
+    const res = await api.post('/api/cart', { _id });
+    console.log(res);
+  };
 
-export default function ProductDetails({ title, latinTitle, shortDescription, price, images }) {
   return (
     <div className="flex flex-col items-center gap-3 min-[900px]:flex-row md:gap-6 lg:gap-10">
       <div className="w-full space-y-6 min-[900px]:w-1/2">
@@ -68,7 +34,7 @@ export default function ProductDetails({ title, latinTitle, shortDescription, pr
           </p>
         </div>
         <div className="grid grid-cols-2 gap-x-2 gap-y-6 min-[380px]:gap-x-4">
-          {inputs.map(({ id, ...input }) => (
+          {productInputs.map(({ id, ...input }) => (
             <SelectInput key={id} {...input} />
           ))}
         </div>
@@ -78,7 +44,7 @@ export default function ProductDetails({ title, latinTitle, shortDescription, pr
               <span>مبلغ قابل پرداخت :</span>
               <p className="text-[32px]">
                 <bdi>
-                  {price.toLocaleString()}
+                  {price}
                   <span className="text-primary ms-2 text-lg">تومان</span>
                 </bdi>
               </p>
@@ -113,6 +79,7 @@ export default function ProductDetails({ title, latinTitle, shortDescription, pr
             <PrimaryButton
               className="bg-primary w-full font-bold text-[#191919] hover:bg-[#0dbe92]! hover:bg-none"
               dir="ltr"
+              onClick={addToCart}
             >
               افزودن به سبد خرید
             </PrimaryButton>
