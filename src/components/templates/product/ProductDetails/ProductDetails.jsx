@@ -67,7 +67,7 @@ export default function ProductDetails({
             <PrimaryButton
               className="bg-primary w-full font-bold text-[#191919] hover:bg-[#0dbe92]! hover:bg-none"
               dir="ltr"
-              onClick={() => mutate(_id)}
+              onClick={() => mutate({ _id, quantity })}
             >
               افزودن به سبد خرید
             </PrimaryButton>

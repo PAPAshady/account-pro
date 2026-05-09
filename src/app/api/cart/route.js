@@ -1,10 +1,9 @@
 import { cookies } from 'next/headers';
 
-import { isValidObjectId } from 'mongoose';
-
 import { connectToDB } from '@/utils/db';
 import cartModel from '@/models/Cart';
 import { BASE_URL } from '@/constants';
+import { cartItemsSchema } from '@/schemas/cartItem.schema';
 
 export async function POST(req) {
   try {
@@ -15,47 +14,37 @@ export async function POST(req) {
 
     const { _id: userId } = await userRes.json();
 
-    const { productId } = await req.json();
-    const isValidId = isValidObjectId(productId);
-    if (!isValidId) return Response.json({ message: 'Invalid Product Id' }, { status: 400 });
+    const product = await req.json();
+
+    const validated = cartItemsSchema.safeParse(product);
+
+    if (!validated.success) {
+      const errors = validated.error.flatten().fieldErrors;
+      return Response.json({ message: 'Invalid quanitity', errors }, { status: 400 });
+    }
 
     const cart = await cartModel.findOne({ user: userId }, '-__v').populate('items.product');
 
     const productAlreadyExists = cart.items.find(
-      (item) => item.product._id.toString() === productId
+      (item) => item.product._id.toString() === product.id
     );
 
-    let updatedCart = null;
-
     if (productAlreadyExists) {
-      // Increment existing item's quantity
-      updatedCart = await cartModel
-        .findOneAndUpdate(
-          {
-            user: userId,
-            'items.product': productId, // Find cart containing this product
-          },
-          {
-            $inc: { 'items.$.quantity': 1 }, // Increment quantity by 1
-            // $ refers to the matched item in the array
-          },
-          { new: true }
-        )
-        .populate('user items.product');
-    } else {
-      // Push new item to array
-      updatedCart = await cartModel
-        .findOneAndUpdate(
-          { user: userId },
-          {
-            $push: {
-              items: { product: productId, quantity: 1 },
-            },
-          },
-          { new: true }
-        )
-        .populate('user items.product');
+      return Response.json({ message: 'محصول در سبد شما موجود است.' }, { status: 409 });
     }
+
+    // Push new item to array
+    const updatedCart = await cartModel
+      .findOneAndUpdate(
+        { user: userId },
+        {
+          $push: {
+            items: { product: product.id, quantity: product.quantity },
+          },
+        },
+        { new: true }
+      )
+      .populate('user items.product');
 
     return Response.json(updatedCart, { status: 201 });
   } catch (error) {

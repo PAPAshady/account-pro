@@ -36,7 +36,7 @@ export const productSchema = z.object({
   }),
   category: z
     .string({ message: 'categoryId Must be a string.' })
-    .transform((val) => Types.ObjectId.isValid(val), {
+    .refine((val) => Types.ObjectId.isValid(val), {
       message: 'Invalid MongoDB ObjectId format',
     }),
 });
