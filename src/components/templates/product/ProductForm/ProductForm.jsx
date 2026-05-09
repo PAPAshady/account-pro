@@ -10,7 +10,7 @@ import { productInputs } from '@/data';
 import { addToCartMutationOptions } from '@/queries/cart';
 import Counter from '@modules/Counter/Counter';
 
-export default function ProductForm({ price }) {
+export default function ProductForm({ id, price }) {
   const [quantity, setQuantity] = useState(1);
   const { mutate } = useMutation(addToCartMutationOptions());
   return (
@@ -48,7 +48,7 @@ export default function ProductForm({ price }) {
           <PrimaryButton
             className="bg-primary w-full font-bold text-[#191919] hover:bg-[#0dbe92]! hover:bg-none"
             dir="ltr"
-            onClick={() => mutate({ _id, quantity })}
+            onClick={() => mutate({ id, quantity })}
           >
             افزودن به سبد خرید
           </PrimaryButton>

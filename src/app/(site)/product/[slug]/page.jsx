@@ -1,5 +1,3 @@
-import { redirect } from 'next/navigation';
-
 import ProductDetails from '@templates/product/ProductDetails/ProductDetails';
 import Navigation from '@templates/product/Navigation/Navigation';
 import Introduction from '@templates/product/Introduction/Introduction';

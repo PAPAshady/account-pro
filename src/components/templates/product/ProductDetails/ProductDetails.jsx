@@ -3,7 +3,14 @@ import Image from 'next/image';
 import Particle from '@modules/Particle/Particle';
 import ProductForm from '@templates/product/ProductForm/ProductForm';
 
-export default function ProductDetails({ title, latinTitle, shortDescription, price, images }) {
+export default function ProductDetails({
+  _id,
+  title,
+  latinTitle,
+  shortDescription,
+  price,
+  images,
+}) {
   return (
     <div className="flex flex-col items-center gap-3 min-[900px]:flex-row md:gap-6 lg:gap-10">
       <div className="w-full space-y-6 min-[900px]:w-1/2">
@@ -15,7 +22,7 @@ export default function ProductDetails({ title, latinTitle, shortDescription, pr
             همین حالا {title} رو امتحان کن!
           </p>
         </div>
-        <ProductForm price={price} />
+        <ProductForm price={price} id={_id} />
       </div>
       <div className="relative grid w-full grid-cols-2 gap-3 min-[900px]:w-1/2">
         <div className="absolute top-1/2 left-1/2 -translate-1/2 rounded-4xl">
