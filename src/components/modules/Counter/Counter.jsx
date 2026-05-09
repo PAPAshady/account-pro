@@ -23,9 +23,10 @@ export default function Counter({ value = 1, setValue, onIncrement, onDecrement 
       <input
         type="text"
         className="bg-foreground w-11 rounded-lg px-3 py-2 text-center font-bold text-white outline-none"
-        defaultValue={value}
+        value={value}
         max={10}
         min={1}
+        onChange={(e) => setValue(0)}
         readOnly
       />
       <button

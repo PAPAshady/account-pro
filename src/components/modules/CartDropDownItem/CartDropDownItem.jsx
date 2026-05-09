@@ -1,8 +1,12 @@
 import Image from 'next/image';
+import { useState } from 'react';
 
 import { FaRegTrashAlt } from 'react-icons/fa';
+import Counter from '@modules/Counter/Counter';
 
 export default function CartDropDownItem({ title, price, image, quantity }) {
+  const [productQuantity, setProductQuantity] = useState(quantity);
+
   return (
     <div className="relative flex items-center gap-6 rounded-2xl rounded-tl-sm bg-[#191919CC] p-3.75">
       <button className="bg-primary absolute top-1/2 -right-4 grid size-5.5 -translate-y-1/2 cursor-pointer place-content-center rounded-lg text-[#191919] hover:bg-[#07dfa9]">
@@ -26,17 +30,7 @@ export default function CartDropDownItem({ title, price, image, quantity }) {
           </p>
         </div>
       </div>
-      <div className="flex items-center gap-1">
-        <button className="bg-primary grid h-8.75 w-5 cursor-pointer place-content-center rounded-lg rounded-tl-sm text-2xl text-[#191919]">
-          +
-        </button>
-        <span className="bg-foreground grid place-content-start px-3 py-2 text-center text-xl font-bold">
-          {quantity}
-        </span>
-        <button className="bg-primary grid h-8.75 w-5 cursor-pointer place-content-center rounded-lg rounded-tr-sm text-2xl text-[#191919]">
-          -
-        </button>
-      </div>
+      <Counter value={productQuantity} setValue={setProductQuantity} />
     </div>
   );
 }
