@@ -1,19 +1,16 @@
-import { cookies } from 'next/headers';
-
 import { connectToDB } from '@/utils/db';
 import cartModel from '@/models/Cart';
-import { BASE_URL } from '@/constants';
 import { cartItemsSchema } from '@/schemas/cartItem.schema';
+import { validateUser } from '@/utils/auth';
 
 export async function POST(req) {
   try {
     await connectToDB();
-    const cookiesStore = await cookies();
-    const userRes = await fetch(`${BASE_URL}/api/auth/me`, { headers: { cookie: cookiesStore } });
-    if (userRes.status !== 200) return Response.json({ message: 'Login first' }, { status: 401 });
+    const userValidationRes = await validateUser();
+    if (userValidationRes.status !== 200)
+      return Response.json({ message: 'Login first' }, { status: 401 });
 
-    const { _id: userId } = await userRes.json();
-
+    const { user } = await userValidationRes.json();
     const product = await req.json();
 
     const validated = cartItemsSchema.safeParse(product);
@@ -23,7 +20,7 @@ export async function POST(req) {
       return Response.json({ message: 'Invalid quanitity', errors }, { status: 400 });
     }
 
-    const cart = await cartModel.findOne({ user: userId }, '-__v').populate('items.product');
+    const cart = await cartModel.findOne({ user: user._id }, '-__v').populate('items.product');
 
     const productAlreadyExists = cart.items.find(
       (item) => item.product._id.toString() === product.id
@@ -36,7 +33,7 @@ export async function POST(req) {
     // Push new item to array
     const updatedCart = await cartModel
       .findOneAndUpdate(
-        { user: userId },
+        { user: user._id },
         {
           $push: {
             items: { product: product.id, quantity: product.quantity },
@@ -56,15 +53,11 @@ export async function POST(req) {
 export async function GET() {
   try {
     await connectToDB();
-    const cookiesStore = await cookies();
-    const userRes = await fetch(`${BASE_URL}/api/auth/me`, { headers: { cookie: cookiesStore } });
-    if (userRes.status !== 200) return Response.json({ message: 'Login first' }, { status: 401 });
-
-    const { _id: userId } = await userRes.json();
-
-    let cart = await cartModel.findOne({ user: userId }, '-__v').populate('items.product');
-    if (!cart) cart = await cartModel.create({ user: userId, items: [] });
-
+    const userValidationRes = await validateUser();
+    if (userValidationRes.status !== 200)
+      return Response.json({ message: 'Login first' }, { status: 401 });
+    const { user } = await userValidationRes.json();
+    const cart = await cartModel.findOne({ user: user._id }, '-__v').populate('items.product');
     return Response.json(cart, { status: 200 });
   } catch (error) {
     console.error('Failed to get cart => ', error);
