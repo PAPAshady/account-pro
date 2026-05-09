@@ -9,3 +9,8 @@ export const addToCart = async (product) => {
   const res = await api.post('/api/cart', product);
   return res.data;
 };
+
+export const removeFromCart = async (productId) => {
+  const res = await api.delete(`/api/cart/${productId}`);
+  return res.data;
+};

@@ -2,14 +2,21 @@ import Image from 'next/image';
 import { useState } from 'react';
 
 import { FaRegTrashAlt } from 'react-icons/fa';
-import Counter from '@modules/Counter/Counter';
+import { useMutation } from '@tanstack/react-query';
 
-export default function CartDropDownItem({ title, price, image, quantity }) {
+import Counter from '@modules/Counter/Counter';
+import { removeFromCartMutationOptions } from '@/queries/cart';
+
+export default function CartDropDownItem({ id, title, price, image, quantity }) {
   const [productQuantity, setProductQuantity] = useState(quantity);
+  const { mutate } = useMutation(removeFromCartMutationOptions());
 
   return (
     <div className="relative flex items-center gap-6 rounded-2xl rounded-tl-sm bg-[#191919CC] p-3.75">
-      <button className="bg-primary absolute top-1/2 -right-4 grid size-5.5 -translate-y-1/2 cursor-pointer place-content-center rounded-lg text-[#191919] hover:bg-[#07dfa9]">
+      <button
+        onClick={() => mutate(id)}
+        className="bg-primary absolute top-1/2 -right-4 grid size-5.5 -translate-y-1/2 cursor-pointer place-content-center rounded-lg text-[#191919] hover:bg-[#07dfa9]"
+      >
         <FaRegTrashAlt className="text-xs" />
       </button>
       <div className="flex grow items-center gap-4">

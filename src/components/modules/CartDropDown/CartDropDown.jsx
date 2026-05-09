@@ -34,6 +34,7 @@ export default function CartDropDown() {
               {data.items.map((item) => (
                 <CartDropDownItem
                   key={item._id}
+                  id={item.product._id}
                   title={item.product.title}
                   price={item.product.price}
                   image={item.product.images[0].url}
