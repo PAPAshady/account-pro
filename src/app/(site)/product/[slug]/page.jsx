@@ -15,14 +15,7 @@ export default async function Product({ params }) {
   const { data: product } = await getProduct(slug);
   return (
     <div className="container space-y-16 lg:space-y-24">
-      <ProductDetails
-        _id={product._id}
-        title={product.title}
-        latinTitle={product.latinTitle}
-        shortDescription={product.shortDescription}
-        price={product.price}
-        images={product.images}
-      />
+      <ProductDetails {...product} />
       <Navigation />
       <Introduction {...product} />
       <Plans />
