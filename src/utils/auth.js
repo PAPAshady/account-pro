@@ -41,7 +41,7 @@ export const validateUser = async ({ checkIsAdmin = false } = {}) => {
 
     if (checkIsAdmin) {
       const adminRoles = [USER_ROLES.ADMIN, USER_ROLES.SUPER_ADMIN];
-      if (adminRoles.includes(user.role)) return Response.json(true);
+      if (adminRoles.includes(user.role)) return Response.json({ validated: true, user });
       return Response.json({ validated: false, user }, { status: 403 });
     }
 
