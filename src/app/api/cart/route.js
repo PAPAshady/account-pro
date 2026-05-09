@@ -39,7 +39,7 @@ export async function POST(req) {
             items: { product: product.id, quantity: product.quantity },
           },
         },
-        { new: true }
+        { returnDocument: 'after' }
       )
       .populate('user items.product');
 
