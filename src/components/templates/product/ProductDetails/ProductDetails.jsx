@@ -1,5 +1,6 @@
 'use client';
 import Image from 'next/image';
+import { useState } from 'react';
 
 import { FaRegHeart, FaShareAlt } from 'react-icons/fa';
 import { useMutation } from '@tanstack/react-query';
@@ -9,6 +10,7 @@ import PrimaryButton from '@modules/PrimaryButton/PrimaryButton';
 import Particle from '@modules/Particle/Particle';
 import { productInputs } from '@/data';
 import { addToCartMutationOptions } from '@/queries/cart';
+import Counter from '@modules/Counter/Counter';
 
 export default function ProductDetails({
   _id,
@@ -18,6 +20,7 @@ export default function ProductDetails({
   price,
   images,
 }) {
+  const [quantity, setQuantity] = useState(1);
   const { mutate } = useMutation(addToCartMutationOptions());
 
   return (
@@ -49,20 +52,7 @@ export default function ProductDetails({
             </div>
             <div className="flex w-full flex-col items-center gap-2.5 rounded-2xl rounded-tr-lg bg-[#191919] p-2.5 text-[#ddd]">
               <span>تعداد :‌</span>
-              <div className="text-blackColor flex items-center gap-2">
-                <button className="bg-primary rounded-box-rtl flex cursor-pointer items-center justify-center px-2 py-1 text-lg">
-                  +
-                </button>
-                <input
-                  type="text"
-                  className="bg-foreground w-10 rounded-lg px-3 py-2 text-center font-bold text-white outline-none"
-                  defaultValue={1}
-                  maxLength={2}
-                />
-                <button className="bg-primary rounded-box-ltr flex cursor-pointer items-center justify-center px-2 py-1 text-lg">
-                  -
-                </button>
-              </div>
+              <Counter value={quantity} setValue={setQuantity} />
             </div>
             <div className="bg-foreground inline-flex max-w-max flex-col items-center justify-center gap-4 rounded-2xl rounded-tr-lg p-2.5 min-[900px]:hidden lg:inline-flex">
               <button className="bg-box hover:text-primary flex size-8.75 cursor-pointer items-center justify-center rounded-lg rounded-tr-sm text-2xl transition-colors duration-300">
