@@ -6,6 +6,7 @@ import { connectToDB } from '@/utils/db';
 import { hashPassword } from '@/utils/auth';
 import { generateAccessToken } from '@/utils/auth';
 import { ACCESS_TOKEN_NAME, USER_ROLES } from '@/constants';
+import cartModel from '@/models/Cart';
 
 export async function POST(req) {
   try {
@@ -35,6 +36,7 @@ export async function POST(req) {
 
     const hashed = hashPassword(data.password);
     const user = await model.create({ ...data, role: USER_ROLES.USER, password: hashed });
+    await cartModel.create({ user: user._id, items: [] }); // create a cart for the new user
     const accessToken = generateAccessToken({ email: data.email });
 
     // make sure to NOT send password in the response.

@@ -2,12 +2,13 @@
 import Image from 'next/image';
 
 import { FaRegHeart, FaShareAlt } from 'react-icons/fa';
+import { useMutation } from '@tanstack/react-query';
 
 import SelectInput from '@modules/SelectInput/SelectInput';
 import PrimaryButton from '@modules/PrimaryButton/PrimaryButton';
 import Particle from '@modules/Particle/Particle';
 import { productInputs } from '@/data';
-import api from '@/axiosInstance';
+import { addToCartMutationOptions } from '@/queries/cart';
 
 export default function ProductDetails({
   _id,
@@ -17,14 +18,7 @@ export default function ProductDetails({
   price,
   images,
 }) {
-  const addToCart = async () => {
-    try {
-      const res = await api.post('/api/cart', { _id });
-      if (res.status === 201) console.log('Added to cart => ', res.data);
-    } catch (err) {
-      console.log('Failed to add to cart => ', err);
-    }
-  };
+  const { mutate } = useMutation(addToCartMutationOptions());
 
   return (
     <div className="flex flex-col items-center gap-3 min-[900px]:flex-row md:gap-6 lg:gap-10">
@@ -83,7 +77,7 @@ export default function ProductDetails({
             <PrimaryButton
               className="bg-primary w-full font-bold text-[#191919] hover:bg-[#0dbe92]! hover:bg-none"
               dir="ltr"
-              onClick={addToCart}
+              onClick={() => mutate(_id)}
             >
               افزودن به سبد خرید
             </PrimaryButton>

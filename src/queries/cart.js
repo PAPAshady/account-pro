@@ -1,9 +1,17 @@
-import { queryOptions } from '@tanstack/react-query';
+import { queryOptions, mutationOptions } from '@tanstack/react-query';
 
-import { getCartItems } from '@/services/cart';
+import { getCart, addToCart } from '@/services/cart';
+import queryClient from '@/queryClient';
 
-export const getCartItemsQueryOptions = () =>
+export const getCartQueryOptions = () =>
   queryOptions({
     queryKey: ['cart'],
-    queryFn: getCartItems,
+    queryFn: getCart,
+  });
+
+export const addToCartMutationOptions = () =>
+  mutationOptions({
+    mutationKey: ['cart'],
+    mutationFn: addToCart,
+    onSuccess: () => queryClient.invalidateQueries({ queryKey: ['cart'] }),
   });

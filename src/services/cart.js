@@ -1,6 +1,11 @@
 import api from '@/axiosInstance';
 
-export const getCartItems = async () => {
+export const getCart = async () => {
   const cart = await api.get('api/cart');
-  return cart.data?.items;
+  return cart.data;
+};
+
+export const addToCart = async (productId) => {
+  const res = await api.post('/api/cart', { productId });
+  return res.data;
 };

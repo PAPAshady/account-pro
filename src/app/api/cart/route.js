@@ -15,17 +15,11 @@ export async function POST(req) {
 
     const { _id: userId } = await userRes.json();
 
-    const { _id: productId } = await req.json();
+    const { productId } = await req.json();
     const isValidId = isValidObjectId(productId);
     if (!isValidId) return Response.json({ message: 'Invalid Product Id' }, { status: 400 });
 
-    let cart = await cartModel.findOne({ user: userId }, '-__v').populate('items.product');
-
-    if (!cart) {
-      cart = await cartModel.create({ user: userId, items: [{ product: productId, quantity: 1 }] });
-      const populatedCart = await cart.populate('user items.product');
-      return Response.json(populatedCart, { status: 201 });
-    }
+    const cart = await cartModel.findOne({ user: userId }, '-__v').populate('items.product');
 
     const productAlreadyExists = cart.items.find(
       (item) => item.product._id.toString() === productId
