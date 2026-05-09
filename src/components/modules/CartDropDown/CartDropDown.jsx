@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { Root, Trigger, Portal, Content } from '@radix-ui/react-dropdown-menu';
 import { FaShoppingCart } from 'react-icons/fa';
 import { useQuery } from '@tanstack/react-query';
+import clsx from 'clsx';
 
 import PrimaryButton from '@modules/PrimaryButton/PrimaryButton';
 import CartDropDownItem from '@modules/CartDropDownItem/CartDropDownItem';
@@ -14,6 +15,7 @@ export default function CartDropDown() {
   const user = useAuth((state) => state.user);
   const { data } = useQuery(getCartQueryOptions());
   const hasItems = !!data?.items.length;
+  const isScrollable = data?.items.length > 2;
 
   return (
     <Root open={open} onOpenChange={setOpen}>
@@ -27,20 +29,25 @@ export default function CartDropDown() {
           align="end"
           dir="rtl"
           sideOffset={10}
-          className="data-[state=closed]:animate-slide-out data-[state=open]:animate-slide-in flex w-90.5 flex-col rounded-3xl rounded-tr-lg bg-[#252525] p-2"
+          className={clsx(
+            'data-[state=closed]:animate-slide-out data-[state=open]:animate-slide-in flex flex-col rounded-3xl rounded-tr-lg bg-[#252525] px-2 py-3',
+            isScrollable ? 'w-95' : 'w-90'
+          )}
         >
           {user && hasItems ? (
-            <div className="mb-4 flex grow flex-col gap-2">
-              {data.items.map((item) => (
-                <CartDropDownItem
-                  key={item._id}
-                  id={item.product._id}
-                  title={item.product.title}
-                  price={item.product.price}
-                  image={item.product.images[0].url}
-                  quantity={item.quantity}
-                />
-              ))}
+            <div className={clsx('max-h-65', isScrollable && 'overflow-y-auto')}>
+              <div className={clsx('mb-4 flex grow flex-col gap-2', isScrollable && 'ps-4 pe-2')}>
+                {data.items.map((item) => (
+                  <CartDropDownItem
+                    key={item._id}
+                    id={item.product._id}
+                    title={item.product.title}
+                    price={item.product.price}
+                    image={item.product.images[0].url}
+                    quantity={item.quantity}
+                  />
+                ))}
+              </div>
             </div>
           ) : (
             <p className="p-1">{!user ? 'لطفا ابتدا وارد شوید.' : 'سبد خرید شما خالیست!'}</p>
