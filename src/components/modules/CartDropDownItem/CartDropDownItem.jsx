@@ -12,7 +12,7 @@ export default function CartDropDownItem({ id, title, price, image, quantity }) 
   const { mutate } = useMutation(removeFromCartMutationOptions());
 
   return (
-    <div className="relative flex items-center gap-6 rounded-2xl rounded-tl-sm bg-[#191919CC] p-3.75">
+    <div className="relative flex items-center gap-3 rounded-2xl rounded-tl-sm bg-[#191919CC] p-3.75">
       <button
         onClick={() => mutate(id)}
         className="bg-primary absolute top-1/2 -right-4 grid size-5.5 -translate-y-1/2 cursor-pointer place-content-center rounded-lg text-[#191919] hover:bg-[#07dfa9]"
