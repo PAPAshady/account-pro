@@ -1,7 +1,7 @@
 import ProductCard from '@/components/modules/Cards/ProductCard/ProductCard';
 import PrimaryButton from '@modules/PrimaryButton/PrimaryButton';
 import Particle from '@modules/Particle/Particle';
-import { getCachedProducts } from '@/services/products';
+import { getCachedProducts } from '@/lib/products';
 
 export default async function Services() {
   const products = await getCachedProducts();

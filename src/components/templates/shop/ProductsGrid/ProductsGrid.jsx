@@ -1,5 +1,5 @@
 import ProductCard from '@modules/Cards/ProductCard/ProductCard';
-import { getFilteredProducts } from '@/services/products';
+import { getFilteredProducts } from '@/lib/products';
 
 export default async function ProductsGrid({ params }) {
   const searchParams = new URLSearchParams();

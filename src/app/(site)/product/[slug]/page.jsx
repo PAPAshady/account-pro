@@ -6,7 +6,7 @@ import ActivationMethods from '@templates/product/ActivationMethods/ActivationMe
 import ImportantPoints from '@templates/product/ImportantPoints/ImportantPoints';
 import Faq from '@templates/product/Faq/Faq';
 import Comments from '@templates/product/Comments/Comments';
-import { getProduct } from '@/services/products';
+import { getProduct } from '@/lib/products';
 
 export default async function Product({ params }) {
   const { slug } = await params;

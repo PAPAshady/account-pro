@@ -1,7 +1,13 @@
+'use client';
+import { useQuery } from '@tanstack/react-query';
+
 import PrimaryButton from '@modules/PrimaryButton/PrimaryButton';
 import CartItem from '@modules/CartItem/CartItem';
+import { getCartQueryOptions } from '@/queries/cart';
 
-export default function page() {
+export default function Page() {
+  const { data: cart } = useQuery(getCartQueryOptions());
+
   return (
     <div className="container space-y-8">
       <div>
@@ -10,31 +16,45 @@ export default function page() {
       </div>
       <div className="flex items-start gap-4">
         <main className="bg-foreground flex w-full flex-col gap-3.75 overflow-hidden rounded-3xl rounded-tr-lg lg:w-2/3 xl:w-full">
-          <CartItem />
-          <CartItem />
-          <CartItem />
+          {cart?.items.map((item) => (
+            <CartItem
+              key={item._id}
+              quantity={item.quantity}
+              title={item.product.title}
+              price={item.product.price}
+              image={item.product.images[0].url}
+              slug={item.product.slug}
+              id={item.product._id}
+            />
+          ))}
         </main>
         <aside className="bg-foreground hidden w-1/3 rounded-3xl rounded-tl-lg p-5 lg:block xl:w-95 xl:shrink-0">
           <div>
             <p className="mb-1.25 border-b border-[#FFFFFF1A] pb-2.5">جمع کل سبد خرید</p>
             <div className="flex flex-wrap items-center justify-between gap-2 px-3 py-2.25">
-              <p>قیمت کالا ها (۳)</p>
+              <p>قیمت کالا ها ({cart?.items.length})</p>
               <p className="text-primary grow text-end">
-                <span className="me-1 text-start text-xl text-white">۳۶۰,۰۰۰</span>
+                <span className="me-1 text-start text-xl text-white">
+                  {cart?.totalPrice.toLocaleString()}
+                </span>
                 تومان
               </p>
             </div>
             <div className="flex flex-wrap items-center justify-between gap-2 px-3 py-2.25">
               <p>جمع سبد خرید</p>
               <p className="text-primary grow text-end">
-                <span className="me-1 text-start text-xl text-white">۳۶۰,۰۰۰</span>
+                <span className="me-1 text-start text-xl text-white">
+                  {cart?.totalPrice.toLocaleString()}
+                </span>
                 تومان
               </p>
             </div>
             <div className="text-primary flex flex-wrap items-center justify-between gap-2 px-3 py-2.25">
               <p>سود شما از خرید</p>
               <p className="grow text-end">
-                <span className="me-1 text-start text-xl">(۵٪) ۳۶۰,۰۰۰</span>
+                <span className="me-1 text-start text-xl">
+                  (۵٪) {cart?.totalPrice.toLocaleString()}
+                </span>
                 تومان
               </p>
             </div>
@@ -58,7 +78,7 @@ export default function page() {
           <div className="flex grow flex-col items-end gap-1">
             <span className="text-paragraph text-xs min-[360px]:text-base">جمع کل سبد خرید</span>
             <p className="text-sm min-[360px]:text-lg">
-              <span className="text-primary me-1">۹,۳۲۱,۴۵۶</span>
+              <span className="text-primary me-1">{cart?.totalPrice.toLocaleString()}</span>
               تومان
             </p>
           </div>
