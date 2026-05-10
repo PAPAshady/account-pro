@@ -5,16 +5,36 @@ import { FaRegTrashAlt } from 'react-icons/fa';
 import { useMutation } from '@tanstack/react-query';
 
 import Counter from '@modules/Counter/Counter';
-import { removeFromCartMutationOptions } from '@/queries/cart';
+import { removeFromCartMutationOptions, updateCartAmountMutationOptions } from '@/queries/cart';
+import { CART_ACTION_TYPES } from '@/constants';
 
 export default function CartDropDownItem({ id, title, price, image, quantity }) {
   const [productQuantity, setProductQuantity] = useState(quantity);
-  const { mutate } = useMutation(removeFromCartMutationOptions());
+  const { mutate: removeFromCartHandler } = useMutation(removeFromCartMutationOptions());
+  const { mutateAsync: updateCartAmountHandler, isPending } = useMutation(
+    updateCartAmountMutationOptions()
+  );
+
+  const incrementCartAmount = async () => {
+    await updateCartAmountHandler({
+      productId: id,
+      quantity,
+      actionType: CART_ACTION_TYPES.INCREMENT,
+    });
+  };
+
+  const decrementCartAmount = async () => {
+    await updateCartAmountHandler({
+      productId: id,
+      quantity,
+      actionType: CART_ACTION_TYPES.DECREMENT,
+    });
+  };
 
   return (
     <div className="relative flex items-center gap-3 rounded-2xl rounded-tl-sm bg-[#191919CC] p-3.75">
       <button
-        onClick={() => mutate(id)}
+        onClick={() => removeFromCartHandler(id)}
         className="bg-primary absolute top-1/2 -right-4 grid size-5.5 -translate-y-1/2 cursor-pointer place-content-center rounded-lg text-[#191919] hover:bg-[#07dfa9]"
       >
         <FaRegTrashAlt className="text-xs" />
@@ -37,7 +57,13 @@ export default function CartDropDownItem({ id, title, price, image, quantity }) 
           </p>
         </div>
       </div>
-      <Counter value={productQuantity} setValue={setProductQuantity} />
+      <Counter
+        value={productQuantity}
+        setValue={setProductQuantity}
+        onIncrement={incrementCartAmount}
+        onDecrement={decrementCartAmount}
+        disabled={isPending}
+      />
     </div>
   );
 }

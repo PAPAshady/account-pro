@@ -7,3 +7,13 @@ export const USER_ROLES = {
 };
 
 export const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
+
+export const CART_ACTION_TYPES = {
+  INCREMENT: 'increment',
+  DECREMENT: 'decrement',
+};
+
+export const CART_ITEM_AMOUNT_LIMIT = {
+  MIN: 1,
+  MAX: 99,
+};

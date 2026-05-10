@@ -1,20 +1,20 @@
-export default function Counter({ value = 1, setValue, onIncrement, onDecrement }) {
-  const increment = () => {
-    if (value === 10) return;
+export default function Counter({ value = 1, setValue, onIncrement, onDecrement, disabled }) {
+  const increment = async () => {
+    if (value === 99) return;
+    await onIncrement?.();
     setValue((prev) => prev + 1);
-    onIncrement?.();
   };
 
-  const decrement = () => {
+  const decrement = async () => {
     if (value === 1) return;
+    await onDecrement?.();
     setValue((prev) => prev - 1);
-    onDecrement?.();
   };
 
   return (
     <div className="text-blackColor flex items-center gap-2">
       <button
-        disabled={value === 10}
+        disabled={value === 99 || disabled}
         onClick={increment}
         className="bg-primary disabled:bg-primary/70 rounded-box-rtl flex cursor-pointer items-center justify-center px-2 py-1 text-xl font-semibold disabled:cursor-not-allowed"
       >
@@ -26,11 +26,11 @@ export default function Counter({ value = 1, setValue, onIncrement, onDecrement 
         value={value}
         max={10}
         min={1}
-        onChange={(e) => setValue(0)}
+        onChange={() => setValue(0)}
         readOnly
       />
       <button
-        disabled={value === 1}
+        disabled={value === 1 || disabled}
         onClick={decrement}
         className="bg-primary disabled:bg-primary/70 rounded-box-ltr flex cursor-pointer items-center justify-center px-2 py-1 text-xl font-semibold disabled:cursor-not-allowed"
       >

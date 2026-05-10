@@ -1,9 +1,11 @@
 import { queryOptions, mutationOptions } from '@tanstack/react-query';
 
-import { getCart, addToCart, removeFromCart } from '@/services/cart';
+import { getCart, addToCart, removeFromCart, updateCartAmount } from '@/services/cart';
 import queryClient from '@/queryClient';
 
-const refreshCart = () => queryClient.invalidateQueries({ queryKey: ['cart'] });
+const refreshCart = (data) => {
+  queryClient.setQueryData(['cart'], data);
+};
 
 export const getCartQueryOptions = () =>
   queryOptions({
@@ -22,5 +24,12 @@ export const removeFromCartMutationOptions = () =>
   mutationOptions({
     mutationKey: ['cart'],
     mutationFn: removeFromCart,
+    onSuccess: refreshCart,
+  });
+
+export const updateCartAmountMutationOptions = () =>
+  mutationOptions({
+    mutationKey: ['cart'],
+    mutationFn: updateCartAmount,
     onSuccess: refreshCart,
   });
