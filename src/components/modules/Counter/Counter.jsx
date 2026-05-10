@@ -1,4 +1,14 @@
-export default function Counter({ value = 1, setValue, onIncrement, onDecrement, disabled }) {
+import { FaRegTrashAlt } from 'react-icons/fa';
+
+export default function Counter({
+  value = 1,
+  setValue,
+  onIncrement,
+  onDecrement,
+  disabled,
+  isRemovable,
+  onRemove,
+}) {
   const increment = async () => {
     if (value === 99) return;
     await onIncrement?.();
@@ -16,7 +26,7 @@ export default function Counter({ value = 1, setValue, onIncrement, onDecrement,
       <button
         disabled={value === 99 || disabled}
         onClick={increment}
-        className="bg-primary disabled:bg-primary/70 rounded-box-rtl flex cursor-pointer items-center justify-center px-2 py-1 text-xl font-semibold disabled:cursor-not-allowed"
+        className="bg-primary disabled:bg-primary/70 rounded-box-rtl flex h-9 w-6.5 cursor-pointer items-center justify-center text-xl font-semibold disabled:cursor-not-allowed"
       >
         +
       </button>
@@ -30,11 +40,11 @@ export default function Counter({ value = 1, setValue, onIncrement, onDecrement,
         readOnly
       />
       <button
-        disabled={value === 1 || disabled}
-        onClick={decrement}
-        className="bg-primary disabled:bg-primary/70 rounded-box-ltr flex cursor-pointer items-center justify-center px-2 py-1 text-xl font-semibold disabled:cursor-not-allowed"
+        disabled={!isRemovable && (value === 1 || disabled)}
+        onClick={isRemovable && value === 1 ? onRemove : decrement}
+        className="bg-primary disabled:bg-primary/70 rounded-box-ltr flex h-9 w-6.5 cursor-pointer items-center justify-center text-xl font-semibold disabled:cursor-not-allowed"
       >
-        -
+        {isRemovable && value === 1 ? <FaRegTrashAlt className="text-[13px]" /> : '-'}
       </button>
     </div>
   );

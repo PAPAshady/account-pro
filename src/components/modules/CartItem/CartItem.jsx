@@ -7,14 +7,19 @@ import { FaRegClock, FaPhotoVideo, FaChartLine } from 'react-icons/fa';
 import { useMutation } from '@tanstack/react-query';
 
 import Counter from '@modules/Counter/Counter';
-import { updateCartAmountMutationOptions } from '@/queries/cart';
+import { updateCartAmountMutationOptions, removeFromCartMutationOptions } from '@/queries/cart';
 import { CART_ACTION_TYPES } from '@/constants';
 
 export default function CartItem({ id, title, price, quantity: itemQuanity, image, slug }) {
   const [quantity, setQuantity] = useState(itemQuanity);
-  const { mutateAsync: updateCartAmountHandler, isPending } = useMutation(
+  const { mutateAsync: updateCartAmountHandler, isPending: updateIsPending } = useMutation(
     updateCartAmountMutationOptions()
   );
+  const { mutate: removeFromCartHandler, isPending: removeIsPending } = useMutation(
+    removeFromCartMutationOptions()
+  );
+
+  const isPending = updateIsPending || removeIsPending;
 
   const incrementCartAmount = async () => {
     await updateCartAmountHandler({
@@ -51,7 +56,9 @@ export default function CartItem({ id, title, price, quantity: itemQuanity, imag
             setValue={setQuantity}
             onIncrement={incrementCartAmount}
             onDecrement={decrementCartAmount}
+            onRemove={() => removeFromCartHandler(id)}
             disabled={isPending}
+            isRemovable
           />
         </div>
 
@@ -70,7 +77,9 @@ export default function CartItem({ id, title, price, quantity: itemQuanity, imag
             setValue={setQuantity}
             onIncrement={incrementCartAmount}
             onDecrement={decrementCartAmount}
+            onRemove={() => removeFromCartHandler(id)}
             disabled={isPending}
+            isRemovable
           />
         </div>
 
