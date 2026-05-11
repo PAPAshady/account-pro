@@ -43,6 +43,6 @@ const schema = mongoose.Schema(
   { timestamps: true }
 );
 
-const planModel = mongoose.models.Plan || mongoose.model('Plan', schema);
+const plansModel = mongoose.models.Plan || mongoose.model('Plan', schema);
 
-export default planModel;
+export default plansModel;
