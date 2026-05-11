@@ -1,6 +1,4 @@
-import { productPlans as plans } from '@/data';
-
-export default function Plans() {
+export default function Plans({ plans }) {
   return (
     <div id="plans">
       <div className="relative">
@@ -22,8 +20,8 @@ export default function Plans() {
           </p>
 
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 lg:gap-6">
-            {plans.map(({ id, ...plan }) => (
-              <PremiumCard key={id} {...plan} />
+            {plans.map((plan) => (
+              <PremiumCard key={plan._id} {...plan} />
             ))}
           </div>
         </div>
@@ -32,18 +30,18 @@ export default function Plans() {
   );
 }
 
-function PremiumCard({ title, type, options }) {
+function PremiumCard({ title, latinTitle, specifications }) {
   return (
     <div className="bg-foreground border-foreground hover:border-primary flex flex-col gap-3 rounded-3xl rounded-tr-lg border p-5 transition-colors duration-300">
-      <p className="text-primary">{type}</p>
+      <p className="text-primary">{latinTitle}</p>
       <p className="font-morabba mb-2 text-[28px] font-bold">{title}</p>
       <ul className="flex grow flex-col gap-5">
-        {options.map((option) => (
-          <li className="flex gap-2" key={option.id}>
+        {specifications.map((specification) => (
+          <li className="flex gap-2" key={specification.title}>
             <span className="bg-primary mt-2 size-3 shrink-0 rounded-lg rounded-tr-xs"></span>
             <div>
-              <p className="mb-2.5">{option.title}:</p>
-              <p className="text-paragraph text-[15px] lg:text-base">{option.description}</p>
+              <p className="mb-2.5">{specification.title}:</p>
+              <p className="text-paragraph text-[15px] lg:text-base">{specification.description}</p>
             </div>
           </li>
         ))}
