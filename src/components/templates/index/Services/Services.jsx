@@ -24,7 +24,7 @@ export default async function Services() {
             </div>
           </div>
           <div className="mt-4 flex justify-center">
-            <PrimaryButton dir="ltr" className="w-2/3 max-w-43">
+            <PrimaryButton isLink href="/shop" dir="ltr" className="w-2/3 max-w-43">
               مشاهده همه
             </PrimaryButton>
           </div>
