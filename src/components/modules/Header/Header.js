@@ -39,9 +39,11 @@ export default function Header() {
               className="size-7.5 md:size-10"
             />
           </Link>
-          <button className="bg-foreground rounded-box-rtl grid size-10.5 cursor-pointer place-content-center p-2.5">
-            <FaShoppingCart />
-          </button>
+          <Link href="/cart">
+            <button className="bg-foreground rounded-box-rtl grid size-10.5 cursor-pointer place-content-center p-2.5">
+              <FaShoppingCart />
+            </button>
+          </Link>
         </div>
         {/* Desktop Header */}
         <div className="hidden lg:block">
