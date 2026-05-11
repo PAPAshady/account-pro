@@ -71,6 +71,7 @@ export async function GET(req) {
     await connectToDB();
     const params = req.nextUrl.searchParams;
     const categoryParams = params.getAll('cat');
+    const searchParam = params.get('search')?.trim();
 
     // Build filter dynamically
     const filters = {};
@@ -80,6 +81,15 @@ export async function GET(req) {
       const categoryIds = categories.map((cat) => cat.id);
       if (categoryIds.length) filters.category = { $in: categoryIds };
     }
+    if (searchParam) {
+      // prevent regex injection
+      const safeSearchParam = searchParam.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+      filters.$or = [
+        { title: { $regex: safeSearchParam, $options: 'i' } },
+        { latinTitle: { $regex: safeSearchParam, $options: 'i' } },
+      ];
+    }
+
     const products = await model.find(filters, '-__v').populate('category', '-__v');
     return Response.json(products);
   } catch (err) {

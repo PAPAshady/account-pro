@@ -1,21 +1,14 @@
 'use client';
 import { useSearchParams, useRouter } from 'next/navigation';
-import { useEffect, useState } from 'react';
 
 import { FaVectorSquare } from 'react-icons/fa';
 
 import FilterAccordion from '@modules/FilterAccordion/FilterAccordion';
 import CheckBox from '@modules/CheckBox/CheckBox';
 
-export default function Sidebar({ categories }) {
+export default function Sidebar({ categories, categoryParams, setCategoryParams }) {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const [categoryParams, setCategoryParams] = useState(searchParams.getAll('cat'));
-
-  // Sync state with URL when URL changes
-  useEffect(() => {
-    setCategoryParams(searchParams.getAll('cat'));
-  }, [searchParams]);
 
   const onChecked = (value) => {
     const params = new URLSearchParams(searchParams);

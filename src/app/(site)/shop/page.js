@@ -1,16 +1,11 @@
-import Main from '@templates/shop/Main/Main';
-import Sidebar from '@templates/shop/Sidebar/Sidebar';
 import { getCategories } from '@/services/categories';
+import Container from '@templates/shop/Container/Container';
 
-export default async function Shop({ searchParams }) {
+export default async function Shop() {
   const categories = await getCategories();
-  const params = await searchParams;
   return (
     <div className="container">
-      <div className="items-start gap-4 min-[880px]:flex lg:gap-8">
-        <Sidebar categories={categories} />
-        <Main params={params} />
-      </div>
+      <Container categories={categories} />
     </div>
   );
 }
@@ -18,5 +13,3 @@ export default async function Shop({ searchParams }) {
 export const metadata = {
   title: 'فروشگاه - اکانت پرو',
 };
-
-export const dynamic = 'force-dynamic';
