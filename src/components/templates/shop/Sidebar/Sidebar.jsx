@@ -33,7 +33,12 @@ export default function Sidebar({ categories, categoryParams, setCategoryParams 
         <p className="font-stretchPro text-paragraph text-sm font-semibold">Filters</p>
       </div>
       <div className="space-y-1 pt-10">
-        <FilterAccordion title="دسته بندی ها" subtitle="Categories" icon={<FaVectorSquare />}>
+        <FilterAccordion
+          title="دسته بندی ها"
+          subtitle="Categories"
+          icon={<FaVectorSquare />}
+          numberOfActiveFilters={categoryParams.length}
+        >
           <ul className="space-y-2">
             {categories.map((category) => (
               <li key={category._id}>
