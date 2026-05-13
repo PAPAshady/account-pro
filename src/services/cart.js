@@ -10,12 +10,12 @@ export const addToCart = async (product) => {
   return res.data;
 };
 
-export const removeFromCart = async (productId) => {
-  const res = await api.delete(`/api/cart/${productId}`);
+export const removeFromCart = async (planId) => {
+  const res = await api.delete(`/api/cart/${planId}`);
   return res.data;
 };
 
-export const updateCartAmount = async ({ productId, actionType, quantity }) => {
-  const res = await api.patch(`/api/cart/${productId}`, { actionType, quantity });
+export const updateCartAmount = async ({ planId, actionType, quantity }) => {
+  const res = await api.patch(`/api/cart/${planId}`, { actionType, quantity });
   return res.data;
 };

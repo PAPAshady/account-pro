@@ -31,7 +31,7 @@ export default function CartDropDown() {
           sideOffset={10}
           className={clsx(
             'data-[state=closed]:animate-slide-out data-[state=open]:animate-slide-in flex flex-col rounded-3xl rounded-tr-lg bg-[#252525] px-2 py-3',
-            isScrollable ? 'w-95' : 'w-90'
+            isScrollable ? 'w-100' : 'w-95'
           )}
         >
           {user && hasItems ? (
@@ -40,10 +40,10 @@ export default function CartDropDown() {
                 {data.items.map((item) => (
                   <CartDropDownItem
                     key={item._id}
-                    id={item.product._id}
-                    title={item.product.title}
-                    price={item.product.price}
-                    image={item.product.images[0].url}
+                    planId={item.planId}
+                    title={item.title}
+                    price={item.price}
+                    image={item.imageUrl}
                     quantity={item.quantity}
                   />
                 ))}

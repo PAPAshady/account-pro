@@ -10,6 +10,7 @@ export default function ProductDetails({
   shortDescription,
   price,
   images,
+  plans,
 }) {
   return (
     <div className="flex flex-col items-center gap-3 min-[900px]:flex-row md:gap-6 lg:gap-10">
@@ -22,7 +23,7 @@ export default function ProductDetails({
             همین حالا {title} رو امتحان کن!
           </p>
         </div>
-        <ProductForm price={price} id={_id} />
+        <ProductForm plans={plans} price={price} id={_id} />
       </div>
       <div className="relative grid w-full grid-cols-2 gap-3 min-[900px]:w-1/2">
         <div className="absolute top-1/2 left-1/2 -translate-1/2 rounded-4xl">

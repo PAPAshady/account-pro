@@ -24,6 +24,7 @@ export default function Counter({
   return (
     <div className="text-blackColor flex items-center gap-2">
       <button
+        type="button"
         disabled={value === 99 || disabled}
         onClick={increment}
         className="bg-primary disabled:bg-primary/70 rounded-box-rtl flex h-9 w-6.5 cursor-pointer items-center justify-center text-xl font-semibold disabled:cursor-not-allowed"
@@ -40,6 +41,7 @@ export default function Counter({
         readOnly
       />
       <button
+        type="button"
         disabled={!isRemovable && (value === 1 || disabled)}
         onClick={isRemovable && value === 1 ? onRemove : decrement}
         className="bg-primary disabled:bg-primary/70 rounded-box-ltr flex h-9 w-6.5 cursor-pointer items-center justify-center text-xl font-semibold disabled:cursor-not-allowed"

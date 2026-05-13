@@ -15,18 +15,16 @@ export async function DELETE(_, { params }) {
 
     const { user } = await userValidationRes.json();
 
-    const { productId } = await params;
-    const isValidProductId = Types.ObjectId.isValid(productId);
+    const { planId } = await params;
+    const isValidProductId = Types.ObjectId.isValid(planId);
 
-    if (!isValidProductId) return Response.json({ message: 'Invalid product id' }, { status: 400 });
+    if (!isValidProductId) return Response.json({ message: 'Invalid plan id' }, { status: 400 });
 
-    const cart = await cartModel
-      .findOneAndUpdate(
-        { user: user._id },
-        { $pull: { items: { product: productId } } },
-        { returnDocument: 'after' }
-      )
-      .populate('items.product');
+    const cart = await cartModel.findOneAndUpdate(
+      { user: user._id },
+      { $pull: { items: { planId } } },
+      { returnDocument: 'after' }
+    );
 
     return Response.json(cart);
   } catch (error) {
@@ -42,27 +40,25 @@ export async function PATCH(req, { params }) {
     if (userValidationRes.status !== 200)
       return Response.json({ message: 'Login first' }, { status: 401 });
     const { user } = await userValidationRes.json();
-    const { productId } = await params;
+    const { planId } = await params;
     const product = await req.json();
 
-    const isValidProductId = Types.ObjectId.isValid(productId);
+    const isValidProductId = Types.ObjectId.isValid(planId);
     const isValidActionType = cartItemAmountSchema.safeParse(product);
 
     if (!isValidActionType.success)
       return Response.json({ message: 'Invalid actionType' }, { status: 400 });
     if (!isValidProductId) return Response.json({ message: 'Invalid product id' }, { status: 400 });
 
-    const updatedCart = await cartModel
-      .findOneAndUpdate(
-        { user: user._id, 'items.product': productId },
-        {
-          $inc: {
-            'items.$.quantity': product.actionType === CART_ACTION_TYPES.INCREMENT ? +1 : -1, // $ is the position of matched item
-          },
+    const updatedCart = await cartModel.findOneAndUpdate(
+      { user: user._id, 'items.planId': planId },
+      {
+        $inc: {
+          'items.$.quantity': product.actionType === CART_ACTION_TYPES.INCREMENT ? +1 : -1, // $ is the position of matched item
         },
-        { returnDocument: 'after' }
-      )
-      .populate('items.product');
+      },
+      { returnDocument: 'after' }
+    );
 
     return Response.json(updatedCart);
   } catch (err) {

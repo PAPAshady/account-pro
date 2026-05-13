@@ -1,8 +1,7 @@
 import z from 'zod';
-import { Types } from 'mongoose';
 import { CART_ITEM_AMOUNT_LIMIT, CART_ACTION_TYPES } from '@/constants';
 
-const cartItemQuantitySchema = z
+export const cartItemQuantitySchema = z
   .number({ message: 'Quantity must be a number.' })
   .min(CART_ITEM_AMOUNT_LIMIT.MIN, {
     message: `Quantity must be at least ${CART_ITEM_AMOUNT_LIMIT.MIN}`,
@@ -12,10 +11,15 @@ const cartItemQuantitySchema = z
   });
 
 export const cartItemsSchema = z.object({
-  quantity: cartItemQuantitySchema,
-  id: z
-    .string({ message: 'ProductId must be a string' })
-    .refine((val) => Types.ObjectId.isValid(val), { message: 'Invalid productId.' }),
+  accountType: z.enum(['current', 'new'], {
+    message: 'نوع حساب کاربری را انخاب کنید.',
+  }),
+  region: z.enum(['turkey', 'usa', 'ukraine'], {
+    message: 'ریجن اکانت خود را انتخاب کنید',
+  }),
+  plan: z.refine((val) => typeof val === 'string' && /^[0-9A-Fa-f]{24}$/i.test(val), {
+    message: 'پلن مد نظر خود را انتخاب کنید.',
+  }),
 });
 
 export const cartItemAmountSchema = z.object({

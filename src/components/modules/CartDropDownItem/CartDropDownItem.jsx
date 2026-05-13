@@ -8,7 +8,7 @@ import Counter from '@modules/Counter/Counter';
 import { removeFromCartMutationOptions, updateCartAmountMutationOptions } from '@/queries/cart';
 import { CART_ACTION_TYPES } from '@/constants';
 
-export default function CartDropDownItem({ id, title, price, image, quantity }) {
+export default function CartDropDownItem({ planId, title, price, image, quantity }) {
   const [productQuantity, setProductQuantity] = useState(quantity);
   const { mutate: removeFromCartHandler } = useMutation(removeFromCartMutationOptions());
   const { mutateAsync: updateCartAmountHandler, isPending } = useMutation(
@@ -17,7 +17,7 @@ export default function CartDropDownItem({ id, title, price, image, quantity }) 
 
   const incrementCartAmount = async () => {
     await updateCartAmountHandler({
-      productId: id,
+      planId,
       quantity,
       actionType: CART_ACTION_TYPES.INCREMENT,
     });
@@ -25,7 +25,7 @@ export default function CartDropDownItem({ id, title, price, image, quantity }) 
 
   const decrementCartAmount = async () => {
     await updateCartAmountHandler({
-      productId: id,
+      planId,
       quantity,
       actionType: CART_ACTION_TYPES.DECREMENT,
     });
@@ -34,13 +34,13 @@ export default function CartDropDownItem({ id, title, price, image, quantity }) 
   return (
     <div className="relative flex items-center gap-3 rounded-2xl rounded-tl-sm bg-[#191919CC] p-3.75">
       <button
-        onClick={() => removeFromCartHandler(id)}
+        onClick={() => removeFromCartHandler(planId)}
         className="bg-primary absolute top-1/2 -right-4 grid size-5.5 -translate-y-1/2 cursor-pointer place-content-center rounded-lg text-[#191919] hover:bg-[#07dfa9]"
       >
         <FaRegTrashAlt className="text-xs" />
       </button>
       <div className="flex grow items-center gap-4">
-        <div className="h-auto w-8.75 max-w-8.75 shrink-0 overflow-hidden rounded-lg">
+        <div className="h-auto w-8.75 max-w-8.75 shrink-0! overflow-hidden rounded-lg">
           <Image
             alt="spotify"
             width={300}
@@ -50,7 +50,9 @@ export default function CartDropDownItem({ id, title, price, image, quantity }) 
           />
         </div>
         <div className="grow space-y-0.5">
-          <p>{title}</p>
+          <p className="text-[15px]" title={title}>
+            {title}
+          </p>
           <p className="text-primary space-x-1">
             <span className="text-lg text-white">{price.toLocaleString()}</span>
             <span className="text-sm">تومان</span>

@@ -1,9 +1,39 @@
 const mongoose = require('mongoose');
 
 const cartItemSchema = mongoose.Schema({
-  product: {
+  title: {
+    type: String,
+    required: true,
+    trim: true,
+    min: 3,
+  },
+  imageUrl: {
+    type: String,
+    required: true,
+  },
+  region: {
+    type: String,
+    required: true,
+    min: 2,
+  },
+  price: {
+    type: Number,
+    default: 0,
+    min: 0,
+  },
+  duration: {
+    type: Number, // in days
+    required: true,
+    min: 30,
+  },
+  accountType: {
+    type: String,
+    required: true,
+    default: 'new',
+    min: 3,
+  },
+  planId: {
     type: mongoose.Types.ObjectId,
-    ref: 'Product',
     required: true,
   },
   quantity: {
@@ -36,7 +66,7 @@ cartSchema.virtual('totalItems').get(function () {
 cartSchema.virtual('totalPrice').get(function () {
   return this.items.reduce((total, item) => {
     // Product must be populated for this to work
-    const price = item.product?.price || 0;
+    const price = item.price || 0;
     return total + price * item.quantity;
   }, 0);
 });

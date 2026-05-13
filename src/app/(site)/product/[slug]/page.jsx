@@ -13,12 +13,19 @@ export default async function Product({ params }) {
   const { slug } = await params;
   const { data: product } = await getProduct(slug);
   const { data: plans } = await getPlans(product._id);
+  // plans data with only necessary fields to pass to client components.
+  const simplifiedPlans = plans.map(({ _id, title, price, duration }) => ({
+    _id,
+    title,
+    price,
+    duration,
+  }));
   return (
     <div className="container space-y-16 lg:space-y-24">
-      <ProductDetails plans={plans} {...product} />
+      <ProductDetails plans={simplifiedPlans} {...product} />
       <Navigation />
       <Introduction {...product} />
-      <Plans plans={plans} />
+      <Plans plans={plans} {...product} />
       <ActivationMethods />
       <ImportantPoints />
       <Faq />
