@@ -11,11 +11,6 @@ const cartItemSchema = mongoose.Schema({
     type: String,
     required: true,
   },
-  region: {
-    type: String,
-    required: true,
-    min: 2,
-  },
   price: {
     type: Number,
     default: 0,

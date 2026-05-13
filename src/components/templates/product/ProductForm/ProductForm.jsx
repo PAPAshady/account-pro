@@ -4,11 +4,9 @@ import { useState } from 'react';
 import { FaRegHeart, FaShareAlt, FaUser, FaPhotoVideo, FaChartLine } from 'react-icons/fa';
 import { useMutation } from '@tanstack/react-query';
 import { zodResolver } from '@hookform/resolvers/zod';
-import z from 'zod';
 
 import SelectInput from '@modules/SelectInput/SelectInput';
 import PrimaryButton from '@modules/PrimaryButton/PrimaryButton';
-import { productRegions } from '@/data';
 import { addToCartMutationOptions } from '@/queries/cart';
 import Counter from '@modules/Counter/Counter';
 import { useForm } from 'react-hook-form';
@@ -29,31 +27,8 @@ export default function ProductForm({ id, price, plans }) {
   };
 
   return (
-    <form onSubmit={handleSubmit(submitHandler)}>
-      <div className="grid grid-cols-2 gap-x-2 gap-y-6 min-[380px]:gap-x-4">
-        <SelectInput
-          label="نوع حساب کاربری"
-          icon={<FaUser />}
-          isInvalid={!!errors.accountType}
-          errorMessage={errors.accountType?.message}
-          {...register('accountType')}
-        >
-          <option value="new">حساب کاربری جدید</option>
-          <option value="current">حساب کاربری موجود</option>
-        </SelectInput>
-        <SelectInput
-          label="منطقه/کشور"
-          icon={<FaPhotoVideo />}
-          isInvalid={!!errors.region}
-          errorMessage={errors.region?.message}
-          {...register('region')}
-        >
-          {productRegions.map((region) => (
-            <option key={region.value} value={region.value}>
-              {region.title}
-            </option>
-          ))}
-        </SelectInput>
+    <form className="space-y-6" onSubmit={handleSubmit(submitHandler)}>
+      <div className="grid grid-cols-1 gap-x-2 gap-y-6 min-[380px]:gap-x-4 sm:grid-cols-2">
         <SelectInput
           label="پلن ها"
           icon={<FaChartLine />}
@@ -66,6 +41,16 @@ export default function ProductForm({ id, price, plans }) {
               {plan.title} - ({plan.duration} روزه)
             </option>
           ))}
+        </SelectInput>
+        <SelectInput
+          label="نوع حساب کاربری"
+          icon={<FaUser />}
+          isInvalid={!!errors.accountType}
+          errorMessage={errors.accountType?.message}
+          {...register('accountType')}
+        >
+          <option value="new">حساب کاربری جدید</option>
+          <option value="current">حساب کاربری موجود (روی ایمیل شما)</option>
         </SelectInput>
       </div>
       <div className="bg-foreground flex flex-col gap-5 rounded-3xl rounded-tr-lg p-3.75">

@@ -51,7 +51,6 @@ export async function POST(req) {
       accountType: reqBody.accountType,
       title: `${[product.title]} - ${plan.title} (${plan.duration} روزه)`,
       imageUrl: product.images[0].url,
-      region: reqBody.region,
       price: plan.price,
       duration: plan.duration,
       planId: plan._id,

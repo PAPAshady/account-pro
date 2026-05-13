@@ -14,9 +14,6 @@ export const cartItemsSchema = z.object({
   accountType: z.enum(['current', 'new'], {
     message: 'نوع حساب کاربری را انخاب کنید.',
   }),
-  region: z.enum(['turkey', 'usa', 'ukraine'], {
-    message: 'ریجن اکانت خود را انتخاب کنید',
-  }),
   plan: z.refine((val) => typeof val === 'string' && /^[0-9A-Fa-f]{24}$/i.test(val), {
     message: 'پلن مد نظر خود را انتخاب کنید.',
   }),
