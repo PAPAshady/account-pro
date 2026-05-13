@@ -25,11 +25,11 @@ export default function Page() {
                 <CartItem
                   key={item._id}
                   quantity={item.quantity}
-                  title={item.product.title}
-                  price={item.product.price}
-                  image={item.product.images[0].url}
-                  slug={item.product.slug}
-                  id={item.product._id}
+                  title={item.title}
+                  price={item.price}
+                  image={item.imageUrl}
+                  slug={item.slug}
+                  id={item.planId}
                 />
               ))}
             </main>
