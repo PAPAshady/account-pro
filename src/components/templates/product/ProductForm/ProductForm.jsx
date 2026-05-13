@@ -1,8 +1,9 @@
 'use client';
 import { useState } from 'react';
 
-import { FaRegHeart, FaShareAlt, FaUser, FaPhotoVideo, FaChartLine } from 'react-icons/fa';
+import { FaRegHeart, FaShareAlt, FaUser, FaChartLine } from 'react-icons/fa';
 import { useMutation } from '@tanstack/react-query';
+import clsx from 'clsx';
 import { zodResolver } from '@hookform/resolvers/zod';
 
 import SelectInput from '@modules/SelectInput/SelectInput';
@@ -13,18 +14,21 @@ import { useForm } from 'react-hook-form';
 
 import { cartItemsSchema } from '@/schemas/cartItem.schema';
 
-export default function ProductForm({ id, price, plans }) {
+export default function ProductForm({ price, plans }) {
   const [quantity, setQuantity] = useState(1);
   const { mutate } = useMutation(addToCartMutationOptions());
   const {
     register,
     handleSubmit,
+    watch,
     formState: { errors },
   } = useForm({ resolver: zodResolver(cartItemsSchema) });
 
   const submitHandler = (data) => {
     mutate({ ...data, quantity }, { onSuccess: (data) => console.log(data) });
   };
+
+  const selectedPlan = plans.find((plan) => plan._id === watch('plan')) || null;
 
   return (
     <form className="space-y-6" onSubmit={handleSubmit(submitHandler)}>
@@ -55,15 +59,17 @@ export default function ProductForm({ id, price, plans }) {
       </div>
       <div className="bg-foreground flex flex-col gap-5 rounded-3xl rounded-tr-lg p-3.75">
         <div className="flex flex-col items-center gap-2.5 sm:flex-row">
-          <div className="w-full space-y-4 rounded-xl rounded-tr-2xl bg-[#191919] p-2.5 text-center text-[#ddd]">
-            <span>مبلغ قابل پرداخت :</span>
-            <p className="text-[32px]">
-              <bdi>
-                {price}
-                <span className="text-primary ms-2 text-lg">تومان</span>
-              </bdi>
-            </p>
-          </div>
+          {selectedPlan && (
+            <div className="w-full space-y-4 rounded-xl rounded-tr-2xl bg-[#191919] p-2.5 text-center text-[#ddd]">
+              <span>مبلغ قابل پرداخت :</span>
+              <p className="text-[32px]">
+                <bdi>
+                  {((selectedPlan?.price || 0) * quantity).toLocaleString()}
+                  <span className="text-primary ms-2 text-lg">تومان</span>
+                </bdi>
+              </p>
+            </div>
+          )}
           <div className="flex w-full flex-col items-center gap-2.5 rounded-2xl rounded-tr-lg bg-[#191919] p-2.5 text-[#ddd]">
             <span>تعداد :‌</span>
             <Counter value={quantity} setValue={setQuantity} />

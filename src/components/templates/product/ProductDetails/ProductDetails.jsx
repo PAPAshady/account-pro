@@ -4,7 +4,6 @@ import Particle from '@modules/Particle/Particle';
 import ProductForm from '@templates/product/ProductForm/ProductForm';
 
 export default function ProductDetails({
-  _id,
   title,
   latinTitle,
   shortDescription,
@@ -23,7 +22,7 @@ export default function ProductDetails({
             همین حالا {title} رو امتحان کن!
           </p>
         </div>
-        <ProductForm plans={plans} price={price} id={_id} />
+        <ProductForm plans={plans} price={price} />
       </div>
       <div className="relative grid w-full grid-cols-2 gap-3 min-[900px]:w-1/2">
         <div className="absolute top-1/2 left-1/2 -translate-1/2 rounded-4xl">
