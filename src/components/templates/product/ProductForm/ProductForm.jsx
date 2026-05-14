@@ -74,7 +74,7 @@ export default function ProductForm({ price, plans }) {
             <span>تعداد :‌</span>
             <Counter value={quantity} setValue={setQuantity} />
           </div>
-          <div className="bg-foreground inline-flex max-w-max flex-col items-center justify-center gap-4 rounded-2xl rounded-tr-lg p-2.5 min-[900px]:hidden lg:inline-flex">
+          <div className="bg-foreground inline-flex max-w-max items-center justify-center gap-4 rounded-2xl rounded-tr-lg p-2.5 min-[900px]:hidden sm:flex-col lg:inline-flex">
             <button
               type="button"
               className="bg-box hover:text-primary flex size-8.75 cursor-pointer items-center justify-center rounded-lg rounded-tr-sm text-2xl transition-colors duration-300"
