@@ -3,7 +3,6 @@ import { useState } from 'react';
 
 import { FaRegHeart, FaShareAlt, FaUser, FaChartLine } from 'react-icons/fa';
 import { useMutation } from '@tanstack/react-query';
-import clsx from 'clsx';
 import { zodResolver } from '@hookform/resolvers/zod';
 
 import SelectInput from '@modules/SelectInput/SelectInput';
