@@ -29,7 +29,7 @@ export default function Page() {
                   price={item.price}
                   image={item.imageUrl}
                   slug={item.slug}
-                  id={item.planId}
+                  planId={item.planId}
                 />
               ))}
             </main>

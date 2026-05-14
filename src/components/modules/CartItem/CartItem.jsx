@@ -10,11 +10,12 @@ import Counter from '@modules/Counter/Counter';
 import { updateCartAmountMutationOptions, removeFromCartMutationOptions } from '@/queries/cart';
 import { CART_ACTION_TYPES } from '@/constants';
 
-export default function CartItem({ id, title, price, quantity: itemQuanity, image, slug }) {
+export default function CartItem({ planId, title, price, quantity: itemQuanity, image, slug }) {
   const [quantity, setQuantity] = useState(itemQuanity);
-  const { mutateAsync: updateCartAmountHandler, isPending: updateIsPending } = useMutation(
-    updateCartAmountMutationOptions()
-  );
+  const {
+    mutateAsync: updateCartAmountHandler,
+    isPending: updateIsPending,
+  } = useMutation(updateCartAmountMutationOptions());
   const { mutate: removeFromCartHandler, isPending: removeIsPending } = useMutation(
     removeFromCartMutationOptions()
   );
@@ -23,7 +24,7 @@ export default function CartItem({ id, title, price, quantity: itemQuanity, imag
 
   const incrementCartAmount = async () => {
     await updateCartAmountHandler({
-      productId: id,
+      planId,
       quantity,
       actionType: CART_ACTION_TYPES.INCREMENT,
     });
@@ -31,7 +32,7 @@ export default function CartItem({ id, title, price, quantity: itemQuanity, imag
 
   const decrementCartAmount = async () => {
     await updateCartAmountHandler({
-      productId: id,
+      planId,
       quantity,
       actionType: CART_ACTION_TYPES.DECREMENT,
     });
@@ -56,7 +57,7 @@ export default function CartItem({ id, title, price, quantity: itemQuanity, imag
             setValue={setQuantity}
             onIncrement={incrementCartAmount}
             onDecrement={decrementCartAmount}
-            onRemove={() => removeFromCartHandler(id)}
+            onRemove={() => removeFromCartHandler(planId)}
             disabled={isPending}
             isRemovable
           />
@@ -77,7 +78,7 @@ export default function CartItem({ id, title, price, quantity: itemQuanity, imag
             setValue={setQuantity}
             onIncrement={incrementCartAmount}
             onDecrement={decrementCartAmount}
-            onRemove={() => removeFromCartHandler(id)}
+            onRemove={() => removeFromCartHandler(planId)}
             disabled={isPending}
             isRemovable
           />
