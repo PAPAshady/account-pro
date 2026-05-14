@@ -30,6 +30,9 @@ export default function Page() {
                   image={item.imageUrl}
                   slug={item.slug}
                   planId={item.planId}
+                  planTitle={item.planTitle}
+                  accountType={item.accountType}
+                  duration={item.duration}
                 />
               ))}
             </main>

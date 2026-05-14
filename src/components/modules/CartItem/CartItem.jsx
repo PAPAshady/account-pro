@@ -3,19 +3,28 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useState } from 'react';
 
-import { FaRegClock, FaPhotoVideo, FaChartLine } from 'react-icons/fa';
+import { FaRegClock, FaUser, FaChartLine } from 'react-icons/fa';
 import { useMutation } from '@tanstack/react-query';
 
 import Counter from '@modules/Counter/Counter';
 import { updateCartAmountMutationOptions, removeFromCartMutationOptions } from '@/queries/cart';
 import { CART_ACTION_TYPES } from '@/constants';
 
-export default function CartItem({ planId, title, price, quantity: itemQuanity, image, slug }) {
+export default function CartItem({
+  planId,
+  title,
+  price,
+  quantity: itemQuanity,
+  image,
+  slug,
+  accountType,
+  duration,
+  planTitle,
+}) {
   const [quantity, setQuantity] = useState(itemQuanity);
-  const {
-    mutateAsync: updateCartAmountHandler,
-    isPending: updateIsPending,
-  } = useMutation(updateCartAmountMutationOptions());
+  const { mutateAsync: updateCartAmountHandler, isPending: updateIsPending } = useMutation(
+    updateCartAmountMutationOptions()
+  );
   const { mutate: removeFromCartHandler, isPending: removeIsPending } = useMutation(
     removeFromCartMutationOptions()
   );
@@ -87,16 +96,16 @@ export default function CartItem({ planId, title, price, quantity: itemQuanity, 
         <div className="my-2.5 flex flex-wrap gap-x-4 gap-y-2 min-[1200px]:flex! min-[1200px]:w-full! md:order-2 md:hidden">
           <div className="text-paragraph flex items-center gap-1 text-[13px]">
             <FaRegClock />
-            <p>مدت زمان یک ماهه</p>
+            <p>مدت زمان {duration / 30} ماهه</p>
           </div>
 
           <div className="text-paragraph flex items-center gap-1 text-[13px]">
-            <FaPhotoVideo />
-            <p>ریجن انگلیس</p>
+            <FaUser />
+            <p>حساب کاربری {accountType === 'new' ? 'جدید' : 'موجود'}</p>
           </div>
           <div className="text-paragraph flex items-center gap-1 text-[13px]">
             <FaChartLine />
-            <p>پلن فردی</p>
+            <p>{planTitle}</p>
           </div>
         </div>
 

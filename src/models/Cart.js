@@ -31,6 +31,12 @@ const cartItemSchema = mongoose.Schema({
     type: mongoose.Types.ObjectId,
     required: true,
   },
+  planTitle: {
+    type: String,
+    required: true,
+    trim: true,
+    min: 3,
+  },
   quantity: {
     type: Number,
     required: true,

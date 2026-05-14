@@ -54,6 +54,7 @@ export async function POST(req) {
       price: plan.price,
       duration: plan.duration,
       planId: plan._id,
+      planTitle: plan.title,
     };
 
     // Push new item to array
