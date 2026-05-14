@@ -2,6 +2,7 @@ import { useSearchParams, useRouter } from 'next/navigation';
 
 import { Drawer } from 'vaul';
 import { FaXmark } from 'react-icons/fa6';
+import clsx from 'clsx';
 
 import CheckBox from '@modules/CheckBox/CheckBox';
 import PrimaryButton from '@modules/PrimaryButton/PrimaryButton';
@@ -10,6 +11,7 @@ export default function CategoriesDrawer({ categories, onChecked, productsQuanti
   const router = useRouter();
   const searchParams = useSearchParams();
   const categoryParams = searchParams.getAll('cat');
+  const hasFilters = !!categoryParams.length;
 
   const removeCategoryFilters = () => {
     const params = new URLSearchParams(searchParams);
@@ -20,8 +22,20 @@ export default function CategoriesDrawer({ categories, onChecked, productsQuanti
   return (
     <Drawer.Root closeThreshold={0.35}>
       <Drawer.Trigger asChild>
-        <button className="bg-foreground hover:bg-primary hover:text-box mx-1.5 rounded-2xl rounded-tr-lg px-3 py-1.5 text-[#b7b7b7] transition-colors duration-300">
-          دسته بندی ها
+        <button
+          className={clsx(
+            'relative mx-1.5 flex items-center gap-2 rounded-2xl rounded-tr-lg px-3 py-1.5 text-[#b7b7b7] transition-colors duration-300',
+            hasFilters
+              ? 'bg-primary/10 text-primary'
+              : 'bg-foreground hover:text-box hover:bg-primary'
+          )}
+        >
+          <span>دسته بندی ها</span>
+          {hasFilters && (
+            <span className="bg-primary grid size-5 place-content-center rounded-full text-sm text-[#191919]">
+              {categoryParams.length}
+            </span>
+          )}
         </button>
       </Drawer.Trigger>
       <Drawer.Portal>
