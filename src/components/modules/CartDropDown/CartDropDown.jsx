@@ -17,8 +17,6 @@ export default function CartDropDown() {
   const hasItems = !!data?.items.length;
   const isScrollable = data?.items.length > 2;
 
-  console.log(data?.items);
-
   return (
     <Root open={open} onOpenChange={setOpen}>
       <Trigger asChild>
