@@ -1,9 +1,13 @@
 import { Drawer } from 'vaul';
 import { FaXmark } from 'react-icons/fa6';
+import { useSearchParams } from 'next/navigation';
 
 import CheckBox from '@modules/CheckBox/CheckBox';
 
-export default function CategoriesDrawer({ categories }) {
+export default function CategoriesDrawer({ categories, onChecked }) {
+  const searchParams = useSearchParams();
+  const categoryParams = searchParams.getAll('cat');
+
   return (
     <Drawer.Root closeThreshold={0.35}>
       <Drawer.Trigger asChild>
@@ -24,10 +28,13 @@ export default function CategoriesDrawer({ categories }) {
                 </button>
               </div>
             </div>
-            <div className="mt-4 flex max-h-[calc(100dvh/2)] grow flex-col overflow-y-auto">
+            <div className="mt-4 flex h-[calc(100dvh/2)] grow flex-col overflow-y-auto">
               {categories.map((category) => (
                 <label className="flex items-center justify-start gap-4" key={category._id}>
-                  <CheckBox />
+                  <CheckBox
+                    checked={categoryParams.includes(category.slug)}
+                    onChange={() => onChecked(category.slug)}
+                  />
                   <div className="border-foreground text-neutral700 grow border-b py-3.5">
                     <p>{category.title}</p>
                   </div>

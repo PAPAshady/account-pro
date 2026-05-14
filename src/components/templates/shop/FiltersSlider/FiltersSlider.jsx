@@ -1,4 +1,5 @@
 'use client';
+import { useRouter, useSearchParams } from 'next/navigation';
 
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { FreeMode } from 'swiper/modules';
@@ -13,13 +14,32 @@ const filters = [
   { title: 'زبان ها' },
 ];
 
-export default function FiltersSlider({ categories }) {
+export default function FiltersSlider({ categories, categoryParams, setCategoryParams }) {
+  const router = useRouter();
+  const searchParams = useSearchParams();
+
+  const onChecked = (value) => {
+    const params = new URLSearchParams(searchParams);
+    let newCategoryParams = null;
+
+    if (categoryParams.includes(value)) {
+      newCategoryParams = [...categoryParams].filter((cat) => cat !== value);
+      params.delete('cat', value);
+    } else {
+      newCategoryParams = [...categoryParams, value];
+      params.append('cat', value);
+    }
+
+    setCategoryParams(newCategoryParams);
+    router.push(`/shop?${params.toString()}`);
+  };
+
   return (
     <div className="flex items-center gap-4 min-[880px]:hidden">
       <span className="text-nowrap">فیلتر ها :‌</span>
       <Swiper modules={[FreeMode]} slidesPerView="auto" freeMode>
         <SwiperSlide className="w-auto!">
-          <CategoriesDrawer categories={categories} />
+          <CategoriesDrawer categories={categories} onChecked={onChecked} />
         </SwiperSlide>
         {filters.map((filter) => (
           <SwiperSlide key={filter.title} className="w-auto!">
