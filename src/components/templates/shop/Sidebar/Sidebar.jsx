@@ -1,30 +1,14 @@
 'use client';
-import { useSearchParams, useRouter } from 'next/navigation';
+import { useSearchParams } from 'next/navigation';
 
 import { FaVectorSquare } from 'react-icons/fa';
 
 import FilterAccordion from '@modules/FilterAccordion/FilterAccordion';
 import CheckBox from '@modules/CheckBox/CheckBox';
 
-export default function Sidebar({ categories, categoryParams, setCategoryParams }) {
-  const router = useRouter();
+export default function Sidebar({ categories, onChecked }) {
   const searchParams = useSearchParams();
-
-  const onChecked = (value) => {
-    const params = new URLSearchParams(searchParams);
-    let newCategoryParams = null;
-
-    if (categoryParams.includes(value)) {
-      newCategoryParams = [...categoryParams].filter((cat) => cat !== value);
-      params.delete('cat', value);
-    } else {
-      newCategoryParams = [...categoryParams, value];
-      params.append('cat', value);
-    }
-
-    setCategoryParams(newCategoryParams);
-    router.push(`/shop?${params.toString()}`);
-  };
+  const categoryParams = searchParams.getAll('cat');
 
   return (
     <aside className="rounded-box-ltr border-primary/50 relative mt-6 hidden min-h-full overflow-visible border p-4 mix-blend-lighten min-[880px]:block min-[880px]:w-[30%] xl:w-[25%]">
@@ -45,7 +29,7 @@ export default function Sidebar({ categories, categoryParams, setCategoryParams 
                 <label className="bg-foreground hover:border-primary flex items-center gap-2.5 rounded-2xl rounded-tr-lg border border-[#fff0] px-3 py-2.5 transition-all duration-300">
                   <CheckBox
                     checked={categoryParams.includes(category.slug)}
-                    onChange={() => onChecked(category.slug)}
+                    onChange={() => onChecked('cat', category.slug)}
                   />
                   <p>{category.title}</p>
                 </label>

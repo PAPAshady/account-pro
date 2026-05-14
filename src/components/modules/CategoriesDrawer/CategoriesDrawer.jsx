@@ -33,7 +33,7 @@ export default function CategoriesDrawer({ categories, onChecked }) {
                 <label className="flex items-center justify-start gap-4" key={category._id}>
                   <CheckBox
                     checked={categoryParams.includes(category.slug)}
-                    onChange={() => onChecked(category.slug)}
+                    onChange={() => onChecked('cat', category.slug)}
                   />
                   <div className="border-foreground text-neutral700 grow border-b py-3.5">
                     <p>{category.title}</p>

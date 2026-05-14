@@ -1,6 +1,5 @@
 'use client';
-import { useSearchParams } from 'next/navigation';
-import { useState, useEffect } from 'react';
+import { useSearchParams, useRouter } from 'next/navigation';
 
 import { useQuery } from '@tanstack/react-query';
 
@@ -11,29 +10,23 @@ import FiltersSlider from '@templates/shop/FiltersSlider/FiltersSlider';
 import ProductsGrid from '@templates/shop/ProductsGrid/ProductsGrid';
 
 export default function Container({ categories }) {
+  const router = useRouter();
   const searchParams = useSearchParams();
-  const [categoryParams, setCategoryParams] = useState(searchParams.getAll('cat'));
   const { data: products, isPending } = useQuery(getFilteredProductsQueryOptions({ searchParams }));
 
-  // Sync state with URL when URL changes
-  useEffect(() => {
-    setCategoryParams(searchParams.getAll('cat'));
-  }, [searchParams]);
+  const onChecked = (key, value) => {
+    const params = new URLSearchParams(searchParams);
+    const paramExists = searchParams.getAll(key).includes(value);
+    paramExists ? params.delete(key, value) : params.append(key, value);
+    router.push(`/shop?${params.toString()}`);
+  };
 
   return (
     <div className="items-start gap-4 min-[880px]:flex lg:gap-8">
-      <Sidebar
-        categories={categories}
-        categoryParams={categoryParams}
-        setCategoryParams={setCategoryParams}
-      />
+      <Sidebar categories={categories} onChecked={onChecked} />
       <main className="space-y-6 min-[880px]:w-[70%] xl:w-[75%]">
         <ProductsPageSearchBox />
-        <FiltersSlider
-          categories={categories}
-          categoryParams={categoryParams}
-          setCategoryParams={setCategoryParams}
-        />
+        <FiltersSlider categories={categories} onChecked={onChecked} />
         <ProductsGrid products={products} isPending={isPending} />
       </main>
     </div>
