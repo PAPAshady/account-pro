@@ -1,12 +1,21 @@
+import { useSearchParams, useRouter } from 'next/navigation';
+
 import { Drawer } from 'vaul';
 import { FaXmark } from 'react-icons/fa6';
-import { useSearchParams } from 'next/navigation';
 
 import CheckBox from '@modules/CheckBox/CheckBox';
+import PrimaryButton from '@modules/PrimaryButton/PrimaryButton';
 
-export default function CategoriesDrawer({ categories, onChecked }) {
+export default function CategoriesDrawer({ categories, onChecked, productsQuantity, isPending }) {
+  const router = useRouter();
   const searchParams = useSearchParams();
   const categoryParams = searchParams.getAll('cat');
+
+  const removeCategoryFilters = () => {
+    const params = new URLSearchParams(searchParams);
+    params.delete('cat');
+    router.push(`/shop?${params.toString()}`);
+  };
 
   return (
     <Drawer.Root closeThreshold={0.35}>
@@ -22,10 +31,12 @@ export default function CategoriesDrawer({ categories, onChecked }) {
           <div className="flex flex-col">
             <div className="border-foreground border-b p-4 pb-2">
               <div className="mb-2 flex flex-wrap items-center justify-between gap-2">
-                <Drawer.Title className="text-paragraph">دسته بندی</Drawer.Title>
-                <button className="text-lg">
-                  <FaXmark />
-                </button>
+                <Drawer.Title className="text-paragraph">دسته بندی ها</Drawer.Title>
+                <Drawer.Close asChild>
+                  <button className="cursor-pointer text-lg">
+                    <FaXmark />
+                  </button>
+                </Drawer.Close>
               </div>
             </div>
             <div className="mt-4 flex h-[calc(100dvh/2)] grow flex-col overflow-y-auto">
@@ -35,11 +46,29 @@ export default function CategoriesDrawer({ categories, onChecked }) {
                     checked={categoryParams.includes(category.slug)}
                     onChange={() => onChecked('cat', category.slug)}
                   />
-                  <div className="border-foreground text-neutral700 grow border-b py-3.5">
+                  <div className="border-foreground grow border-b py-3.5">
                     <p>{category.title}</p>
                   </div>
                 </label>
               ))}
+            </div>
+          </div>
+          <div className="border-foreground border-t bg-[#252525] px-4 pt-4">
+            <div className="flex items-center justify-between gap-4">
+              <Drawer.Close asChild>
+                <PrimaryButton className="bg-primary max-w-125 grow text-[#191919] hover:bg-none">
+                  {isPending ? '...' : `مشاهده ${productsQuantity} محصول`}
+                </PrimaryButton>
+              </Drawer.Close>
+              <Drawer.Close asChild>
+                <button
+                  disabled={!categoryParams.length}
+                  className="disabled:text-primary/30 text-primary px-4 py-2"
+                  onClick={removeCategoryFilters}
+                >
+                  حذف فیلتر
+                </button>
+              </Drawer.Close>
             </div>
           </div>
         </Drawer.Content>
