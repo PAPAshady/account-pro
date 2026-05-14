@@ -29,7 +29,7 @@ export default function Container({ categories }) {
       />
       <main className="space-y-6 min-[880px]:w-[70%] xl:w-[75%]">
         <ProductsPageSearchBox />
-        <FiltersSlider />
+        <FiltersSlider categories={categories} />
         <ProductsGrid products={products} isPending={isPending} />
       </main>
     </div>
