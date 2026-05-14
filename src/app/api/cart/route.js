@@ -31,7 +31,7 @@ export async function POST(req) {
 
     if (!plan) return Response.json({ message: "This plan dosen't have exist" }, { status: 404 });
 
-    const product = await productsModel.findOne({ _id: plan.productId }, 'title images -_id');
+    const product = await productsModel.findOne({ _id: plan.productId }, 'title images -_id slug');
 
     if (!product)
       return Response.json({ message: "This product dosen't have exist" }, { status: 404 });
@@ -55,6 +55,7 @@ export async function POST(req) {
       duration: plan.duration,
       planId: plan._id,
       planTitle: plan.title,
+      slug: product.slug,
     };
 
     // Push new item to array

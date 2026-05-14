@@ -17,6 +17,8 @@ export default function CartDropDown() {
   const hasItems = !!data?.items.length;
   const isScrollable = data?.items.length > 2;
 
+  console.log(data?.items);
+
   return (
     <Root open={open} onOpenChange={setOpen}>
       <Trigger asChild>
@@ -45,6 +47,7 @@ export default function CartDropDown() {
                     price={item.price}
                     image={item.imageUrl}
                     quantity={item.quantity}
+                    slug={item.slug}
                   />
                 ))}
               </div>

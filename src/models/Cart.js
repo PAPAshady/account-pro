@@ -43,6 +43,7 @@ const cartItemSchema = mongoose.Schema({
     min: 1,
     default: 1,
   },
+  slug: { type: String, required: true, minLength: 1 },
 });
 
 const cartSchema = mongoose.Schema(

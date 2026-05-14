@@ -25,7 +25,7 @@ export default function ProductForm({ price, plans }) {
   } = useForm({ resolver: zodResolver(cartItemsSchema) });
 
   const submitHandler = (data) => {
-    mutate({ ...data, quantity }, { onSuccess: (data) => console.log(data) });
+    mutate({ ...data, quantity });
   };
 
   const selectedPlan = plans.find((plan) => plan._id === watch('plan')) || null;

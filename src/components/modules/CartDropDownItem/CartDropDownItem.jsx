@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import Link from 'next/link';
 import { useState } from 'react';
 
 import { FaRegTrashAlt } from 'react-icons/fa';
@@ -8,7 +9,7 @@ import Counter from '@modules/Counter/Counter';
 import { removeFromCartMutationOptions, updateCartAmountMutationOptions } from '@/queries/cart';
 import { CART_ACTION_TYPES } from '@/constants';
 
-export default function CartDropDownItem({ planId, title, price, image, quantity }) {
+export default function CartDropDownItem({ planId, title, price, image, quantity, slug }) {
   const [productQuantity, setProductQuantity] = useState(quantity);
   const { mutate: removeFromCartHandler } = useMutation(removeFromCartMutationOptions());
   const { mutateAsync: updateCartAmountHandler, isPending } = useMutation(
@@ -40,19 +41,21 @@ export default function CartDropDownItem({ planId, title, price, image, quantity
         <FaRegTrashAlt className="text-xs" />
       </button>
       <div className="flex grow items-center gap-4">
-        <div className="h-auto w-8.75 max-w-8.75 shrink-0! overflow-hidden rounded-lg">
-          <Image
-            alt="spotify"
-            width={300}
-            height={300}
-            src={image}
-            className="size-full object-cover"
-          />
-        </div>
+        <Link href={`/product/${slug}`}>
+          <div className="h-auto w-8.75 max-w-8.75 shrink-0! overflow-hidden rounded-lg">
+            <Image
+              alt="spotify"
+              width={300}
+              height={300}
+              src={image}
+              className="size-full object-cover"
+            />
+          </div>
+        </Link>
         <div className="grow space-y-0.5">
-          <p className="text-[15px]" title={title}>
+          <Link href={`/product/${slug}`} className="text-[15px]" title={title}>
             {title}
-          </p>
+          </Link>
           <p className="text-primary space-x-1">
             <span className="text-lg text-white">{price.toLocaleString()}</span>
             <span className="text-sm">تومان</span>
