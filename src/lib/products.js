@@ -63,3 +63,34 @@ export const getProduct = async (slug) => {
     return { data: null, status: 500 };
   }
 };
+
+export const getProductPriceRange = unstable_cache(
+  async () => {
+    try {
+      await connectToDB();
+      const priceRange = await productsModel.aggregate([
+        {
+          $group: {
+            _id: null,
+            minPrice: { $min: '$minPlanPrice' },
+            maxPrice: { $max: '$maxPlanPrice' },
+          },
+        },
+      ]);
+
+      const range = priceRange[0] || { minPrice: 0, maxPrice: 0 };
+
+      return JSON.parse(
+        JSON.stringify({
+          minPrice: range.minPrice || 0,
+          maxPrice: range.maxPrice || 0,
+        })
+      );
+    } catch (err) {
+      console.log('Failed to get product price ranges => ', err);
+      return null;
+    }
+  },
+  ['price-range'],
+  { tags: ['price-range'] }
+);

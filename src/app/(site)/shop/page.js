@@ -1,11 +1,11 @@
-import { getCategories } from '@/services/categories';
+import { getCategories } from '@/lib/categories';
 import Container from '@templates/shop/Container/Container';
 
 export default async function Shop() {
   const categories = await getCategories();
   return (
     <div className="container">
-      <Container categories={categories} />
+      <Container categories={categories} priceRange={priceRange} />
     </div>
   );
 }

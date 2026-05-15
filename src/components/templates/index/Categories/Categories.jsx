@@ -1,7 +1,7 @@
 import PrimaryButton from '@modules/PrimaryButton/PrimaryButton';
 import CategoryCard from '@modules/Cards/CategoryCard/CategoryCard';
 import Particle from '@modules/Particle/Particle';
-import { getCategories } from '@/services/categories';
+import { getCategories } from '@/lib/categories';
 
 export default async function Categories() {
   const categories = await getCategories();

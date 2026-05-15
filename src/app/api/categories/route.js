@@ -3,7 +3,7 @@ import { validateUser } from '@/utils/auth';
 import { categorySchema } from '@/schemas/category.schema';
 import categoriesModel from '@/models/Category';
 import { saveFileToDisk } from '@/utils/file';
-import { getCategories } from '@/services/categories';
+import { getCategories } from '@/lib/categories';
 
 export async function POST(req) {
   try {
