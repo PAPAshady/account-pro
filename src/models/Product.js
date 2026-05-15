@@ -63,6 +63,18 @@ const schema = mongoose.Schema(
       required: true,
       ref: 'Category',
     },
+    plansCount: {
+      type: Number,
+      default: 0,
+    },
+    minPlanPrice: {
+      type: Number,
+      default: null,
+    },
+    maxPlanPrice: {
+      type: Number,
+      default: null,
+    },
   },
   { timestamps: true }
 );
