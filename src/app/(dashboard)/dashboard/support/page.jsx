@@ -1,7 +1,9 @@
 import PrimaryButton from '@/components/modules/PrimaryButton/PrimaryButton';
 import TableCategories from '@templates/Dashboard/Support/TableCategories';
 
-export default function page() {
+export default async function page() {
+  await new Promise((resolve) => setTimeout(resolve, 5000));
+
   return (
     <div>
       <div className="px-4">
