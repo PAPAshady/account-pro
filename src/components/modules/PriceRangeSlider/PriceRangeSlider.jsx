@@ -1,6 +1,6 @@
 'use client';
 import { useRouter, useSearchParams } from 'next/navigation';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import { FaWallet } from 'react-icons/fa';
 import ReactRangeSliderInput from 'react-range-slider-input';
@@ -13,6 +13,14 @@ export default function PriceRangeSlider({ priceRange }) {
   const searchParams = useSearchParams();
   const [values, setValues] = useState([priceRange.minPrice, priceRange.maxPrice]);
   const [limit] = useState(values);
+
+  // sync state with url
+  useEffect(() => {
+    let minPrice = +searchParams.get('minPrice') || limit[0];
+    let maxPrice = +searchParams.get('maxPrice') || limit[1];
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setValues([minPrice, maxPrice]);
+  }, [searchParams, limit]);
 
   const onDragEnd = () => {
     const params = new URLSearchParams(searchParams);
@@ -59,6 +67,7 @@ export default function PriceRangeSlider({ priceRange }) {
           value={values}
           onInput={setValues}
           onThumbDragEnd={onDragEnd}
+          onRangeDragEnd={onDragEnd}
         />
         <div className="text[#0F8669] text-primary flex items-center justify-between gap-2">
           <span
