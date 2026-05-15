@@ -5,7 +5,7 @@ export default async function Shop() {
   const categories = await getCategories();
   return (
     <div className="container">
-      <Container categories={categories} priceRange={priceRange} />
+      <Container categories={categories} />
     </div>
   );
 }
