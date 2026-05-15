@@ -9,7 +9,7 @@ import ProductsPageSearchBox from '@templates/shop/ProductsPageSearchBox/Product
 import FiltersSlider from '@templates/shop/FiltersSlider/FiltersSlider';
 import ProductsGrid from '@templates/shop/ProductsGrid/ProductsGrid';
 
-export default function Container({ categories }) {
+export default function Container({ categories, priceRange }) {
   const router = useRouter();
   const searchParams = useSearchParams();
   const { data: products, isPending } = useQuery(getFilteredProductsQueryOptions({ searchParams }));
@@ -23,7 +23,7 @@ export default function Container({ categories }) {
 
   return (
     <div className="items-start gap-4 min-[880px]:flex lg:gap-8">
-      <Sidebar categories={categories} onChecked={onChecked} />
+      <Sidebar categories={categories} onChecked={onChecked} priceRange={priceRange} />
       <main className="space-y-6 min-[880px]:w-[70%] xl:w-[75%]">
         <ProductsPageSearchBox />
         <FiltersSlider categories={categories} onChecked={onChecked} />

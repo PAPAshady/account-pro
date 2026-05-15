@@ -1,0 +1,15 @@
+.range-slider {
+  background: #333;
+  height: 8px;
+}
+
+.range-slider__range {
+  background: #0efdc2 !important;
+}
+
+.range-slider__thumb {
+  width: 20px !important;
+  height: 20px !important;
+  background: #00bc8e !important;
+  cursor: grab;
+}

@@ -2,11 +2,13 @@
 import { useSearchParams } from 'next/navigation';
 
 import { FaVectorSquare } from 'react-icons/fa';
+import 'react-range-slider-input/dist/style.css';
 
 import FilterAccordion from '@modules/FilterAccordion/FilterAccordion';
 import CheckBox from '@modules/CheckBox/CheckBox';
+import PriceRangeSlider from '@modules/PriceRangeSlider/PriceRangeSlider';
 
-export default function Sidebar({ categories, onChecked }) {
+export default function Sidebar({ categories, priceRange, onChecked }) {
   const searchParams = useSearchParams();
   const categoryParams = searchParams.getAll('cat');
 
@@ -37,6 +39,8 @@ export default function Sidebar({ categories, onChecked }) {
             ))}
           </ul>
         </FilterAccordion>
+
+        <PriceRangeSlider priceRange={priceRange} />
       </div>
     </aside>
   );
