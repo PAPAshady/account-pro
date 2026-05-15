@@ -11,7 +11,7 @@ export default function ProductsGrid({ products, isPending }) {
         <ProductCard
           key={product._id}
           title={product.title}
-          price={product.price}
+          minPlanPrice={product.minPlanPrice}
           region={product.region}
           image={product.images[0].url}
           slug={product.slug}

@@ -29,7 +29,7 @@ export default function PriceRangeSlider({ priceRange }) {
   };
 
   return (
-    <FilterAccordion title="محدوده قیمت" subtitle="Price range" icon={<FaWallet />}>
+    <FilterAccordion title="محدوده قیمت پلن ها" subtitle="Plans price range" icon={<FaWallet />}>
       <div className="space-y-3.75">
         <div className="text-primary flex items-center justify-between gap-2">
           <span className="text-sm">از</span>

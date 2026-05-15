@@ -7,12 +7,12 @@ import PrimaryButton from '@/components/modules/PrimaryButton/PrimaryButton';
 
 export default function ProductCard({
   title,
-  price,
   region,
   image,
   slug,
   hasLikeButton,
   isFavorite,
+  minPlanPrice,
 }) {
   return (
     <div className="group relative">
@@ -42,7 +42,9 @@ export default function ProductCard({
           <div className="text-end">
             <span className="text-paragraph text-sm lg:text-base">شروع قیمت از</span>
             <p>
-              <span className="me-1.5 text-xl font-bold lg:text-lg">{price.toLocaleString()}</span>
+              <span className="me-1.5 text-xl font-bold lg:text-lg">
+                {minPlanPrice.toLocaleString()}
+              </span>
               <span className="text-primary">تومان</span>
             </p>
           </div>
