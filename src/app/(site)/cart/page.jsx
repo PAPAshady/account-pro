@@ -61,7 +61,7 @@ export default function Page() {
                   <p>سود شما از خرید</p>
                   <p className="grow text-end">
                     <span className="me-1 text-start text-xl">
-                      (۵٪) {cart?.totalPrice.toLocaleString()}
+                      (۵٪) {((cart?.totalPrice * 95) / 100).toLocaleString()}
                     </span>
                     تومان
                   </p>
