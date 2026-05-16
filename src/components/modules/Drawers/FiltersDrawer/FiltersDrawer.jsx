@@ -17,7 +17,12 @@ export default function FiltersDrawer({ title, filterParamName, children }) {
 
   const removeCategoryFilters = () => {
     const params = new URLSearchParams(searchParams);
-    params.delete(filterParamName);
+    // since price filters are set together, we have to remove them together.
+    const isPriceFilter = filterParamName.includes('Price');
+    if (isPriceFilter) {
+      params.delete('minPrice');
+      params.delete('maxPrice');
+    } else params.delete(filterParamName);
     router.push(`/shop?${params.toString()}`);
   };
 
