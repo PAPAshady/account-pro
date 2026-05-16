@@ -67,7 +67,11 @@ export default function Page() {
                   </p>
                 </div>
                 <div className="pt-4 pb-2">
-                  <PrimaryButton className="bg-primary text-blackColor w-full hover:bg-none">
+                  <PrimaryButton
+                    isLink
+                    href="/checkout"
+                    className="bg-primary text-blackColor w-full hover:bg-none"
+                  >
                     تایید و تکمیل سفارش
                   </PrimaryButton>
                 </div>
@@ -78,7 +82,7 @@ export default function Page() {
             <div className="flex w-full items-center justify-between gap-2">
               <PrimaryButton
                 isLink
-                href="/"
+                href="/checkout"
                 className="bg-primary text-blackColor max-h-15 py-1.5! text-center hover:bg-none min-[360px]:py-2.5! sm:w-1/2"
               >
                 تایید و تکمیل سفارش
