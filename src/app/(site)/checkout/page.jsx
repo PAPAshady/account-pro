@@ -124,7 +124,7 @@ export default function Page() {
                 />
               ))}
             </div>
-            <div className="mb-4 flex flex-wrap justify-between gap-2">
+            <div className="mb-4 hidden flex-wrap justify-between gap-2 lg:flex">
               <p>جمع قیمت : </p>
               <p className="grow text-end">
                 <span className="text-primary me-1.5 text-xl sm:text-2xl">
@@ -135,11 +135,32 @@ export default function Page() {
             </div>
             <PrimaryButton
               type="submit"
-              className="bg-primary text-blackColor w-full hover:bg-none"
+              className="bg-primary text-blackColor hidden w-full hover:bg-none lg:flex"
             >
               پرداخت
             </PrimaryButton>
           </aside>
+          <div className="bg-box fixed inset-0 top-[unset] bottom-0 z-10 border-t border-[#333] px-4 py-3 lg:hidden">
+            <div className="flex w-full items-center justify-between gap-2">
+              <PrimaryButton
+                type="submit"
+                className="bg-primary text-blackColor max-h-15 py-1.5! text-center hover:bg-none min-[360px]:w-[40%] min-[360px]:py-2.5!"
+              >
+                پرداخت
+              </PrimaryButton>
+              <div className="flex grow flex-col items-end gap-1">
+                <span className="text-paragraph text-xs min-[360px]:text-base">
+                  جمع کل سبد خرید
+                </span>
+                <p className="text-lg">
+                  <span className="text-primary me-1">
+                    (5%) {((cart?.totalPrice * 95) / 100).toLocaleString()}
+                  </span>
+                  تومان
+                </p>
+              </div>
+            </div>
+          </div>
         </form>
       ) : (
         <div className="border-[#3a3939 border-primary/50 mt-10 flex flex-col items-center justify-center gap-6 rounded-lg border px-4 py-5 text-center sm:py-10">
