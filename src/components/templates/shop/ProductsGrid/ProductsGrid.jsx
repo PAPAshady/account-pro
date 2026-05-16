@@ -1,13 +1,19 @@
-import ProductCard from '@modules/Cards/ProductCard/ProductCard';
+'use client';
+import { useSearchParams } from 'next/navigation';
+import { useQuery } from '@tanstack/react-query';
 
-export default function ProductsGrid({ products, isPending }) {
-  if (isPending) {
-    return <p>در حال دریافت محصولات...</p>;
-  }
+import ProductCard from '@modules/Cards/ProductCard/ProductCard';
+import { getFilteredProductsQueryOptions } from '@/queries/products';
+
+export default function ProductsGrid() {
+  const searchParams = useSearchParams();
+  const { data: products, isPending } = useQuery(getFilteredProductsQueryOptions({ searchParams }));
+
+  if (isPending) return <p>در حال دریافت محصولات...</p>;
 
   return (
     <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 sm:gap-x-4 xl:grid-cols-3 xl:gap-6">
-      {products.map((product) => (
+      {products?.map((product) => (
         <ProductCard
           key={product._id}
           title={product.title}
