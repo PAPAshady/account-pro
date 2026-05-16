@@ -14,7 +14,7 @@ export default async function Shop() {
         <Sidebar categories={categories} priceRange={priceRange} />
         <main className="space-y-6 min-[880px]:w-[70%] xl:w-[75%]">
           <ProductsPageSearchBox />
-          <FiltersSlider categories={categories} />
+          <FiltersSlider categories={categories} priceRange={priceRange} />
           <ProductsGrid />
         </main>
       </div>

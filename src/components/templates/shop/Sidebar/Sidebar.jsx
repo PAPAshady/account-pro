@@ -1,7 +1,7 @@
 'use client';
 import { useSearchParams } from 'next/navigation';
 
-import { FaVectorSquare } from 'react-icons/fa';
+import { FaVectorSquare, FaWallet } from 'react-icons/fa';
 import 'react-range-slider-input/dist/style.css';
 
 import FilterAccordion from '@modules/FilterAccordion/FilterAccordion';
@@ -41,8 +41,13 @@ export default function Sidebar({ categories, priceRange }) {
             ))}
           </ul>
         </FilterAccordion>
-
-        <PriceRangeSlider priceRange={priceRange} />
+        <FilterAccordion
+          title="محدوده قیمت پلن ها"
+          subtitle="Plans price range"
+          icon={<FaWallet />}
+        >
+          <PriceRangeSlider priceRange={priceRange} />
+        </FilterAccordion>
       </div>
     </aside>
   );

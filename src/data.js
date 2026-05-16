@@ -19,37 +19,34 @@ import {
   FaPencilAlt,
   FaFoursquare,
   FaPuzzlePiece,
-  FaCalendar,
-  FaPhotoVideo,
-  FaChartLine,
 } from 'react-icons/fa';
 
 export const services = [
   {
     id: 1,
     title: 'لایسنس ویندوز ۱۱',
-    price: '۹۰,۰۰۰',
+    minPlanPrice: '۹۰,۰۰۰',
     region: 'همه ریجن ها',
     image: '/images/apple.png',
   },
   {
     id: 2,
     title: 'اکانت پرمیوم یوتیوب',
-    price: '۱۰۰,۰۰۰',
+    minPlanPrice: '۱۰۰,۰۰۰',
     region: 'همه ریجن ها',
     image: '/images/apple.png',
   },
   {
     id: 3,
     title: 'اکانت پرمیوم اسپاتیفای یک ماهه',
-    price: '۲۰۰,۰۰۰',
+    minPlanPrice: '۲۰۰,۰۰۰',
     region: 'ریجن آمریکا',
     image: '/images/apple.png',
   },
   {
     id: 4,
     title: 'اکانت پرمیوم تلگرام یک ساله',
-    price: '۱۲۰,۰۰۰',
+    minPlanPrice: '۱۲۰,۰۰۰',
     region: 'همه ریجن ها',
     image: '/images/apple.png',
   },
