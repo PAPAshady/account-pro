@@ -1,37 +1,19 @@
 'use client';
-import { useSearchParams } from 'next/navigation';
-
-import { useQuery } from '@tanstack/react-query';
-
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { FreeMode } from 'swiper/modules';
-import { getFilteredProductsQueryOptions } from '@/queries/products';
 import 'swiper/css';
 
-import CategoriesDrawer from '@modules/CategoriesDrawer/CategoriesDrawer';
+import CategoriesDrawer from '@modules/Drawers/CategoriesDrawer/CategoriesDrawer';
 
-const filters = [
-  { title: 'مدت زمان اشتراک' },
-  { title: 'محدوده قیمت' },
-  { title: 'نحوه فعال سازی' },
-  { title: 'زبان ها' },
-];
+const filters = [{ title: 'مدت زمان اشتراک' }, { title: 'نحوه فعال سازی' }, { title: 'زبان ها' }];
 
 export default function FiltersSlider({ categories, onChecked }) {
-  const searchParams = useSearchParams();
-  const { data: products, isPending } = useQuery(getFilteredProductsQueryOptions({ searchParams }));
-
   return (
     <div className="flex items-center gap-4 min-[880px]:hidden">
       <span className="text-nowrap">فیلتر ها :‌</span>
       <Swiper modules={[FreeMode]} slidesPerView="auto" freeMode>
         <SwiperSlide className="w-auto!">
-          <CategoriesDrawer
-            categories={categories}
-            onChecked={onChecked}
-            productsQuantity={products?.length}
-            isPending={isPending}
-          />
+          <CategoriesDrawer categories={categories} onChecked={onChecked} />
         </SwiperSlide>
         {filters.map((filter) => (
           <SwiperSlide key={filter.title} className="w-auto!">
