@@ -2,10 +2,12 @@ import { useSearchParams } from 'next/navigation';
 
 import CheckBox from '@modules/CheckBox/CheckBox';
 import FiltersDrawer from '@modules/Drawers/FiltersDrawer/FiltersDrawer';
+import useCheckBoxFilterHandler from '@/hooks/useCheckBoxFilterHandler';
 
-export default function CategoriesDrawer({ categories, onChecked }) {
+export default function CategoriesDrawer({ categories }) {
   const searchParams = useSearchParams();
   const categoryParams = searchParams.getAll('cat');
+  const onChecked = useCheckBoxFilterHandler();
 
   return (
     <FiltersDrawer title="دسته بندی ها" filterParamName="cat">

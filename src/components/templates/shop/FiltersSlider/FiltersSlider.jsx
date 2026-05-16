@@ -7,13 +7,13 @@ import CategoriesDrawer from '@modules/Drawers/CategoriesDrawer/CategoriesDrawer
 
 const filters = [{ title: 'مدت زمان اشتراک' }, { title: 'نحوه فعال سازی' }, { title: 'زبان ها' }];
 
-export default function FiltersSlider({ categories, onChecked }) {
+export default function FiltersSlider({ categories }) {
   return (
     <div className="flex items-center gap-4 min-[880px]:hidden">
       <span className="text-nowrap">فیلتر ها :‌</span>
       <Swiper modules={[FreeMode]} slidesPerView="auto" freeMode>
         <SwiperSlide className="w-auto!">
-          <CategoriesDrawer categories={categories} onChecked={onChecked} />
+          <CategoriesDrawer categories={categories} />
         </SwiperSlide>
         {filters.map((filter) => (
           <SwiperSlide key={filter.title} className="w-auto!">

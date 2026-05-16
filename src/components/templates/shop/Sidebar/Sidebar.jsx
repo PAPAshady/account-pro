@@ -7,10 +7,12 @@ import 'react-range-slider-input/dist/style.css';
 import FilterAccordion from '@modules/FilterAccordion/FilterAccordion';
 import CheckBox from '@modules/CheckBox/CheckBox';
 import PriceRangeSlider from '@modules/PriceRangeSlider/PriceRangeSlider';
+import useCheckBoxFilterHandler from '@/hooks/useCheckBoxFilterHandler';
 
-export default function Sidebar({ categories, priceRange, onChecked }) {
+export default function Sidebar({ categories, priceRange }) {
   const searchParams = useSearchParams();
   const categoryParams = searchParams.getAll('cat');
+  const onChecked = useCheckBoxFilterHandler();
 
   return (
     <aside className="rounded-box-ltr border-primary/50 relative mt-6 hidden min-h-full overflow-visible border p-4 mix-blend-lighten min-[880px]:block min-[880px]:w-[30%] xl:w-[25%]">
