@@ -103,7 +103,7 @@ export default function Page() {
         </>
       ) : (
         <div className="border-[#3a3939 border-primary/50 mt-10 flex flex-col items-center justify-center gap-6 rounded-lg border px-4 py-5 text-center sm:py-10">
-          {isPending ? (
+          {isPending && user ? (
             <FaCircleNotch className="animate-spin text-3xl" />
           ) : (
             <FaShoppingBag className="text-2xl" />
