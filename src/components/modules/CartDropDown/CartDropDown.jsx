@@ -21,7 +21,7 @@ export default function CartDropDown() {
   return (
     <Root open={open} onOpenChange={setOpen}>
       <Trigger asChild>
-        <PrimaryButton className="px-3! outline-none">
+        <PrimaryButton isHighLight={open} className="px-3! outline-none">
           <FaShoppingCart />
         </PrimaryButton>
       </Trigger>
