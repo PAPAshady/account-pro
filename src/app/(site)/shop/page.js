@@ -1,3 +1,5 @@
+import { Suspense } from 'react';
+
 import { getCategories } from '@/lib/categories';
 import { getProductPriceRange } from '@/lib/products';
 import ProductsPageSearchBox from '@templates/shop/ProductsPageSearchBox/ProductsPageSearchBox';
@@ -13,9 +15,13 @@ export default async function Shop() {
       <div className="items-start gap-4 min-[880px]:flex lg:gap-8">
         <Sidebar categories={categories} priceRange={priceRange} />
         <main className="space-y-6 min-[880px]:w-[70%] xl:w-[75%]">
-          <ProductsPageSearchBox />
+          <Suspense fallback="Loading searchbox...">
+            <ProductsPageSearchBox />
+          </Suspense>
           <FiltersSlider categories={categories} priceRange={priceRange} />
-          <ProductsGrid />
+          <Suspense fallback="Loading products grid section...">
+            <ProductsGrid />
+          </Suspense>
         </main>
       </div>
     </div>
