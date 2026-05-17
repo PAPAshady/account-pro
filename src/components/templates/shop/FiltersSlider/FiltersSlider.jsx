@@ -1,6 +1,4 @@
 'use client';
-import { Suspense } from 'react';
-
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { FreeMode } from 'swiper/modules';
 import 'swiper/css';
@@ -15,26 +13,24 @@ export default function FiltersSlider({ categories, priceRange }) {
   return (
     <div className="flex items-center gap-4 min-[880px]:hidden">
       <span className="text-nowrap">فیلتر ها :‌</span>
-      <Suspense fallback="Loading mobile filters slider...">
-        <Swiper modules={[FreeMode]} slidesPerView="auto" freeMode>
-          <SwiperSlide className="w-auto!">
-            <CategoriesDrawer categories={categories} />
-          </SwiperSlide>
+      <Swiper modules={[FreeMode]} slidesPerView="auto" freeMode>
+        <SwiperSlide className="w-auto!">
+          <CategoriesDrawer categories={categories} />
+        </SwiperSlide>
 
-          <SwiperSlide className="w-auto!">
-            <FiltersDrawer title="محدوده قیمت پلن ها" filterParamName="minPrice">
-              <PriceRangeSlider priceRange={priceRange} />
-            </FiltersDrawer>
+        <SwiperSlide className="w-auto!">
+          <FiltersDrawer title="محدوده قیمت پلن ها" filterParamName="minPrice">
+            <PriceRangeSlider priceRange={priceRange} />
+          </FiltersDrawer>
+        </SwiperSlide>
+        {filters.map((filter) => (
+          <SwiperSlide key={filter.title} className="w-auto!">
+            <button className="bg-foreground hover:bg-primary hover:text-box mx-1.5 rounded-2xl rounded-tr-lg px-3 py-1.5 text-[#b7b7b7] transition-colors duration-300">
+              {filter.title}
+            </button>
           </SwiperSlide>
-          {filters.map((filter) => (
-            <SwiperSlide key={filter.title} className="w-auto!">
-              <button className="bg-foreground hover:bg-primary hover:text-box mx-1.5 rounded-2xl rounded-tr-lg px-3 py-1.5 text-[#b7b7b7] transition-colors duration-300">
-                {filter.title}
-              </button>
-            </SwiperSlide>
-          ))}
-        </Swiper>
-      </Suspense>
+        ))}
+      </Swiper>
     </div>
   );
 }

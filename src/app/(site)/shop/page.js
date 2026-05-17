@@ -13,12 +13,16 @@ export default async function Shop() {
   return (
     <div className="container">
       <div className="items-start gap-4 min-[880px]:flex lg:gap-8">
-        <Sidebar categories={categories} priceRange={priceRange} />
+        <Suspense>
+          <Sidebar categories={categories} priceRange={priceRange} />
+        </Suspense>
         <main className="space-y-6 min-[880px]:w-[70%] xl:w-[75%]">
           <Suspense fallback="Loading searchbox...">
             <ProductsPageSearchBox />
           </Suspense>
-          <FiltersSlider categories={categories} priceRange={priceRange} />
+          <Suspense fallback="Loading mobile filters slider...">
+            <FiltersSlider categories={categories} priceRange={priceRange} />
+          </Suspense>
           <Suspense fallback="Loading products grid section...">
             <ProductsGrid />
           </Suspense>

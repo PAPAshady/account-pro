@@ -1,5 +1,3 @@
-import { Suspense } from 'react';
-
 import { FaWallet } from 'react-icons/fa';
 import 'react-range-slider-input/dist/style.css';
 
@@ -15,17 +13,13 @@ export default function Sidebar({ categories, priceRange }) {
         <p className="font-stretchPro text-paragraph text-sm font-semibold">Filters</p>
       </div>
       <div className="space-y-1 pt-10">
-        <Suspense fallback="Loading categories filter...">
-          <CategoriesFilterAccordion categories={categories} />
-        </Suspense>
+        <CategoriesFilterAccordion categories={categories} />
         <FilterAccordion
           title="محدوده قیمت پلن ها"
           subtitle="Plans price range"
           icon={<FaWallet />}
         >
-          <Suspense fallback='Loading sidebar price range slider...'>
-            <PriceRangeSlider priceRange={priceRange} />
-          </Suspense>
+          <PriceRangeSlider priceRange={priceRange} />
         </FilterAccordion>
       </div>
     </aside>
