@@ -7,15 +7,19 @@ export default function PrimaryButton({
   className,
   dir = 'rtl',
   isLink = false,
+  isHighLight = false,
   ...props
 }) {
   const styles = clsx(
-    'bg-foreground  hover:bg-primary hover:bg-hatching flex cursor-pointer items-center justify-center gap-3.5 px-3.75 py-2.5 backdrop-blur-xl text-[15px] transition-all duration-300 hover:text-[#2F2F2F]',
+    'flex cursor-pointer disabled:bg-[#089270] disabled:cursor-not-allowed items-center font-semibold justify-center gap-3.5 px-3.75 py-2.5 backdrop-blur-xl text-[15px] transition-all duration-300',
+    isHighLight
+      ? 'bg-primary hover:bg-[#0bc798] text-[#2f2f2f]'
+      : 'bg-foreground hover:bg-primary hover:bg-hatching hover:text-[#2F2F2F]',
     dir === 'rtl' ? 'rounded-box-rtl' : 'rounded-box-ltr',
     className
   );
 
-  return isLink ? (
+  return isLink && !props.disabled ? (
     <Link className={styles} {...props}>
       {children}
     </Link>

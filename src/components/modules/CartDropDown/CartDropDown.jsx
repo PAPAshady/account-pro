@@ -62,7 +62,7 @@ export default function CartDropDown() {
           )}
 
           <div>
-            <div className="flex flex-wrap items-center justify-between gap-2">
+            <div className="my-1.5 flex flex-wrap items-center justify-between gap-2">
               <p className="font-medium text-[#ccc]">مبلغ قابل پرداخت :‌</p>
               <p className="grow text-end text-[32px]">
                 {(!user ? 0 : data?.totalPrice.toLocaleString()) || 0}
@@ -72,8 +72,10 @@ export default function CartDropDown() {
             {user && (hasItems || isPending) && (
               <PrimaryButton
                 isLink
+                isHighLight
                 href="/cart"
-                className="bg-primary bg-hatching w-full font-semibold text-[#2f2f2f]"
+                className="w-full"
+                disabled={isPending}
                 onClick={() => setOpen(false)}
               >
                 ثبت سفارش و پرداخت
