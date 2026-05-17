@@ -12,7 +12,7 @@ import { getCartQueryOptions } from '@/queries/cart';
 import useAuth from '@/store/useAuth';
 
 export default function CartDropDown() {
-  const [open, setOpen] = useState(true);
+  const [open, setOpen] = useState(false);
   const user = useAuth((state) => state.user);
   const { data, isPending } = useQuery(getCartQueryOptions());
   const hasItems = !!data?.items.length;
