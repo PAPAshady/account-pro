@@ -5,11 +5,12 @@ import PrimaryButton from '@modules/PrimaryButton/PrimaryButton';
 import CartItem from '@modules/CartItem/CartItem';
 import { getCartQueryOptions } from '@/queries/cart';
 import useAuth from '@/store/useAuth';
-import { FaShoppingBag } from 'react-icons/fa';
+import { FaShoppingBag, FaCircleNotch } from 'react-icons/fa';
 
 export default function Page() {
-  const { data: cart } = useQuery(getCartQueryOptions());
+  const { data: cart, isPending } = useQuery(getCartQueryOptions());
   const user = useAuth((state) => state.user);
+  const hasItems = !!cart?.totalItems;
 
   return (
     <div className="container space-y-8">
@@ -17,7 +18,8 @@ export default function Page() {
         <h2 className="font-morabba text-2xl font-semibold">سبد خرید</h2>
         <p className="font-stretchPro text-paragraph">Shopping Cart</p>
       </div>
-      {user && !!cart?.totalItems ? (
+
+      {user && !isPending && hasItems ? (
         <>
           <div className="flex items-start gap-4">
             <main className="bg-foreground flex w-full flex-col gap-3.75 overflow-hidden rounded-3xl rounded-tr-lg lg:w-2/3 xl:w-full">
@@ -101,21 +103,36 @@ export default function Page() {
         </>
       ) : (
         <div className="border-[#3a3939 border-primary/50 mt-10 flex flex-col items-center justify-center gap-6 rounded-lg border px-4 py-5 text-center sm:py-10">
-          <FaShoppingBag className="text-2xl" />
+          {isPending ? (
+            <FaCircleNotch className="animate-spin text-3xl" />
+          ) : (
+            <FaShoppingBag className="text-2xl" />
+          )}
+
           <div className="space-y-2">
-            <p className="">{!user ? 'لطفا ابتدا وارد شوید.' : 'سبد خرید شما خالی است.'}</p>
+            <p className="">
+              {!user
+                ? 'لطفا ابتدا وارد شوید.'
+                : isPending
+                  ? 'در حال بارگذاری...'
+                  : 'سبد خرید شما خالی است.'}
+            </p>
             <p className="text-paragraph text-sm">
               {!user
                 ? 'پس از ورود یا ثبت نام میتوانید محصولات خود را اضافه کنید.'
-                : 'لطفا محصولات موردنظر خود را انتخاب و به سبد اضافه کنید.'}
+                : isPending
+                  ? 'یه لحظه صبر کن. همه چی تا چند ثانیه دیگه آماده میشه.'
+                  : 'لطفا محصولات موردنظر خود را انتخاب و به سبد اضافه کنید.'}
             </p>
-            <PrimaryButton
-              isLink
-              href={!user ? '/sign-in' : '/shop'}
-              className="bg-primary bg-hatching mt-5 text-[#191919]"
-            >
-              {!user ? 'ورود و ثبت نام' : 'دیدن محصولات'}
-            </PrimaryButton>
+            {!isPending && (
+              <PrimaryButton
+                isLink
+                href={!user ? '/sign-in' : '/shop'}
+                className="bg-primary bg-hatching mt-5 text-[#191919]"
+              >
+                {!user ? 'ورود و ثبت نام' : 'دیدن محصولات'}
+              </PrimaryButton>
+            )}
           </div>
         </div>
       )}
