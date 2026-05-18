@@ -1,9 +1,6 @@
-import Image from 'next/image';
-
-import Input from '@modules/Input/Input';
-import PrimaryButton from '@modules/PrimaryButton/PrimaryButton';
 import Comment from '@modules/Comment/Comment';
 import CommentsBox from '@modules/CommentsBox/CommentsBox';
+import CommentForm from '@templates/product/CommentForm/CommentForm';
 import { commentsBoxes } from '@/data';
 
 export default function Comments() {
@@ -30,43 +27,7 @@ export default function Comments() {
                   </div>
                 </div>
               </div>
-              <form className="bg-foreground rounded-3xl rounded-tr-lg p-5">
-                <div className="mb-4">
-                  <p className="mb-2.5 text-lg">دیدگاه شما</p>
-                  <p className="text-paragraph font-light">
-                    دیدگاه شما نه تنها به ما کمک می‌کنه خدمات بهتری ارائه بدیم، بلکه به دیگر کاربران
-                    هم در انتخابشون کمک می‌کنه.
-                  </p>
-                </div>
-                <div className="mb-4">
-                  <div className="grid gap-3 md:grid-cols-2">
-                    <Input label="نام و نام خانوادگی شما : *" />
-                    <Input label="ایمیل شما : *" />
-                    <div className="w-full md:col-span-2">
-                      <label className="mb-1 block font-light">دیدگاه شما : *</label>
-                      <div className="bg-foreground rounded-box-ltr flex w-full items-center gap-2 px-3.5">
-                        <textarea
-                          className="h-40 w-full pt-2.5 font-normal outline-none"
-                          placeholder="دیدگاه خودتان را بنویسید"
-                        />
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div className="mb-6 space-y-2 font-light">
-                  <p>امتیاز شما به اکانت پرو : *</p>
-                  <div className="flex max-w-50 justify-between">
-                    <RatingButton />
-                    <RatingButton />
-                    <RatingButton />
-                    <RatingButton />
-                    <RatingButton />
-                  </div>
-                </div>
-                <PrimaryButton className="bg-primary w-full text-[#2f2f2f] hover:bg-[#0bcf9e]! hover:bg-none">
-                  ارسال دیدگاه
-                </PrimaryButton>
-              </form>
+              <CommentForm />
             </div>
           </div>
         </div>
@@ -77,13 +38,5 @@ export default function Comments() {
         ))}
       </div>
     </div>
-  );
-}
-
-function RatingButton() {
-  return (
-    <button className="hover:bg-primary grid size-8 cursor-pointer place-content-center rounded-lg rounded-tr-sm bg-[#3f3f3f] transition-colors duration-300">
-      <Image alt="" width={20} height={20} src="/images/product/star.png" />
-    </button>
   );
 }
