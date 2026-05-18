@@ -1,6 +1,7 @@
 'use client';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useParams } from 'next/navigation';
 
 import clsx from 'clsx';
 import { useForm } from 'react-hook-form';
@@ -13,6 +14,7 @@ import useAuth from '@/store/useAuth';
 import styles from './CommentForm.module.css';
 
 export default function CommentForm() {
+  const { slug } = useParams();
   const user = useAuth((state) => state.user);
   const {
     register,
@@ -35,7 +37,10 @@ export default function CommentForm() {
           <FaUser className="shrink-0 text-lg" />
           <p>برای ثبت نظر لطفا وارد حساب کاربری خود شوید.</p>
         </div>
-        <Link href="/sign-in" className="flex grow items-center justify-end gap-2">
+        <Link
+          href={`/sign-in?callbackUrl=${encodeURIComponent(`/product/${slug}#comments`)}`}
+          className="flex grow items-center justify-end gap-2"
+        >
           <span className="underline">ورود یا عضویت</span>
           <FaChevronLeft />
         </Link>

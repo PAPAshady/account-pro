@@ -1,6 +1,7 @@
 'use client';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
+import { useSearchParams } from 'next/navigation';
 
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -12,6 +13,7 @@ import api from '@/axiosInstance';
 import useAuth from '@/store/useAuth';
 
 export default function SignIn() {
+  const params = useSearchParams();
   const setUser = useAuth((state) => state.setUser);
   const router = useRouter();
   const {
@@ -39,7 +41,9 @@ export default function SignIn() {
 
       if (res.status === 200) {
         setUser(res.data.user);
-        router.push('/');
+        const callbackUrl = params.get('callbackUrl') || null;
+        const href = callbackUrl ? decodeURIComponent(callbackUrl) : '/';
+        router.push(href);
       }
     } catch (err) {}
   };
@@ -81,7 +85,10 @@ export default function SignIn() {
         </div>
         <div className="flex flex-wrap items-center justify-center gap-3 min-[515px]:justify-between">
           <p className="text-paragraph">هنوز عضوی از خانواده‌ی اکانتینو نیستید؟</p>
-          <Link href="/sign-up" className="text-primary hover:text-[#0ac596]">
+          <Link
+            href={`/sign-up?${params.toString()}`}
+            className="text-primary hover:text-[#0ac596]"
+          >
             ایجاد حساب کاربری
           </Link>
         </div>
