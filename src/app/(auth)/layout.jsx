@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
+import { Suspense } from 'react';
 
 import Particle from '@modules/Particle/Particle';
 
@@ -22,7 +23,7 @@ export default function Layout({ children }) {
               <Particle className="top-0 -right-30 z-1 size-50 opacity-50 blur-[100px] lg:size-60 lg:opacity-40" />
               <Particle className="bottom-0 -left-30 z-1 size-30 opacity-50 blur-[70px] lg:size-60 lg:opacity-40 lg:blur-[100px]" />
               <div className="relative w-full max-w-120 space-y-5 rounded-3xl rounded-tr-lg bg-[#222] p-6.25">
-                {children}
+                <Suspense>{children}</Suspense>
               </div>
             </div>
             <div className="hidden w-1/2 xl:block">
@@ -30,7 +31,7 @@ export default function Layout({ children }) {
                 alt="Account Pro"
                 width={647}
                 height={368}
-                src="/images/index/banner.png"
+                src="/images/index/Banner.png"
                 className="size-full"
               />
             </div>
