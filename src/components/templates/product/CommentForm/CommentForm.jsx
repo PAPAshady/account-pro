@@ -1,15 +1,19 @@
 'use client';
 import Image from 'next/image';
+import Link from 'next/link';
 
 import clsx from 'clsx';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { FaUser, FaChevronLeft } from 'react-icons/fa';
 
 import PrimaryButton from '@modules/PrimaryButton/PrimaryButton';
 import { commentsSchema } from '@/schemas/comment.schema';
+import useAuth from '@/store/useAuth';
 import styles from './CommentForm.module.css';
 
 export default function CommentForm() {
+  const user = useAuth((state) => state.user);
   const {
     register,
     setValue,
@@ -23,6 +27,21 @@ export default function CommentForm() {
   const submitHandler = (data) => {
     console.log(data);
   };
+
+  if (!user) {
+    return (
+      <div className="flex flex-wrap items-center justify-between gap-4 rounded-lg bg-yellow-500/20 px-5 py-3.5 font-normal text-yellow-100 select-none">
+        <div className="flex items-center gap-2">
+          <FaUser className="shrink-0 text-lg" />
+          <p>برای ثبت نظر لطفا وارد حساب کاربری خود شوید.</p>
+        </div>
+        <Link href="/sign-in" className="flex grow items-center justify-end gap-2">
+          <span className="underline">ورود یا عضویت</span>
+          <FaChevronLeft />
+        </Link>
+      </div>
+    );
+  }
 
   return (
     <form

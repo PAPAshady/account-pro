@@ -19,6 +19,7 @@ export default function Comments() {
           <p className="text-paragraph font-stretchPro text-sm">Reviews</p>
           <div className="pt-8">
             <div className="flex flex-col gap-12.5">
+              <CommentForm />
               <div className="flex flex-col gap-10">
                 <div>
                   <Comment />
@@ -27,7 +28,6 @@ export default function Comments() {
                   </div>
                 </div>
               </div>
-              <CommentForm />
             </div>
           </div>
         </div>
