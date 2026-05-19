@@ -26,7 +26,7 @@ export default function Comment({ isReply, body, user, rating, createdAt }) {
         <div className="mb-3 rounded-lg rounded-tr-sm bg-[#191919] p-3.75 text-justify font-light">
           <p>{body}</p>
         </div>
-        {!isReply && (
+        {!isReply && rating && (
           <div className="text-primary flex justify-end gap-0.5 text-[15px]">
             {Array(rating)
               .fill()
