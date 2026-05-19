@@ -1,6 +1,6 @@
-import Comment from '@modules/Comment/Comment';
 import CommentsBox from '@modules/CommentsBox/CommentsBox';
 import CommentForm from '@templates/product/CommentForm/CommentForm';
+import CommentsList from '@templates/product/CommentsList/CommentsList';
 import { commentsBoxes } from '@/data';
 
 export default function Comments({ productId }) {
@@ -20,14 +20,7 @@ export default function Comments({ productId }) {
           <div className="pt-8">
             <div className="flex flex-col gap-12.5">
               <CommentForm productId={productId} />
-              <div className="flex flex-col gap-10">
-                <div>
-                  <Comment />
-                  <div className="ps-5 pt-4">
-                    <Comment isReply />
-                  </div>
-                </div>
-              </div>
+              <CommentsList productId={productId} />
             </div>
           </div>
         </div>
