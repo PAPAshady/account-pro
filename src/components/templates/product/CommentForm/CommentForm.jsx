@@ -7,18 +7,22 @@ import clsx from 'clsx';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { FaUser, FaChevronLeft } from 'react-icons/fa';
+import { useMutation } from '@tanstack/react-query';
 
 import PrimaryButton from '@modules/PrimaryButton/PrimaryButton';
 import { commentsSchema } from '@/schemas/comment.schema';
 import useAuth from '@/store/useAuth';
 import styles from './CommentForm.module.css';
+import { addCommentMutationOptions } from '@/queries/comments';
 
-export default function CommentForm() {
+export default function CommentForm({ productId }) {
+  const { mutate, isPending } = useMutation(addCommentMutationOptions(productId));
   const { slug } = useParams();
   const user = useAuth((state) => state.user);
   const {
     register,
     setValue,
+    reset,
     handleSubmit,
     watch,
     formState: { errors },
@@ -26,8 +30,8 @@ export default function CommentForm() {
     resolver: zodResolver(commentsSchema),
   });
 
-  const submitHandler = (data) => {
-    console.log(data);
+  const submitHandler = async (data) => {
+    mutate(data, { onSuccess: () => reset() });
   };
 
   if (!user) {
@@ -99,8 +103,8 @@ export default function CommentForm() {
             ))}
         </div>
       </div>
-      <PrimaryButton type="submit" className="w-full" isHighLight>
-        ارسال دیدگاه
+      <PrimaryButton disabled={isPending} type="submit" className="w-full" isHighLight>
+        {isPending ? 'لطفا صبر کنید...' : 'ارسال دیدگاه'}
       </PrimaryButton>
     </form>
   );

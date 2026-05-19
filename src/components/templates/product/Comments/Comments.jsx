@@ -3,7 +3,7 @@ import CommentsBox from '@modules/CommentsBox/CommentsBox';
 import CommentForm from '@templates/product/CommentForm/CommentForm';
 import { commentsBoxes } from '@/data';
 
-export default function Comments() {
+export default function Comments({ productId }) {
   return (
     <div id="comments" className="flex flex-col gap-12 lg:flex-row lg:items-start lg:gap-6">
       <div className="relative lg:w-2/3">
@@ -19,7 +19,7 @@ export default function Comments() {
           <p className="text-paragraph font-stretchPro text-sm">Reviews</p>
           <div className="pt-8">
             <div className="flex flex-col gap-12.5">
-              <CommentForm />
+              <CommentForm productId={productId} />
               <div className="flex flex-col gap-10">
                 <div>
                   <Comment />

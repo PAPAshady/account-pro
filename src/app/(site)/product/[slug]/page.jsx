@@ -29,7 +29,7 @@ export default async function Product({ params }) {
       <ActivationMethods />
       <ImportantPoints />
       <Faq />
-      <Comments />
+      <Comments productId={product._id} />
     </div>
   );
 }
