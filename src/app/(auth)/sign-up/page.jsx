@@ -1,6 +1,7 @@
 'use client';
 import Link from 'next/link';
 import { useRouter, useSearchParams } from 'next/navigation';
+import { useState } from 'react';
 
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -13,6 +14,7 @@ import useAuth from '@/store/useAuth';
 import api from '@/axiosInstance';
 
 export default function SignUp() {
+  const [isPending, setIsPending] = useState(false);
   const params = useSearchParams();
   const setUser = useAuth((state) => state.setUser);
   const router = useRouter();
@@ -25,6 +27,7 @@ export default function SignUp() {
 
   const submitHandler = async (data) => {
     try {
+      setIsPending(true);
       const res = await api.post('/api/auth/signup', data);
       if (res.status === 201) {
         setUser(res.data.user);
@@ -46,6 +49,8 @@ export default function SignUp() {
         return;
       }
       toast.error('خطا در ایجاد حساب کاربری. لطفا مجددا تلاش کنید.');
+    } finally {
+      setIsPending(false);
     }
   };
 
@@ -108,8 +113,8 @@ export default function SignUp() {
           </div>
         </div>
         <div className="pt-2">
-          <PrimaryButton className="bg-primary mx-auto w-[80%] max-w-62.5 font-bold text-[#2f2f2f] hover:bg-[#0ac596]! hover:bg-none">
-            ایجاد حساب کاربری
+          <PrimaryButton disabled={isPending} isHighLight className="w-full">
+            {isPending ? 'لطفا صبر کنید...' : 'ایجاد حساب کاربری'}
           </PrimaryButton>
         </div>
         <div className="flex flex-wrap items-center justify-center gap-3 min-[515px]:justify-between">
