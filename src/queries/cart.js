@@ -22,7 +22,10 @@ export const addToCartMutationOptions = () =>
       refreshCart(data);
       toast.success('محصول به سبد خرید شما اضافه شد.');
     },
-    onError: (err) => toast.error(err.response.data.message),
+    onError: (err) =>
+      toast.error(
+        err.response.data?.message || 'محصول به سبد خرید اضافه نشد. لطفا مجددا تلاش کنید.'
+      ),
   });
 
 export const removeFromCartMutationOptions = () =>
