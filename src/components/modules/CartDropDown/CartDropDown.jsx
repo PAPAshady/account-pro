@@ -31,7 +31,7 @@ export default function CartDropDown() {
           dir="rtl"
           sideOffset={10}
           className={clsx(
-            'data-[state=closed]:animate-slide-out data-[state=open]:animate-slide-in flex flex-col rounded-3xl rounded-tr-lg bg-[#252525] px-2 py-3',
+            'data-[state=closed]:animate-slide-out data-[state=open]:animate-slide-in z-5 flex flex-col rounded-3xl rounded-tr-lg bg-[#252525] px-2 py-3',
             isScrollable ? 'w-100' : 'w-95'
           )}
         >

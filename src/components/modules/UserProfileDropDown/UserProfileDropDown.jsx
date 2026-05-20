@@ -36,7 +36,7 @@ export default function UserProfileDropDown({ userName }) {
           align="end"
           dir="rtl"
           sideOffset={10}
-          className="data-[state=closed]:animate-slide-out data-[state=open]:animate-slide-in w-62.5 space-y-5 rounded-3xl rounded-tr-lg bg-[#252525] p-3.75 pt-6"
+          className="data-[state=closed]:animate-slide-out data-[state=open]:animate-slide-in z-5 w-62.5 space-y-5 rounded-3xl rounded-tr-lg bg-[#252525] p-3.75 pt-6"
         >
           <div className="bg-primary bg-hatching space-y-2 rounded-md rounded-tl-[20px] p-6.25 pb-3.75">
             <div>
