@@ -1,4 +1,5 @@
 import { queryOptions, mutationOptions } from '@tanstack/react-query';
+import { toast } from 'sonner';
 
 import { getCart, addToCart, removeFromCart, updateCartAmount } from '@/services/cart';
 import queryClient from '@/queryClient';
@@ -17,7 +18,11 @@ export const addToCartMutationOptions = () =>
   mutationOptions({
     mutationKey: ['cart'],
     mutationFn: addToCart,
-    onSuccess: refreshCart,
+    onSuccess: (data) => {
+      refreshCart(data);
+      toast.success('محصول به سبد خرید شما اضافه شد.');
+    },
+    onError: (err) => toast.error(err.response.data.message),
   });
 
 export const removeFromCartMutationOptions = () =>

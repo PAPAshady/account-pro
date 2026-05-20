@@ -11,7 +11,7 @@ export async function POST(req) {
     await connectToDB();
     const userValidationRes = await validateUser();
     if (userValidationRes.status !== 200)
-      return Response.json({ message: 'Login first' }, { status: 401 });
+      return Response.json({ message: 'لطفا ابتدا وارد حساب کاربری خود شوید.' }, { status: 401 });
 
     const { user } = await userValidationRes.json();
     const reqBody = await req.json();
@@ -21,7 +21,7 @@ export async function POST(req) {
 
     if (!validated.success) {
       const errors = validated.error.flatten().fieldErrors;
-      return Response.json({ message: 'Invalid user input', errors }, { status: 400 });
+      return Response.json({ message: 'مشخصات محصول نامعتبر است.', errors }, { status: 400 });
     }
 
     const plan = await plansModel.findOne(
@@ -29,12 +29,12 @@ export async function POST(req) {
       'title duration price _id productId'
     );
 
-    if (!plan) return Response.json({ message: "This plan dosen't have exist" }, { status: 404 });
+    if (!plan)
+      return Response.json({ message: 'این پلن برای این محصول وجود ندارد' }, { status: 404 });
 
     const product = await productsModel.findOne({ _id: plan.productId }, 'title images -_id slug');
 
-    if (!product)
-      return Response.json({ message: "This product dosen't have exist" }, { status: 404 });
+    if (!product) return Response.json({ message: 'این محصول وجود ندارد.' }, { status: 404 });
 
     const cart = await cartModel.findOne({ user: user._id }, '-__v');
 
@@ -43,7 +43,7 @@ export async function POST(req) {
     );
 
     if (productAlreadyExists) {
-      return Response.json({ message: 'محصول در سبد شما موجود است.' }, { status: 409 });
+      return Response.json({ message: 'این محصول در سبد شما موجود است.' }, { status: 409 });
     }
 
     const newCartItem = {
@@ -72,7 +72,10 @@ export async function POST(req) {
     return Response.json(updatedCart, { status: 201 });
   } catch (error) {
     console.error('Failed to add to cart => ', error);
-    return Response.json({ message: 'Failed to add to cart.' }, { status: 500 });
+    return Response.json(
+      { message: 'محصول به سبد خرید اضافه نشد. لطفا مجددا تلاش کنید.' },
+      { status: 500 }
+    );
   }
 }
 
