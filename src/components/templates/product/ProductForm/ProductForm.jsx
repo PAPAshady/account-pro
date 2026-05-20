@@ -13,9 +13,9 @@ import { useForm } from 'react-hook-form';
 
 import { cartItemsSchema } from '@/schemas/cartItem.schema';
 
-export default function ProductForm({ price, plans }) {
+export default function ProductForm({ plans }) {
   const [quantity, setQuantity] = useState(1);
-  const { mutate } = useMutation(addToCartMutationOptions());
+  const { mutate, isPending } = useMutation(addToCartMutationOptions());
   const {
     register,
     handleSubmit,
@@ -90,11 +90,13 @@ export default function ProductForm({ price, plans }) {
         </div>
         <div>
           <PrimaryButton
-            className="bg-primary w-full font-bold text-[#191919] hover:bg-[#0dbe92]! hover:bg-none"
+            className="w-full"
             dir="ltr"
             type="submit"
+            isHighLight
+            disabled={isPending}
           >
-            افزودن به سبد خرید
+            {isPending ? 'لطفا صبر کنید...' : 'افزودن به سبد خرید'}
           </PrimaryButton>
         </div>
       </div>
