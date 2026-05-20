@@ -39,18 +39,17 @@ export default function SignIn() {
       }
     } catch (err) {
       const { status, data } = err.response;
-
       if (status === 400) {
         for (let key in data.errors) {
           setError(key, { message: data.errors[key] });
         }
         return;
       }
-
       if (status === 401) {
         toast.error(data.message);
         return;
       }
+      toast.error('خطا در ورود به حساب کاربری. لطفا مجددا تلاش کنید.');
     } finally {
       setIsPending(false);
     }

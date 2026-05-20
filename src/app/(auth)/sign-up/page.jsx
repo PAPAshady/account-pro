@@ -4,6 +4,7 @@ import { useRouter, useSearchParams } from 'next/navigation';
 
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { toast } from 'sonner';
 
 import Input from '@modules/Input/Input';
 import PrimaryButton from '@modules/PrimaryButton/PrimaryButton';
@@ -25,26 +26,27 @@ export default function SignUp() {
   const submitHandler = async (data) => {
     try {
       const res = await api.post('/api/auth/signup', data);
-
-      if (res.status === 400) {
-        for (let key in res.data.errors) {
-          setError(key, { message: res.data.errors[key] });
-        }
-        return;
-      }
-
-      if (res.status === 409) {
-        setError(res.data.field, { message: res.data.message });
-        return;
-      }
-
       if (res.status === 201) {
         setUser(res.data.user);
         const callbackUrl = params.get('callbackUrl') || null;
         const href = callbackUrl ? decodeURIComponent(callbackUrl) : '/';
+        toast.success('خوش آمدید');
         router.push(href);
       }
-    } catch (err) {}
+    } catch (err) {
+      const { status, data } = err.response;
+      if (status === 400) {
+        for (let key in data.errors) {
+          setError(key, { message: data.errors[key] });
+        }
+        return;
+      }
+      if (status === 409) {
+        setError(data.field, { message: data.message });
+        return;
+      }
+      toast.error('خطا در ایجاد حساب کاربری. لطفا مجددا تلاش کنید.');
+    }
   };
 
   return (
