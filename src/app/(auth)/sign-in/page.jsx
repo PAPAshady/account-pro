@@ -2,9 +2,11 @@
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useSearchParams } from 'next/navigation';
+import { useState } from 'react';
 
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { toast } from 'sonner';
 
 import Input from '@modules/Input/Input';
 import PrimaryButton from '@modules/PrimaryButton/PrimaryButton';
@@ -13,6 +15,7 @@ import api from '@/axiosInstance';
 import useAuth from '@/store/useAuth';
 
 export default function SignIn() {
+  const [isPending, setIsPending] = useState(false);
   const params = useSearchParams();
   const setUser = useAuth((state) => state.setUser);
   const router = useRouter();
@@ -25,27 +28,32 @@ export default function SignIn() {
 
   const submitHandler = async (data) => {
     try {
+      setIsPending(true);
       const res = await api.post('/api/auth/signin', data);
-
-      if (res.status === 400) {
-        for (let key in res.data.errors) {
-          setError(key, { message: res.data.errors[key] });
-        }
-        return;
-      }
-
-      if (res.status === 401) {
-        setError('root', { message: res.data.message });
-        return;
-      }
-
       if (res.status === 200) {
         setUser(res.data.user);
         const callbackUrl = params.get('callbackUrl') || null;
         const href = callbackUrl ? decodeURIComponent(callbackUrl) : '/';
+        toast.success('خوش آمدید.');
         router.push(href);
       }
-    } catch (err) {}
+    } catch (err) {
+      const { status, data } = err.response;
+
+      if (status === 400) {
+        for (let key in data.errors) {
+          setError(key, { message: data.errors[key] });
+        }
+        return;
+      }
+
+      if (status === 401) {
+        toast.error(data.message);
+        return;
+      }
+    } finally {
+      setIsPending(false);
+    }
   };
 
   return (
@@ -79,8 +87,8 @@ export default function SignIn() {
           />
         </div>
         <div className="pt-2">
-          <PrimaryButton className="bg-primary mx-auto w-[80%] max-w-62.5 font-bold text-[#2f2f2f] hover:bg-[#0ac596]! hover:bg-none">
-            ورود به حساب کاربری
+          <PrimaryButton disabled={isPending} isHighLight className="w-full">
+            {isPending ? 'لطفا صبر کنید...' : 'ورود به حساب کاربری'}
           </PrimaryButton>
         </div>
         <div className="flex flex-wrap items-center justify-center gap-3 min-[515px]:justify-between">
