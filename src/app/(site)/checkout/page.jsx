@@ -15,17 +15,32 @@ import { checkoutSchema } from '@/schemas/checkout.schema';
 import { addOrderMutationOptions } from '@/queries/orders';
 
 export default function Page() {
+  'use no memo';
   const {
     register,
     handleSubmit,
+    reset,
+    setError,
     formState: { errors },
-  } = useForm({ resolver: zodResolver(checkoutSchema) });
+  } = useForm({
+    resolver: zodResolver(checkoutSchema),
+  });
   const user = useAuth((state) => state.user);
   const { data: cart } = useQuery(getCartQueryOptions());
-  const { mutate } = useMutation(addOrderMutationOptions());
+  const { mutate, isPending } = useMutation(addOrderMutationOptions());
 
   const submitHandler = (data) => {
-    mutate(data, { onSuccess: (data) => console.log(data) });
+    mutate(data, {
+      onSuccess: () => reset(),
+      onError: (err) => {
+        const { data, status } = err.response;
+        if (status === 400 && data.errors) {
+          for (let key in data.errors) {
+            setError(key, { message: data.errors[key] });
+          }
+        }
+      },
+    });
   };
 
   return (
@@ -45,7 +60,7 @@ export default function Page() {
                 <Input
                   label="نام *"
                   aria-invalid={!!errors.firstName}
-                  message={errors.first_name?.message}
+                  message={errors.firstName?.message}
                   {...register('firstName')}
                 />
               </div>
@@ -53,7 +68,7 @@ export default function Page() {
                 <Input
                   label="نام خانوادگی *"
                   aria-invalid={!!errors.lastName}
-                  message={errors.last_name?.message}
+                  message={errors.lastName?.message}
                   {...register('lastName')}
                 />
               </div>
@@ -140,19 +155,23 @@ export default function Page() {
               </p>
             </div>
             <PrimaryButton
+              disabled={isPending}
               type="submit"
-              className="bg-primary text-blackColor hidden w-full hover:bg-none lg:flex"
+              isHighLight
+              className="hidden w-full lg:flex"
             >
-              پرداخت
+              {isPending ? 'لطفا صبر کنید...' : 'پرداخت'}
             </PrimaryButton>
           </aside>
           <div className="bg-box fixed inset-0 top-[unset] bottom-0 z-10 border-t border-[#333] px-4 py-3 lg:hidden">
             <div className="flex w-full items-center justify-between gap-2">
               <PrimaryButton
+                disabled={isPending}
                 type="submit"
-                className="bg-primary text-blackColor max-h-15 py-1.5! text-center hover:bg-none min-[360px]:w-[40%] min-[360px]:py-2.5!"
+                isHighLight
+                className="max-h-15 py-1.5! text-center min-[360px]:w-[40%] min-[360px]:py-2.5!"
               >
-                پرداخت
+                {isPending ? 'لطفا صبر کنید...' : 'پرداخت'}
               </PrimaryButton>
               <div className="flex grow flex-col items-end gap-1">
                 <span className="text-paragraph text-xs min-[360px]:text-base">
