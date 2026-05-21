@@ -1,10 +1,10 @@
 import z from 'zod';
 
 export const checkoutSchema = z.object({
-  first_name: z
+  firstName: z
     .string({ message: 'نام باید یک رشته باشد' })
     .min(1, { message: 'نام خود را وارد کنید' }),
-  last_name: z
+  lastName: z
     .string({ message: 'نام خانوادگی باید یک رشته باشد' })
     .min(1, { message: 'نام خانوادگی خود را وارد کنید' }),
   email: z.email({ message: 'لطفا یک ایمیل معتبر وارد کنید' }),

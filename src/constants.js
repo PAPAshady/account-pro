@@ -17,3 +17,9 @@ export const CART_ITEM_AMOUNT_LIMIT = {
   MIN: 1,
   MAX: 99,
 };
+
+export const ORDER_STATUS = {
+  PENDING: 'pending',
+  REJECTED: 'rejected',
+  SUCCESS: 'success',
+};

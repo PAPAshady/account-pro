@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const cartItemSchema = mongoose.Schema({
+export const cartItemSchema = mongoose.Schema({
   title: {
     type: String,
     required: true,

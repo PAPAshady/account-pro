@@ -3,6 +3,7 @@ import { FaShoppingBag } from 'react-icons/fa';
 import { useQuery } from '@tanstack/react-query';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { useMutation } from '@tanstack/react-query';
 import clsx from 'clsx';
 
 import Input from '@modules/Input/Input';
@@ -11,6 +12,7 @@ import PrimaryButton from '@modules/PrimaryButton/PrimaryButton';
 import { getCartQueryOptions } from '@/queries/cart';
 import useAuth from '@/store/useAuth';
 import { checkoutSchema } from '@/schemas/checkout.schema';
+import { addOrderMutationOptions } from '@/queries/orders';
 
 export default function Page() {
   const {
@@ -20,9 +22,10 @@ export default function Page() {
   } = useForm({ resolver: zodResolver(checkoutSchema) });
   const user = useAuth((state) => state.user);
   const { data: cart } = useQuery(getCartQueryOptions());
+  const { mutate } = useMutation(addOrderMutationOptions());
 
   const submitHandler = (data) => {
-    console.log(data);
+    mutate(data, { onSuccess: (data) => console.log(data) });
   };
 
   return (
@@ -32,23 +35,26 @@ export default function Page() {
         <p className="font-stretchPro text-paragraph">Checkout</p>
       </div>
       {user && !!cart?.totalItems ? (
-        <form onSubmit={handleSubmit(submitHandler)} className="flex flex-col gap-4 lg:flex-row">
+        <form
+          onSubmit={handleSubmit(submitHandler)}
+          className="flex flex-col gap-4 lg:flex-row lg:items-start"
+        >
           <main className="bg-foreground rounded-3xl rounded-tr-lg p-5 lg:w-2/3 xl:w-full">
             <div className="mb-5 grid grid-cols-1 gap-5 sm:grid-cols-2">
               <div>
                 <Input
                   label="نام *"
-                  aria-invalid={!!errors.first_name}
+                  aria-invalid={!!errors.firstName}
                   message={errors.first_name?.message}
-                  {...register('first_name')}
+                  {...register('firstName')}
                 />
               </div>
               <div>
                 <Input
                   label="نام خانوادگی *"
-                  aria-invalid={!!errors.last_name}
+                  aria-invalid={!!errors.lastName}
                   message={errors.last_name?.message}
-                  {...register('last_name')}
+                  {...register('lastName')}
                 />
               </div>
               <div>
