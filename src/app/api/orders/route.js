@@ -39,6 +39,7 @@ export async function POST(req) {
     };
 
     const createdOrder = await ordersModel.create(newOrder);
+    await cartModel.findOneAndUpdate({ user: user._id }, { items: [] }); // empty cart
     return Response.json(createdOrder, { status: 201 });
   } catch (err) {
     console.log('Error adding order to db => ', err);

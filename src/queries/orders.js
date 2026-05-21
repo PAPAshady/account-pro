@@ -10,6 +10,8 @@ export const addOrderMutationOptions = () =>
     mutationFn: addOrder,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['orders'] });
+      const prevCart = queryClient.getQueryData(['cart']);
+      queryClient.setQueryData(['cart'], { ...prevCart, totalItems: 0, totalPrice: 0, items: [] });
       toast.success('پرداخت موفقیت آمیز بود.');
     },
     onError: (err) => {
