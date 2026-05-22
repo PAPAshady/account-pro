@@ -29,8 +29,6 @@ export default async function UserProducts() {
 
 async function ProductsList() {
   const products = await getUserProducts();
-  await new Promise((r) => setTimeout(r, 1000));
-
   if (!products.length) {
     return (
       <div className="px-3 pt-3 text-center md:px-4 lg:pt-6">
