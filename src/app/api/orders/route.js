@@ -50,6 +50,7 @@ export async function POST(req) {
         userName: `${order.firstName} ${order.lastName}`,
         email: order.email,
         createdAt: new Date(),
+        expiresAt: new Date(new Date().getTime() + duration * 24 * 60 * 60 * 1000),
       })
     );
 

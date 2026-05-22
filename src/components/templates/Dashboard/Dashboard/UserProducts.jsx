@@ -32,10 +32,9 @@ export default async function UserProducts() {
   );
 }
 
-function License({ title, createdAt, price, duration }) {
+function License({ title, createdAt, expiresAt, price }) {
   const buyDate = new Date(createdAt);
-  const durationinMs = duration * 24 * 60 * 60 * 1000;
-  const expireDate = new Date(buyDate.getTime() + durationinMs);
+  const expireDate = new Date(expiresAt);
   const remainingDays = Math.max(
     0,
     Math.ceil((expireDate.getTime() - new Date().getTime()) / (1000 * 60 * 60 * 24))

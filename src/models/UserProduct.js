@@ -11,6 +11,7 @@ const schema = mongoose.Schema({
     {
       title: { type: String, required: true, trim: true, min: 3 },
       createdAt: { type: Date, required: true, default: new Date() },
+      expiresAt: { type: Date, required: true },
       price: { type: Number, default: 0, min: 0 },
       accountType: { type: String, required: true, default: 'new', min: 3 },
       imageUrl: { type: String, required: true },
