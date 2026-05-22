@@ -75,7 +75,7 @@ export default function Header() {
             <Navbar />
             <SearchBox />
             {user ? (
-              <UserProfileDropDown userName={user.name} />
+              <UserProfileDropDown />
             ) : (
               <PrimaryButton isLink href="/sign-in">
                 ورود/ثبت نام
