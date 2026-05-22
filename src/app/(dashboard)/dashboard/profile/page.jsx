@@ -1,10 +1,6 @@
 import Form from '@templates/Dashboard/Profile/Form';
-import { validateUser } from '@/utils/auth';
 
-export default async function Page() {
-  const userRes = await validateUser();
-  const { user } = await userRes.json();
-
+export default function Page() {
   return (
     <div className="pb-6">
       <div className="relative">
@@ -20,7 +16,7 @@ export default async function Page() {
             اطلاعات حساب کاربری
           </h3>
         </div>
-        <Form name={user.name} phone={user.phone} />
+        <Form />
       </div>
     </div>
   );

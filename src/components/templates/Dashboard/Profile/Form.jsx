@@ -1,4 +1,6 @@
 'use client';
+import { useEffect } from 'react';
+
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { toast } from 'sonner';
@@ -9,13 +11,30 @@ import { userProfileSchema } from '@/schemas/auth.schema';
 import api from '@/axiosInstance';
 import useAuth from '@/store/useAuth';
 
-export default function Form({ name = '', phone = '' }) {
+export default function Form() {
   const setUser = useAuth((state) => state.setUser);
   const {
     register,
     handleSubmit,
+    setValue,
     formState: { errors },
-  } = useForm({ resolver: zodResolver(userProfileSchema), defaultValues: { name, phone } });
+  } = useForm({ resolver: zodResolver(userProfileSchema) });
+
+  useEffect(() => {
+    const getMe = async () => {
+      try {
+        const res = await api.get('/api/auth/me');
+        if (res.status === 200) {
+          setValue('name', res.data.name);
+          setValue('phone', res.data.phone);
+        }
+      } catch (err) {
+        console.log('Error fetching user data in profile page => ', err);
+        toast.error('خطا در دریافت اطلاعات کاربر.');
+      }
+    };
+    getMe();
+  }, [setValue]);
 
   const submitHandler = async (data) => {
     try {
