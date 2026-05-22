@@ -4,6 +4,7 @@ import { validateUser } from '@/utils/auth';
 import cartModel from '@/models/Cart';
 import ordersModel from '@/models/Order';
 import { ORDER_STATUS } from '@/constants';
+import userProductsModel from '@/models/UserProduct';
 
 export async function POST(req) {
   try {
@@ -37,6 +38,31 @@ export async function POST(req) {
       status: ORDER_STATUS.SUCCESS,
       orderId: Date.now().toString(36).toUpperCase(),
     };
+
+    const newUserProducts = cart.items.map(
+      ({ title, price, accountType, imageUrl, duration, slug }) => ({
+        title,
+        price,
+        accountType,
+        imageUrl,
+        duration,
+        slug,
+        userName: `${order.firstName} ${order.lastName}`,
+        email: order.email,
+        createdAt: new Date(),
+      })
+    );
+
+    const userProducts = await userProductsModel.findOne({ user: user._id }, '_id');
+
+    if (userProducts) {
+      await userProductsModel.findOneAndUpdate(
+        { user: user._id },
+        { $push: { products: { $each: newUserProducts } } }
+      );
+    } else {
+      await userProductsModel.create({ user: user._id, products: newUserProducts });
+    }
 
     const createdOrder = await ordersModel.create(newOrder);
     await cartModel.findOneAndUpdate({ user: user._id }, { items: [] }); // empty cart
