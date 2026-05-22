@@ -29,6 +29,8 @@ const schema = mongoose.Schema({
   },
 });
 
+schema.index({ expiresAt: 1 }, { expireAfterSeconds: 0 });
+
 const userProductsModel = mongoose.models.UserProduct || mongoose.model('UserProduct', schema);
 
 export default userProductsModel;
