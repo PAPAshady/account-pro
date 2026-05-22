@@ -41,24 +41,26 @@ export async function PUT(req) {
 
     const { user } = await userRes.json();
 
-    const isValidPassword = verifyPassword(reqBody.prevPassword, user.password);
+    const newUserData = { phone: reqBody.phone, name: reqBody.name };
 
-    if (!isValidPassword) {
-      return Response.json(
-        { message: 'پسورد وارد شده اشتباه است.', field: 'prevPassword' },
-        { status: 400 }
-      );
+    // validate password if user wants to update it
+    if (reqBody.newPassword) {
+      const isValidPassword = verifyPassword(reqBody.prevPassword, user.password);
+      if (!isValidPassword) {
+        return Response.json(
+          { message: 'رمز عبور وارد شده اشتباه است.', field: 'prevPassword' },
+          { status: 400 }
+        );
+      }
+      const newPassword = hashPassword(reqBody.newPassword);
+      newUserData.password = newPassword;
     }
 
-    const newPassword = hashPassword(reqBody.newPassword);
+    const updatedUserData = await usersModel.findOneAndUpdate({ _id: user._id }, newUserData, {
+      returnDocument: 'after',
+    });
 
-    const newUserData = await usersModel.findOneAndUpdate(
-      { _id: user._id },
-      { password: newPassword, phone: reqBody.phone, name: reqBody.name },
-      { returnDocument: 'after' }
-    );
-
-    return Response.json(newUserData);
+    return Response.json(updatedUserData);
   } catch (err) {
     console.error('Failed to update user data => ', err);
     return Response.json({ message: 'خطا در ویرایش اطلاعات کاربر.' }, { status: 500 });

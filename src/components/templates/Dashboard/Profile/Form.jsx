@@ -17,6 +17,7 @@ export default function Form() {
     register,
     handleSubmit,
     setValue,
+    setError,
     formState: { errors },
   } = useForm({ resolver: zodResolver(userProfileSchema) });
 
@@ -44,7 +45,19 @@ export default function Form() {
         toast.success('اطلاعات شما با موفقیت ویرایش شد.');
       }
     } catch (err) {
-      console.log('Error updating user data => ', err);
+      const { data, status } = err.response;
+      if (status === 400) {
+        if (data.errors) {
+          for (let key in data.errors) {
+            setError(key, { message: data.errors[key] });
+          }
+        } else {
+          setError(data.field, { message: data.message });
+        }
+        return;
+      }
+
+      console.log('Error updating user data => ', err.response);
       toast.error('خطا در ویرایش اطلاعات.');
     }
   };
@@ -74,6 +87,7 @@ export default function Form() {
             type="password"
             aria-invalid={!!errors.prevPassword}
             message={errors.prevPassword?.message}
+            autoComplete="new-password"
             {...register('prevPassword')}
           />
         </div>
@@ -83,6 +97,7 @@ export default function Form() {
             type="password"
             aria-invalid={!!errors.newPassword}
             message={errors.newPassword?.message}
+            autoComplete="new-password"
             {...register('newPassword')}
           />
         </div>
@@ -92,6 +107,7 @@ export default function Form() {
             type="password"
             aria-invalid={!!errors.repeatedNewPassword}
             message={errors.repeatedNewPassword?.message}
+            autoComplete="new-password"
             {...register('repeatedNewPassword')}
           />
         </div>

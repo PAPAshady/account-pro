@@ -46,17 +46,43 @@ export const userProfileSchema = z
       .refine((val) => /^09\d{9}$/.test(val), {
         message: 'شماره موبایل باید با 09 شروع شود و 11 رقم باشد',
       }),
-    prevPassword: z
-      .string()
-      .min(6, { message: 'رمز عبور سابق باید حداقل شامل ۶ کرکتر باشد' })
-      .max(20, { message: 'رمز عبور سابق باید حداکثر ۲۰ کرکتر داشته باشد.' }),
-    newPassword: z
-      .string()
-      .min(6, { message: 'رمز عبور جدید باید حداقل شامل ۶ کرکتر باشد' })
-      .max(20, { message: 'رمز عبور جدید باید حداکثر ۲۰ کرکتر داشته باشد.' }),
+    prevPassword: z.string().refine(
+      (val) => {
+        if (val.length) {
+          return val.length >= 6 && val.length <= 20;
+        }
+        return true;
+      },
+      { message: 'رمز عبور سابق باید حداقل ۶ و حداکثر ۲۰ کاراکتر داشته باشد.' }
+    ),
+    newPassword: z.string().refine(
+      (val) => {
+        if (val.length) {
+          return val.length >= 6 && val.length <= 20;
+        }
+        return true;
+      },
+      { message: 'رمز عبور جدید باید حداقل ۶ و حداکثر ۲۰ کاراکتر داشته باشد.' }
+    ),
     repeatedNewPassword: z.string(),
   })
   .superRefine((data, ctx) => {
+    if (data.prevPassword && !data.newPassword) {
+      return ctx.addIssue({
+        code: 'custom',
+        path: ['newPassword'],
+        message: 'رمز عبور جدید را وارد کنید.',
+      });
+    }
+
+    if (!data.prevPassword && data.newPassword) {
+      return ctx.addIssue({
+        code: 'custom',
+        path: ['prevPassword'],
+        message: 'رمز عبور سابق خود را وارد کنید.',
+      });
+    }
+
     if (data.newPassword !== data.repeatedNewPassword) {
       return ctx.addIssue({
         code: 'custom',
