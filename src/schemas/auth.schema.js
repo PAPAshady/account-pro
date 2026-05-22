@@ -57,7 +57,7 @@ export const userProfileSchema = z
     repeatedNewPassword: z.string(),
   })
   .superRefine((data, ctx) => {
-    if (data.password !== data.repeatedNewPassword) {
+    if (data.newPassword !== data.repeatedNewPassword) {
       return ctx.addIssue({
         code: 'custom',
         path: ['repeatedNewPassword'],

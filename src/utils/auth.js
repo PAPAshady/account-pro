@@ -29,14 +29,17 @@ export const verifyToken = (token) => {
   }
 };
 
-export const validateUser = async ({ checkIsAdmin = false } = {}) => {
+export const validateUser = async ({ checkIsAdmin = false, includePassword = false } = {}) => {
   try {
     await connectToDB();
     const cookiesStore = await cookies();
     const accessToken = cookiesStore.get(ACCESS_TOKEN_NAME)?.value;
     const tokenPayload = verifyToken(accessToken);
     if (!tokenPayload) return Response.json({ validated: false, user: null }, { status: 401 });
-    const user = await usersModel.findOne({ email: tokenPayload?.email }, '-__v');
+    const user = await usersModel.findOne(
+      { email: tokenPayload?.email },
+      includePassword ? '-__v +password' : '-__v'
+    );
     if (!user) return Response.json({ validated: false, user: null }, { status: 401 });
 
     if (checkIsAdmin) {
