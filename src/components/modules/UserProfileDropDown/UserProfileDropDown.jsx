@@ -6,6 +6,7 @@ import Link from 'next/link';
 import { FaUser, FaSignOutAlt, FaChevronLeft } from 'react-icons/fa';
 import clsx from 'clsx';
 import { Root, Trigger, Portal, Content, Item } from '@radix-ui/react-dropdown-menu';
+import { toast } from 'sonner';
 
 import PrimaryButton from '@modules/PrimaryButton/PrimaryButton';
 import api from '@/axiosInstance';
@@ -19,8 +20,14 @@ export default function UserProfileDropDown({ userName }) {
   const signOutHandler = async () => {
     try {
       const res = await api.post('/api/auth/signout');
-      if (res.status === 200) setUser(null);
-    } catch (error) {}
+      if (res.status === 200) {
+        setUser(null);
+        toast.success('از حساب کاربری خود خارج شدید.');
+      }
+    } catch (error) {
+      console.log('Error logging out user => ', error);
+      toast.error('خطا در خروج از حساب کاربری.');
+    }
   };
 
   return (
