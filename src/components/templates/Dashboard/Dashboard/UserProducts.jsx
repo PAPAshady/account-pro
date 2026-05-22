@@ -1,6 +1,7 @@
-import { licences } from '@/data';
+import { getUserProducts } from '@/lib/userProducts';
 
-export default function Licenses() {
+export default async function UserProducts() {
+  const products = await getUserProducts();
   return (
     <div className="relative">
       <div
@@ -15,27 +16,37 @@ export default function Licenses() {
           وضعیت اشتراک و لایسنس ها
         </h3>
       </div>
-      <div className="space-y-4 px-3 pt-3 md:px-4 lg:pt-6">
-        {licences.map((license) => (
-          <License key={license.id} {...license} />
-        ))}
-      </div>
 
-      {/* Empty state ui */}
-      {/* <div className="px-3 pt-3 text-center md:px-4 lg:pt-6">
-        <p>در حال حاضر اشتراک فعالی ندارید.</p>
-      </div> */}
+      {products?.length ? (
+        <div className="space-y-4 px-3 pt-3 md:px-4 lg:pt-6">
+          {products.map((product) => (
+            <License key={product._id} {...product} />
+          ))}
+        </div>
+      ) : (
+        <div className="px-3 pt-3 text-center md:px-4 lg:pt-6">
+          <p>در حال حاضر اشتراک فعالی ندارید.</p>
+        </div>
+      )}
     </div>
   );
 }
 
-function License({ title, remainingTime, buyTime, endTime, price }) {
+function License({ title, createdAt, price, duration }) {
+  const buyDate = new Date(createdAt);
+  const durationinMs = duration * 24 * 60 * 60 * 1000;
+  const expireDate = new Date(buyDate.getTime() + durationinMs);
+  const remainingDays = Math.max(
+    0,
+    Math.ceil((expireDate.getTime() - new Date().getTime()) / (1000 * 60 * 60 * 24))
+  );
+
   return (
     <div className="flex flex-col gap-4">
       <div className="rounded-3xl rounded-tr-lg bg-[#111] px-3 py-4 md:p-4">
         <div className="mb-3 space-y-2">
           <p className="font-morabba text-lg font-semibold">{title}</p>
-          <p className="text-primary text-lg font-semibold">{remainingTime} باقی مانده</p>
+          <p className="text-primary text-lg font-semibold">{remainingDays} روز باقی مانده</p>
         </div>
         <ul className="flex flex-wrap justify-between gap-4">
           <li className="flex items-center gap-2 text-sm md:text-base">
@@ -43,21 +54,21 @@ function License({ title, remainingTime, buyTime, endTime, price }) {
               <span className="bg-primary block size-2 rounded-lg rounded-tr-sm"></span>
               <span>تاریخ خرید : </span>
             </div>
-            <span>{buyTime}</span>
+            <span>{buyDate.toLocaleDateString('fa')}</span>
           </li>
           <li className="flex items-center gap-2 text-sm md:text-base">
             <div className="flex items-center gap-2.5">
               <span className="bg-primary block size-2 rounded-lg rounded-tr-sm"></span>
               <span>تاریخ پایان : </span>
             </div>
-            <span>{endTime}</span>
+            <span>{expireDate.toLocaleDateString('fa')}</span>
           </li>
           <li className="flex items-center gap-2 text-sm md:text-base">
             <div className="flex items-center gap-2.5">
               <span className="bg-primary block size-2 rounded-lg rounded-tr-sm"></span>
               <span>هزینه : </span>
             </div>
-            <span>{price} تومان</span>
+            <span>{price.toLocaleString()} تومان</span>
           </li>
         </ul>
       </div>
