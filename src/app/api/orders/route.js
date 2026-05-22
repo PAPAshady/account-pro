@@ -51,20 +51,11 @@ export async function POST(req) {
         email: order.email,
         createdAt: new Date(),
         expiresAt: new Date(new Date().getTime() + duration * 24 * 60 * 60 * 1000),
+        user: user._id,
       })
     );
 
-    const userProducts = await userProductsModel.findOne({ user: user._id }, '_id');
-
-    if (userProducts) {
-      await userProductsModel.findOneAndUpdate(
-        { user: user._id },
-        { $push: { products: { $each: newUserProducts } } }
-      );
-    } else {
-      await userProductsModel.create({ user: user._id, products: newUserProducts });
-    }
-
+    await userProductsModel.create(newUserProducts);
     const createdOrder = await ordersModel.create(newOrder);
     await cartModel.findOneAndUpdate({ user: user._id }, { items: [] }); // empty cart
     return Response.json(createdOrder, { status: 201 });

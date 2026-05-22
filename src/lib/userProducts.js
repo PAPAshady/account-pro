@@ -8,16 +8,8 @@ export const getUserProducts = async () => {
     const userRes = await validateUser();
     if (userRes.status !== 200) return [];
     const { user } = await userRes.json();
-    const userProducts = await userProductsModel
-      .findOne({ user: user._id }, 'products -_id')
-      .lean();
-
-    if (!userProducts) {
-      await userProductsModel.create({ user: user._id, products: [] });
-      return [];
-    }
-
-    return JSON.parse(JSON.stringify(userProducts.products)) || [];
+    const userProducts = await userProductsModel.find({ user: user._id }).lean();
+    return JSON.parse(JSON.stringify(userProducts));
   } catch (err) {
     console.log('Failed to get user products => ', err);
     return [];
