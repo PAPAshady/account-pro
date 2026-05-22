@@ -36,3 +36,33 @@ export const signInSchema = z.object({
     .min(6, { message: 'رمز عبور باید حداقل شامل ۶ کرکتر باشد' })
     .max(20, { message: 'رمز عبور باید حداکثر ۲۰ کرکتر داشته باشد.' }),
 });
+
+export const userProfileSchema = z
+  .object({
+    name: z.string().min(2, { message: 'نام باید حداقل شامل دو کرکتر باشد' }),
+    phone: z
+      .string()
+      .transform((val) => normalizeNumber(val))
+      .refine((val) => /^09\d{9}$/.test(val), {
+        message: 'شماره موبایل باید با 09 شروع شود و 11 رقم باشد',
+      }),
+    prevPassword: z
+      .string()
+      .min(6, { message: 'رمز عبور سابق باید حداقل شامل ۶ کرکتر باشد' })
+      .max(20, { message: 'رمز عبور سابق باید حداکثر ۲۰ کرکتر داشته باشد.' }),
+    newPassword: z
+      .string()
+      .min(6, { message: 'رمز عبور جدید باید حداقل شامل ۶ کرکتر باشد' })
+      .max(20, { message: 'رمز عبور جدید باید حداکثر ۲۰ کرکتر داشته باشد.' }),
+    repeatedNewPassword: z.string(),
+  })
+  .superRefine((data, ctx) => {
+    if (data.password !== data.repeatedNewPassword) {
+      return ctx.addIssue({
+        code: 'custom',
+        path: ['repeatedNewPassword'],
+        message: 'رمز های عبور همخوانی ندارند.',
+      });
+    }
+    return true;
+  });

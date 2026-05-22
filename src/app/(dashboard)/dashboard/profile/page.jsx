@@ -1,7 +1,22 @@
-import PrimaryButton from '@/components/modules/PrimaryButton/PrimaryButton';
-import Input from '@modules/Input/Input';
+'use client';
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
 
-export default function page() {
+import PrimaryButton from '@modules/PrimaryButton/PrimaryButton';
+import Input from '@modules/Input/Input';
+import { userProfileSchema } from '@/schemas/auth.schema';
+
+export default function Page() {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({ resolver: zodResolver(userProfileSchema) });
+
+  const submitHandler = async (data) => {
+    console.log(data);
+  };
+
   return (
     <div className="pb-6">
       <div className="relative">
@@ -17,26 +32,57 @@ export default function page() {
             اطلاعات حساب کاربری
           </h3>
         </div>
-        <form className="space-y-6 px-3 py-4 md:px-4 lg:pt-6">
+        <form
+          className="space-y-6 px-3 py-4 md:px-4 lg:pt-6"
+          onSubmit={handleSubmit(submitHandler)}
+        >
           <div className="grid grid-cols-1 gap-4 min-[480px]:grid-cols-2">
             <div className="min-[480px]:col-span-2 sm:col-span-1">
-              <Input label="نام کاربری" />
+              <Input
+                label="نام و نام خانوادگی"
+                aria-invalid={!!errors.name}
+                message={errors.name?.message}
+                {...register('name')}
+              />
             </div>
             <div className="min-[480px]:col-span-2 sm:col-span-1">
-              <Input label="تلفن همراه" />
+              <Input
+                label="تلفن همراه"
+                aria-invalid={!!errors.phone}
+                message={errors.phone?.message}
+                {...register('phone')}
+              />
             </div>
             <div className="">
-              <Input label="رمز عبور فعلی" type="password" />
+              <Input
+                label="رمز عبور فعلی"
+                type="password"
+                aria-invalid={!!errors.prevPassword}
+                message={errors.prevPassword?.message}
+                {...register('prevPassword')}
+              />
             </div>
             <div className="">
-              <Input label="رمز عبور جدید" type="password" />
+              <Input
+                label="رمز عبور جدید"
+                type="password"
+                aria-invalid={!!errors.newPassword}
+                message={errors.newPassword?.message}
+                {...register('newPassword')}
+              />
             </div>
             <div className="">
-              <Input label="تکرار رمز عبور جدید" type="password" />
+              <Input
+                label="تکرار رمز عبور جدید"
+                type="password"
+                aria-invalid={!!errors.repeatedNewPassword}
+                message={errors.repeatedNewPassword?.message}
+                {...register('repeatedNewPassword')}
+              />
             </div>
           </div>
           <div className="max-w-37.5">
-            <PrimaryButton className="bg-primary text-blackColor w-full hover:bg-[#0bc798]! hover:bg-none">
+            <PrimaryButton className="w-full" type="submit" isHighLight>
               ذخیره تغییرات
             </PrimaryButton>
           </div>
