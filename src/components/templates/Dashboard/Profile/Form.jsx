@@ -1,5 +1,5 @@
 'use client';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -12,6 +12,8 @@ import api from '@/axiosInstance';
 import useAuth from '@/store/useAuth';
 
 export default function Form() {
+  const [isPending, setIsPending] = useState(false);
+  const user = useAuth((state) => state.user);
   const setUser = useAuth((state) => state.setUser);
   const {
     register,
@@ -22,23 +24,15 @@ export default function Form() {
   } = useForm({ resolver: zodResolver(userProfileSchema) });
 
   useEffect(() => {
-    const getMe = async () => {
-      try {
-        const res = await api.get('/api/auth/me');
-        if (res.status === 200) {
-          setValue('name', res.data.name);
-          setValue('phone', res.data.phone);
-        }
-      } catch (err) {
-        console.log('Error fetching user data in profile page => ', err);
-        toast.error('خطا در دریافت اطلاعات کاربر.');
-      }
-    };
-    getMe();
-  }, [setValue]);
+    if (user) {
+      setValue('name', user.name);
+      setValue('phone', user.phone);
+    }
+  }, [user, setValue]);
 
   const submitHandler = async (data) => {
     try {
+      setIsPending(true);
       const res = await api.put('/api/auth/me', data);
       if (res.status === 200) {
         setUser(res.data);
@@ -59,6 +53,8 @@ export default function Form() {
 
       console.log('Error updating user data => ', err.response);
       toast.error('خطا در ویرایش اطلاعات.');
+    } finally {
+      setIsPending(false);
     }
   };
 
@@ -67,7 +63,7 @@ export default function Form() {
       <div className="grid grid-cols-1 gap-4 min-[480px]:grid-cols-2">
         <div className="min-[480px]:col-span-2 sm:col-span-1">
           <Input
-            label="نام و نام خانوادگی"
+            label="نام و نام خانوادگی *"
             aria-invalid={!!errors.name}
             message={errors.name?.message}
             {...register('name')}
@@ -75,7 +71,7 @@ export default function Form() {
         </div>
         <div className="min-[480px]:col-span-2 sm:col-span-1">
           <Input
-            label="تلفن همراه"
+            label="تلفن همراه *"
             aria-invalid={!!errors.phone}
             message={errors.phone?.message}
             {...register('phone')}
@@ -101,7 +97,7 @@ export default function Form() {
             {...register('newPassword')}
           />
         </div>
-        <div className="">
+        <div>
           <Input
             label="تکرار رمز عبور جدید"
             type="password"
@@ -113,8 +109,8 @@ export default function Form() {
         </div>
       </div>
       <div className="max-w-37.5">
-        <PrimaryButton className="w-full" type="submit" isHighLight>
-          ذخیره تغییرات
+        <PrimaryButton disabled={isPending} className="w-full" type="submit" isHighLight>
+          {isPending ? 'لطفا صبر کنید...' : 'ذخیره تغییرات'}
         </PrimaryButton>
       </div>
     </form>
