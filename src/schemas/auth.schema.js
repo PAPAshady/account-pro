@@ -1,10 +1,17 @@
 import { z } from 'zod';
 
+import { normalizeNumber } from '@/utils/general';
+
 export const signUpSchema = z
   .object({
     name: z.string().min(2, { message: 'نام باید حداقل شامل دو کرکتر باشد' }),
     email: z.email({ message: 'ایمیل نامعتبر' }).trim(),
-    phone: z.string().regex(/^09\d{9}$/, 'شماره موبایل باید با 09 شروع شود و 11 رقم باشد'),
+    phone: z
+      .string()
+      .transform((val) => normalizeNumber(val))
+      .refine((val) => /^09\d{9}$/.test(val), {
+        message: 'شماره موبایل باید با 09 شروع شود و 11 رقم باشد',
+      }),
     password: z
       .string()
       .min(6, { message: 'رمز عبور باید حداقل شامل ۶ کرکتر باشد' })
