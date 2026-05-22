@@ -12,10 +12,12 @@ import useHamburgerMenu from '@/store/useHamburgerMenu';
 import useAuth from '@/store/useAuth';
 import UserProfileDropDown from '@modules/UserProfileDropDown/UserProfileDropDown';
 import CartDropDown from '@modules/CartDropDown/CartDropDown';
+import Skeleton from '@modules/Skeleton/Skeleton';
 
 export default function Header() {
   const setOpen = useHamburgerMenu((state) => state.setOpen);
   const user = useAuth((state) => state.user);
+  const isUserLoading = useAuth((state) => state.isLoading);
   return (
     <div className="relative py-10 lg:pt-12.5">
       <Particle className="-top-35 left-0 size-64 opacity-35 blur-[70px]" />
@@ -74,7 +76,9 @@ export default function Header() {
           <div className="hidden items-center justify-between gap-3 py-2.5 min-[1080]:gap-4 lg:flex">
             <Navbar />
             <SearchBox />
-            {user ? (
+            {isUserLoading ? (
+              <Skeleton className="rounded-box-rtl h-9 w-33.5" />
+            ) : user ? (
               <UserProfileDropDown />
             ) : (
               <PrimaryButton isLink href="/sign-in">

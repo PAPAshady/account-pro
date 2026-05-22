@@ -2,7 +2,7 @@ import { create } from 'zustand';
 
 const useAuth = create((set) => ({
   user: null,
-  isLoading: false,
+  isLoading: true,
   setUser: (user) => set({ user }),
   setIsLoading: (isLoading) => set({ isLoading }),
 }));
