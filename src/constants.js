@@ -23,3 +23,8 @@ export const ORDER_STATUS = {
   REJECTED: 'rejected',
   SUCCESS: 'success',
 };
+
+export const FAVORITES_ITEM_TYPES = {
+  PRODUCT: 'Product',
+  ARTICLE: 'Article',
+};
