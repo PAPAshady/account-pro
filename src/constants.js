@@ -28,3 +28,9 @@ export const FAVORITES_ITEM_TYPES = {
   PRODUCT: 'Product',
   ARTICLE: 'Article',
 };
+
+export const TICKET_STATUS = {
+  PENDING: 'pending',
+  DONE: 'done',
+  CHECKING: 'checking',
+};
