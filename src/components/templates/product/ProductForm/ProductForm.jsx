@@ -1,7 +1,7 @@
 'use client';
 import { useState } from 'react';
 
-import { FaRegHeart, FaShareAlt, FaUser, FaChartLine } from 'react-icons/fa';
+import { FaShareAlt, FaUser, FaChartLine } from 'react-icons/fa';
 import { useMutation } from '@tanstack/react-query';
 import { zodResolver } from '@hookform/resolvers/zod';
 
@@ -10,16 +10,13 @@ import PrimaryButton from '@modules/PrimaryButton/PrimaryButton';
 import { addToCartMutationOptions } from '@/queries/cart';
 import Counter from '@modules/Counter/Counter';
 import { useForm } from 'react-hook-form';
-import { toggleProductFavoriteStatusMutaitonOptions } from '@/queries/favorites';
+import ProductFormLikeButton from '@templates/product/ProductFormLikeButton/ProductFormLikeButton';
 
 import { cartItemsSchema } from '@/schemas/cartItem.schema';
 
 export default function ProductForm({ plans, productId }) {
   const [quantity, setQuantity] = useState(1);
   const { mutate, isPending } = useMutation(addToCartMutationOptions());
-  const { mutate: toggleFavoriteStatus } = useMutation(
-    toggleProductFavoriteStatusMutaitonOptions()
-  );
   const {
     register,
     handleSubmit,
@@ -29,10 +26,6 @@ export default function ProductForm({ plans, productId }) {
 
   const submitHandler = (data) => {
     mutate({ ...data, quantity });
-  };
-
-  const likeHandler = () => {
-    toggleFavoriteStatus(productId,);
   };
 
   const selectedPlan = plans.find((plan) => plan._id === watch('plan')) || null;
@@ -82,13 +75,7 @@ export default function ProductForm({ plans, productId }) {
             <Counter value={quantity} setValue={setQuantity} />
           </div>
           <div className="bg-foreground inline-flex max-w-max items-center justify-center gap-4 rounded-2xl rounded-tr-lg p-2.5 min-[900px]:hidden sm:flex-col lg:inline-flex">
-            <button
-              onClick={likeHandler}
-              type="button"
-              className="bg-box hover:text-primary flex size-8.75 cursor-pointer items-center justify-center rounded-lg rounded-tr-sm text-2xl transition-colors duration-300"
-            >
-              <FaRegHeart />
-            </button>
+            <ProductFormLikeButton productId={productId} />
             <button
               type="button"
               className="bg-box hover:text-primary flex size-8.75 cursor-pointer items-center justify-center rounded-lg rounded-tr-sm text-2xl transition-colors duration-300"

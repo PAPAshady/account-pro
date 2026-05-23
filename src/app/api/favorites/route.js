@@ -38,12 +38,14 @@ export async function POST(req) {
       await favoritesModel.findOneAndDelete(itemFilters);
       return Response.json({
         message: `${isProduct ? 'محصول' : 'مقاله'} مورد نظر از علاقه مندی ها حذف شد.`,
+        item: null,
       });
     }
 
-    await favoritesModel.create(itemFilters);
+    const item = await favoritesModel.create(itemFilters);
     return Response.json({
       message: `${isProduct ? 'محصول' : 'مقاله'} مورد نظر به علاقه مندی ها اضافه شد.`,
+      item,
     });
   } catch (error) {
     console.log('Error adding product to favorites => ', error);
