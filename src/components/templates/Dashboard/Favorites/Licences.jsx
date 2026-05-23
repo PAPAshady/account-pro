@@ -2,10 +2,11 @@
 import { useQuery } from '@tanstack/react-query';
 
 import ProductCard from '@modules/Cards/ProductCard/ProductCard';
+import ProductCardSkeleton from '@modules/Cards/ProductCard/ProductCardSkeleton';
 import { getFavoriteProductsQueryOptions } from '@/queries/favorites';
 
 export default function Licences() {
-  const { data: products } = useQuery(getFavoriteProductsQueryOptions());
+  const { data: products, isPending } = useQuery(getFavoriteProductsQueryOptions());
 
   return (
     <div className="relative">
@@ -20,21 +21,25 @@ export default function Licences() {
         <h3 className="font-morabba text-xl lg:text-[26px] lg:font-semibold">اشتراک و لایسنس ها</h3>
       </div>
       <div className="px-3 pt-4 md:px-4 lg:pt-6">
-        {products?.length ? (
+        {products?.length || isPending ? (
           <div className="grid grid-cols-1 gap-6 min-[600px]:grid-cols-2 xl:grid-cols-3">
-            {products.map(({ item: { _id: id, title, region, images, slug, minPlanPrice } }) => (
-              <ProductCard
-                key={id}
-                title={title}
-                region={region}
-                image={images[0].url}
-                slug={slug}
-                minPlanPrice={minPlanPrice}
-                id={id}
-                hasLikeButton
-                isFavorite
-              />
-            ))}
+            {isPending
+              ? Array(3)
+                  .fill()
+                  .map((_, index) => <ProductCardSkeleton hasLikeButton key={index} />)
+              : products.map(({ item: { _id: id, title, region, images, slug, minPlanPrice } }) => (
+                  <ProductCard
+                    key={id}
+                    title={title}
+                    region={region}
+                    image={images[0].url}
+                    slug={slug}
+                    minPlanPrice={minPlanPrice}
+                    id={id}
+                    hasLikeButton
+                    isFavorite
+                  />
+                ))}
           </div>
         ) : (
           <div className="px-3 pb-4 text-center md:px-4">
