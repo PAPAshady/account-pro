@@ -30,6 +30,7 @@ export default function Licences() {
                 image={images[0].url}
                 slug={slug}
                 minPlanPrice={minPlanPrice}
+                id={id}
                 hasLikeButton
                 isFavorite
               />

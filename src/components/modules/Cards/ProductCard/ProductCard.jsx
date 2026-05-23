@@ -1,9 +1,8 @@
 import Image from 'next/image';
 
-import { FaHeart, FaRegHeart } from 'react-icons/fa';
-
 import Particle from '@/components/modules/Particle/Particle';
 import PrimaryButton from '@/components/modules/PrimaryButton/PrimaryButton';
+import ProductCardLikeButton from './ProductCardLikeButton';
 
 export default function ProductCard({
   title,
@@ -13,6 +12,7 @@ export default function ProductCard({
   hasLikeButton,
   isFavorite,
   minPlanPrice,
+  id,
 }) {
   return (
     <div className="group relative">
@@ -53,11 +53,7 @@ export default function ProductCard({
           <PrimaryButton isLink href={`/product/${slug}`} dir="ltr" className="w-full">
             مشاهده و خرید
           </PrimaryButton>
-          {hasLikeButton && (
-            <button className="bg-foreground text-primary grid size-10.5 shrink-0 cursor-pointer place-content-center rounded-lg rounded-tr-sm text-[23px] hover:bg-[#ffffff28]">
-              {isFavorite ? <FaHeart /> : <FaRegHeart />}
-            </button>
-          )}
+          {hasLikeButton && <ProductCardLikeButton isFavorite={isFavorite} id={id} />}
         </div>
       </div>
     </div>
