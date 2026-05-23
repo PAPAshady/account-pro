@@ -20,6 +20,7 @@ export default function Form() {
     handleSubmit,
     setValue,
     setError,
+    reset,
     formState: { errors },
   } = useForm({ resolver: zodResolver(userProfileSchema) });
 
@@ -37,6 +38,7 @@ export default function Form() {
       if (res.status === 200) {
         setUser(res.data);
         toast.success('اطلاعات شما با موفقیت ویرایش شد.');
+        reset();
       }
     } catch (err) {
       const { data, status } = err.response;
