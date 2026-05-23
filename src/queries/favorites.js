@@ -1,7 +1,11 @@
 import { mutationOptions, queryOptions } from '@tanstack/react-query';
 import { toast } from 'sonner';
 
-import { toggleProductFavoriteStatus, isProductInFavorites } from '@/services/favorites';
+import {
+  toggleProductFavoriteStatus,
+  isProductInFavorites,
+  getFavoriteProducts,
+} from '@/services/favorites';
 import queryClient from '@/queryClient';
 
 export const toggleProductFavoriteStatusMutaitonOptions = () =>
@@ -20,4 +24,10 @@ export const isProductInFavoritesQueryOptions = (productId) =>
   queryOptions({
     queryKey: ['favorites', 'products', { productId }],
     queryFn: () => isProductInFavorites(productId),
+  });
+
+export const getFavoriteProductsQueryOptions = () =>
+  queryOptions({
+    queryKey: ['favorites', 'products'],
+    queryFn: getFavoriteProducts,
   });

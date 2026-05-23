@@ -10,3 +10,8 @@ export const isProductInFavorites = async (productId) => {
   const res = await api.get(`/api/favorites/${productId}`);
   return res.data;
 };
+
+export const getFavoriteProducts = async () => {
+  const res = await api.get('/api/favorites/type/product');
+  return res.data;
+};
