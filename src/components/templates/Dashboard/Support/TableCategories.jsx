@@ -30,8 +30,8 @@ export default function TableCategories() {
         </Swiper>
       </div>
       <div className="sm:shrink-0">
-        <PrimaryButton className="bg-primary text-blackColor w-full hover:bg-none">
-          ارتباط با پشتیبانی
+        <PrimaryButton className="w-full" isHighLight isLink href="/dashboard/support/new-ticket">
+          ثبت تیکت جدید
         </PrimaryButton>
       </div>
     </div>
