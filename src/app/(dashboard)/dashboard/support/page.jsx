@@ -42,7 +42,12 @@ export default function Page() {
                   {new Date(ticket.updatedAt).toLocaleDateString('fa')}
                 </td>
                 <td className="px-2 py-2.5 align-middle font-normal sm:px-3">
-                  <PrimaryButton className="w-full" isHighLight>
+                  <PrimaryButton
+                    isLink
+                    href={`/dashboard/support/chat/${ticket.chatId}`}
+                    className="w-full"
+                    isHighLight
+                  >
                     مشاهده
                   </PrimaryButton>
                 </td>
