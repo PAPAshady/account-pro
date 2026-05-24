@@ -31,8 +31,7 @@ export async function POST(req) {
 
     const createdTicket = await ticketsModel.create(newTicket);
 
-    return Response.json(createdTicket, {status: 201})
-
+    return Response.json(createdTicket, { status: 201 });
   } catch (err) {
     console.log('Error creating ticket => ', err);
     return Response.json({ message: 'خطا در ایجاد تیکت' }, { status: 500 });

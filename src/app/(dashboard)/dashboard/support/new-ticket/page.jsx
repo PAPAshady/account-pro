@@ -1,21 +1,42 @@
 'use client';
+import { useRouter } from 'next/navigation';
+
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import clsx from 'clsx';
+import { useMutation } from '@tanstack/react-query';
 
 import Input from '@modules/Input/Input';
 import PrimaryButton from '@modules/PrimaryButton/PrimaryButton';
 import { ticketSchema } from '@/schemas/tickets.schema';
+import { addTicketMMutaitonOptions } from '@/queries/tickets';
 
 export default function Page() {
+  const router = useRouter();
+  const { mutate, isPending } = useMutation(addTicketMMutaitonOptions());
   const {
     register,
     handleSubmit,
+    setError,
+    reset,
     formState: { errors },
   } = useForm({ resolver: zodResolver(ticketSchema) });
 
   const submitHandler = (data) => {
-    console.log(data);
+    mutate(data, {
+      onSuccess: () => {
+        reset();
+        router.push('/dashboard/support');
+      },
+      onError: (error) => {
+        const { data, status } = error.response;
+        if (status === 400) {
+          for (let key in data.errors) {
+            setError(key, { message: data.errors[key] });
+          }
+        }
+      },
+    });
   };
 
   return (
@@ -55,8 +76,8 @@ export default function Page() {
           )}
         </div>
       </div>
-      <PrimaryButton isHighLight className="ms-auto w-42.5">
-        ثبت تیکت
+      <PrimaryButton disabled={isPending} isHighLight className="ms-auto w-42.5">
+        {isPending ? 'لطفا صبر کنید...' : 'ثبت تیکت'}
       </PrimaryButton>
     </form>
   );
