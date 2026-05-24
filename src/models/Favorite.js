@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 
 import { FAVORITES_ITEM_TYPES } from '@/constants';
 require('./User');
+require('./Product');
 
 const schema = mongoose.Schema({
   user: {
