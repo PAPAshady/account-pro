@@ -37,3 +37,22 @@ export async function POST(req) {
     return Response.json({ message: 'خطا در ایجاد تیکت' }, { status: 500 });
   }
 }
+
+export async function GET() {
+  try {
+    await connectToDB();
+    const userRes = await validateUser();
+
+    if (userRes.status !== 200)
+      return Response.json({ message: 'لطفا ابتدا وارد حساب کاربری خود شوید.' }, { status: 401 });
+
+    const { user } = await userRes.json();
+
+    const tickets = await ticketsModel.find({ user: user._id }, '-__v').lean();
+
+    return Response.json(tickets);
+  } catch (err) {
+    console.log('Error fetching ticket => ', err);
+    return Response.json({ message: 'خطا در دریافت تیکت ها' }, { status: 500 });
+  }
+}
