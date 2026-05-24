@@ -2,6 +2,7 @@
 import { useState } from 'react';
 
 import { useQuery } from '@tanstack/react-query';
+import { FaCircleNotch } from 'react-icons/fa';
 
 import PrimaryButton from '@/components/modules/PrimaryButton/PrimaryButton';
 import TicketsFilters from '@templates/Dashboard/Support/TicketsFilters';
@@ -10,7 +11,7 @@ import { TICKET_STATUS } from '@/constants';
 
 export default function Page() {
   const [status, setStatus] = useState('all');
-  const { data: tickets } = useQuery(getTickesQueryOptions(status));
+  const { data: tickets, isPending } = useQuery(getTickesQueryOptions(status));
   return (
     <div>
       <div className="mb-4">
@@ -50,8 +51,14 @@ export default function Page() {
           </tbody>
         </table>
       </div>
-      {!tickets?.length && (
-        <div className="bg-foreground w-full py-10 text-center">تیکتی پیدا نشد.</div>
+      {(!tickets?.length || isPending) && (
+        <div className="bg-foreground grid w-full place-content-center py-10 text-center">
+          {isPending ? (
+            <FaCircleNotch className="text-primary animate-spin text-3xl sm:my-4" />
+          ) : (
+            'تیکتی پیدا نشد.'
+          )}
+        </div>
       )}
     </div>
   );
