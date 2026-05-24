@@ -9,11 +9,11 @@ import { useMutation } from '@tanstack/react-query';
 import Input from '@modules/Input/Input';
 import PrimaryButton from '@modules/PrimaryButton/PrimaryButton';
 import { ticketSchema } from '@/schemas/tickets.schema';
-import { addTicketMMutaitonOptions } from '@/queries/tickets';
+import { addTicketMutationOptions } from '@/queries/tickets';
 
 export default function Page() {
   const router = useRouter();
-  const { mutate, isPending } = useMutation(addTicketMMutaitonOptions());
+  const { mutate, isPending } = useMutation(addTicketMutationOptions());
   const {
     register,
     handleSubmit,

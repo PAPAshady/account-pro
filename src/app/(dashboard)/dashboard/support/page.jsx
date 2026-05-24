@@ -1,15 +1,20 @@
+'use client';
+import { useState } from 'react';
+
+import { useQuery } from '@tanstack/react-query';
+
 import PrimaryButton from '@/components/modules/PrimaryButton/PrimaryButton';
-import TableCategories from '@templates/Dashboard/Support/TableCategories';
-import { getTickets } from '@/lib/tikcets';
+import TicketsFilters from '@templates/Dashboard/Support/TicketsFilters';
+import { getTickesQueryOptions } from '@/queries/tickets';
 import { TICKET_STATUS } from '@/constants';
 
-export default async function page() {
-  const { data: tickets } = await getTickets();
-
+export default function Page() {
+  const [status, setStatus] = useState('all');
+  const { data: tickets } = useQuery(getTickesQueryOptions(status));
   return (
     <div>
       <div className="mb-4">
-        <TableCategories />
+        <TicketsFilters status={status} setStatus={setStatus} itemsCount={tickets?.length} />
       </div>
       <div className="overflow-x-auto">
         <table className="w-full min-w-157.5 text-right">
@@ -22,7 +27,7 @@ export default async function page() {
             </tr>
           </thead>
           <tbody>
-            {tickets.map((ticket) => (
+            {tickets?.map((ticket) => (
               <tr key={ticket._id} className="bg-foreground border-t border-[rgba(0,0,0,.1)]">
                 <td className="px-2 py-2.5 align-middle font-normal sm:px-3">{ticket.title}</td>
                 <td className="px-2 py-2.5 align-middle font-normal sm:px-3">
@@ -46,7 +51,7 @@ export default async function page() {
         </table>
       </div>
       {!tickets?.length && (
-        <div className="bg-foreground w-full py-10 text-center">در حال حاضر تیکتی ندارید.</div>
+        <div className="bg-foreground w-full py-10 text-center">تیکتی پیدا نشد.</div>
       )}
     </div>
   );
