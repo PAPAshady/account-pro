@@ -8,8 +8,8 @@ export const addTicketMutationOptions = () =>
   mutationOptions({
     mutationKey: ['tickets'],
     mutationFn: addTicket,
-    onSuccess: (newTicket) => {
-      queryClient.setQueryData(['tickets'], (prevTickets) => [...prevTickets, newTicket]);
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['tickets'] });
       toast.success('تیکت با موفقیت ثبت شد.');
     },
     onError: (err) => {

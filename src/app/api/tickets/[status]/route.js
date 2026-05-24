@@ -14,7 +14,6 @@ export async function GET(_, { params }) {
     const { status } = await params;
 
     const validStatus = [...Object.values(TICKET_STATUS), 'all'];
-    console.log(validStatus);
     const isStatusValid = validStatus.includes(status.toLowerCase());
 
     if (!isStatusValid) {
