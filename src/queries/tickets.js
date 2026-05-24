@@ -9,7 +9,7 @@ export const addTicketMutationOptions = () =>
     mutationKey: ['tickets'],
     mutationFn: addTicket,
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['tickets'] });
+      queryClient.refetchQueries({ queryKey: ['tickets'] });
       toast.success('تیکت با موفقیت ثبت شد.');
     },
     onError: (err) => {
