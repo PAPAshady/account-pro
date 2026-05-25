@@ -29,7 +29,7 @@ export const FAVORITES_ITEM_TYPES = {
   ARTICLE: 'Article',
 };
 
-export const TICKET_STATUS = {
+export const CHAT_STATUS = {
   PENDING: 'pending',
   DONE: 'done',
   CHECKING: 'checking',

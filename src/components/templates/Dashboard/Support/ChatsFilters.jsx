@@ -5,16 +5,16 @@ import clsx from 'clsx';
 import 'swiper/css';
 
 import PrimaryButton from '@modules/PrimaryButton/PrimaryButton';
-import { TICKET_STATUS } from '@/constants';
+import { CHAT_STATUS } from '@/constants';
 
 const categoryButtons = [
   { title: 'همه', status: 'all' },
-  { title: 'منتظر پاسخ', status: TICKET_STATUS.PENDING },
-  { title: 'در حال بررسی', status: TICKET_STATUS.CHECKING },
-  { title: 'پایان یافته', status: TICKET_STATUS.DONE },
+  { title: 'منتظر پاسخ', status: CHAT_STATUS.PENDING },
+  { title: 'در حال بررسی', status: CHAT_STATUS.CHECKING },
+  { title: 'پایان یافته', status: CHAT_STATUS.DONE },
 ];
 
-export default function TicketsFilters({ status, setStatus, itemsCount }) {
+export default function ChatsFilters({ status, setStatus, itemsCount }) {
   return (
     <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
       <div>

@@ -1,6 +1,6 @@
 import z from 'zod';
 
-export const ticketSchema = z.object({
+export const chatsSchema = z.object({
   title: z
     .string({ message: 'موضوع تیکت باید یک رشته متنی باشد.' })
     .min(1, { message: 'موضوع تیکت را وارد کنید.' }),

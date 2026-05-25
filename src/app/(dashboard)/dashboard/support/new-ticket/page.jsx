@@ -8,19 +8,19 @@ import { useMutation } from '@tanstack/react-query';
 
 import Input from '@modules/Input/Input';
 import PrimaryButton from '@modules/PrimaryButton/PrimaryButton';
-import { ticketSchema } from '@/schemas/tickets.schema';
-import { addTicketMutationOptions } from '@/queries/tickets';
+import { chatsSchema } from '@/schemas/chats.schema';
+import { createChatMutationOptions } from '@/queries/chats';
 
 export default function Page() {
   const router = useRouter();
-  const { mutate, isPending } = useMutation(addTicketMutationOptions());
+  const { mutate, isPending } = useMutation(createChatMutationOptions());
   const {
     register,
     handleSubmit,
     setError,
     reset,
     formState: { errors },
-  } = useForm({ resolver: zodResolver(ticketSchema) });
+  } = useForm({ resolver: zodResolver(chatsSchema) });
 
   const submitHandler = (data) => {
     mutate(data, {

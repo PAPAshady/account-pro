@@ -1,8 +1,9 @@
 import { connectToDB } from '@/utils/db';
-import ticketsModel from '@/models/Ticket';
+import chatsModel from '@/models/Chat';
+import messagesModel from '@/models/Message';
 import { validateUser } from '@/utils/auth';
-import { ticketSchema } from '@/schemas/tickets.schema';
-import { TICKET_STATUS } from '@/constants';
+import { chatsSchema } from '@/schemas/chats.schema';
+import { CHAT_STATUS } from '@/constants';
 
 export async function POST(req) {
   try {
@@ -12,8 +13,8 @@ export async function POST(req) {
     if (userRes.status !== 200)
       return Response.json({ message: 'لطفا ابتدا وارد حساب کاربری خود شوید.' }, { status: 401 });
 
-    const ticket = await req.json();
-    const validated = ticketSchema.safeParse(ticket);
+    const chat = await req.json();
+    const validated = chatsSchema.safeParse(chat);
 
     if (!validated.success) {
       const errors = validated.error.flatten().fieldErrors;
@@ -22,19 +23,27 @@ export async function POST(req) {
 
     const { user } = await userRes.json();
 
-    const newTicket = {
-      ...ticket,
+    const newChat = {
+      title: chat.title,
       user: user._id,
-      status: TICKET_STATUS.PENDING,
+      replier: null,
+      status: CHAT_STATUS.PENDING,
       chatId: Date.now().toString(36).toUpperCase(),
     };
 
-    const createdTicket = await ticketsModel.create(newTicket);
+    const createdChat = await chatsModel.create(newChat);
 
-    return Response.json(createdTicket, { status: 201 });
+    const newMessage = {
+      user: user._id,
+      chat: createdChat._id,
+      text: chat.description,
+    };
+
+    const createdMessage = await messagesModel.create(newMessage);
+
+    return Response.json(createdChat, { status: 201 });
   } catch (err) {
-    console.log('Error creating ticket => ', err);
+    console.log('Error creating chat => ', err);
     return Response.json({ message: 'خطا در ایجاد تیکت' }, { status: 500 });
   }
 }
-
