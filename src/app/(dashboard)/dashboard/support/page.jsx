@@ -30,7 +30,9 @@ export default function Page() {
           <tbody>
             {chats?.map((chat) => (
               <tr key={chat._id} className="bg-foreground border-t border-[rgba(0,0,0,.1)]">
-                <td className="px-2 py-2.5 align-middle font-normal sm:px-3">{chat.title}</td>
+                <td className="max-w-40 px-2 py-2.5 align-middle font-normal sm:px-3">
+                  {chat.title}
+                </td>
                 <td className="px-2 py-2.5 align-middle font-normal sm:px-3">
                   {chat.status === CHAT_STATUS.PENDING
                     ? 'در انتظار پاسخ'
