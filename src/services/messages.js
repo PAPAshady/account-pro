@@ -1,6 +1,6 @@
 import api from '@/axiosInstance';
 
-export const getMessages = async (chatId) => {
-  const res = await api.get(`/api/tickets/${chatId}`);
-  return res.data
+export const sendMessage = async (message) => {
+  const res = await api.post(`/api/messages`, message);
+  return res.data;
 };
