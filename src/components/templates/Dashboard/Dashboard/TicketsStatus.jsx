@@ -1,6 +1,13 @@
-import { ticketsStatus } from '@/data';
+'use client';
+import { useQuery } from '@tanstack/react-query';
+import { FaCircleNotch } from 'react-icons/fa';
+
+import { getTotalChatsCountQueryOptions } from '@/queries/chats';
+import { ticketsStatusCards } from '@/data';
 
 export default function TicketsStatus() {
+  const { data, isPending } = useQuery(getTotalChatsCountQueryOptions());
+
   return (
     <div className="relative">
       <div
@@ -15,8 +22,13 @@ export default function TicketsStatus() {
       </div>
       <div className="space-y-4 px-3 pt-3 md:px-4 lg:pt-6">
         <div className="grid grid-cols-1 gap-4 min-[480px]:grid-cols-2 md:grid-cols-4">
-          {ticketsStatus.map((status) => (
-            <TicketCard key={status.id} {...status} />
+          {ticketsStatusCards.map(({ id, ...status }) => (
+            <TicketCard
+              key={id}
+              value={data?.[status.statusName]}
+              isPending={isPending}
+              {...status}
+            />
           ))}
         </div>
       </div>
@@ -24,7 +36,7 @@ export default function TicketsStatus() {
   );
 }
 
-function TicketCard({ icon, title, subTitle, value }) {
+function TicketCard({ icon, title, subTitle, value, isPending }) {
   return (
     <div className="rounded-3xl rounded-tr-lg bg-[#111] p-3.75">
       <div className="mb-2 flex">
@@ -36,7 +48,13 @@ function TicketCard({ icon, title, subTitle, value }) {
           <span className="text-paragraph">{subTitle}</span>
         </div>
       </div>
-      <p className="font-morabba! text-primary text-end text-3xl font-bold">{value}</p>
+      <p className="font-morabba! text-primary text-end text-3xl font-bold">
+        {isPending ? (
+          <FaCircleNotch className="text-primary ms-auto mb-2 animate-spin text-xl" />
+        ) : (
+          value?.toLocaleString('fa')
+        )}
+      </p>
     </div>
   );
 }

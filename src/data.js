@@ -464,11 +464,35 @@ export const dashboardLinks = [
   { id: 6, title: 'اخبار و اطلاعیه ها', href: '/dashboard/news', icon: <FaRegNewspaper /> },
 ];
 
-export const ticketsStatus = [
-  { id: 1, value: '۹', title: 'همه :‌', subTitle: 'All', icon: <FaRegComments /> },
-  { id: 2, value: '۳', title: 'در انتظار پاسخ :‌', subTitle: 'Waiting', icon: <FaClock /> },
-  { id: 3, value: '۱', title: 'در حال بررسی : ‌', subTitle: 'Reviewing', icon: <FaRedo /> },
-  { id: 4, value: '۰', title: 'پایان یافته :‌', subTitle: 'Finished', icon: <FaCheck /> },
+export const ticketsStatusCards = [
+  {
+    id: 1,
+    title: 'همه :‌',
+    subTitle: 'All',
+    icon: <FaRegComments />,
+    statusName: 'all',
+  },
+  {
+    id: 2,
+    title: 'در انتظار پاسخ :‌',
+    subTitle: 'Waiting',
+    icon: <FaClock />,
+    statusName: 'pending',
+  },
+  {
+    id: 3,
+    title: 'در حال بررسی : ‌',
+    subTitle: 'Reviewing',
+    icon: <FaRedo />,
+    statusName: 'checking',
+  },
+  {
+    id: 4,
+    title: 'پایان یافته :‌',
+    subTitle: 'Finished',
+    icon: <FaCheck />,
+    statusName: 'done',
+  },
 ];
 
 export const announcements = [

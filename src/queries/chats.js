@@ -1,7 +1,7 @@
 import { mutationOptions, queryOptions } from '@tanstack/react-query';
 import { toast } from 'sonner';
 
-import { createChat, getChats } from '@/services/chats';
+import { createChat, getChats, getTotalChatsCount } from '@/services/chats';
 import queryClient from '@/queryClient';
 
 export const createChatMutationOptions = () =>
@@ -22,4 +22,10 @@ export const getChatsQueryOptions = (status = 'all') =>
   queryOptions({
     queryKey: ['chats', status],
     queryFn: () => getChats(status),
+  });
+
+export const getTotalChatsCountQueryOptions = () =>
+  queryOptions({
+    queryKey: ['chats', 'totals'],
+    queryFn: getTotalChatsCount,
   });

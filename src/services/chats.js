@@ -9,3 +9,8 @@ export const getChats = async (status = 'all') => {
   const res = await api.get(`/api/chats/${status}`);
   return res.data;
 };
+
+export const getTotalChatsCount = async () => {
+  const res = await api.get(`/api/chats/totals`);
+  return res.data;
+};
