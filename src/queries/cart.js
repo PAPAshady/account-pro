@@ -12,6 +12,11 @@ export const getCartQueryOptions = () =>
   queryOptions({
     queryKey: ['cart'],
     queryFn: getCart,
+    retry: (failureCount, error) => {
+      const { status } = error.response;
+      if (status === 401) return false;
+      return failureCount < 2;
+    },
   });
 
 export const addToCartMutationOptions = () =>
