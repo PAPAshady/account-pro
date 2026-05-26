@@ -7,22 +7,23 @@ import { FaUser, FaSignOutAlt, FaChevronLeft } from 'react-icons/fa';
 import clsx from 'clsx';
 import { Root, Trigger, Portal, Content, Item } from '@radix-ui/react-dropdown-menu';
 import { toast } from 'sonner';
+import { useQuery } from '@tanstack/react-query';
 
 import PrimaryButton from '@modules/PrimaryButton/PrimaryButton';
 import api from '@/axiosInstance';
-import useAuth from '@/store/useAuth';
+import { getUserQueryOptions } from '@/queries/user';
+import { updateUser } from '@/services/user';
 import { dashboardLinks } from '@/data';
 
 export default function UserProfileDropDown() {
   const [open, setOpen] = useState(false);
-  const setUser = useAuth((state) => state.setUser);
-  const userName = useAuth((state) => state.user.name);
+  const { data: user } = useQuery(getUserQueryOptions());
 
   const signOutHandler = async () => {
     try {
       const res = await api.post('/api/auth/signout');
       if (res.status === 200) {
-        setUser(null);
+        updateUser(null);
         toast.success('از حساب کاربری خود خارج شدید.');
       }
     } catch (error) {
@@ -35,7 +36,7 @@ export default function UserProfileDropDown() {
     <Root open={open} onOpenChange={setOpen}>
       <Trigger className="outline-none" asChild>
         <PrimaryButton>
-          {userName}
+          {user?.name}
           <FaUser />
         </PrimaryButton>
       </Trigger>
@@ -49,14 +50,14 @@ export default function UserProfileDropDown() {
           <div className="bg-primary bg-hatching space-y-2 rounded-md rounded-tl-[20px] p-6.25 pb-3.75">
             <div>
               <Image
-                alt={userName}
+                alt={user?.name}
                 width={60}
                 height={60}
                 className="border-primary -mt-10 size-14 rounded-3xl rounded-tr-lg border-4 object-cover"
                 src="/images/profile/profile2.png"
               />
             </div>
-            <p className="text-xl font-bold text-[#191919]">{userName}</p>
+            <p className="text-xl font-bold text-[#191919]">{user?.name}</p>
           </div>
           <div>
             <div className="mb-2 flex flex-col gap-2 border-b border-[#ffffff1a] pb-2">

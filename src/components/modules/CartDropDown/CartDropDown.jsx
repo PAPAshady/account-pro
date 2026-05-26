@@ -9,11 +9,11 @@ import PrimaryButton from '@modules/PrimaryButton/PrimaryButton';
 import CartDropDownItem from '@modules/CartDropDownItem/CartDropDownItem';
 import CartDropDownItemSkeleton from '@modules/CartDropDownItem/CartDropDownItemSkeleton';
 import { getCartQueryOptions } from '@/queries/cart';
-import useAuth from '@/store/useAuth';
+import { getUserQueryOptions } from '@/queries/user';
 
 export default function CartDropDown() {
   const [open, setOpen] = useState(false);
-  const user = useAuth((state) => state.user);
+  const { data: user } = useQuery(getUserQueryOptions());
   const { data, isPending } = useQuery(getCartQueryOptions());
   const hasItems = !!data?.items.length;
   const isScrollable = data?.items.length > 2 || isPending;

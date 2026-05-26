@@ -7,7 +7,8 @@ import { FaChevronLeft, FaSignOutAlt } from 'react-icons/fa';
 import clsx from 'clsx';
 import { toast } from 'sonner';
 
-import useAuth from '@/store/useAuth';
+import { getUserQueryOptions } from '@/queries/user';
+import { updateUser } from '@/services/user';
 import { dashboardLinks } from '@/data';
 import { USER_ROLES } from '@/constants';
 import api from '@/axiosInstance';
@@ -15,14 +16,13 @@ import api from '@/axiosInstance';
 export default function Sidebar() {
   const router = useRouter();
   const pathname = usePathname();
-  const user = useAuth((state) => state.user);
-  const setUser = useAuth((state) => state.setUser);
+  const { data: user } = useQuery(getUserQueryOptions());
 
   const signOutHandler = async () => {
     try {
       const res = await api.post('/api/auth/signout');
       if (res.status === 200) {
-        setUser(null);
+        updateUser(null);
         router.replace('/');
         toast.success('از حساب کاربری خود خارج شدید.');
       }

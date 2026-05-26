@@ -4,12 +4,12 @@ import { useQuery } from '@tanstack/react-query';
 import PrimaryButton from '@modules/PrimaryButton/PrimaryButton';
 import CartItem from '@modules/CartItem/CartItem';
 import { getCartQueryOptions } from '@/queries/cart';
-import useAuth from '@/store/useAuth';
+import { getUserQueryOptions } from '@/queries/user';
 import { FaShoppingBag, FaCircleNotch } from 'react-icons/fa';
 
 export default function Page() {
   const { data: cart, isPending } = useQuery(getCartQueryOptions());
-  const user = useAuth((state) => state.user);
+  const { data: user } = useQuery(getUserQueryOptions());
   const hasItems = !!cart?.totalItems;
 
   return (

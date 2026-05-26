@@ -11,14 +11,14 @@ import { useMutation } from '@tanstack/react-query';
 
 import PrimaryButton from '@modules/PrimaryButton/PrimaryButton';
 import { commentsSchema } from '@/schemas/comment.schema';
-import useAuth from '@/store/useAuth';
+import { getUserQueryOptions } from '@/queries/user';
 import styles from './CommentForm.module.css';
 import { addCommentMutationOptions } from '@/queries/comments';
 
 export default function CommentForm({ productId }) {
   const { mutate, isPending } = useMutation(addCommentMutationOptions(productId));
   const { slug } = useParams();
-  const user = useAuth((state) => state.user);
+  const { data: user } = useQuery(getUserQueryOptions());
   const {
     register,
     setValue,

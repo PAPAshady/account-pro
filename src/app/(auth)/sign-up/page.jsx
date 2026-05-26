@@ -10,13 +10,12 @@ import { toast } from 'sonner';
 import Input from '@modules/Input/Input';
 import PrimaryButton from '@modules/PrimaryButton/PrimaryButton';
 import { signUpSchema } from '@/schemas/auth.schema';
-import useAuth from '@/store/useAuth';
+import { updateUser } from '@/services/user';
 import api from '@/axiosInstance';
 
 export default function SignUp() {
   const [isPending, setIsPending] = useState(false);
   const params = useSearchParams();
-  const setUser = useAuth((state) => state.setUser);
   const router = useRouter();
   const {
     register,
@@ -30,7 +29,7 @@ export default function SignUp() {
       setIsPending(true);
       const res = await api.post('/api/auth/signup', data);
       if (res.status === 201) {
-        setUser(res.data.user);
+        updateUser(res.data.user);
         const callbackUrl = params.get('callbackUrl') || null;
         const href = callbackUrl ? decodeURIComponent(callbackUrl) : '/';
         toast.success('خوش آمدید');

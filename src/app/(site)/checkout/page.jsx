@@ -10,7 +10,7 @@ import Input from '@modules/Input/Input';
 import CheckoutItem from '@modules/CheckoutItem/CheckoutItem';
 import PrimaryButton from '@modules/PrimaryButton/PrimaryButton';
 import { getCartQueryOptions } from '@/queries/cart';
-import useAuth from '@/store/useAuth';
+import { getUserQueryOptions } from '@/queries/user';
 import { checkoutSchema } from '@/schemas/checkout.schema';
 import { addOrderMutationOptions } from '@/queries/orders';
 
@@ -25,7 +25,7 @@ export default function Page() {
   } = useForm({
     resolver: zodResolver(checkoutSchema),
   });
-  const user = useAuth((state) => state.user);
+  const { data: user } = useQuery(getUserQueryOptions());
   const { data: cart } = useQuery(getCartQueryOptions());
   const { mutate, isPending } = useMutation(addOrderMutationOptions());
 

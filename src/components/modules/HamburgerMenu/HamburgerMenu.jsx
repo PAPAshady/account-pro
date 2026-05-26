@@ -3,16 +3,17 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { useRef } from 'react';
 
+import { useQuery } from '@tanstack/react-query';
 import clsx from 'clsx';
 import { FaArrowLeft, FaChevronLeft } from 'react-icons/fa';
 
 import useHamburgerMenu from '@/store/useHamburgerMenu';
 import NavItem from '@modules/HamburgerMenuNavItem/HamburgerMenuNavItem';
-import useAuth from '@/store/useAuth';
+import { getUserQueryOptions } from '@/queries/user';
 import { navLinks } from '@/data';
 
 export default function HamburgerMenu() {
-  const user = useAuth((state) => state.user);
+  const { data: user } = useQuery(getUserQueryOptions());
   const open = useHamburgerMenu((state) => state.open);
   const setOpen = useHamburgerMenu((state) => state.setOpen);
   const menuRef = useRef(null);

@@ -12,12 +12,11 @@ import Input from '@modules/Input/Input';
 import PrimaryButton from '@modules/PrimaryButton/PrimaryButton';
 import { signInSchema } from '@/schemas/auth.schema';
 import api from '@/axiosInstance';
-import useAuth from '@/store/useAuth';
+import { updateUser } from '@/services/user';
 
 export default function SignIn() {
   const [isPending, setIsPending] = useState(false);
   const params = useSearchParams();
-  const setUser = useAuth((state) => state.setUser);
   const router = useRouter();
   const {
     register,
@@ -31,7 +30,7 @@ export default function SignIn() {
       setIsPending(true);
       const res = await api.post('/api/auth/signin', data);
       if (res.status === 200) {
-        setUser(res.data.user);
+        updateUser(res.data.user);
         const callbackUrl = params.get('callbackUrl') || null;
         const href = callbackUrl ? decodeURIComponent(callbackUrl) : '/';
         toast.success('خوش آمدید.');

@@ -9,12 +9,12 @@ import PrimaryButton from '@modules/PrimaryButton/PrimaryButton';
 import Input from '@modules/Input/Input';
 import { userProfileSchema } from '@/schemas/auth.schema';
 import api from '@/axiosInstance';
-import useAuth from '@/store/useAuth';
+import { getUserQueryOptions } from '@/queries/user';
+import { updateUser } from '@/services/user';
 
 export default function Form() {
   const [isPending, setIsPending] = useState(false);
-  const user = useAuth((state) => state.user);
-  const setUser = useAuth((state) => state.setUser);
+  const { data: user } = useQuery(getUserQueryOptions());
   const {
     register,
     handleSubmit,
@@ -36,7 +36,7 @@ export default function Form() {
       setIsPending(true);
       const res = await api.put('/api/auth/me', data);
       if (res.status === 200) {
-        setUser(res.data);
+        updateUser(res.data);
         toast.success('اطلاعات شما با موفقیت ویرایش شد.');
         reset();
       }
