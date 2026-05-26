@@ -46,7 +46,7 @@ export default function Page() {
                 <td className="px-2 py-2.5 align-middle font-normal sm:px-3">
                   <PrimaryButton
                     isLink
-                    href={`/dashboard/support/chat/${chat.chatId}`}
+                    href={`/dashboard/support/chat/${chat._id}`}
                     className="w-full"
                     isHighLight
                   >
