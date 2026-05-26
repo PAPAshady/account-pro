@@ -6,6 +6,7 @@ import { usePathname, useRouter } from 'next/navigation';
 import { FaChevronLeft, FaSignOutAlt } from 'react-icons/fa';
 import clsx from 'clsx';
 import { toast } from 'sonner';
+import { useQuery } from '@tanstack/react-query';
 
 import { getUserQueryOptions } from '@/queries/user';
 import { updateUser } from '@/services/user';
