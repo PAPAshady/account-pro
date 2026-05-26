@@ -16,12 +16,21 @@ export const getMessages = async (chatId) => {
     if (!isChatIdValid) return { data: null, status: 400 };
 
     const { user } = await userRes.json();
-    const chat = await chatsModel.findOne({ user: user._id, _id: chatId }, '_id');
+    const chat = await chatsModel.findOne(
+      {
+        _id: chatId,
+        $or: [
+          { user: user._id },
+          { replier: { $exists: true, $eq: user._id } }, // Handles null replier safely
+        ],
+      },
+      '_id'
+    );
 
     if (!chat) return { data: null, status: 404 };
 
     const messages = await messagesModel
-      .find({ user: user._id, chat: chat._id })
+      .find({ chat: chat._id })
       .populate({ path: 'user', select: 'role' })
       .sort({ createdAt: 1 })
       .lean();
