@@ -11,7 +11,7 @@ export default function SendMessageForm() {
   const router = useRouter();
   const { chatId } = useParams();
   const [text, setText] = useState('');
-  const { mutate } = useMutation(sendMessagesMutationOptions(chatId));
+  const { mutate, isPending } = useMutation(sendMessagesMutationOptions(chatId));
 
   const submitHandler = async (e) => {
     e.preventDefault();
@@ -41,8 +41,12 @@ export default function SendMessageForm() {
           placeholder="پاسخ شما"
         />
         <div>
-          <PrimaryButton disabled={text.length < 1} isHighLight className="ms-auto w-30">
-            ارسال پیام
+          <PrimaryButton
+            disabled={text.length < 1 || isPending}
+            isHighLight
+            className="ms-auto w-30"
+          >
+            {isPending ? 'لطفا صبر کنید...' : 'ارسال پیام'}
           </PrimaryButton>
         </div>
       </form>
