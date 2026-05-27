@@ -1,4 +1,6 @@
-import { FaRegTrashAlt } from 'react-icons/fa';
+import { useState } from 'react';
+
+import { FaRegTrashAlt, FaCircleNotch } from 'react-icons/fa';
 
 export default function Counter({
   value = 1,
@@ -9,15 +11,22 @@ export default function Counter({
   isRemovable,
   onRemove,
 }) {
+  const [isIncrementPending, setIsIncrementPending] = useState(false);
+  const [isDecrementPending, setIsDecrementPending] = useState(false);
+
   const increment = async () => {
     if (value === 99) return;
+    setIsIncrementPending(true);
     await onIncrement?.();
+    setIsIncrementPending(false);
     setValue((prev) => prev + 1);
   };
 
   const decrement = async () => {
     if (value === 1) return;
+    setIsDecrementPending(true);
     await onDecrement?.();
+    setIsDecrementPending(false);
     setValue((prev) => prev - 1);
   };
 
@@ -29,7 +38,7 @@ export default function Counter({
         onClick={increment}
         className="bg-primary disabled:bg-primary/70 rounded-box-rtl flex h-9 w-6.5 cursor-pointer items-center justify-center text-xl font-semibold disabled:cursor-not-allowed"
       >
-        +
+        {isIncrementPending ? <FaCircleNotch className="animate-spin text-base" /> : '+'}
       </button>
       <input
         type="text"
@@ -42,11 +51,17 @@ export default function Counter({
       />
       <button
         type="button"
-        disabled={!isRemovable && (value === 1 || disabled)}
+        disabled={isRemovable ? disabled : value === 1 || disabled}
         onClick={isRemovable && value === 1 ? onRemove : decrement}
         className="bg-primary disabled:bg-primary/70 rounded-box-ltr flex h-9 w-6.5 cursor-pointer items-center justify-center text-xl font-semibold disabled:cursor-not-allowed"
       >
-        {isRemovable && value === 1 ? <FaRegTrashAlt className="text-[13px]" /> : '-'}
+        {isDecrementPending ? (
+          <FaCircleNotch className="animate-spin text-base" />
+        ) : isRemovable && value === 1 ? (
+          <FaRegTrashAlt className="text-[13px]" />
+        ) : (
+          '-'
+        )}
       </button>
     </div>
   );
