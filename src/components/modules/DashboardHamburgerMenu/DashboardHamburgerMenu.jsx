@@ -4,20 +4,26 @@ import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { useRef } from 'react';
 
-import { useQuery } from '@tanstack/react-query';
+import { useQuery, useMutation } from '@tanstack/react-query';
 import clsx from 'clsx';
 import { FaArrowRightFromBracket } from 'react-icons/fa6';
 
 import useDashboardHamburgerMenu from '@/store/useDashboardHamburgerMenu';
-import { getUserQueryOptions } from '@/queries/user';
+import { getUserQueryOptions, signOutUserMutationOptions } from '@/queries/user';
 import { dashboardLinks } from '@/data';
 
 export default function DashboardHamburgerMenu() {
   const pathname = usePathname();
   const { data: user } = useQuery(getUserQueryOptions());
+  const { mutate } = useMutation(signOutUserMutationOptions());
   const open = useDashboardHamburgerMenu((state) => state.open);
   const setOpen = useDashboardHamburgerMenu((state) => state.setOpen);
   const menuRef = useRef(null);
+
+  const signOutHandler = () => {
+    setOpen(false);
+    mutate();
+  };
 
   // close on click outside
   const onClose = (e) => {
@@ -45,7 +51,7 @@ export default function DashboardHamburgerMenu() {
               <p>{user?.name}</p>
               <p className="text-paragraph text-sm">{user?.phone}</p>
             </div>
-            <Link href="/" className="p-2" onClick={() => setOpen(false)}>
+            <Link href="/" replace className="p-2" onClick={signOutHandler}>
               <FaArrowRightFromBracket className="rotate-180 text-xl" />
             </Link>
           </div>
