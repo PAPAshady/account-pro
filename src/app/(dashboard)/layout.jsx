@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 
-import { FaBars, FaShoppingCart } from 'react-icons/fa';
+import { FaShoppingCart } from 'react-icons/fa';
 
 import Sidebar from '@templates/Dashboard/Sidebar/Sidebar';
 
@@ -9,15 +9,16 @@ import SearchBox from '@modules/SearchBox/SearchBox';
 import Footer from '@modules/Footer/Footer';
 import CartDropDown from '@modules/CartDropDown/CartDropDown';
 import PrimaryButton from '@modules/PrimaryButton/PrimaryButton';
+import DashboardHamburgerMenu from '@modules/DashboardHamburgerMenu/DashboardHamburgerMenu';
+import DashboardMenuButton from '@templates/Dashboard/DashboardMenuButton/DashboardMenuButton';
 
 export default function layout({ children }) {
   return (
     <div className="overflow-x-hidden">
+      <DashboardHamburgerMenu />
       <header className="mb-10 border-b border-[#333]">
         <div className="mx-auto flex w-[95%] max-w-360 items-center justify-between py-5 xl:w-[85%]">
-          <button className="bg-foreground rounded-box-ltr grid size-10.5 cursor-pointer place-content-center p-2.5 lg:hidden">
-            <FaBars />
-          </button>
+          <DashboardMenuButton />
           <div className="hidden w-75 lg:block">
             <SearchBox />
           </div>
