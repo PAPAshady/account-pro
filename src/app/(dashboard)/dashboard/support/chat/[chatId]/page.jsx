@@ -2,7 +2,7 @@ import PrimaryButton from '@modules/PrimaryButton/PrimaryButton';
 import TicketMessage from '@modules/TicketMessage/TicketMessage';
 import SendMessageForm from '@templates/Dashboard/Support/SendMessageForm';
 import { USER_ROLES } from '@/constants';
-import { getMessages } from '@/lib/messages';
+import { getMessages } from '@/lib/Messages';
 
 export default async function Page({ params }) {
   const { chatId } = await params;
