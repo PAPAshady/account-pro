@@ -5,32 +5,20 @@ import { usePathname, useRouter } from 'next/navigation';
 
 import { FaChevronLeft, FaSignOutAlt } from 'react-icons/fa';
 import clsx from 'clsx';
-import { toast } from 'sonner';
-import { useQuery } from '@tanstack/react-query';
+import { useQuery, useMutation } from '@tanstack/react-query';
 
-import { getUserQueryOptions } from '@/queries/user';
-import { updateUser } from '@/services/user';
+import { getUserQueryOptions, signOutUserMutationOptions } from '@/queries/user';
 import { dashboardLinks } from '@/data';
 import { USER_ROLES } from '@/constants';
-import api from '@/axiosInstance';
 
 export default function Sidebar() {
   const router = useRouter();
   const pathname = usePathname();
   const { data: user } = useQuery(getUserQueryOptions());
+  const { mutate } = useMutation(signOutUserMutationOptions());
 
   const signOutHandler = async () => {
-    try {
-      const res = await api.post('/api/auth/signout');
-      if (res.status === 200) {
-        updateUser(null);
-        router.replace('/');
-        toast.success('از حساب کاربری خود خارج شدید.');
-      }
-    } catch (error) {
-      console.log('Error logging out user => ', error);
-      toast.error('خطا در خروج از حساب کاربری.');
-    }
+    mutate(undefined, { onSuccess: () => router.replace('/') });
   };
 
   return (
