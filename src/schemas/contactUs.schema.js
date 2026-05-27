@@ -11,6 +11,7 @@ const contactUsSchema = z.object({
     .min(2, { message: 'نام خانوادگی باید حداقل شامل دو کاراکتر باشد' }),
   phone: z
     .string()
+    .min(1, { message: 'شماره تلفن خود را وارد کنید.' })
     .transform((val) => normalizeNumber(val))
     .refine((val) => /^09\d{9}$/.test(val), {
       message: 'شماره موبایل باید با 09 شروع شود و 11 رقم باشد',
