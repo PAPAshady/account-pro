@@ -44,7 +44,7 @@ function TicketCard({ icon, title, subTitle, value, isPending }) {
           {icon}
         </div>
         <div>
-          <p className="mb-1">{title}</p>
+          <p className="mb-1 whitespace-nowrap">{title}</p>
           <span className="text-paragraph">{subTitle}</span>
         </div>
       </div>
