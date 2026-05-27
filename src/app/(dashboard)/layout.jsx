@@ -1,13 +1,14 @@
 import Image from 'next/image';
 import Link from 'next/link';
 
-import { FaBars } from 'react-icons/fa';
+import { FaBars, FaShoppingCart } from 'react-icons/fa';
 
 import Sidebar from '@templates/Dashboard/Sidebar/Sidebar';
 
 import SearchBox from '@modules/SearchBox/SearchBox';
 import Footer from '@modules/Footer/Footer';
 import CartDropDown from '@modules/CartDropDown/CartDropDown';
+import PrimaryButton from '@modules/PrimaryButton/PrimaryButton';
 
 export default function layout({ children }) {
   return (
@@ -29,7 +30,14 @@ export default function layout({ children }) {
               className="size-7.5 md:size-10"
             />
           </Link>
-          <CartDropDown />
+          <div className="min-[420px]:hidden">
+            <PrimaryButton isLink href="/cart" className="cur px-3! outline-none">
+              <FaShoppingCart />
+            </PrimaryButton>
+          </div>
+          <div className="hidden min-[420px]:block">
+            <CartDropDown />
+          </div>
         </div>
       </header>
       <div className="mx-auto w-[95%] max-w-360 xl:w-[85%]">
