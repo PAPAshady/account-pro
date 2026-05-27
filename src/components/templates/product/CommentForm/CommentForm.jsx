@@ -7,7 +7,7 @@ import clsx from 'clsx';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { FaUser, FaChevronLeft } from 'react-icons/fa';
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQuery } from '@tanstack/react-query';
 
 import PrimaryButton from '@modules/PrimaryButton/PrimaryButton';
 import { commentsSchema } from '@/schemas/comment.schema';

@@ -1,12 +1,13 @@
 import Image from 'next/image';
 import Link from 'next/link';
 
-import { FaBars, FaShoppingCart } from 'react-icons/fa';
+import { FaBars } from 'react-icons/fa';
 
 import Sidebar from '@templates/Dashboard/Sidebar/Sidebar';
 
 import SearchBox from '@modules/SearchBox/SearchBox';
 import Footer from '@modules/Footer/Footer';
+import CartDropDown from '@modules/CartDropDown/CartDropDown';
 
 export default function layout({ children }) {
   return (
@@ -28,9 +29,7 @@ export default function layout({ children }) {
               className="size-7.5 md:size-10"
             />
           </Link>
-          <button className="bg-foreground rounded-box-rtl grid size-10.5 cursor-pointer place-content-center p-2.5">
-            <FaShoppingCart />
-          </button>
+          <CartDropDown />
         </div>
       </header>
       <div className="mx-auto w-[95%] max-w-360 xl:w-[85%]">
