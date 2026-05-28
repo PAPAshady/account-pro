@@ -5,6 +5,7 @@ import { getProductPriceRange } from '@/lib/products';
 import ProductsPageSearchBox from '@templates/shop/ProductsPageSearchBox/ProductsPageSearchBox';
 import SearchBoxSkeleton from '@modules/SearchBox/SearchBoxSkeleton';
 import FiltersSlider from '@templates/shop/FiltersSlider/FiltersSlider';
+import FiltersSliderSkeleton from '@templates/shop/FiltersSlider/FiltersSliderSkeleton';
 import ProductsGrid from '@templates/shop/ProductsGrid/ProductsGrid';
 import Sidebar from '@templates/shop/Sidebar/Sidebar';
 import SidebarSkeleton from '@templates/shop/Sidebar/SidebarSkeleton';
@@ -23,7 +24,7 @@ export default async function Shop() {
           <Suspense fallback={<SearchBoxSkeleton />}>
             <ProductsPageSearchBox />
           </Suspense>
-          <Suspense fallback="Loading mobile filters slider...">
+          <Suspense fallback={<FiltersSliderSkeleton />}>
             <FiltersSlider categories={categories} priceRange={priceRange} />
           </Suspense>
           <Suspense fallback={<ProductsGridSkeleton />}>

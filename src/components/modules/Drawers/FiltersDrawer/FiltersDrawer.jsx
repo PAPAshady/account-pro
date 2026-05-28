@@ -60,9 +60,7 @@ export default function FiltersDrawer({ title, filterParamName, children }) {
                 </Drawer.Close>
               </div>
             </div>
-            <div className="mt-4 flex h-[calc(100dvh/2)] grow flex-col overflow-y-auto">
-              {children}
-            </div>
+            <div className="mt-4 flex h-[50dvh] grow flex-col overflow-y-auto">{children}</div>
           </div>
           <div className="border-foreground border-t bg-[#252525] px-4 pt-4">
             <div className="flex items-center justify-between gap-4">
