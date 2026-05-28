@@ -3,6 +3,7 @@ import { Suspense } from 'react';
 import { getCategories } from '@/lib/categories';
 import { getProductPriceRange } from '@/lib/products';
 import ProductsPageSearchBox from '@templates/shop/ProductsPageSearchBox/ProductsPageSearchBox';
+import SearchBoxSkeleton from '@modules/SearchBox/SearchBoxSkeleton';
 import FiltersSlider from '@templates/shop/FiltersSlider/FiltersSlider';
 import ProductsGrid from '@templates/shop/ProductsGrid/ProductsGrid';
 import Sidebar from '@templates/shop/Sidebar/Sidebar';
@@ -19,7 +20,7 @@ export default async function Shop() {
           <Sidebar categories={categories} priceRange={priceRange} />
         </Suspense>
         <main className="space-y-6 min-[880px]:w-[70%] xl:w-[75%]">
-          <Suspense fallback="Loading searchbox...">
+          <Suspense fallback={<SearchBoxSkeleton />}>
             <ProductsPageSearchBox />
           </Suspense>
           <Suspense fallback="Loading mobile filters slider...">
