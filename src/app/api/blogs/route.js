@@ -56,3 +56,14 @@ export async function POST(req) {
     return Response.json({ message: 'خطا در ایجاد مقاله.', error });
   }
 }
+
+export async function GET() {
+  try {
+    await connectToDB();
+    const blogs = await blogsModel.find();
+    return Response.json(blogs);
+  } catch (error) {
+    console.log('Error fetching blogs => ', error);
+    return Response.json({ message: 'خطا در دریافت مقالات.' }, { status: 500 });
+  }
+}

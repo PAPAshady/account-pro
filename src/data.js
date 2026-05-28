@@ -369,7 +369,7 @@ export const footerLinks = [
   { id: 1, title: 'صفحه اصلی', href: '/' },
   { id: 2, title: 'سرویس های اکانت پرو', href: '/shop' },
   { id: 3, title: 'پلن ها', href: '/plans' },
-  { id: 4, title: 'وبلاگ', href: '/blog' },
+  { id: 4, title: 'وبلاگ', href: '/blogs' },
   { id: 5, title: 'درباره ما', href: '/about-us' },
   { id: 6, title: 'تماس با ما', href: '/contact-us' },
 ];
@@ -588,7 +588,7 @@ export const navLinks = [
     ],
   },
   { id: 4, title: 'پلن ها', href: '/plans' },
-  { id: 5, title: 'وبلاگ', href: '/blog' },
+  { id: 5, title: 'وبلاگ', href: '/blogs' },
   { id: 3, title: 'درباره ما', href: '/about-us' },
   { id: 6, title: 'تماس با ما', href: '/contact-us' },
 ];
