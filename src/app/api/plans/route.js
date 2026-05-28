@@ -1,3 +1,5 @@
+import { revalidateTag } from 'next/cache';
+
 import { connectToDB } from '@/utils/db';
 import { planSchema } from '@/schemas/plan.schema';
 import { validateUser } from '@/utils/auth';
@@ -30,7 +32,7 @@ export async function POST(req) {
       return Response.json({ message: 'Plan with this title already exists.' }, { status: 409 });
 
     const createdPlan = await plansModel.create(plan);
-
+    revalidateTag('price-range');
     return Response.json(createdPlan);
   } catch (err) {
     console.log('Failed to add new plan => ', err);

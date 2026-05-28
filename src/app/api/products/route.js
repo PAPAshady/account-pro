@@ -1,3 +1,5 @@
+import { revalidateTag } from 'next/cache';
+
 import { connectToDB } from '@/utils/db';
 import { productSchema } from '@/schemas/product.schema';
 import { validateUser } from '@/utils/auth';
@@ -59,6 +61,7 @@ export async function POST(req) {
       ],
     });
 
+    revalidateTag('products');
     return Response.json(createdProduct);
   } catch (error) {
     console.error('Error adding product => ', error);

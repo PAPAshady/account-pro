@@ -1,3 +1,5 @@
+import { revalidateTag } from 'next/cache';
+
 import { connectToDB } from '@/utils/db';
 import { validateUser } from '@/utils/auth';
 import { blogsSchema } from '@/schemas/blogs.schema';
@@ -47,7 +49,7 @@ export async function POST(req) {
     const { user } = await userRes.json();
 
     const createdBlog = await blogsModel.create({ ...blog, imageUrl, creator: user._id });
-
+    revalidateTag('blogs');
     return Response.json(createdBlog, { status: 201 });
   } catch (error) {
     console.log('Error creating blog => ', error);

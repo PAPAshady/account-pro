@@ -1,3 +1,5 @@
+import { revalidateTag } from 'next/cache';
+
 import { connectToDB } from '@/utils/db';
 import { validateUser } from '@/utils/auth';
 import { categorySchema } from '@/schemas/category.schema';
@@ -36,6 +38,7 @@ export async function POST(req) {
     const imageUrl = await saveFileToDisk(category.imageFile, category.latinTitle, 'categories');
 
     const createdCategory = await categoriesModel.create({ ...category, imageUrl });
+    revalidateTag('categories');
     return Response.json(createdCategory, { status: 201 });
   } catch (error) {
     console.error('Failed to add Category to database => ', error);
