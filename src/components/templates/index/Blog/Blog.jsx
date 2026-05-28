@@ -34,7 +34,7 @@ export default async function Blog() {
             ))}
           </div>
           <div className="mt-4 flex justify-center">
-            <PrimaryButton dir="ltr" className="w-2/3 max-w-43">
+            <PrimaryButton dir="ltr" isLink href="/blogs" className="w-2/3 max-w-43">
               مشاهده همه
             </PrimaryButton>
           </div>
