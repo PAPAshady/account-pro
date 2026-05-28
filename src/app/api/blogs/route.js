@@ -6,7 +6,6 @@ import { blogsSchema } from '@/schemas/blogs.schema';
 import blogCategoriesModel from '@/models/BlogCategory';
 import blogsModel from '@/models/Blog';
 import { saveFileToDisk } from '@/utils/file';
-import { ca } from 'zod/v4/locales';
 
 export async function POST(req) {
   try {
@@ -73,10 +72,7 @@ export async function GET(req) {
     if (searchParam) {
       // prevent regex injection
       const safeSearchParam = searchParam.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-      filters.$or = [
-        { title: { $regex: safeSearchParam, $options: 'i' } },
-        { latinTitle: { $regex: safeSearchParam, $options: 'i' } },
-      ];
+      filters.title = { $regex: safeSearchParam, $options: 'i' };
     }
 
     const blogs = await blogsModel.find(filters);
