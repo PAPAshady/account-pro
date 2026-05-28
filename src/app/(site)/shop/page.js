@@ -7,6 +7,7 @@ import FiltersSlider from '@templates/shop/FiltersSlider/FiltersSlider';
 import ProductsGrid from '@templates/shop/ProductsGrid/ProductsGrid';
 import Sidebar from '@templates/shop/Sidebar/Sidebar';
 import SidebarSkeleton from '@templates/shop/Sidebar/SidebarSkeleton';
+import ProductsGridSkeleton from '@templates/shop/ProductsGrid/ProductsGridSkeleton';
 
 export default async function Shop() {
   const categories = await getCategories();
@@ -24,7 +25,7 @@ export default async function Shop() {
           <Suspense fallback="Loading mobile filters slider...">
             <FiltersSlider categories={categories} priceRange={priceRange} />
           </Suspense>
-          <Suspense fallback="Loading products grid section...">
+          <Suspense fallback={<ProductsGridSkeleton />}>
             <ProductsGrid />
           </Suspense>
         </main>
