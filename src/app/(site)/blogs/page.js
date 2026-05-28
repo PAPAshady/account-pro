@@ -4,6 +4,7 @@ import Sidebar from '@templates/blogs/Sidebar';
 import BlogsGrid from '@templates/blogs/BlogsGrid';
 import BlogsPageSearchBox from '@templates/blogs/BlogsPageSearchBox';
 import SearchBoxSkeleton from '@modules/SearchBox/SearchBoxSkeleton';
+import BlogsGridSkeleton from '@templates/blogs/BlogsGridSkeleton';
 
 export default function Blogs() {
   return (
@@ -13,7 +14,7 @@ export default function Blogs() {
           <Suspense fallback={<SearchBoxSkeleton />}>
             <BlogsPageSearchBox />
           </Suspense>
-          <Suspense fallback="Loading blogs grid section...">
+          <Suspense fallback={<BlogsGridSkeleton />}>
             <BlogsGrid />
           </Suspense>
         </main>
