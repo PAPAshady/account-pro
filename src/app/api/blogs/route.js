@@ -6,6 +6,7 @@ import { blogsSchema } from '@/schemas/blogs.schema';
 import blogCategoriesModel from '@/models/BlogCategory';
 import blogsModel from '@/models/Blog';
 import { saveFileToDisk } from '@/utils/file';
+import { ca } from 'zod/v4/locales';
 
 export async function POST(req) {
   try {
@@ -57,10 +58,28 @@ export async function POST(req) {
   }
 }
 
-export async function GET() {
+export async function GET(req) {
   try {
     await connectToDB();
-    const blogs = await blogsModel.find();
+    const params = req.nextUrl.searchParams;
+    const categoryParam = params.get('cat');
+    const searchParam = params.get('search')?.trim();
+
+    // Build filter dynamically
+    const filters = {};
+
+    if (categoryParam) filters.category = categoryParam;
+
+    if (searchParam) {
+      // prevent regex injection
+      const safeSearchParam = searchParam.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+      filters.$or = [
+        { title: { $regex: safeSearchParam, $options: 'i' } },
+        { latinTitle: { $regex: safeSearchParam, $options: 'i' } },
+      ];
+    }
+
+    const blogs = await blogsModel.find(filters);
     return Response.json(blogs);
   } catch (error) {
     console.log('Error fetching blogs => ', error);

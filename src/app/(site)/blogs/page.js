@@ -12,7 +12,9 @@ export default function Blogs() {
           <Suspense fallback="Loading searchbox...">
             <BlogsPageSearchBox />
           </Suspense>
-          <BlogsGrid />
+          <Suspense fallback="Loading products grid section...">
+            <BlogsGrid />
+          </Suspense>
         </main>
         <Sidebar />
       </div>
