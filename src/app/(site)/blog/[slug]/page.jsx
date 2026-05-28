@@ -1,26 +1,28 @@
 import Image from 'next/image';
 
-import { FaPen, FaRegCalendar, FaEye, FaStopwatch } from 'react-icons/fa';
+import { FaPen, FaRegCalendar, FaUser, FaStopwatch } from 'react-icons/fa';
 
-import { getLandingPageBlogs } from '@/lib/blogs';
+import { getLandingPageBlogs, getBlog } from '@/lib/blogs';
 import BlogCard from '@modules/Cards/BlogCard/BlogCard';
 
-const blogInfos = [
-  { id: 1, title: 'اکانت پرو', icon: <FaPen /> },
-  { id: 2, title: '1404/26/03', icon: <FaRegCalendar /> },
-  { id: 3, title: '۳۳۴ بازدید', icon: <FaEye /> },
-  { id: 4, title: 'زمان مطالعه : ۷ دقیقه', icon: <FaStopwatch /> },
-];
-
-export default async function page() {
+export default async function page({ params }) {
+  const { slug } = await params;
+  const { data: blog } = await getBlog(slug);
   const { data: relatedBlogs } = await getLandingPageBlogs();
+  const date = new Date(blog.createdAt).toLocaleDateString('fa-IR');
+
+  const blogInfos = [
+    { id: 1, title: 'ناشر : اکانت پرو', icon: <FaPen /> },
+    { id: 2, title: `تاریخ : ${date}`, icon: <FaRegCalendar /> },
+    { id: 3, title: ` نویسنده : ${blog.creator.name}`, icon: <FaUser /> },
+    { id: 4, title: `زمان مطالعه : ${blog.readTime} دقیقه`, icon: <FaStopwatch /> },
+  ];
+
   return (
     <div className="container">
       <div className="flex flex-col gap-6 lg:flex-row">
         <main className="bg-foreground rounded-2xl rounded-tr-lg p-5 lg:w-[70%] xl:w-[75%]">
-          <h1 className="font-morabba text-xl font-bold lg:text-2xl">
-            ویژگی های اکانت پرمیوم یوتیوب
-          </h1>
+          <h1 className="font-morabba text-xl font-bold lg:text-2xl">{blog.title}</h1>
           <div className="bg-foreground my-8 flex flex-wrap justify-between gap-4 rounded-2xl rounded-tr-lg p-3.75">
             {blogInfos.map((info) => (
               <div key={info.id} className="flex w-full items-center gap-2.5 min-[500px]:w-auto">
@@ -34,19 +36,11 @@ export default async function page() {
           <div className="flex flex-col gap-8 lg:flex-row lg:items-center">
             <div className="bg-foreground space-y-8 rounded-xl rounded-tr-lg p-5">
               <h4 className="font-morabba text-xl font-bold lg:text-2xl">تیتر تستی</h4>
-              <p className="text-justify text-sm leading-8 lg:text-base">
-                یوتیوب یکی از بزرگ‌ترین پلتفرم‌های اشتراک‌گذاری ویدیو در جهان است که در سال 2005
-                راه‌اندازی شد و از آن زمان به یکی از محبوب‌ترین شبکه‌های اجتماعی تبدیل شده است. این
-                پلتفرم به کاربران امکان می‌دهد ویدیوهای خود را آپلود، مشاهده، و با دیگران به اشتراک
-                بگذارند. یوتیوب بستری برای محتوای متنوع از آموزش و سرگرمی تا اخبار و پادکست‌ها است.
-                با بیش از 2.5 میلیارد کاربر فعال ماهانه، یوتیوب نه‌تنها منبع سرگرمی بلکه ابزاری
-                قدرتمند برای آموزش و تبلیغات نیز محسوب می‌شود. از طریق سیستم پیشنهاد محتوا و
-                الگوریتم‌های پیشرفته، یوتیوب تجربه‌ای شخصی‌سازی‌شده به کاربران ارائه می‌کند.
-              </p>
+              <p className="text-justify text-sm leading-8 lg:text-base">{blog.content}</p>
             </div>
             <div className="flex flex-col gap-6 lg:px-4">
               <Image
-                alt="title"
+                alt={title}
                 width={300}
                 height={300}
                 src="/images/products/YouTube Premium-main-1778009063469.png"
