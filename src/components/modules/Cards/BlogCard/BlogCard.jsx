@@ -12,7 +12,7 @@ export default function BlogCard({ title, imageUrl, description, createdAt, slug
         <div className="group-hover:bg-hatching bg-box group-hover:bg-primary absolute bottom-5.5 h-18.75 w-full overflow-hidden rounded-t-2xl rounded-b-lg transition-all duration-300"></div>
         <Link
           href={`/blog/${slug}`}
-          className="rounded-box-ltr relative z-1 mx-auto w-[90%] overflow-hidden"
+          className="rounded-box-ltr relative z-1 mx-auto block w-[90%] overflow-hidden"
         >
           <Image
             alt={title}
