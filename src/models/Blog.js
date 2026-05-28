@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 require('./User');
+require('./BlogCategory');
 
 const schema = mongoose.Schema(
   {
@@ -15,6 +16,11 @@ const schema = mongoose.Schema(
     },
     description: {
       type: String,
+      required: true,
+    },
+    category: {
+      type: mongoose.Types.ObjectId,
+      ref: 'BlogCategory',
       required: true,
     },
     slug: {

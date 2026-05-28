@@ -1,6 +1,7 @@
 import { connectToDB } from '@/utils/db';
 import { validateUser } from '@/utils/auth';
 import { blogsSchema } from '@/schemas/blogs.schema';
+import blogCategoriesModel from '@/models/BlogCategory';
 import blogsModel from '@/models/Blog';
 import { saveFileToDisk } from '@/utils/file';
 
@@ -26,13 +27,17 @@ export async function POST(req) {
       return Response.json({ message: 'خطا در ایجاد مقاله.', errors }, { status: 400 });
     }
 
+    const categoryExists = await blogCategoriesModel.findOne({ _id: blog.category }, '_id');
+    if (!categoryExists)
+      return Response.json({ message: 'این دسته بندی برای مقالات وجود ندارد.' }, { status: 404 });
+
     const alreadyExists = await blogsModel.findOne({
       $or: [{ title: blog.title }, { slug: blog.slug }],
     });
 
     if (alreadyExists) {
       return Response.json(
-        { message: 'این مقاله با این تیتر یا شناسه وجود دارد.' },
+        { message: 'این مقاله با این تیتر یا شناسه موجود است.' },
         { status: 409 }
       );
     }

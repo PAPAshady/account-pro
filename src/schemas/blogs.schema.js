@@ -1,4 +1,5 @@
 import z from 'zod';
+import { Types } from 'mongoose';
 
 export const blogsSchema = z.object({
   title: z
@@ -16,5 +17,12 @@ export const blogsSchema = z.object({
   content: z
     .string({ message: 'محتوای مقاله باید یک رشته متنی باشد.' })
     .min(10, { message: 'محتوای مقاله باید حداقل شامل ۱۰ کاراکتر باشد.' }),
+  category: z
+    .string({ message: 'شناسه دسته بندی مقاله باید یک رشته متنی باشد.' })
+    .trim()
+    .min(1, { message: 'شناسه دسته بندی مقاله را وارد کنید.' })
+    .refine((val) => Types.ObjectId.isValid(val), {
+      message: 'شناسه دسته بندی مقاله نامعتبر میباشد.',
+    }),
   imageFile: z.instanceof(File, { message: 'عکس مقاله باید یک فایل باشد.' }),
 });
