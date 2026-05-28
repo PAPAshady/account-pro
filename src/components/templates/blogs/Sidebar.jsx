@@ -1,39 +1,30 @@
-import { FaServer, FaChalkboardTeacher, FaNewspaper, FaLock, FaGamepad } from 'react-icons/fa';
+import DynamicIcon from '@modules/DynamicIcon/DynamicIcon';
+import { getBlogCategories } from '@/lib/blogCategories';
 
-const categories = [
-  { id: 1, title: 'آشنایی با سرویس ها', subtitle: 'About Services', icon: <FaServer /> },
-  {
-    id: 2,
-    title: 'آموزش ها و راهنمایی ها',
-    subtitle: 'Tutorials & Tips',
-    icon: <FaChalkboardTeacher />,
-  },
-  { id: 3, title: 'اخبار به روز رسانی ها', subtitle: 'News & Updates', icon: <FaNewspaper /> },
-  { id: 4, title: 'امنیت و حریم خصوصی', subtitle: 'Security & Privacy', icon: <FaLock /> },
-  { id: 5, title: 'تکنولوژی و سرگرمی', subtitle: 'Tech & Entertainment', icon: <FaGamepad /> },
-];
-export default function Sidebar() {
+export default async function Sidebar() {
+  const { data: blogCategories } = await getBlogCategories();
+
   return (
     <aside className="grid min-h-full grid-cols-1 gap-4 min-[880px]:block min-[880px]:w-[30%] min-[880px]:space-y-4 sm:grid-cols-2 xl:w-[25%]">
-      {categories.map((category) => (
-        <Category key={category.id} {...category} />
+      {blogCategories.map((category) => (
+        <Category key={category._id} {...category} />
       ))}
     </aside>
   );
 }
 
-function Category({ title, subtitle, icon }) {
+function Category({ title, latinTitle, iconName }) {
   return (
     <div className="bg-box group hover:bg-primary rounded-box-ltr flex cursor-pointer items-center gap-4 p-5 transition-colors duration-300">
       <div className="transition-colors duration-300 group-hover:text-[#191919] lg:text-lg">
-        {icon}
+        <DynamicIcon iconName={iconName} />
       </div>
       <div className="text-sm">
         <p className="mb-1 transition-colors duration-300 group-hover:text-[#191919] lg:text-lg">
           {title}
         </p>
         <p className="text-primary transition-colors duration-300 group-hover:text-[#191919]">
-          {subtitle}
+          {latinTitle}
         </p>
       </div>
     </div>

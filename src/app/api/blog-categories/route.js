@@ -1,3 +1,5 @@
+import { revalidateTag } from 'next/cache';
+
 import { connectToDB } from '@/utils/db';
 import { validateUser } from '@/utils/auth';
 import { blogCategoriesSchema } from '@/schemas/blogCategories.schema';
@@ -31,6 +33,7 @@ export async function POST(req) {
     }
 
     const createdBlogCategory = await blogCategoriesModel.create(category);
+    revalidateTag('blog-categories');
     return Response.json(createdBlogCategory, { status: 201 });
   } catch (error) {
     console.error('Failed to add blog category to database => ', error);
