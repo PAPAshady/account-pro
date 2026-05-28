@@ -6,6 +6,7 @@ import ProductsPageSearchBox from '@templates/shop/ProductsPageSearchBox/Product
 import FiltersSlider from '@templates/shop/FiltersSlider/FiltersSlider';
 import ProductsGrid from '@templates/shop/ProductsGrid/ProductsGrid';
 import Sidebar from '@templates/shop/Sidebar/Sidebar';
+import SidebarSkeleton from '@templates/shop/Sidebar/SidebarSkeleton';
 
 export default async function Shop() {
   const categories = await getCategories();
@@ -13,7 +14,7 @@ export default async function Shop() {
   return (
     <div className="container">
       <div className="items-start gap-4 min-[880px]:flex lg:gap-8">
-        <Suspense>
+        <Suspense fallback={<SidebarSkeleton />}>
           <Sidebar categories={categories} priceRange={priceRange} />
         </Suspense>
         <main className="space-y-6 min-[880px]:w-[70%] xl:w-[75%]">
