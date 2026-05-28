@@ -40,7 +40,7 @@ export default async function page({ params }) {
             </div>
             <div className="flex flex-col gap-6 lg:px-4">
               <Image
-                alt={title}
+                alt={blog.title}
                 width={300}
                 height={300}
                 src="/images/products/YouTube Premium-main-1778009063469.png"
