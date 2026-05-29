@@ -79,7 +79,9 @@ export default function Footer() {
                 هستیم. ارائه حساب‌های معتبر و رسمی از پلتفرم‌هایی مثل اسپاتیفای، یوتیوب و سایر
                 سرویس‌های جهانی.
               </p>
-              <PrimaryButton className="mx-auto md:m-0">صفحه درباره ما</PrimaryButton>
+              <PrimaryButton isLink href="/about-us" className="mx-auto inline md:m-0">
+                صفحه درباره ما
+              </PrimaryButton>
             </div>
             <div className="md:w-1/3 lg:w-[20%]">
               <div className="text-center md:text-start">
