@@ -29,7 +29,7 @@ export default function Blogs() {
             : blogs?.map(({ item, _id }) => <BlogCard key={_id} {...item} />)}
         </div>
 
-        {!blogs?.length && (
+        {!isPending && !blogs?.length && (
           <div className="px-3 pb-4 text-center md:px-4">
             <p>در حال حاضر مقاله مورد علاقه ای ندارید.</p>
           </div>
