@@ -520,7 +520,7 @@ export const navLinks = [
     menus: [
       {
         id: 1,
-        href: '/',
+        href: '/shop?cat=film',
         title: 'استریم فیلم و سریال',
         icon: <FaTv />,
         subLinks: [
@@ -535,7 +535,7 @@ export const navLinks = [
       },
       {
         id: 2,
-        href: '/',
+        href: '/shop?cat=music',
         title: 'استریم موزیک',
         icon: <FaMusic />,
         subLinks: [
@@ -548,7 +548,7 @@ export const navLinks = [
       },
       {
         id: 3,
-        href: '/',
+        href: '/shop?cat=graphics',
         title: 'گرافیک و طراحی',
         icon: <FaPencilAlt />,
         subLinks: [
@@ -562,7 +562,7 @@ export const navLinks = [
       },
       {
         id: 4,
-        href: '/',
+        href: '/shop?cat=ai',
         title: 'هوش مصنوعی',
         icon: <FaFoursquare />,
         subLinks: [
@@ -573,7 +573,7 @@ export const navLinks = [
       },
       {
         id: 5,
-        href: '/',
+        href: '/shop?cat=gift-and-game',
         title: 'گیفت کارت و بازی',
         icon: <FaPuzzlePiece />,
         subLinks: [
