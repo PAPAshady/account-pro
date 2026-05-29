@@ -2,6 +2,7 @@ import Image from 'next/image';
 
 import PlanCard from '@modules/Cards/PlanCard/PlanCard';
 import Particle from '@modules/Particle/Particle';
+import PrimaryButton from '@modules/PrimaryButton/PrimaryButton';
 import { plans } from '@/data';
 
 export default function Plans() {
@@ -29,9 +30,9 @@ export default function Plans() {
         <div className="bg-primary absolute inset-0 size-full mix-blend-hue"></div>
       </div>
 
-      <div className="gap-4 min-[1100px]:flex min-[1100px]:items-center">
-        <div className="mb-8 text-center min-[1100px]:mb-0! min-[1100px]:w-[25%] min-[1100px]:text-start md:mb-10 lg:mb-12">
-          <div className="relative mb-4 min-[1100px]:mb-6">
+      <div className="gap-4 min-[1100px]:flex">
+        <div className="mb-4 text-center min-[1100px]:w-[25%] min-[1100px]:pt-16 min-[1100px]:text-start md:mb-10 lg:mb-12">
+          <div className="relative mb-4">
             <h4 className="font-morabba text-xl font-bold sm:mix-blend-color-dodge md:text-2xl lg:mb-2 lg:text-3xl">
               پلن های قیمتی
             </h4>
@@ -44,12 +45,22 @@ export default function Plans() {
             با انتخاب پلن مناسب خود، علاوه بر صرفه‌جویی در هزینه، تجربه‌ای بدون دغدغه از استفاده از
             حساب‌های پریمیوم خواهید داشت.
           </p>
+          <div className="mt-6 hidden min-[1100px]:block">
+            <PrimaryButton isLink href="/plans" className="w-full max-w-40">
+              مشاهده همه
+            </PrimaryButton>
+          </div>
         </div>
         <div className="relative z-1 grid grow grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {plans.map((plan) => (
             <PlanCard key={plan.id} {...plan} />
           ))}
         </div>
+      </div>
+      <div className="mt-8 flex justify-center min-[1100px]:hidden">
+        <PrimaryButton isLink href="/plans" className="w-full max-w-40">
+          مشاهده همه
+        </PrimaryButton>
       </div>
     </div>
   );
