@@ -44,7 +44,7 @@ export default function AboutUs() {
                 فراهم کنیم.
               </p>
 
-              <PrimaryButton className="w-40" dir="ltr">
+              <PrimaryButton isLink href="/contact-us" className="w-40" dir="ltr">
                 صفحه تماس با ما
               </PrimaryButton>
             </div>
