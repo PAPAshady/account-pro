@@ -30,7 +30,7 @@ export default function Plans() {
       </div>
 
       <div className="gap-4 min-[1100px]:flex min-[1100px]:items-center">
-        <div className="mb-8 text-center min-[1100px]:mb-0! min-[1100px]:w-[25%] min-[1100px]:pt-10 min-[1100px]:text-start md:mb-10 lg:mb-12">
+        <div className="mb-8 text-center min-[1100px]:mb-0! min-[1100px]:w-[25%] min-[1100px]:text-start md:mb-10 lg:mb-12">
           <div className="relative mb-4 min-[1100px]:mb-6">
             <h4 className="font-morabba text-xl font-bold sm:mix-blend-color-dodge md:text-2xl lg:mb-2 lg:text-3xl">
               پلن های قیمتی
