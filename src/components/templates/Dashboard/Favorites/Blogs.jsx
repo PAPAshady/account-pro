@@ -1,6 +1,13 @@
+'use client';
+import { useQuery } from '@tanstack/react-query';
+
 import BlogCard from '@modules/Cards/BlogCard/BlogCard';
+import BlogCardSkeleton from '@modules/Cards/BlogCard/BlogCardSkeleton';
+import { getFavoriteBlogsQueryOptions } from '@/queries/favorites';
 
 export default function Blogs() {
+  const { data: blogs, isPending } = useQuery(getFavoriteBlogsQueryOptions());
+
   return (
     <div className="relative">
       <div
@@ -15,17 +22,18 @@ export default function Blogs() {
       </div>
       <div className="px-3 pt-4 md:px-4 lg:pt-6">
         <div className="grid grid-cols-1 gap-6 min-[600px]:grid-cols-2 xl:grid-cols-3">
-          {Array(3)
-            .fill()
-            .map((_, index) => (
-              <BlogCard key={index} />
-            ))}
+          {isPending
+            ? Array(3)
+                .fill()
+                .map((_, index) => <BlogCardSkeleton key={index} />)
+            : blogs?.map(({ item, _id }) => <BlogCard key={_id} {...item} />)}
         </div>
 
-        {/* Empty state ui */}
-        {/* <div className="px-3 pb-4 text-center md:px-4">
-          <p>در حال حاضر مقاله مورد علاقه ای ندارید.</p>
-        </div> */}
+        {!blogs?.length && (
+          <div className="px-3 pb-4 text-center md:px-4">
+            <p>در حال حاضر مقاله مورد علاقه ای ندارید.</p>
+          </div>
+        )}
       </div>
     </div>
   );

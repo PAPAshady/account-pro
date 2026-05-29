@@ -26,7 +26,7 @@ export const ORDER_STATUS = {
 
 export const FAVORITES_ITEM_TYPES = {
   PRODUCT: 'Product',
-  ARTICLE: 'Article',
+  BLOG: 'Blog',
 };
 
 export const CHAT_STATUS = {

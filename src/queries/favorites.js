@@ -5,6 +5,9 @@ import {
   toggleProductFavoriteStatus,
   isProductInFavorites,
   getFavoriteProducts,
+  toggleBlogFavoriteStatus,
+  isBlogInFavorites,
+  getFavoriteBlogs,
 } from '@/services/favorites';
 import queryClient from '@/queryClient';
 
@@ -30,4 +33,28 @@ export const getFavoriteProductsQueryOptions = () =>
   queryOptions({
     queryKey: ['favorites', 'products'],
     queryFn: getFavoriteProducts,
+  });
+
+export const toggleBlogFavoriteStatusMutaitonOptions = () =>
+  mutationOptions({
+    mutationKey: ['favorites', 'blogs'],
+    mutationFn: toggleBlogFavoriteStatus,
+    onSuccess: async (data, blogId) => {
+      await queryClient.refetchQueries({ queryKey: ['favorites', 'blogs'], exact: true });
+      await queryClient.setQueryData(['favorites', 'blogs', { blogId }], data.item);
+      toast.success(data.message);
+    },
+    onError: (error) => toast.error(error.response.data.message),
+  });
+
+export const isBlogInFavoritesQueryOptions = (blogId) =>
+  queryOptions({
+    queryKey: ['favorites', 'blogs', { blogId }],
+    queryFn: () => isBlogInFavorites(blogId),
+  });
+
+export const getFavoriteBlogsQueryOptions = () =>
+  queryOptions({
+    queryKey: ['favorites', 'blogs'],
+    queryFn: getFavoriteBlogs,
   });

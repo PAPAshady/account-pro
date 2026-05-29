@@ -3,6 +3,7 @@ import Image from 'next/image';
 import { FaPen, FaRegCalendar, FaUser, FaStopwatch } from 'react-icons/fa';
 
 import { getBlog } from '@/lib/blogs';
+import BlogLikeButton from './BlogLikeButton';
 
 export default async function Main({ params }) {
   const { slug } = await params;
@@ -44,6 +45,9 @@ export default async function Main({ params }) {
           />
           <p className="text-center text-3xl font-bold">YOUTUBE PREMIUM</p>
         </div>
+      </div>
+      <div className="flex justify-end pt-10">
+        <BlogLikeButton blogId={blog._id} />
       </div>
     </main>
   );

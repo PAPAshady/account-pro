@@ -28,7 +28,7 @@ export async function GET(_, { params }) {
     const favoriteItems = await favoritesModel
       .find({
         user: user._id,
-        type: isProduct ? FAVORITES_ITEM_TYPES.PRODUCT : FAVORITES_ITEM_TYPES.ARTICLE,
+        type: isProduct ? FAVORITES_ITEM_TYPES.PRODUCT : FAVORITES_ITEM_TYPES.BLOG,
       })
       .populate({ path: 'item', select: requiredFields });
 

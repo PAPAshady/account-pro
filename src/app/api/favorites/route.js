@@ -27,14 +27,14 @@ export async function POST(req) {
 
     const itemFilters = {
       item: likedItem.itemId,
-      type: FAVORITES_ITEM_TYPES.PRODUCT,
+      type: likedItem.type,
       user: user._id,
     };
 
-    const isProductInFavorites = await favoritesModel.findOne(itemFilters);
+    const isItemInFavorites = await favoritesModel.findOne(itemFilters);
     const isProduct = FAVORITES_ITEM_TYPES.PRODUCT === likedItem.type;
 
-    if (isProductInFavorites) {
+    if (isItemInFavorites) {
       await favoritesModel.findOneAndDelete(itemFilters);
       return Response.json({
         message: `${isProduct ? 'محصول' : 'مقاله'} مورد نظر از علاقه مندی ها حذف شد.`,
