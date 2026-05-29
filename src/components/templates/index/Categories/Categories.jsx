@@ -18,8 +18,8 @@ export default async function Categories() {
             backgroundPositionX: 'center',
           }}
         >
-          <div className="items-center space-y-4 lg:m-0 lg:flex lg:gap-8">
-            <div className="lg:m-0">
+          <div className="items-center space-y-4 sm:pb-10 lg:m-0 lg:flex lg:gap-8 lg:pb-0">
+            <div className="sm:mb-10 lg:m-0">
               <h3 className="font-morabba text-center text-[26px] font-semibold lg:hidden">
                 دسته بندی محصولات
               </h3>
