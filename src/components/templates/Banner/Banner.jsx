@@ -29,6 +29,9 @@ export default function Banner() {
         <Image
           alt="Account Pro"
           src="/images/index/Banner.png"
+          priority
+          loading="eager"
+          fetchPriority="high"
           width={637}
           height={368}
           className="w-full mix-blend-exclusion lg:w-1/2"
@@ -46,6 +49,9 @@ export default function Banner() {
                   width={192}
                   height={48}
                   className="w-22 min-[480px]:w-30 sm:w-40 lg:h-auto lg:w-30 xl:w-40"
+                  priority
+                  loading="eager"
+                  fetchPriority="high"
                 />
               </div>
             </h1>
