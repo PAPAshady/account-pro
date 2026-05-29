@@ -30,28 +30,22 @@ export default function Reviews() {
 
       <div className="relative z-1 container">
         <div className="bg-[url('/images/index/section-container-sm.png')] bg-position-[center_12] bg-no-repeat lg:bg-position-[top_right] xl:bg-[url('/images/index/reviews-rectangle.png')] xl:bg-position-[center_right]">
-          <div className="items-center gap-10 lg:flex xl:gap-4">
+          <div className="items-center gap-10 lg:flex lg:pb-10 xl:gap-4">
             <div className="mb-10 text-center lg:m-0 lg:max-w-57.5 lg:ps-4 lg:pt-20 lg:text-start xl:w-[30%] xl:max-w-none xl:p-0 xl:ps-6">
               <div className="mb-4 xl:mb-1">
                 <h4 className="font-morabba text-xl font-semibold md:text-[26px] lg:mb-4 lg:text-3xl xl:mb-2 xl:pt-6">
                   نظرات مشتریان
                 </h4>
-                <h4 className="font-stretchPro text-paragraph text-sm xl:mb-3">Customers Review</h4>
+                <h4 className="font-stretchPro text-paragraph text-sm xl:mb-3.25">Customers Review</h4>
               </div>
-              <p className="text-paragraph lg:mb-24 xl:mb-8">
+              <p className="text-paragraph lg:mb-24 xl:mb-6">
                 اکانت پرو همیشه توجه کاربرانش را جلب می کند!
               </p>
-              <div className="hidden justify-center lg:flex xl:justify-start">
-                <PrimaryButton className="w-full max-w-40">مشاهده همه</PrimaryButton>
-              </div>
             </div>
             <div className="mb-8 flex flex-col gap-8 lg:m-0 xl:w-[70%] xl:flex-row">
               {reviews.map((review) => (
                 <Review key={review.id} {...review} />
               ))}
-            </div>
-            <div className="flex justify-center lg:hidden">
-              <PrimaryButton className="w-full max-w-40">مشاهده همه</PrimaryButton>
             </div>
           </div>
         </div>
