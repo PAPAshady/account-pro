@@ -30,7 +30,7 @@ export default function Navbar() {
               )}
             </Link>
             {navLink.hasMenu && (
-              <div className="invisible absolute -right-[65%] -z-1 translate-y-2 pt-3 opacity-0 transition-all duration-300 group-hover:visible group-hover:z-1 group-hover:translate-0 group-hover:opacity-100">
+              <div className="invisible absolute right-[-65%] -z-1 translate-y-2 pt-3 opacity-0 transition-all duration-300 group-hover:visible group-hover:z-1 group-hover:translate-0 group-hover:opacity-100">
                 <div className="rounded-3xl rounded-tr-lg bg-[#252525] p-2.5">
                   <div className="flex gap-1">
                     {navLink.menus.map((menu) => (
@@ -55,7 +55,7 @@ export default function Navbar() {
                               </li>
                             ))}
                           </ul>
-                          <Link href="/" className="flex items-center gap-2 pt-6">
+                          <Link href={menu.href} className="flex items-center gap-2 pt-6">
                             <span>مشاهده همه</span>
                             <FaChevronLeft className="text-primary text-sm" />
                           </Link>
