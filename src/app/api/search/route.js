@@ -18,12 +18,12 @@ export async function GET(req) {
           { latinTitle: { $regex: safeQuery, $options: 'i' } },
         ],
       },
-      '_id title slug'
+      '_id title slug images'
     );
 
     const searchedBlogs = await blogsModel.find(
       { title: { $regex: safeQuery, $options: 'i' } },
-      '_id title slug'
+      '_id title slug imageUrl'
     );
 
     const results = { products: searchedProducts, blogs: searchedBlogs };
