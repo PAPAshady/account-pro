@@ -1,8 +1,11 @@
 import { NextResponse } from 'next/server';
-import { validateUser } from './utils/auth';
 
 export async function proxy(req) {
-  const isUserValid = (await validateUser()).status === 200;
+  const userRes = await fetch(new URL('/api/auth/me', req.url), {
+    method: 'GET',
+    headers: req.headers,
+  });
+  const isUserValid = userRes.status === 200;
   if (!isUserValid) return NextResponse.redirect(new URL('/sign-in', req.url));
   return NextResponse.next();
 }
