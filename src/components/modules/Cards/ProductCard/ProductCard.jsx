@@ -1,5 +1,7 @@
 import Image from 'next/image';
 
+import clsx from 'clsx';
+
 import Particle from '@/components/modules/Particle/Particle';
 import PrimaryButton from '@/components/modules/PrimaryButton/PrimaryButton';
 import ProductCardLikeButton from './ProductCardLikeButton';
@@ -23,7 +25,7 @@ export default function ProductCard({
             {region}
           </span>
         </div>
-        <Particle className="-bottom-[75%] left-1/2 z-1 size-25 -translate-x-1/2 blur-[25px]" />
+        <Particle className="bottom-[-75%] left-1/2 z-1 size-25 -translate-x-1/2 blur-[25px]" />
       </div>
       <div className="relative z-1 -mt-13 flex justify-center">
         <Image
@@ -42,10 +44,10 @@ export default function ProductCard({
           <div className="text-end">
             <span className="text-paragraph text-sm lg:text-base">شروع قیمت از</span>
             <p>
-              <span className="me-1.5 text-xl font-bold lg:text-lg">
-                {minPlanPrice.toLocaleString()}
+              <span className={clsx('text-xl font-bold lg:text-lg', minPlanPrice && 'me-1.5')}>
+                {minPlanPrice?.toLocaleString() ?? 'رایگان'}
               </span>
-              <span className="text-primary">تومان</span>
+              {minPlanPrice && <span className="text-paragraph">تومان</span>}
             </p>
           </div>
         </div>
