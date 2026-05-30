@@ -1,8 +1,7 @@
 import { Suspense } from 'react';
 
-import { getUserProducts } from '@/lib/userProducts';
-import DashboardLicenceCard from '@modules/DashboardLicenceCard/DashboardLicenceCard';
-import DashboardLicenceCardSkeleton from '@modules/DashboardLicenceCard/DashboardLicenceCardSkeleton';
+import ProductsList from './ProductsList';
+import ProductsListSkeleton from './ProductsListSkeleton';
 
 export default async function UserProducts() {
   return (
@@ -19,41 +18,9 @@ export default async function UserProducts() {
           وضعیت اشتراک و لایسنس ها
         </h3>
       </div>
-
       <Suspense fallback={<ProductsListSkeleton />}>
         <ProductsList />
       </Suspense>
-    </div>
-  );
-}
-
-async function ProductsList() {
-  const products = await getUserProducts();
-  if (!products.length) {
-    return (
-      <div className="px-3 pt-3 text-center md:px-4 lg:pt-6">
-        <p>در حال حاضر اشتراک فعالی ندارید.</p>
-      </div>
-    );
-  }
-
-  return (
-    <div className="space-y-4 px-3 pt-3 md:px-4 lg:pt-6">
-      {products.map((product) => (
-        <DashboardLicenceCard key={product._id} {...product} />
-      ))}
-    </div>
-  );
-}
-
-function ProductsListSkeleton() {
-  return (
-    <div className="space-y-4 px-3 pt-3 md:px-4 lg:pt-6">
-      {Array(3)
-        .fill()
-        .map((_, index) => (
-          <DashboardLicenceCardSkeleton key={index} />
-        ))}
     </div>
   );
 }
