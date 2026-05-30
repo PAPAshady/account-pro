@@ -16,9 +16,8 @@ export const verifyPassword = (password, hashedPassword) => {
 };
 
 export const generateAccessToken = (payload) => {
-  const expiresIn = process.env.ACCESS_TOKEN_EXPIRE_TIME;
   return sign(payload, process.env.JWT_SECRET, {
-    expiresIn: parseInt(expiresIn) || 86400, // fallback to 1 day
+    expiresIn: +process.env.ACCESS_TOKEN_EXPIRE_TIME,
   });
 };
 
