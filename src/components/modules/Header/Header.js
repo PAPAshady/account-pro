@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { FaBars, FaShoppingCart, FaUser } from 'react-icons/fa';
 import { useQuery } from '@tanstack/react-query';
 
-import SearchBox from '@modules/SearchBox/SearchBox';
+import GlobalSearchBox from '@modules/GlobalSearchBox/GlobalSearchBox';
 import Navbar from '@modules/Navbar/Navbar';
 import PrimaryButton from '@modules/PrimaryButton/PrimaryButton';
 import Particle from '@modules/Particle/Particle';
@@ -75,7 +75,7 @@ export default function Header() {
           </div>
           <div className="hidden items-center justify-between gap-3 py-2.5 min-[1080]:gap-4 lg:flex">
             <Navbar />
-            <SearchBox />
+            <GlobalSearchBox />
             {isPending ? (
               <Skeleton className="rounded-box-rtl h-9 w-33.5" />
             ) : user ? (
