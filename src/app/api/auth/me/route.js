@@ -41,6 +41,16 @@ export async function PUT(req) {
 
     const { user } = await userRes.json();
 
+    if (user.phone !== reqBody.phone) {
+      const isPhoneInUse = await usersModel.findOne({ phone: reqBody.phone });
+      if (isPhoneInUse) {
+        return Response.json(
+          { message: 'این شماره توسط کاربر دیگری در حال استفاده است.', field: 'phone' },
+          { status: 409 }
+        );
+      }
+    }
+
     const newUserData = { phone: reqBody.phone, name: reqBody.name };
 
     // validate password if user wants to update it

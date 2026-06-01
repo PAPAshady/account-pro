@@ -52,6 +52,9 @@ export default function Form() {
           setError(data.field, { message: data.message });
         }
         return;
+      } else if (status === 409) {
+        setError(data.field, { message: data.message });
+        return;
       }
 
       console.log('Error updating user data => ', err.response);
