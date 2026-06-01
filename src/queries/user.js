@@ -1,7 +1,7 @@
 import { queryOptions, mutationOptions } from '@tanstack/react-query';
 import { toast } from 'sonner';
 
-import { getUser, signOutUser } from '@/services/user';
+import { getUser, signOutUser, updateUser } from '@/services/user';
 import queryClient from '@/queryClient';
 
 export const getUserQueryOptions = () =>
@@ -20,9 +20,19 @@ export const signOutUserMutationOptions = () =>
     mutationKey: ['user'],
     mutationFn: signOutUser,
     onSuccess: (data) => {
-      console.log(data)
       queryClient.setQueryData(['user'], null);
       toast.success(data.message);
     },
     onError: (err) => toast.error(err.response.data?.message || 'خطا هنگام خروج از حساب کاربری.'),
+  });
+
+export const updateUserMutationOptions = () =>
+  mutationOptions({
+    mutationKey: ['user'],
+    mutationFn: updateUser,
+    onSuccess: (data) => {
+      queryClient.setQueryData(['user'], data);
+      toast.success('اطلاعات شما با موفقیت ویرایش شد.');
+    },
+    onError: () => toast.error('خطا در ویرایش اطلاعات.'),
   });

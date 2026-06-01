@@ -1,27 +1,23 @@
 'use client';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { toast } from 'sonner';
-import { useQuery } from '@tanstack/react-query';
+import { useQuery, useMutation } from '@tanstack/react-query';
 
 import PrimaryButton from '@modules/PrimaryButton/PrimaryButton';
 import Input from '@modules/Input/Input';
 import { userProfileSchema } from '@/schemas/auth.schema';
-import api from '@/axiosInstance';
-import { getUserQueryOptions } from '@/queries/user';
-import { updateUser } from '@/services/user';
+import { getUserQueryOptions, updateUserMutationOptions } from '@/queries/user';
 
 export default function Form() {
-  const [isPending, setIsPending] = useState(false);
   const { data: user } = useQuery(getUserQueryOptions());
+  const { mutate, isPending } = useMutation(updateUserMutationOptions());
   const {
     register,
     handleSubmit,
     setValue,
     setError,
-    reset,
     formState: { errors },
   } = useForm({ resolver: zodResolver(userProfileSchema) });
 
@@ -33,35 +29,22 @@ export default function Form() {
   }, [user, setValue]);
 
   const submitHandler = async (data) => {
-    try {
-      setIsPending(true);
-      const res = await api.put('/api/auth/me', data);
-      if (res.status === 200) {
-        updateUser(res.data);
-        toast.success('اطلاعات شما با موفقیت ویرایش شد.');
-        reset();
-      }
-    } catch (err) {
-      const { data, status } = err.response;
-      if (status === 400) {
-        if (data.errors) {
-          for (let key in data.errors) {
-            setError(key, { message: data.errors[key] });
-          }
-        } else {
-          setError(data.field, { message: data.message });
+    mutate(data, {
+      onError: (err) => {
+        const { data, status } = err.response;
+        switch (status) {
+          case 400:
+            if (data.errors) {
+              for (let key in data.errors) {
+                setError(key, { message: data.errors[key] });
+              }
+            } else setError(data.field, { message: data.message });
+            break;
+          case 409:
+            setError(data.field, { message: data.message });
         }
-        return;
-      } else if (status === 409) {
-        setError(data.field, { message: data.message });
-        return;
-      }
-
-      console.log('Error updating user data => ', err.response);
-      toast.error('خطا در ویرایش اطلاعات.');
-    } finally {
-      setIsPending(false);
-    }
+      },
+    });
   };
 
   return (

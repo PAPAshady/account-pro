@@ -10,7 +10,7 @@ import { toast } from 'sonner';
 import Input from '@modules/Input/Input';
 import PrimaryButton from '@modules/PrimaryButton/PrimaryButton';
 import { signUpSchema } from '@/schemas/auth.schema';
-import { updateUser } from '@/services/user';
+import { setUserData } from '@/services/user';
 import api from '@/axiosInstance';
 
 export default function SignUp() {
@@ -29,7 +29,7 @@ export default function SignUp() {
       setIsPending(true);
       const res = await api.post('/api/auth/signup', data);
       if (res.status === 201) {
-        updateUser(res.data.user);
+        setUserData(res.data.user);
         const callbackUrl = params.get('callbackUrl') || null;
         const href = callbackUrl ? decodeURIComponent(callbackUrl) : '/';
         toast.success('خوش آمدید');

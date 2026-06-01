@@ -11,6 +11,11 @@ export const signOutUser = async () => {
   return res.data;
 };
 
-export const updateUser = (user) => {
+export const updateUser = async (data) => {
+  const res = await api.put('/api/auth/me', data);
+  return res.data;
+};
+
+export const setUserData = (user) => {
   queryClient.setQueryData(['user'], user);
 };
