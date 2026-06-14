@@ -1,36 +1,141 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# 📦 Account Pro | اکانت پرو
 
-## Getting Started
+A modern full-stack marketplace for premium digital accounts and subscriptions.
 
-First, run the development server:
+Account Pro is a SaaS-style platform that allows users to browse, purchase, and manage premium digital accounts such as streaming services, SaaS tools, gaming services, and other online subscriptions.
+
+Built as a production-grade portfolio project using a full-stack Next.js architecture.
+
+
+## 🚀 Live Demo
+
+https://account-pro-ruddy.vercel.app
+
+---
+
+
+## 🧠 About the Project
+
+Account Pro is designed as a marketplace platform for digital goods and premium accounts.
+
+It solves a real-world problem in restricted payment regions by providing a structured system where users can:
+- Browse digital products
+- Purchase premium accounts
+- Track orders and active services
+- Communicate with support through a ticket system
+
+---
+
+## ⚙️ Tech Stack
+
+### Frontend
+- React.js
+- Next.js
+- TailwindCSS 4
+- Swiper
+- Radix UI
+
+### State Management & Data
+- TanStack Query
+- Zustand
+- Axios
+
+### Backend (Next.js API Routes)
+- MongoDB + Mongoose
+- JWT Authentication
+- bcryptjs
+- jsonwebtoken
+
+### Forms & Validation
+- React Hook Form
+- Zod
+
+---
+
+## ✨ Features
+
+### 🔐 Authentication
+- JWT-based authentication
+- Secure password hashing (bcrypt)
+- Role-based access control
+
+### 🛍️ Product System
+- Product listing with search & filters
+- Category-based browsing
+- Product detail pages
+
+### 🛒 Cart System
+- Add/remove/update items
+- Persistent cart state
+- Optimized UX with smooth updates
+
+### 👤 User Dashboard
+- Order history
+- Active purchased accounts
+- Favorites system (products & blogs)
+
+### 💬 Ticket System
+- User-to-support ticket messaging
+- Structured conversation threads
+- Support response handling (non real-time)
+
+### 📰 Blog System
+- Blog listing with search & filters
+- Blog favorites system
+
+### 🎨 UI/UX
+- Fully responsive design
+- Clean modern interface
+- Loading skeletons and smooth transitions
+
+---
+
+## 🧱 Architecture
+
+Full-stack Next.js architecture:
+
+Client (React UI)
+→ Next.js API Routes
+→ Business Logic Layer
+→ MongoDB (Mongoose)
+
+### Key Design Decisions:
+- Single codebase full-stack structure
+- JWT authentication instead of sessions
+- TanStack Query for server-state management
+- Zustand for lightweight client state (cart, UI state)
+
+---
+
+## 📁 Project Structure
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+/app
+/components
+/lib
+/models
+/hooks
+/store
+/services
+/utils
+/queries
+/schemas
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🌍 Deployment
+- Frontend + Backend: Vercel
+- Database: MongoDB Atlas
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 🔒 Security
+- Password hashing with bcryptjs
+- JWT authentication for protected routes
+- Role-based authorization
+- Input validation using Zod
 
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 💡 Purpose
+- Full-stack SaaS architecture
+- Real-world marketplace system design
+- Authentication & authorization flows
+- Scalable frontend state management
+- Production-level UI/UX design
