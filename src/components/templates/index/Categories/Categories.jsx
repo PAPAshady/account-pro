@@ -4,7 +4,7 @@ import Particle from '@modules/Particle/Particle';
 import { getCategories } from '@/lib/categories';
 
 export default async function Categories() {
-  const categories = await getCategories();
+  const categories = await getCategories({ limit: 5 });
   return (
     <div className="relative">
       <Particle className="top-45 right-0 hidden size-50 opacity-50 blur-[80px] sm:block lg:top-25" />

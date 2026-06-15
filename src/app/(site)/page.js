@@ -1,7 +1,7 @@
 import Banner from '@templates/Banner/Banner';
 import Categories from '@templates/index/Categories/Categories';
 import Services from '@templates/index/Services/Services';
-import AppleId from '@templates/index/AppleId/AppleId';
+import ApplePlans from '@templates/index/ApplePlans/ApplePlans';
 import OrderingWays from '@templates/OrderingWays';
 import Plans from '@templates/index/Plans/Plans';
 import Reviews from '@templates/Reviews/Reviews';
@@ -13,7 +13,7 @@ export default function Home() {
       <Banner />
       <Categories />
       <Services />
-      <AppleId />
+      <ApplePlans />
       <OrderingWays />
       <Plans />
       <Reviews />
