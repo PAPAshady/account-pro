@@ -5,6 +5,7 @@ import BlogsGrid from '@templates/blogs/BlogsGrid';
 import BlogsPageSearchBox from '@templates/blogs/BlogsPageSearchBox';
 import SearchBoxSkeleton from '@modules/SearchBox/SearchBoxSkeleton';
 import BlogsGridSkeleton from '@templates/blogs/BlogsGridSkeleton';
+import SidebarSkeleton from '@templates/blogs/SidebarSkeleton';
 
 export default function Blogs() {
   return (
@@ -18,7 +19,9 @@ export default function Blogs() {
             <BlogsGrid />
           </Suspense>
         </main>
-        <Sidebar />
+        <Suspense fallback={<SidebarSkeleton />}>
+          <Sidebar />
+        </Suspense>
       </div>
     </div>
   );
