@@ -33,7 +33,7 @@ export default function ProductCard({
           src={image}
           width={300}
           height={300}
-          className="size-18.75 grayscale-100 transition-all duration-300 group-hover:grayscale-0 lg:size-20"
+          className="size-18.75 rounded-2xl grayscale-100 transition-all duration-300 group-hover:grayscale-0 lg:size-20"
         />
       </div>
       <div className="bg-box -mt-3.5 rounded-t-lg rounded-b-3xl p-3 pt-4 lg:pt-6">

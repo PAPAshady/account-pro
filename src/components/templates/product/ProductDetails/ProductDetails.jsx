@@ -33,7 +33,7 @@ export default function ProductDetails({
             width={170}
             height={170}
             src={images[0].url}
-            className="size-42.5 min-w-42.5 object-cover"
+            className="size-42.5 rounded-[40px] min-w-42.5 object-cover"
           />
         </div>
         <div className="bg-foreground flex min-h-50 flex-col rounded-4xl rounded-tr-2xl p-5">
