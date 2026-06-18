@@ -7,7 +7,7 @@ import PrimaryButton from '../../PrimaryButton/PrimaryButton';
 export default function BlogCard({ title, imageUrl, description, createdAt, slug }) {
   const date = new Date(createdAt).toLocaleDateString('fa');
   return (
-    <div className="group">
+    <div className="group flex flex-col">
       <div className="relative">
         <div className="group-hover:bg-hatching bg-box group-hover:bg-primary absolute bottom-5.5 h-18.75 w-full overflow-hidden rounded-t-2xl rounded-b-lg transition-all duration-300"></div>
         <Link
@@ -23,8 +23,8 @@ export default function BlogCard({ title, imageUrl, description, createdAt, slug
           />
         </Link>
       </div>
-      <div className="bg-box -mt-4 rounded-t-lg rounded-b-2xl p-3.75 pt-7.5">
-        <Link href={`/blog/${slug}`}>
+      <div className="bg-box -mt-4 flex grow flex-col rounded-t-lg rounded-b-2xl p-3.75 pt-7.5">
+        <Link className="grow" href={`/blog/${slug}`}>
           <h4 className="line-clamp-2 text-[16px] font-bold">{title}</h4>
         </Link>
         <p className="text-paragraph my-3.25 line-clamp-2">{description}</p>

@@ -11,7 +11,25 @@ export const getLandingPageBlogs = unstable_cache(
       return { data: JSON.parse(JSON.stringify(blogs)), status: 200 };
     } catch (error) {
       console.log('Error fetching landing page blogs => ', error);
-      return { data: null, status: 500 };
+      return { data: [], status: 500 };
+    }
+  },
+  ['blogs'],
+  { tags: ['blogs'] }
+);
+
+export const getRelatedBlogs = unstable_cache(
+  async (slug) => {
+    try {
+      await connectToDB();
+      const blogs = await blogsModel
+        .find({ slug: { $ne: slug } })
+        .limit(2)
+        .lean();
+      return { data: JSON.parse(JSON.stringify(blogs)), status: 200 };
+    } catch (error) {
+      console.log('Error fetching related blogs => ', error);
+      return { data: [], status: 500 };
     }
   },
   ['blogs'],
@@ -25,10 +43,10 @@ export const getBlog = async (slug) => {
       .findOne({ slug }, '-__v')
       .populate({ path: 'creator', select: 'name' })
       .lean();
-    if (!blog) return { data: null, status: 404 };
+    if (!blog) return { data: {}, status: 404 };
     return JSON.parse(JSON.stringify({ data: blog, status: 200 }));
   } catch (error) {
     console.error('Failed to fetch blog => ', error);
-    return { data: null, status: 500 };
+    return { data: {}, status: 500 };
   }
 };

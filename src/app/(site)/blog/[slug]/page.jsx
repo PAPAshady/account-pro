@@ -13,7 +13,7 @@ export default async function page({ params }) {
           <Main params={params} />
         </Suspense>
         <Suspense fallback={<SidebarSkeleton />}>
-          <Sidebar />
+          <Sidebar params={params} />
         </Suspense>
       </div>
     </div>

@@ -1,8 +1,9 @@
 import BlogCard from '@modules/Cards/BlogCard/BlogCard';
-import { getLandingPageBlogs } from '@/lib/blogs';
+import { getRelatedBlogs } from '@/lib/blogs';
 
-export default async function Sidebar() {
-  const { data: relatedBlogs } = await getLandingPageBlogs();
+export default async function Sidebar({ params }) {
+  const { slug } = await params;
+  const { data: relatedBlogs } = await getRelatedBlogs(slug);
 
   return (
     <aside className="space-y-8 lg:w-[30%] xl:w-[25%]">
