@@ -30,20 +30,19 @@ export default async function Main({ params }) {
           </div>
         ))}
       </div>
-      <div className="flex flex-col gap-8 lg:flex-row lg:items-center">
+      <div className="flex flex-col gap-6 xl:flex-row xl:items-center">
         <div className="bg-foreground space-y-8 rounded-xl rounded-tr-lg p-5">
           <h4 className="font-morabba text-xl font-bold lg:text-2xl">تیتر تستی</h4>
           <p className="text-justify text-sm leading-8 lg:text-base">{blog.content}</p>
         </div>
-        <div className="flex flex-col gap-6 lg:px-4">
+        <div className=":px-4 flex flex-col gap-6">
           <Image
             alt={blog.title}
             width={300}
             height={300}
-            src="/images/products/YouTube Premium-main-1778009063469.png"
-            className="mx-auto aspect-square w-full max-w-50 lg:w-auto"
+            src={blog.imageUrl}
+            className="mx-auto aspect-video w-full rounded-xl sm:max-w-115 lg:max-w-130 xl:w-auto xl:max-w-75"
           />
-          <p className="text-center text-3xl font-bold">YOUTUBE PREMIUM</p>
         </div>
       </div>
       <div className="flex justify-end pt-10">
