@@ -1,7 +1,7 @@
 import api from '@/axiosInstance';
 
 export const getCart = async () => {
-  const cart = await api.get('api/cart');
+  const cart = await api.get('/api/cart');
   return cart.data;
 };
 

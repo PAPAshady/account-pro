@@ -6,8 +6,9 @@ import { FaChevronDown, FaChevronLeft } from 'react-icons/fa';
 import clsx from 'clsx';
 
 import { navLinks } from '@/data';
+import DynamicIcon from '../DynamicIcon/DynamicIcon';
 
-export default function Navbar() {
+export default function Navbar({ dropdownLinks }) {
   const pathname = usePathname();
 
   return (
@@ -33,29 +34,34 @@ export default function Navbar() {
               <div className="invisible absolute right-[-65%] -z-1 translate-y-2 pt-3 opacity-0 transition-all duration-300 group-hover:visible group-hover:z-1 group-hover:translate-0 group-hover:opacity-100">
                 <div className="rounded-3xl rounded-tr-lg bg-[#252525] p-2.5">
                   <div className="flex gap-1">
-                    {navLink.menus.map((menu) => (
+                    {dropdownLinks.map((link) => (
                       <div
-                        key={menu.id}
+                        key={link._id}
                         className="flex w-42.5 flex-col space-y-4 p-2.5 min-[1100px]:w-48"
                       >
                         <div className="flex gap-2">
-                          <i className="text-primary mt-0.5 shrink-0">{menu.icon}</i>
-                          <p className="text-nowrap">{menu.title}</p>
+                          <i className="text-primary mt-0.5 shrink-0 text-lg">
+                            <DynamicIcon iconName={link.iconName} />
+                          </i>
+                          <p className="text-nowrap">{link.title}</p>
                         </div>
-                        <div className="flex grow flex-col rounded-t-lg rounded-b-2xl bg-[#191919BA] px-3.75 py-5">
-                          <ul className="flex grow flex-col text-sm">
-                            {menu.subLinks.map((subLink) => (
+                        <div className="flex grow flex-col rounded-t-lg rounded-b-2xl bg-[#191919BA] py-5 ps-3.75 pe-2">
+                          <ul className="flex h-52 grow flex-col overflow-y-auto text-sm">
+                            {link.products.map((product) => (
                               <li
-                                key={subLink.id}
+                                key={product._id}
                                 className="hover:text-paragraph transition-colors duration-200"
                               >
-                                <Link className="block py-1.5" href={subLink.href}>
-                                  {subLink.title}
+                                <Link className="block py-1.5" href={`/product/${product.slug}`}>
+                                  {product.title}
                                 </Link>
                               </li>
                             ))}
                           </ul>
-                          <Link href={menu.href} className="flex items-center gap-2 pt-6">
+                          <Link
+                            href={`/shop?cat=${link.slug}`}
+                            className="flex items-center gap-2 pt-6"
+                          >
                             <span>مشاهده همه</span>
                             <FaChevronLeft className="text-primary text-sm" />
                           </Link>

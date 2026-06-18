@@ -1,20 +1,14 @@
-'use client';
 import Image from 'next/image';
 import Link from 'next/link';
 
-import { useQuery } from '@tanstack/react-query';
-import { FaUser } from 'react-icons/fa';
-
-import UserProfileDropDown from '@modules/UserProfileDropDown/UserProfileDropDown';
 import CartDropDown from '@modules/CartDropDown/CartDropDown';
-import Skeleton from '@modules/Skeleton/Skeleton';
 import GlobalSearchBox from '@modules/GlobalSearchBox/GlobalSearchBox';
 import Navbar from '@modules/Navbar/Navbar';
-import PrimaryButton from '@modules/PrimaryButton/PrimaryButton';
-import { getUserQueryOptions } from '@/queries/user';
+import AuthButton from './AuthButton';
+import { getNavbarDropdownLinks } from '@/lib/categories';
 
-export default function DesktopHeader() {
-  const { data: user, isPending } = useQuery(getUserQueryOptions());
+export default async function DesktopHeader() {
+  const { data: dropdownLinks } = await getNavbarDropdownLinks();
 
   return (
     <div className="hidden lg:block">
@@ -43,18 +37,9 @@ export default function DesktopHeader() {
         </div>
       </div>
       <div className="hidden items-center justify-between gap-3 py-2.5 min-[1080]:gap-4 lg:flex">
-        <Navbar />
+        <Navbar dropdownLinks={dropdownLinks} />
         <GlobalSearchBox />
-        {isPending ? (
-          <Skeleton className="rounded-box-rtl h-9 w-33.5" />
-        ) : user ? (
-          <UserProfileDropDown />
-        ) : (
-          <PrimaryButton isLink href="/sign-in">
-            ورود/ثبت نام
-            <FaUser />
-          </PrimaryButton>
-        )}
+        <AuthButton />
         <CartDropDown />
       </div>
     </div>
