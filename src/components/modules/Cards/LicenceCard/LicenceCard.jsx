@@ -63,7 +63,7 @@ export default function LicenceCard({
               src={imageUrl}
               width={300}
               height={300}
-              className="size-18 transition-all duration-300"
+              className="size-18 rounded-2xl transition-all duration-300"
             />
           </div>
           <div className="-mt-7 h-16 rounded-lg bg-[#D9D9D908]"></div>
