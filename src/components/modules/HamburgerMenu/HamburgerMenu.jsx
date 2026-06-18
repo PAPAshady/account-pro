@@ -12,7 +12,7 @@ import NavItem from '@modules/HamburgerMenuNavItem/HamburgerMenuNavItem';
 import { getUserQueryOptions } from '@/queries/user';
 import { navLinks } from '@/data';
 
-export default function HamburgerMenu() {
+export default function HamburgerMenu({ dropdownLinks }) {
   const { data: user } = useQuery(getUserQueryOptions());
   const open = useHamburgerMenu((state) => state.open);
   const setOpen = useHamburgerMenu((state) => state.setOpen);
@@ -69,7 +69,7 @@ export default function HamburgerMenu() {
                   title={link.title}
                   href={link.href}
                   hasMenu={link.hasMenu}
-                  menus={link.menus}
+                  dropdownLinks={link.hasMenu && dropdownLinks}
                 />
               ))}
             </nav>

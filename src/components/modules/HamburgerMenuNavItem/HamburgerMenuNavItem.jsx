@@ -7,8 +7,9 @@ import clsx from 'clsx';
 
 import PrimaryButton from '@modules/PrimaryButton/PrimaryButton';
 import useHamburgerMenu from '@/store/useHamburgerMenu';
+import DynamicIcon from '../DynamicIcon/DynamicIcon';
 
-export default function NavItem({ title, href, hasMenu, menus }) {
+export default function NavItem({ title, href, hasMenu, dropdownLinks }) {
   const [isActive, setIsActive] = useState(false);
   const [elemHeight, setElemHeight] = useState(0);
   const setOpen = useHamburgerMenu((state) => state.setOpen);
@@ -40,7 +41,7 @@ export default function NavItem({ title, href, hasMenu, menus }) {
           )}
         </div>
       </div>
-      {hasMenu && (
+      {!!hasMenu && (
         <div
           className={clsx(
             'bg-foreground overflow-hidden rounded-3xl rounded-tr-lg px-3.5 transition-all duration-200',
@@ -52,15 +53,17 @@ export default function NavItem({ title, href, hasMenu, menus }) {
             className="transition-all duration-300"
             style={{ height: isActive ? elemHeight : 0 }}
           >
-            {menus.map((menu) => (
+            {dropdownLinks.map((link) => (
               <Link
-                key={menu.id}
-                href={menu.href}
+                key={link._id}
+                href={`/shop?cat=${link.slug}`}
                 onClick={closeAll}
                 className="flex items-center gap-4 py-2.5"
               >
-                <i className="text-primary text-lg">{menu.icon}</i>
-                <span>{menu.title}</span>
+                <i className="text-primary text-lg">
+                  <DynamicIcon iconName={link.iconName} />
+                </i>
+                <span>{link.title}</span>
               </Link>
             ))}
             <PrimaryButton isLink href={href} onClick={closeAll}>
