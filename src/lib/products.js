@@ -4,11 +4,11 @@ import { connectToDB } from '@/utils/db';
 import productsModel from '@/models/Product';
 import categoriesModel from '@/models/Category';
 
-export const getCachedProducts = unstable_cache(
+export const getLandingPageProducts = unstable_cache(
   async () => {
     try {
       await connectToDB();
-      const products = await productsModel.find().lean().populate('category', '-__v');
+      const products = await productsModel.find().limit(4).lean().populate('category', '-__v');
       return JSON.parse(JSON.stringify(products));
     } catch (err) {
       console.error('Error fetching products => ', err);

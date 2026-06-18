@@ -1,10 +1,10 @@
 import ProductCard from '@/components/modules/Cards/ProductCard/ProductCard';
 import PrimaryButton from '@modules/PrimaryButton/PrimaryButton';
 import Particle from '@modules/Particle/Particle';
-import { getCachedProducts } from '@/lib/products';
+import { getLandingPageProducts } from '@/lib/products';
 
 export default async function Services() {
-  const products = await getCachedProducts();
+  const products = await getLandingPageProducts();
   return (
     <div className="relative">
       <Particle className="-bottom-26 left-0 z-2 size-44 opacity-60 blur-[70px] sm:-bottom-46 sm:size-68 sm:opacity-40 sm:blur-[80px] lg:opacity-30" />

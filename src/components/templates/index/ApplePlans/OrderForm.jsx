@@ -39,7 +39,7 @@ export default function OrderForm({ plans }) {
               key={plan._id}
               title={plan.title}
               description={plan.specifications[0].description}
-              checked={plan._id === selectedPlan._id}
+              checked={plan._id === selectedPlan?._id}
               onChange={() => onPlanChange(plan)}
             />
           ))}
@@ -64,14 +64,14 @@ export default function OrderForm({ plans }) {
           <div>
             <div>
               <span suppressHydrationWarning className="w-full min-[360px]:text-xl sm:text-2xl">
-                {(selectedPlan.price * quantity).toLocaleString()}
+                {(selectedPlan?.price * quantity).toLocaleString()}
               </span>
               <span className="text-primary ms-1 min-[360px]:ms-2 sm:text-lg">تومان</span>
             </div>
           </div>
         </div>
         <PrimaryButton
-          onClick={() => mutate({ plan: selectedPlan._id, accountType: 'new', quantity })}
+          onClick={() => mutate({ plan: selectedPlan?._id, accountType: 'new', quantity })}
           disabled={isPending}
           dir="ltr"
           isHighLight
