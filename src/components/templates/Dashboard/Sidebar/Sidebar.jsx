@@ -31,7 +31,7 @@ export default function Sidebar() {
               width={60}
               height={60}
               className="border-primary -mt-10 size-14 rounded-3xl rounded-tr-lg border-4 object-cover"
-              src="/images/profile/profile2.png"
+              src="/images/profile/no-avatar.png"
             />
           </div>
           <p className="my-2 text-xl font-bold">{user?.name}</p>
