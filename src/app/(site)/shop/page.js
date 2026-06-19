@@ -10,6 +10,7 @@ import ProductsGrid from '@templates/shop/ProductsGrid/ProductsGrid';
 import Sidebar from '@templates/shop/Sidebar/Sidebar';
 import SidebarSkeleton from '@templates/shop/Sidebar/SidebarSkeleton';
 import ProductsGridSkeleton from '@templates/shop/ProductsGrid/ProductsGridSkeleton';
+import { BASE_URL } from '@/constants';
 
 export default async function Shop() {
   const categories = await getCategories();
@@ -37,5 +38,10 @@ export default async function Shop() {
 }
 
 export const metadata = {
-  title: 'فروشگاه - اکانت پرو',
+  title: 'محصولات | اکانت پرو',
+  description:
+    'لیست کامل محصولات و اکانت‌های پریمیوم در اکانت پرو. مشاهده، فیلتر و انتخاب بهترین گزینه‌ها با تجربه کاربری سریع و ساده.',
+  alternates: {
+    canonical: `${BASE_URL}/shop`,
+  },
 };

@@ -210,3 +210,11 @@ export default function Page() {
     </div>
   );
 }
+
+export const metadata = {
+  title: 'پرداخت | اکانت پرو',
+  robots: {
+    index: false,
+    follow: false,
+  },
+};

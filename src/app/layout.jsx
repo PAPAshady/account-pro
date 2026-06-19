@@ -1,8 +1,14 @@
 import Providers from '@/components/providers/Providers';
+import { BASE_URL } from '@/constants';
 import './globals.css';
 
 export const metadata = {
-  title: 'اکانت پرو',
+  title: 'اکانت پرو | مدیریت اکانت‌های پریمیوم',
+  description:
+    'اکانت پرو یک سیستم مدرن برای مدیریت اکانت‌های پریمیوم با احراز هویت امن، داشبورد حرفه‌ای و تجربه کاربری سریع است.',
+  alternates: {
+    canonical: BASE_URL,
+  },
 };
 
 export default function RootLayout({ children }) {

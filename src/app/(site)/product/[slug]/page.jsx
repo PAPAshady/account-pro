@@ -8,6 +8,7 @@ import Faq from '@templates/product/Faq/Faq';
 import Comments from '@templates/product/Comments/Comments';
 import { getProduct } from '@/lib/products';
 import { getPlans } from '@/lib/plans';
+import { BASE_URL } from '@/constants';
 
 export default async function Product({ params }) {
   const { slug } = await params;
@@ -32,4 +33,38 @@ export default async function Product({ params }) {
       <Comments productId={product._id} />
     </div>
   );
+}
+
+export async function generateMetadata({ params }) {
+  const { slug } = await params;
+  const { data: product } = await getProduct(slug);
+
+  return {
+    title: `اکانت پرو | ${product.title}`,
+    description: product.shortDescription,
+    alternates: {
+      canonical: `${BASE_URL}/product/${product.slug}`,
+    },
+    openGraph: {
+      title: product.title,
+      description: product.shortDescription,
+      url: `${BASE_URL}/product/${product.slug}`,
+      siteName: 'اکانت پرو',
+      type: 'website',
+      images: [
+        {
+          url: `${BASE_URL}${product.images[0].url}`,
+          width: 1024,
+          height: 640,
+          alt: product.title,
+        },
+      ],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: product.title,
+      description: product.shortDescription,
+      images: [`${BASE_URL}${product.images[0].url}`],
+    },
+  };
 }

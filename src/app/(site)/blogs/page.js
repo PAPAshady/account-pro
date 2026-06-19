@@ -6,6 +6,7 @@ import BlogsPageSearchBox from '@templates/blogs/BlogsPageSearchBox';
 import SearchBoxSkeleton from '@modules/SearchBox/SearchBoxSkeleton';
 import BlogsGridSkeleton from '@templates/blogs/BlogsGridSkeleton';
 import SidebarSkeleton from '@templates/blogs/SidebarSkeleton';
+import { BASE_URL } from '@/constants';
 
 export default function Blogs() {
   return (
@@ -26,3 +27,13 @@ export default function Blogs() {
     </div>
   );
 }
+
+export const metadata = {
+  title: 'وبلاگ | اکانت پرو',
+  description:
+    'مقالات، آموزش‌ها و اخبار مرتبط با اکانت پرو و مدیریت اکانت‌های پریمیوم. یادگیری، راهنما و نکات کاربردی برای کاربران.',
+
+  alternates: {
+    canonical: `${BASE_URL}/blogs`,
+  },
+};

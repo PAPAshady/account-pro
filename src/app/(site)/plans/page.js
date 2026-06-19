@@ -1,5 +1,6 @@
 import PlanCard from '@modules/Cards/PlanCard/PlanCard';
 import { plans } from '@/data';
+import { BASE_URL } from '@/constants';
 
 export default function page() {
   return (
@@ -22,3 +23,11 @@ export default function page() {
     </div>
   );
 }
+export const metadata = {
+  title: 'پلن‌های اشتراک | اکانت پرو',
+  description:
+    'مشاهده پلن‌های اشتراک اکانت پرو. انتخاب بهترین پلن برای دسترسی به امکانات پریمیوم با قیمت مناسب و پرداخت امن.',
+  alternates: {
+    canonical: `${BASE_URL}/plans`,
+  },
+};

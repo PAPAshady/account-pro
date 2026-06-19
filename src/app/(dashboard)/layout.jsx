@@ -58,3 +58,11 @@ export default function layout({ children }) {
     </div>
   );
 }
+
+export const metadata = {
+  title: 'داشبورد | اکانت پرو',
+  robots: {
+    index: false,
+    follow: false,
+  },
+};

@@ -13,7 +13,7 @@ export default async function Main({ params }) {
   const blogInfos = [
     { id: 1, title: 'ناشر : اکانت پرو', icon: <FaPen /> },
     { id: 2, title: `تاریخ : ${date}`, icon: <FaRegCalendar /> },
-    { id: 3, title: ` نویسنده : ${blog.creator.name}`, icon: <FaUser /> },
+    { id: 3, title: ` نویسنده : ${blog.creator?.name || 'ناشناس'}`, icon: <FaUser /> },
     { id: 4, title: `زمان مطالعه : ${blog.readTime} دقیقه`, icon: <FaStopwatch /> },
   ];
 
@@ -32,7 +32,7 @@ export default async function Main({ params }) {
       </div>
       <div className="flex flex-col gap-6 xl:flex-row xl:items-center">
         <div className="bg-foreground space-y-8 rounded-xl rounded-tr-lg p-5">
-          <h4 className="font-morabba text-xl font-bold lg:text-2xl">تیتر تستی</h4>
+          <h2 className="font-morabba text-xl font-bold lg:text-2xl">تیتر تستی</h2>
           <p className="text-justify text-sm leading-8 lg:text-base">{blog.content}</p>
         </div>
         <div className=":px-4 flex flex-col gap-6">
