@@ -139,11 +139,3 @@ export default function Page() {
     </div>
   );
 }
-
-export const metadata = {
-  title: 'سبد خرید | اکانت پرو',
-  robots: {
-    index: false,
-    follow: false,
-  },
-};
