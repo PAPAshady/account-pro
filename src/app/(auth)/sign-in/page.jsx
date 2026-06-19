@@ -102,12 +102,3 @@ export default function SignIn() {
     </>
   );
 }
-
-export const metadata = {
-  title: "ورود | اکانت پرو",
-  description: "ورود به حساب کاربری اکانت پرو",
-  robots: {
-    index: false,
-    follow: false,
-  },
-};

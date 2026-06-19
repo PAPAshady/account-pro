@@ -41,3 +41,11 @@ export default function Layout({ children }) {
     </div>
   );
 }
+export const metadata = {
+  title: 'ورود / ثبت نام | اکانت پرو',
+  description: 'حساب کاربری اکانت پرو',
+  robots: {
+    index: false,
+    follow: false,
+  },
+};
