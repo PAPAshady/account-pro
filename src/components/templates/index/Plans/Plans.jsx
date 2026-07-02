@@ -7,7 +7,7 @@ import { plans } from '@/data';
 
 export default function Plans() {
   return (
-    <div className="relative container">
+    <div className="relative container pt-14 pb-8">
       <Particle className="-bottom-30 -left-35 z-2 size-40 opacity-60 blur-[75px] sm:size-45 sm:blur-[80px]" />
       <div className="absolute -top-30 -right-70 min-[1100px]:-bottom-10! sm:top-[unset] sm:-right-60 sm:-bottom-30 lg:-right-60">
         <Image
@@ -19,7 +19,7 @@ export default function Plans() {
         />
         <div className="bg-primary absolute inset-0 size-full mix-blend-hue"></div>
       </div>
-      <div className="absolute -bottom-50 -left-65 sm:-top-20 sm:-bottom-[unset] sm:-left-70 lg:-top-32 lg:-left-65">
+      <div className="absolute -bottom-50 -left-65 min-[1100px]:-top-22! sm:-top-10 sm:-bottom-[unset] sm:-left-60 lg:-top-10 lg:-left-65">
         <Image
           alt=""
           src="/images/index/ring-particle-4.png"

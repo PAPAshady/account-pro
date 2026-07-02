@@ -4,7 +4,7 @@
 @import '../../public/fonts/stretch-pro-font/stretch-pro-font.css';
 
 @utility container {
-  @apply mx-auto w-[80%] max-w-360 lg:w-[90%];
+  @apply mx-auto w-[90%] max-w-360;
 }
 
 @utility bg-hatching {

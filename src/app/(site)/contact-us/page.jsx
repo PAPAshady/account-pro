@@ -4,7 +4,7 @@ import { BASE_URL } from '@/constants';
 
 export default function page() {
   return (
-    <div className="space-y-27">
+  <div className="space-y-27 sm:space-y-44">
       <ContactInfos />
       <ContactForm />
     </div>

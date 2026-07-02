@@ -22,9 +22,11 @@ export default async function Product({ params }) {
     duration,
   }));
   return (
-    <div className="container space-y-16 lg:space-y-24">
+    <div className="container space-y-20 sm:space-y-30">
       <ProductDetails plans={simplifiedPlans} {...product} />
-      <Navigation />
+      <div className="my-20">
+        <Navigation />
+      </div>
       <Introduction {...product} />
       <Plans plans={plans} {...product} />
       <ActivationMethods />
