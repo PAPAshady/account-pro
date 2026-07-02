@@ -42,7 +42,7 @@ export default function ProductCard({
             {title}
           </h4>
           <div className="text-end">
-            <span className="text-paragraph text-sm lg:text-base">شروع قیمت از</span>
+            <span className="text-paragraph text-nowrap text-sm lg:text-base">شروع قیمت از</span>
             <p>
               <span className={clsx('text-xl font-bold lg:text-lg', minPlanPrice && 'me-1.5')}>
                 {minPlanPrice?.toLocaleString() ?? 'رایگان'}

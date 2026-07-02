@@ -28,7 +28,7 @@ export default async function Blog() {
               ‌Blog
             </h3>
           </div>
-          <div className="grid grid-cols-1 gap-2 min-[560px]:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+          <div className="grid grid-cols-1 gap-6 min-[560px]:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
             {blogs.map((blog) => (
               <BlogCard key={blog._id} {...blog} />
             ))}

@@ -15,7 +15,7 @@ export default function Introduction({ title, images, heading, latinHeading, lon
           <h3 className="font-morabba text-xl lg:text-[26px]">{heading}</h3>
           <p className="font-stretchPro text-paragraph text-sm">{latinHeading}</p>
         </div>
-        <div className="relative flex flex-col justify-center gap-4 p-3 md:mt-4 md:flex-row md:items-center md:px-6">
+        <div className="relative flex flex-col justify-center gap-8 p-3 md:mt-4 md:flex-row md:items-center md:px-6">
           <div className="space-y-4 md:w-[60%]">
             <div className="bg-foreground text-paragraph rounded-3xl rounded-tr-lg p-5 text-justify">
               <p>{longDescription}</p>

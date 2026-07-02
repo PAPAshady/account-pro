@@ -17,7 +17,7 @@ export default async function Services() {
             <h3 className="text-paragraph font-stretchPro mb-4 text-center text-sm font-semibold lg:mb-5">
               Services
             </h3>
-            <div className="grid grid-cols-1 gap-x-4 gap-y-2 min-[1140px]:grid-cols-4! sm:grid-cols-2 lg:grid-cols-3 lg:gap-4">
+            <div className="g grid grid-cols-1 gap-4 min-[580px]:grid-cols-2 min-[1140px]:grid-cols-4! lg:grid-cols-3">
               {products.map((product) => (
                 <ProductCard key={product._id} image={product.images[0].url} {...product} />
               ))}
