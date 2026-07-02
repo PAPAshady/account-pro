@@ -2,21 +2,23 @@
 import { useState } from 'react';
 
 import { FaShareAlt, FaUser, FaChartLine } from 'react-icons/fa';
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQuery } from '@tanstack/react-query';
 import { zodResolver } from '@hookform/resolvers/zod';
 
 import SelectInput from '@modules/SelectInput/SelectInput';
 import PrimaryButton from '@modules/PrimaryButton/PrimaryButton';
 import { addToCartMutationOptions } from '@/queries/cart';
+import { getUserQueryOptions } from '@/queries/user';
 import Counter from '@modules/Counter/Counter';
 import { useForm } from 'react-hook-form';
 import ProductFormLikeButton from '@templates/product/ProductFormLikeButton/ProductFormLikeButton';
 
 import { cartItemsSchema } from '@/schemas/cartItem.schema';
 
-export default function ProductForm({ plans, productId }) {
+export default function ProductForm({ plans, slug, productId }) {
   const [quantity, setQuantity] = useState(1);
-  const { mutate, isPending } = useMutation(addToCartMutationOptions());
+  const { mutate, isProductPending } = useMutation(addToCartMutationOptions());
+  const { data: user, isPending: isUserPending } = useQuery(getUserQueryOptions());
   const {
     register,
     handleSubmit,
@@ -88,11 +90,19 @@ export default function ProductForm({ plans, productId }) {
           <PrimaryButton
             className="w-full"
             dir="ltr"
-            type="submit"
+            type={user ? 'submit' : 'button'}
             isHighLight
-            disabled={isPending}
+            disabled={isProductPending || isUserPending}
+            isLink={!user}
+            href={
+              !user ? `/sign-in?callbackUrl=${encodeURIComponent(`/product/${slug}`)}` : undefined
+            }
           >
-            {isPending ? 'لطفا صبر کنید...' : 'افزودن به سبد خرید'}
+            {isProductPending || isUserPending
+              ? 'لطفا صبر کنید...'
+              : user
+                ? 'افزودن به سبد خرید'
+                : 'ورود به حساب کاربری'}
           </PrimaryButton>
         </div>
       </div>

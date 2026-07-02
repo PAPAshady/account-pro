@@ -21,7 +21,10 @@ export default function SelectInput({ label, icon, children, isInvalid, errorMes
           isInvalid ? 'border-red-400' : 'border-transparent'
         )}
       >
-        <select className="bg-box w-full p-4 ps-2 text-sm min-[380px]:text-base" {...props}>
+        <select
+          className="bg-box w-full p-4 ps-2 text-sm outline-none min-[380px]:text-base"
+          {...props}
+        >
           <option value="">انتخاب کنید</option>
           {children}
         </select>

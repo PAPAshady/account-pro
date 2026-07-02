@@ -8,9 +8,9 @@ export default function ProductDetails({
   title,
   latinTitle,
   shortDescription,
-  price,
   images,
   plans,
+  slug,
 }) {
   return (
     <div className="flex flex-col items-center gap-3 min-[900px]:flex-row md:gap-6 lg:gap-10">
@@ -23,7 +23,7 @@ export default function ProductDetails({
             همین حالا {title} رو امتحان کن!
           </p>
         </div>
-        <ProductForm plans={plans} price={price} productId={_id} />
+        <ProductForm plans={plans} slug={slug} productId={_id} />
       </div>
       <div className="relative grid w-full grid-cols-2 gap-3 min-[900px]:w-1/2">
         <div className="absolute top-1/2 left-1/2 -translate-1/2 rounded-4xl">
@@ -33,7 +33,7 @@ export default function ProductDetails({
             width={170}
             height={170}
             src={images[0].url}
-            className="size-42.5 rounded-[40px] min-w-42.5 object-cover"
+            className="size-42.5 min-w-42.5 rounded-[40px] object-cover"
           />
         </div>
         <div className="bg-foreground flex min-h-50 flex-col rounded-4xl rounded-tr-2xl p-5">
