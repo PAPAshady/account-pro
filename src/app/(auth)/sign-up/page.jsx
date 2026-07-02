@@ -117,7 +117,7 @@ export default function SignUp() {
           </PrimaryButton>
         </div>
         <div className="flex flex-wrap items-center justify-center gap-3 min-[515px]:justify-between">
-          <p className="text-paragraph">عضوی از خانواده‌ی اکانتینو هستید؟</p>
+          <p className="text-paragraph">عضوی از خانواده‌ی اکانت پرو هستید؟</p>
           <Link
             href={`/sign-in?${params.toString()}`}
             className="text-primary hover:text-[#0ac596]"
