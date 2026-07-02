@@ -4,7 +4,7 @@ import News from '@templates/Dashboard/Dashboard/News';
 
 export default function page() {
   return (
-    <div className="space-y-12 pb-6">
+    <div className="space-y-22 pb-6">
       <UserProducts />
       <TicketsStatus />
       <News />
