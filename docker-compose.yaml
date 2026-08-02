@@ -34,4 +34,4 @@ services:
 volumes:
   caddy-data:
   caddy-config:
-  mongo-data
+  mongo-data:
