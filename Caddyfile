@@ -1,0 +1,3 @@
+www.acc-pro.ir, acc-pro.ir {
+    reverse_proxy app:3000
+}
